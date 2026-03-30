@@ -70,7 +70,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-full flex items-center justify-center px-4 py-8 sm:py-12 bg-linear-to-br from-navy-900 via-navy-800 to-navy-950">
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 sm:py-12 bg-linear-to-br from-navy-900 via-navy-800 to-navy-950">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
