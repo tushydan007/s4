@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  /* Navy blue — primary brand palette */
+  --color-navy-50: #f0f5ff;
+  --color-navy-100: #e1ecff;
+  --color-navy-200: #c3d9ff;
+  --color-navy-300: #9ab9ff;
+  --color-navy-400: #6690ff;
+  --color-navy-500: #3d68f5;
+  --color-navy-600: #2a4de0;
+  --color-navy-700: #1e39b5;
+  --color-navy-800: #1a2e8a;
+  --color-navy-900: #162266;
+  --color-navy-950: #0e163f;
+
+  /* Danger (error / alert) */
+  --color-danger-50: #fff1f2;
+  --color-danger-100: #ffe4e6;
+  --color-danger-200: #fecdd3;
+  --color-danger-300: #fda4af;
+  --color-danger-400: #fb7185;
+  --color-danger-500: #f43f5e;
+  --color-danger-600: #e11d48;
+  --color-danger-700: #be123c;
+  --color-danger-800: #9f1239;
+  --color-danger-900: #881337;
+  --color-danger-950: #4c0519;
+
+  /* Warning (amber) */
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+  --color-warning-950: #451a03;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}

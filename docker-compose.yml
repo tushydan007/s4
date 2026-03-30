@@ -1,0 +1,72 @@
+services:
+  server:
+    build: ./server
+    container_name: s4-server
+    env_file: ./server/.env
+    environment:
+      - DB_HOST=db
+      - DB_USER=s4_user
+      - DB_PASSWORD=s4_password
+      - ALLOWED_HOSTS=localhost,127.0.0.1,server
+      - CORS_ALLOWED_ORIGINS=http://localhost:8080,http://localhost:5173,http://localhost:3000
+      - FRONTEND_URL=http://localhost:8080
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py seed_stations &&
+             daphne -b 0.0.0.0 -p 8000 s4.asgi:application"
+    ports:
+      - "8000:8000"
+    volumes:
+      - media_data:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  client:
+    build: ./client
+    container_name: s4-client
+    ports:
+      - "8080:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: s4-db
+    environment:
+      POSTGRES_DB: s4_db
+      POSTGRES_USER: s4_user
+      POSTGRES_PASSWORD: s4_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U s4_user -d s4_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: s4-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  media_data:
