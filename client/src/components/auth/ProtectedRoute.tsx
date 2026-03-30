@@ -14,7 +14,11 @@ export default function ProtectedRoute({
 }: ProtectedRouteProps) {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   const location = useLocation();
-  const { data: user, isLoading } = useGetProfileQuery(undefined, {
+  const {
+    data: user,
+    isLoading,
+    isError,
+  } = useGetProfileQuery(undefined, {
     skip: !isAuthenticated,
   });
 
@@ -24,6 +28,10 @@ export default function ProtectedRoute({
 
   if (isLoading) {
     return <FullPageSpinner />;
+  }
+
+  if (isError) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   if (requireNIN && user && !user.nin_verified) {

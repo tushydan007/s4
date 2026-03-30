@@ -229,7 +229,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="h-full relative overflow-hidden">
+    <div className="h-[calc(100vh-3.5rem)] relative overflow-hidden">
       {/* Map Container */}
       <div ref={mapContainer} className="w-full h-full" />
 

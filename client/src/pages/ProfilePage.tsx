@@ -29,7 +29,7 @@ import {
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
-import Spinner from "@/components/ui/Spinner";
+import { FullPageSpinner } from "@/components/ui/Spinner";
 import type { ApiError } from "@/types";
 
 export default function ProfilePage() {
@@ -116,7 +116,7 @@ export default function ProfilePage() {
     }
   };
 
-  if (isLoading) return <Spinner size="lg" className="mt-20" />;
+  if (isLoading) return <FullPageSpinner />;
   if (!user) return null;
 
   return (
@@ -368,7 +368,7 @@ function StatusBadge({
     <span
       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${
         verified
-          ? "bg-success-50 text-success-600"
+          ? "bg-emerald-50 text-emerald-600"
           : "bg-warning-50 text-warning-600"
       }`}
     >
