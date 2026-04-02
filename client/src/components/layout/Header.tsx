@@ -7,6 +7,7 @@ import {
   HiBars3,
   HiXMark,
   HiViewColumns,
+  HiMapPin,
 } from "react-icons/hi2";
 import { useAuth } from "@/hooks/useAuth";
 import { useAppDispatch } from "@/store";
@@ -88,6 +89,14 @@ export default function Header() {
               </>
             ) : (
               <>
+                <Link
+                  to="/dashboard"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-emerald-400 hover:text-emerald-300 hover:bg-navy-800 transition-colors"
+                  title="Live Map"
+                >
+                  <HiMapPin className="w-4 h-4" />
+                  Live Map
+                </Link>
                 <Link
                   to="/login"
                   className="px-4 py-1.5 text-sm font-medium text-navy-200 hover:text-white transition-colors rounded-lg hover:bg-navy-800"
@@ -202,6 +211,14 @@ export default function Header() {
                   </>
                 ) : (
                   <>
+                    <Link
+                      to="/dashboard"
+                      onClick={closeMobileMenu}
+                      className="flex items-center gap-3 px-3 py-3 rounded-xl text-emerald-400 hover:text-emerald-300 hover:bg-navy-800 transition-colors text-sm font-medium"
+                    >
+                      <HiMapPin className="w-5 h-5" />
+                      Live Map
+                    </Link>
                     <Link
                       to="/login"
                       onClick={closeMobileMenu}

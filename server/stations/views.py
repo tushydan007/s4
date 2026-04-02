@@ -9,10 +9,10 @@ from .serializers import SecurityStationSerializer
 
 
 class StationListView(generics.ListAPIView):
-    """List all active security stations."""
+    """List all active security stations. Publicly accessible."""
 
     serializer_class = SecurityStationSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     pagination_class = None  # Return plain array – stations is a small finite dataset
 
     def get_queryset(self):

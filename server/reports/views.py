@@ -14,10 +14,10 @@ logger = logging.getLogger(__name__)
 
 
 class ReportListView(generics.ListAPIView):
-    """List all active reports. Accessible to all authenticated users."""
+    """List all active reports. Publicly accessible — no authentication required."""
 
     serializer_class = ReportSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         queryset = Report.objects.filter(is_active=True).select_related('user').prefetch_related('media')

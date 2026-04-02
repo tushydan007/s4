@@ -19,12 +19,9 @@ export const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
       { path: "verify-email/:token", element: <VerifyEmailPage /> },
       {
+        // Dashboard is public — authentication is only required to post reports
         path: "dashboard",
-        element: (
-          <ProtectedRoute>
-            <DashboardPage />
-          </ProtectedRoute>
-        ),
+        element: <DashboardPage />,
       },
       {
         path: "profile",

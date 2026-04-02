@@ -10,6 +10,7 @@ import {
   HiFunnel,
   HiPlus,
 } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { useAppDispatch, useAppSelector } from "@/store";
@@ -30,6 +31,61 @@ import { STATION_TYPES, SEVERITY_LEVELS } from "@/types";
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN as string;
 
+// ── Nigeria geographic restriction ──────────────────────────────────────────
+// Approximate bounding box for Nigeria (mainland + territorial waters)
+const NIGERIA_BOUNDS = {
+  minLat: 4.27,
+  maxLat: 13.9,
+  minLng: 2.69,
+  maxLng: 14.68,
+} as const;
+
+function isWithinNigeria(lat: number, lng: number): boolean {
+  return (
+    lat >= NIGERIA_BOUNDS.minLat &&
+    lat <= NIGERIA_BOUNDS.maxLat &&
+    lng >= NIGERIA_BOUNDS.minLng &&
+    lng <= NIGERIA_BOUNDS.maxLng
+  );
+}
+
+function checkNigeriaLocation(): Promise<{
+  allowed: boolean;
+  reason?: string;
+}> {
+  return new Promise((resolve) => {
+    if (!navigator.geolocation) {
+      resolve({
+        allowed: false,
+        reason: "Location services are not supported by your browser.",
+      });
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        if (isWithinNigeria(pos.coords.latitude, pos.coords.longitude)) {
+          resolve({ allowed: true });
+        } else {
+          resolve({
+            allowed: false,
+            reason:
+              "You must be physically located in Nigeria to post reports on this platform.",
+          });
+        }
+      },
+      (err) => {
+        const reason =
+          err.code === err.TIMEOUT
+            ? "Location check timed out. Please ensure location services are enabled."
+            : "Location access is required to post reports. Please enable location services in your browser.";
+        resolve({ allowed: false, reason });
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
+    );
+  });
+}
+// ────────────────────────────────────────────────────────────────────────────
+
 export default function DashboardPage() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
@@ -40,16 +96,25 @@ export default function DashboardPage() {
   const { showUploadModal, showReportDetail, showStations } = useAppSelector(
     (state) => state.ui,
   );
-  const { data: user } = useGetProfileQuery();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const { data: user } = useGetProfileQuery(undefined, {
+    skip: !isAuthenticated,
+  });
   const { data: reportsData } = useGetReportsQuery();
   const { data: stations } = useGetStationsQuery();
   const { isConnected } = useWebSocket();
 
-  // Keep a ref so the map contextmenu closure always reads the latest user
+  // Refs so map event-handler closures always read the latest values (created once)
   const userRef = useRef(user);
   userRef.current = user;
+  const isAuthenticatedRef = useRef(isAuthenticated);
+  isAuthenticatedRef.current = isAuthenticated;
+  const navigateRef = useRef(navigate);
+  navigateRef.current = navigate;
 
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [isCheckingLocation, setIsCheckingLocation] = useState(false);
 
   // Initialize map
   useEffect(() => {
@@ -80,8 +145,18 @@ export default function DashboardPage() {
     });
 
     // Right-click to add report
-    mapInstance.on("contextmenu", (e) => {
+    mapInstance.on("contextmenu", async (e) => {
       const currentUser = userRef.current;
+      const isAuth = isAuthenticatedRef.current;
+
+      if (!isAuth) {
+        toast.error(
+          "Please log in or create an account to report an incident.",
+        );
+        navigateRef.current("/login");
+        return;
+      }
+
       if (!currentUser?.is_fully_verified) {
         const msg =
           !currentUser?.email_verified && !currentUser?.nin_verified
@@ -92,7 +167,20 @@ export default function DashboardPage() {
         toast.error(msg);
         return;
       }
-      dispatch(openUploadModal({ lat: e.lngLat.lat, lng: e.lngLat.lng }));
+
+      const loadingToastId = toast.loading("Checking your location...");
+      try {
+        const loc = await checkNigeriaLocation();
+        toast.dismiss(loadingToastId);
+        if (!loc.allowed) {
+          toast.error(loc.reason ?? "Location check failed.");
+          return;
+        }
+        dispatch(openUploadModal({ lat: e.lngLat.lat, lng: e.lngLat.lng }));
+      } catch {
+        toast.dismiss(loadingToastId);
+        toast.error("Location check failed. Please try again.");
+      }
     });
 
     map.current = mapInstance;
@@ -101,7 +189,7 @@ export default function DashboardPage() {
       mapInstance.remove();
       map.current = null;
     };
-  }, [dispatch, user?.is_fully_verified]);
+  }, [dispatch]);
 
   // Add report markers
   const addReportMarkers = useCallback(
@@ -223,7 +311,13 @@ export default function DashboardPage() {
     }
   }, [stations, showStations, mapLoaded, addStationMarkers]);
 
-  const handleAddReport = () => {
+  const handleAddReport = async () => {
+    if (!isAuthenticated) {
+      toast.error("Please log in or create an account to report an incident.");
+      navigate("/login");
+      return;
+    }
+
     if (!user?.is_fully_verified) {
       const msg =
         !user?.email_verified && !user?.nin_verified
@@ -234,10 +328,22 @@ export default function DashboardPage() {
       toast.error(msg);
       return;
     }
-    // Use map center as default location
-    if (map.current) {
-      const center = map.current.getCenter();
-      dispatch(openUploadModal({ lat: center.lat, lng: center.lng }));
+
+    setIsCheckingLocation(true);
+    try {
+      const loc = await checkNigeriaLocation();
+      if (!loc.allowed) {
+        toast.error(loc.reason ?? "Location check failed.");
+        return;
+      }
+      if (map.current) {
+        const center = map.current.getCenter();
+        dispatch(openUploadModal({ lat: center.lat, lng: center.lng }));
+      }
+    } catch {
+      toast.error("Location check failed. Please try again.");
+    } finally {
+      setIsCheckingLocation(false);
     }
   };
 
@@ -314,13 +420,22 @@ export default function DashboardPage() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", delay: 0.3 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: isCheckingLocation ? 1 : 1.1 }}
+        whileTap={{ scale: isCheckingLocation ? 1 : 0.9 }}
         onClick={handleAddReport}
-        className="absolute bottom-24 right-4 sm:bottom-8 sm:right-8 z-10 w-14 h-14 bg-danger-600 hover:bg-danger-700 text-white rounded-full shadow-lg shadow-danger-600/40 flex items-center justify-center"
-        title="Report an incident"
+        disabled={isCheckingLocation}
+        className="absolute bottom-24 right-4 sm:bottom-8 sm:right-8 z-10 w-14 h-14 bg-danger-600 hover:bg-danger-700 disabled:opacity-75 text-white rounded-full shadow-lg shadow-danger-600/40 flex items-center justify-center"
+        title={
+          isCheckingLocation
+            ? "Checking your location..."
+            : "Report an incident"
+        }
       >
-        <HiPlus className="w-7 h-7" />
+        {isCheckingLocation ? (
+          <span className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+        ) : (
+          <HiPlus className="w-7 h-7" />
+        )}
       </motion.button>
 
       {/* Hint */}
@@ -331,10 +446,12 @@ export default function DashboardPage() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 bg-navy-900/80 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs whitespace-nowrap"
       >
         <span className="hidden sm:inline">
-          Right-click on the map to report an incident
+          {isAuthenticated
+            ? "Right-click on the map to report an incident"
+            : "Browse incidents \u00b7 Log in to post a report"}
         </span>
         <span className="sm:hidden">
-          Tap the + button to report an incident
+          {isAuthenticated ? "Tap + to report" : "Log in to report"}
         </span>
       </motion.div>
 

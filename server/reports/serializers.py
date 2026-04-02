@@ -96,6 +96,26 @@ class ReportCreateSerializer(serializers.ModelSerializer):
         )
         return value
 
+    def validate(self, attrs):
+        """Enforce that reported locations are within Nigeria's geographic bounds."""
+        NIGERIA_LAT_MIN, NIGERIA_LAT_MAX = 4.27, 13.90
+        NIGERIA_LNG_MIN, NIGERIA_LNG_MAX = 2.69, 14.68
+        try:
+            lat = float(attrs.get('latitude', 0))
+            lng = float(attrs.get('longitude', 0))
+        except (TypeError, ValueError):
+            raise serializers.ValidationError(
+                {'location': 'Invalid latitude or longitude.'}
+            )
+        if not (
+            NIGERIA_LAT_MIN <= lat <= NIGERIA_LAT_MAX
+            and NIGERIA_LNG_MIN <= lng <= NIGERIA_LNG_MAX
+        ):
+            raise serializers.ValidationError(
+                {'location': 'Reports must be submitted for locations within Nigeria.'}
+            )
+        return attrs
+
     def create(self, validated_data: dict) -> Report:
         images = validated_data.pop('images', [])
         videos = validated_data.pop('videos', [])
