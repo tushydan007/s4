@@ -64,6 +64,10 @@ export function useWebSocket() {
         clearTimeout(reconnectTimeoutRef.current);
       }
       if (wsRef.current) {
+        // Null out handlers before closing so the onclose callback
+        // does not schedule a reconnect for this intentional close.
+        wsRef.current.onclose = null;
+        wsRef.current.onerror = null;
         wsRef.current.close();
       }
     };
