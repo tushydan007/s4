@@ -74,6 +74,17 @@ export const authApi = createApi({
       }),
     }),
 
+    verifyLoginOTP: builder.mutation<
+      { access: string; refresh: string; user: User },
+      { otp_code: string; temp_token: string }
+    >({
+      query: (data) => ({
+        url: "/users/login/verify-otp/",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     disableTwoFactor: builder.mutation<
       { message: string },
       { otp_code: string }
@@ -130,6 +141,7 @@ export const {
   useLazySetupTwoFactorQuery,
   useConfirmTwoFactorSetupMutation,
   useVerifyTwoFactorMutation,
+  useVerifyLoginOTPMutation,
   useDisableTwoFactorMutation,
   useVerifyNINMutation,
   useGetProfileQuery,

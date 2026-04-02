@@ -1,5 +1,6 @@
 import io
 import logging
+import secrets
 import uuid
 from datetime import timedelta
 
@@ -7,6 +8,8 @@ import pyotp
 import qrcode
 from django.conf import settings
 from django.contrib.auth import authenticate
+from django.core.cache import cache
+from django.core.mail import send_mail
 from django.utils import timezone
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
@@ -137,20 +140,37 @@ class LoginView(APIView):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        if user.two_factor_enabled:
-            temp_token = str(AccessToken.for_user(user))
-            return Response({
-                'requires_2fa': True,
-                'temp_token': temp_token,
-                'message': 'Please enter your 2FA code.',
-            })
+        # Always require email OTP — generate a 6-digit code and send it
+        otp_code = str(secrets.randbelow(10 ** 6)).zfill(6)
+        temp_token = str(AccessToken.for_user(user))
+        cache_key = f'login_email_otp_{user.id}'
+        cache.set(cache_key, otp_code, timeout=300)  # 5-minute TTL
 
-        refresh = RefreshToken.for_user(user)
+        try:
+            send_mail(
+                subject='S4 Security – Your Login Verification Code',
+                message=(
+                    f'Hello {user.first_name},\n\n'
+                    f'Your one-time login code is: {otp_code}\n\n'
+                    f'This code expires in 5 minutes.\n\n'
+                    f'If you did not request this, please ignore this email.'
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
+        except Exception as exc:
+            logger.error('Failed to send login OTP to %s: %s', user.email, exc)
+            cache.delete(cache_key)
+            return Response(
+                {'error': 'Failed to send verification code. Please try again.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
         return Response({
-            'requires_2fa': False,
-            'access': str(refresh.access_token),
-            'refresh': str(refresh),
-            'user': UserSerializer(user).data,
+            'requires_2fa': True,
+            'temp_token': temp_token,
+            'message': 'A verification code has been sent to your email.',
         })
 
 
@@ -234,6 +254,50 @@ class TwoFactorVerifyView(APIView):
                 {'error': 'Invalid OTP code.'},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'access': str(refresh.access_token),
+            'refresh': str(refresh),
+            'user': UserSerializer(user).data,
+        })
+
+
+class LoginEmailOTPVerifyView(APIView):
+    """Verify the email OTP sent during login and issue full tokens."""
+
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        serializer = TwoFactorVerifySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        try:
+            token = AccessToken(serializer.validated_data['temp_token'])
+            user_id = token['user_id']
+            user = User.objects.get(id=user_id)
+        except Exception:
+            return Response(
+                {'error': 'Invalid or expired session. Please log in again.'},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        cache_key = f'login_email_otp_{user_id}'
+        stored_otp = cache.get(cache_key)
+
+        if not stored_otp:
+            return Response(
+                {'error': 'Verification code has expired. Please log in again.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if serializer.validated_data['otp_code'] != stored_otp:
+            return Response(
+                {'error': 'Invalid verification code. Please try again.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        cache.delete(cache_key)  # Single-use – prevent replay
 
         refresh = RefreshToken.for_user(user)
         return Response({

@@ -14,7 +14,7 @@ import {
 } from "@/schemas/authSchemas";
 import {
   useLoginMutation,
-  useVerifyTwoFactorMutation,
+  useVerifyLoginOTPMutation,
 } from "@/store/api/authApi";
 import { useAuth } from "@/hooks/useAuth";
 import Input from "@/components/ui/Input";
@@ -25,7 +25,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { login: setAuth, handleRequires2FA } = useAuth();
   const [loginApi, { isLoading: isLoginLoading }] = useLoginMutation();
-  const [verify2FA, { isLoading: is2FALoading }] = useVerifyTwoFactorMutation();
+  const [verify2FA, { isLoading: is2FALoading }] = useVerifyLoginOTPMutation();
   const [show2FA, setShow2FA] = useState(false);
   const [tempToken, setTempToken] = useState("");
 
@@ -45,7 +45,7 @@ export default function LoginPage() {
         setTempToken(response.temp_token);
         setShow2FA(true);
         handleRequires2FA(response.temp_token);
-        toast.success("Please enter your 2FA code.");
+        toast.success("A verification code has been sent to your email.");
       } else if (response.access && response.refresh && response.user) {
         setAuth({
           user: response.user,
@@ -79,7 +79,7 @@ export default function LoginPage() {
       navigate("/dashboard");
     } catch (err) {
       const error = err as { data?: ApiError };
-      toast.error(String(error.data?.error ?? "Invalid 2FA code."));
+      toast.error(String(error.data?.error ?? "Invalid verification code."));
     }
   };
 
@@ -105,7 +105,7 @@ export default function LoginPage() {
           </h1>
           <p className="text-navy-300 mt-2">
             {show2FA
-              ? "Enter the code from your authenticator app"
+              ? "Enter the 6-digit code sent to your email"
               : "Sign in to your S4 Security account"}
           </p>
         </div>
@@ -150,8 +150,11 @@ export default function LoginPage() {
               noValidate
               className="space-y-5"
             >
+              <p className="text-sm text-navy-500 text-center -mb-2">
+                Check your email for a 6-digit verification code.
+              </p>
               <Input
-                label="Authentication Code"
+                label="Verification Code"
                 placeholder="000000"
                 maxLength={6}
                 error={twoFactorForm.formState.errors.otp_code}

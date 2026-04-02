@@ -13,6 +13,7 @@ class StationListView(generics.ListAPIView):
 
     serializer_class = SecurityStationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    pagination_class = None  # Return plain array – stations is a small finite dataset
 
     def get_queryset(self):
         queryset = SecurityStation.objects.filter(is_active=True)

@@ -141,6 +141,19 @@ CORS_ALLOWED_ORIGINS = config(
 CORS_ALLOW_CREDENTIALS = True
 
 # ---------------------------------------------------------------------------
+# Cache (Redis)
+# ---------------------------------------------------------------------------
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': (
+            f"redis://{config('REDIS_HOST', default='redis')}"
+            f":{config('REDIS_PORT', default=6379, cast=int)}/1"
+        ),
+    }
+}
+
+# ---------------------------------------------------------------------------
 # Channel Layers
 # ---------------------------------------------------------------------------
 if DEBUG:

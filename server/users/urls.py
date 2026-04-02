@@ -16,6 +16,7 @@ urlpatterns = [
     path('2fa/setup/', views.TwoFactorSetupView.as_view(), name='2fa-setup'),
     path('2fa/verify/', views.TwoFactorVerifyView.as_view(), name='2fa-verify'),
     path('2fa/disable/', views.TwoFactorDisableView.as_view(), name='2fa-disable'),
+    path('login/verify-otp/', views.LoginEmailOTPVerifyView.as_view(), name='login-verify-otp'),
     path('nin/verify/', views.NINVerifyView.as_view(), name='nin-verify'),
     path('profile/', views.UserProfileView.as_view(), name='profile'),
 ]
