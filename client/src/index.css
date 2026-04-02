@@ -59,9 +59,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 #root {
   min-height: 100%;
   width: 100%;
+}
+
+/* Prevent inline SVG gradient ids from conflicting when the same component is rendered multiple times */
+@layer base {
+  img,
+  svg {
+    max-width: 100%;
+  }
 }

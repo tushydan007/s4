@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'channels',
+    'django_ses',
     # Local apps
     'users',
     'reports',
@@ -162,15 +163,16 @@ else:
     }
 
 # ---------------------------------------------------------------------------
-# Email
+# Email — AWS SES
 # ---------------------------------------------------------------------------
-EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
-EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
-EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@s4app.com')
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django_ses.SESBackend')
+AWS_SES_ACCESS_KEY_ID = config('AWS_SES_ACCESS_KEY_ID', default='')
+AWS_SES_SECRET_ACCESS_KEY = config('AWS_SES_SECRET_ACCESS_KEY', default='')
+AWS_SES_REGION_NAME = config('AWS_SES_REGION_NAME', default='us-east-1')
+AWS_SES_REGION_ENDPOINT = f"email.{AWS_SES_REGION_NAME}.amazonaws.com"
+# Sender must be a verified address in SES (sandbox: both sender AND recipient must be verified)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='ezeh@proforcegalaxies.com')
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # ---------------------------------------------------------------------------
 # SmileID

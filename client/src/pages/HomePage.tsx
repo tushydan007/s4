@@ -16,6 +16,7 @@ import {
   HiFire,
   HiTruck,
 } from "react-icons/hi2";
+import S4Logo from "@/components/ui/S4Logo";
 
 const stats = [
   { value: "22", label: "Security Stations", color: "text-emerald-400" },
@@ -208,23 +209,13 @@ export default function HomePage() {
             backgroundSize: "48px 48px",
           }}
         />
-        <div className="relative w-full max-w-6xl mx-auto px-6 py-32 text-center">
+        <div className="relative w-full max-w-6xl mx-auto px-6 py-20 sm:py-28 md:py-32 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-sm text-emerald-300 mb-10"
-            >
-              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-              Nigeria's #1 Citizen Security Platform
-            </motion.div>
-
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black leading-tight tracking-tight mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight mb-8">
               Report Incidents.
               <br />
               <span className="bg-linear-to-r from-emerald-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
@@ -598,11 +589,11 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="p-1.5 bg-navy-800 rounded-lg">
-                  <HiShieldCheck className="w-5 h-5 text-emerald-400" />
-                </div>
-                <span className="font-black text-white">S4 Security</span>
+              <div className="flex items-center gap-2.5 mb-3">
+                <S4Logo className="w-8 h-8" />
+                <span className="font-black text-white text-lg">
+                  S4 Security
+                </span>
               </div>
               <p className="text-navy-400 text-sm leading-relaxed">
                 Secure - Swift - Smart - Safe. Bridging the gap between citizens
