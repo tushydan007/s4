@@ -26,6 +26,7 @@ import { useWebSocket } from "@/hooks/useWebSocket";
 import VoiceUploadModal from "@/components/reports/VoiceUploadModal";
 import ReportDetailModal from "@/components/reports/ReportDetailModal";
 import ReportSidebar from "@/components/reports/ReportSidebar";
+import MapSearchBox, { type SearchResult } from "@/components/map/MapSearchBox";
 import type { Report, SecurityStation } from "@/types";
 import { STATION_TYPES, SEVERITY_LEVELS } from "@/types";
 
@@ -91,6 +92,7 @@ export default function DashboardPage() {
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const stationMarkersRef = useRef<mapboxgl.Marker[]>([]);
+  const searchMarkerRef = useRef<mapboxgl.Marker | null>(null);
 
   const dispatch = useAppDispatch();
   const { showUploadModal, showReportDetail, showStations } = useAppSelector(
@@ -311,6 +313,65 @@ export default function DashboardPage() {
     }
   }, [stations, showStations, mapLoaded, addStationMarkers]);
 
+  const handleSearchSelect = (result: SearchResult) => {
+    if (!map.current) return;
+
+    // Remove previous search pin
+    if (searchMarkerRef.current) {
+      searchMarkerRef.current.remove();
+      searchMarkerRef.current = null;
+    }
+
+    // Create a custom pin element
+    const el = document.createElement("div");
+    el.innerHTML = `
+      <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
+      ">
+        <div style="
+          background: #10b981;
+          color: white;
+          font-size: 11px;
+          font-weight: 700;
+          padding: 4px 8px;
+          border-radius: 6px;
+          white-space: nowrap;
+          max-width: 180px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        ">${result.place_name.split(",")[0]}</div>
+        <div style="
+          width: 0; height: 0;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-top: 8px solid #10b981;
+        "></div>
+        <div style="
+          width: 10px; height: 10px;
+          background: #10b981;
+          border: 2px solid white;
+          border-radius: 50%;
+        "></div>
+      </div>
+    `;
+
+    const marker = new mapboxgl.Marker({ element: el, anchor: "bottom" })
+      .setLngLat([result.lng, result.lat])
+      .addTo(map.current);
+
+    searchMarkerRef.current = marker;
+
+    map.current.flyTo({
+      center: [result.lng, result.lat],
+      zoom: 13,
+      duration: 1800,
+      essential: true,
+    });
+  };
+
   const handleAddReport = async () => {
     if (!isAuthenticated) {
       toast.error("Please log in or create an account to report an incident.");
@@ -414,6 +475,16 @@ export default function DashboardPage() {
           {showStations ? "Hide Stations" : "Show Stations"}
         </motion.button>
       </div>
+
+      {/* Search Box — top right */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.15 }}
+        className="absolute top-4 right-4 z-10"
+      >
+        <MapSearchBox onSelect={handleSearchSelect} />
+      </motion.div>
 
       {/* Add Report FAB */}
       <motion.button
