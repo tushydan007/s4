@@ -164,10 +164,10 @@ else:
 
 # ---------------------------------------------------------------------------
 # Email — AWS SES
+# django-ses and django-storages both use boto3, which automatically reads
+# the standard AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY env vars.
 # ---------------------------------------------------------------------------
 EMAIL_BACKEND = config('EMAIL_BACKEND', default='django_ses.SESBackend')
-AWS_SES_ACCESS_KEY_ID = config('AWS_SES_ACCESS_KEY_ID', default='')
-AWS_SES_SECRET_ACCESS_KEY = config('AWS_SES_SECRET_ACCESS_KEY', default='')
 AWS_SES_REGION_NAME = config('AWS_SES_REGION_NAME', default='us-east-1')
 AWS_SES_REGION_ENDPOINT = f"email.{AWS_SES_REGION_NAME}.amazonaws.com"
 # Sender must be a verified address in SES (sandbox: both sender AND recipient must be verified)

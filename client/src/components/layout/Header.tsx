@@ -56,7 +56,7 @@ export default function Header() {
                   <span
                     className={`w-2 h-2 rounded-full shrink-0 ${user?.nin_verified ? "bg-emerald-400" : "bg-amber-400"}`}
                   />
-                  <span className="text-sm text-navy-200 max-w-[140px] truncate">
+                  <span className="text-sm text-navy-200 max-w-35 truncate">
                     {user?.first_name} {user?.last_name}
                   </span>
                 </div>
