@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 
 
 class RegisterView(generics.CreateAPIView):
-    """Register a new user and send verification email."""
+    """Register a new user, verify NIN via SmileID, and send verification email."""
 
     serializer_class = RegisterSerializer
     permission_classes = [permissions.AllowAny]
@@ -39,7 +39,29 @@ class RegisterView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+        nin = serializer.validated_data.get('nin', '').strip()
+        first_name = serializer.validated_data.get('first_name', '').strip()
+        last_name = serializer.validated_data.get('last_name', '').strip()
+
+        if nin:
+            nin_result = verify_nin_with_smileid(
+                user_id=str(uuid.uuid4()),
+                nin=nin,
+                first_name=first_name,
+                last_name=last_name,
+            )
+            if not nin_result['success']:
+                return Response(
+                    {'nin': [nin_result.get('message', 'NIN verification failed. Please check your NIN and try again.')]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
         user = serializer.save()
+
+        if nin:
+            user.nin_verified = True
+            user.save(update_fields=['nin_verified'])
 
         send_verification_email(user)
 
@@ -49,6 +71,44 @@ class RegisterView(generics.CreateAPIView):
                 'user': UserSerializer(user).data,
             },
             status=status.HTTP_201_CREATED,
+        )
+
+
+class PreRegisterNINVerifyView(APIView):
+    """Verify NIN before registration (no authentication required)."""
+
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        nin = request.data.get('nin', '').strip()
+        first_name = request.data.get('first_name', '').strip()
+        last_name = request.data.get('last_name', '').strip()
+
+        if not nin or not first_name or not last_name:
+            return Response(
+                {'error': 'NIN, first name, and last name are required.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if not (nin.isdigit() and len(nin) == 11):
+            return Response(
+                {'error': 'NIN must be exactly 11 digits.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        result = verify_nin_with_smileid(
+            user_id=str(uuid.uuid4()),
+            nin=nin,
+            first_name=first_name,
+            last_name=last_name,
+        )
+
+        if result['success']:
+            return Response({'verified': True, 'message': result.get('message', 'NIN verified.')})
+
+        return Response(
+            {'error': result.get('message', 'NIN verification failed. Please check your NIN.')},
+            status=status.HTTP_400_BAD_REQUEST,
         )
 
 

@@ -109,6 +109,17 @@ export const authApi = createApi({
       invalidatesTags: ["User"],
     }),
 
+    preVerifyNIN: builder.mutation<
+      { verified: boolean; message: string },
+      { nin: string; first_name: string; last_name: string }
+    >({
+      query: (data) => ({
+        url: "/users/nin/pre-verify/",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     getProfile: builder.query<User, void>({
       query: () => "/users/profile/",
       providesTags: ["User"],
@@ -144,6 +155,7 @@ export const {
   useVerifyLoginOTPMutation,
   useDisableTwoFactorMutation,
   useVerifyNINMutation,
+  usePreVerifyNINMutation,
   useGetProfileQuery,
   useUpdateProfileMutation,
   useLogoutMutation,

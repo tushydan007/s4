@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,10 +11,15 @@ import {
   HiUser,
   HiPhone,
   HiIdentification,
+  HiCheckCircle,
+  HiXCircle,
 } from "react-icons/hi2";
 
 import { registerSchema, type RegisterFormData } from "@/schemas/authSchemas";
-import { useRegisterMutation } from "@/store/api/authApi";
+import {
+  useRegisterMutation,
+  usePreVerifyNINMutation,
+} from "@/store/api/authApi";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import type { ApiError } from "@/types";
@@ -21,17 +27,60 @@ import type { ApiError } from "@/types";
 export default function RegisterPage() {
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterMutation();
+  const [preVerifyNIN, { isLoading: isVerifyingNIN }] =
+    usePreVerifyNINMutation();
+  const [ninStatus, setNinStatus] = useState<"idle" | "verified" | "failed">(
+    "idle",
+  );
 
   const {
     register: registerField,
     handleSubmit,
     formState: { errors },
     setError,
+    watch,
+    trigger,
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
   });
 
+  const ninValue = watch("nin");
+  const firstNameValue = watch("first_name");
+  const lastNameValue = watch("last_name");
+
+  // Reset NIN verification whenever NIN or name fields change
+  useEffect(() => {
+    setNinStatus("idle");
+  }, [ninValue, firstNameValue, lastNameValue]);
+
+  const handleVerifyNIN = async () => {
+    const isValid = await trigger(["nin", "first_name", "last_name"]);
+    if (!isValid) return;
+    try {
+      await preVerifyNIN({
+        nin: ninValue.trim(),
+        first_name: firstNameValue.trim(),
+        last_name: lastNameValue.trim(),
+      }).unwrap();
+      setNinStatus("verified");
+      toast.success("NIN verified successfully!");
+    } catch (err) {
+      const error = err as { data?: ApiError };
+      setNinStatus("failed");
+      setError("nin", {
+        message: String(
+          error.data?.error ??
+            "NIN verification failed. Please check your NIN.",
+        ),
+      });
+    }
+  };
+
   const onSubmit = async (data: RegisterFormData) => {
+    if (ninStatus !== "verified") {
+      toast.error("Please verify your NIN before creating an account.");
+      return;
+    }
     try {
       await register(data).unwrap();
       toast.success(
@@ -152,6 +201,47 @@ export default function RegisterPage() {
               {...registerField("nin")}
             />
 
+            {/* NIN verification button */}
+            <button
+              type="button"
+              onClick={handleVerifyNIN}
+              disabled={
+                isVerifyingNIN ||
+                ninStatus === "verified" ||
+                !ninValue ||
+                ninValue.length !== 11
+              }
+              className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-navy-500/30 disabled:opacity-50 disabled:cursor-not-allowed ${
+                ninStatus === "verified"
+                  ? "bg-emerald-50 border-emerald-300 text-emerald-700 cursor-default"
+                  : ninStatus === "failed"
+                    ? "bg-red-50 border-red-300 text-red-700 hover:bg-red-100"
+                    : "bg-white border-navy-300 text-navy-700 hover:bg-navy-50"
+              }`}
+            >
+              {isVerifyingNIN ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-navy-400 border-t-transparent rounded-full animate-spin" />
+                  Verifying NIN...
+                </>
+              ) : ninStatus === "verified" ? (
+                <>
+                  <HiCheckCircle className="w-4 h-4" />
+                  NIN Verified
+                </>
+              ) : ninStatus === "failed" ? (
+                <>
+                  <HiXCircle className="w-4 h-4" />
+                  Retry NIN Verification
+                </>
+              ) : (
+                <>
+                  <HiIdentification className="w-4 h-4" />
+                  Verify NIN
+                </>
+              )}
+            </button>
+
             <Input
               label="Password"
               type="password"
@@ -186,9 +276,15 @@ export default function RegisterPage() {
               isLoading={isLoading}
               className="w-full"
               size="lg"
+              disabled={ninStatus !== "verified"}
             >
               Create Account
             </Button>
+            {ninStatus !== "verified" && (
+              <p className="text-xs text-amber-600 text-center">
+                Please verify your NIN above before creating your account.
+              </p>
+            )}
           </form>
 
           <p className="text-center text-sm text-navy-500 mt-6">

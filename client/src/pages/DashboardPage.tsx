@@ -45,6 +45,10 @@ export default function DashboardPage() {
   const { data: stations } = useGetStationsQuery();
   const { isConnected } = useWebSocket();
 
+  // Keep a ref so the map contextmenu closure always reads the latest user
+  const userRef = useRef(user);
+  userRef.current = user;
+
   const [mapLoaded, setMapLoaded] = useState(false);
 
   // Initialize map
@@ -77,10 +81,15 @@ export default function DashboardPage() {
 
     // Right-click to add report
     mapInstance.on("contextmenu", (e) => {
-      if (!user?.is_fully_verified) {
-        toast.error(
-          "Please complete NIN and email verification to post reports.",
-        );
+      const currentUser = userRef.current;
+      if (!currentUser?.is_fully_verified) {
+        const msg =
+          !currentUser?.email_verified && !currentUser?.nin_verified
+            ? "Please verify your email address and NIN to post reports."
+            : !currentUser?.email_verified
+              ? "Please verify your email address to post reports."
+              : "Please verify your NIN to post reports.";
+        toast.error(msg);
         return;
       }
       dispatch(openUploadModal({ lat: e.lngLat.lat, lng: e.lngLat.lng }));
@@ -216,9 +225,13 @@ export default function DashboardPage() {
 
   const handleAddReport = () => {
     if (!user?.is_fully_verified) {
-      toast.error(
-        "Please complete NIN and email verification to post reports.",
-      );
+      const msg =
+        !user?.email_verified && !user?.nin_verified
+          ? "Please verify your email address and NIN to post reports."
+          : !user?.email_verified
+            ? "Please verify your email address to post reports."
+            : "Please verify your NIN to post reports.";
+      toast.error(msg);
       return;
     }
     // Use map center as default location
