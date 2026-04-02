@@ -16,28 +16,28 @@ SAMPLE_STATIONS = [
     {"name": "Oyo State Police Command", "station_type": "police", "latitude": 7.3775, "longitude": 3.9470, "address": "Eleyele, Ibadan", "phone_number": ""},
 
     # Army Barracks
-    {"name": "Bonny Camp", "station_type": "army", "latitude": 6.4355, "longitude": 3.4119, "address": "Victoria Island, Lagos", "phone_number": ""},
-    {"name": "Ikeja Army Cantonment", "station_type": "army", "latitude": 6.6053, "longitude": 3.3377, "address": "Ikeja, Lagos", "phone_number": ""},
-    {"name": "Mogadishu Cantonment", "station_type": "army", "latitude": 9.0716, "longitude": 7.4863, "address": "Asokoro, Abuja", "phone_number": ""},
-    {"name": "Jaji Military Cantonment", "station_type": "army", "latitude": 10.5417, "longitude": 7.5250, "address": "Jaji, Kaduna", "phone_number": ""},
-    {"name": "82 Division Nigerian Army", "station_type": "army", "latitude": 6.4423, "longitude": 7.5127, "address": "Enugu", "phone_number": ""},
+    {"name": "Bonny Camp", "station_type": "army", "latitude": 3.4119, "longitude": 6.4355, "address": "Victoria Island, Lagos", "phone_number": ""},
+    {"name": "Ikeja Army Cantonment", "station_type": "army", "latitude": 3.3377, "longitude": 6.6053, "address": "Ikeja, Lagos", "phone_number": ""},
+    {"name": "Mogadishu Cantonment", "station_type": "army", "latitude": 7.4863, "longitude": 9.0716, "address": "Asokoro, Abuja", "phone_number": ""},
+    {"name": "Jaji Military Cantonment", "station_type": "army", "latitude": 7.5250, "longitude": 10.5417, "address": "Jaji, Kaduna", "phone_number": ""},
+    {"name": "82 Division Nigerian Army", "station_type": "army", "latitude": 7.5127, "longitude": 6.4423, "address": "Enugu", "phone_number": ""},
 
     # Military Bases
-    {"name": "Nigerian Defence Academy", "station_type": "military", "latitude": 10.5260, "longitude": 7.4317, "address": "Afaka, Kaduna", "phone_number": ""},
-    {"name": "Sambisa Military Base", "station_type": "military", "latitude": 11.4500, "longitude": 13.5833, "address": "Borno State", "phone_number": ""},
-    {"name": "Maimalari Barracks", "station_type": "military", "latitude": 11.8311, "longitude": 13.1510, "address": "Maiduguri, Borno", "phone_number": ""},
+    {"name": "Nigerian Defence Academy", "station_type": "military", "latitude": 7.4317, "longitude": 10.5260, "address": "Afaka, Kaduna", "phone_number": ""},
+    {"name": "Sambisa Military Base", "station_type": "military", "latitude": 13.5833, "longitude": 11.4500, "address": "Borno State", "phone_number": ""},
+    {"name": "Maimalari Barracks", "station_type": "military", "latitude": 13.1510 , "longitude": 11.8311, "address": "Maiduguri, Borno", "phone_number": ""},
 
     # Navy
-    {"name": "Western Naval Command", "station_type": "navy", "latitude": 6.4290, "longitude": 3.4070, "address": "Apapa, Lagos", "phone_number": ""},
-    {"name": "NNS Beecroft", "station_type": "navy", "latitude": 6.4295, "longitude": 3.4075, "address": "Apapa, Lagos", "phone_number": ""},
+    {"name": "Western Naval Command", "station_type": "navy", "latitude": 3.4070, "longitude": 6.4290, "address": "Apapa, Lagos", "phone_number": ""},
+    {"name": "NNS Beecroft", "station_type": "navy", "latitude": 3.4075, "longitude": 6.4295, "address": "Apapa, Lagos", "phone_number": ""},
 
     # Civil Defense
-    {"name": "NSCDC Headquarters", "station_type": "civil_defense", "latitude": 9.0580, "longitude": 7.4890, "address": "Abuja", "phone_number": "08033226246"},
-    {"name": "NSCDC Lagos Command", "station_type": "civil_defense", "latitude": 6.4550, "longitude": 3.3890, "address": "Lagos", "phone_number": ""},
+    {"name": "NSCDC Headquarters", "station_type": "civil_defense", "latitude": 7.4890, "longitude": 9.0580, "address": "Abuja", "phone_number": "08033226246"},
+    {"name": "NSCDC Lagos Command", "station_type": "civil_defense", "latitude": 3.3890, "longitude": 6.4550, "address": "Lagos", "phone_number": ""},
 
     # Fire Stations
-    {"name": "Federal Fire Service HQ", "station_type": "fire", "latitude": 9.0570, "longitude": 7.4940, "address": "Abuja", "phone_number": "112"},
-    {"name": "Lagos State Fire Service", "station_type": "fire", "latitude": 6.4560, "longitude": 3.3920, "address": "Lagos Island, Lagos", "phone_number": "112"},
+    {"name": "Federal Fire Service HQ", "station_type": "fire", "latitude": 7.4940, "longitude": 9.0570, "address": "Abuja", "phone_number": "112"},
+    {"name": "Lagos State Fire Service", "station_type": "fire", "latitude": 3.3920, "longitude": 6.4560, "address": "Lagos Island, Lagos", "phone_number": "112"},
 ]
 
 

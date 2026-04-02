@@ -32,6 +32,58 @@ import { STATION_TYPES, SEVERITY_LEVELS } from "@/types";
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN as string;
 
+// ── Base map options ────────────────────────────────────────────────────────
+function rasterStyle(
+  id: string,
+  tileUrl: string,
+  attribution: string,
+  maxzoom: number,
+) {
+  return {
+    version: 8 as const,
+    sources: {
+      [id]: {
+        type: "raster" as const,
+        tiles: [tileUrl],
+        tileSize: 256 as const,
+        attribution,
+        maxzoom,
+      },
+    },
+    layers: [{ id: `${id}-layer`, type: "raster" as const, source: id }],
+  };
+}
+
+const BASE_MAPS: Array<{ id: string; label: string; style: string | object }> =
+  [
+    {
+      id: "streets",
+      label: "Streets",
+      style: rasterStyle(
+        "osm",
+        "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
+        19,
+      ),
+    },
+    {
+      id: "terrain",
+      label: "Terrain",
+      style: rasterStyle(
+        "terrain",
+        "https://tile.opentopomap.org/{z}/{x}/{y}.png",
+        "© <a href='https://opentopomap.org'>OpenTopoMap</a> contributors",
+        17,
+      ),
+    },
+    {
+      id: "satellite",
+      label: "Satellite",
+      style: "mapbox://styles/mapbox/satellite-streets-v12",
+    },
+  ];
+// ────────────────────────────────────────────────────────────────────────────
+
 // ── Nigeria geographic restriction ──────────────────────────────────────────
 // Approximate bounding box for Nigeria (mainland + territorial waters)
 const NIGERIA_BOUNDS = {
@@ -117,6 +169,7 @@ export default function DashboardPage() {
 
   const [mapLoaded, setMapLoaded] = useState(false);
   const [isCheckingLocation, setIsCheckingLocation] = useState(false);
+  const [activeBaseMap, setActiveBaseMap] = useState("satellite");
 
   // Initialize map
   useEffect(() => {
@@ -313,6 +366,15 @@ export default function DashboardPage() {
     }
   }, [stations, showStations, mapLoaded, addStationMarkers]);
 
+  const handleBaseMapChange = (id: string) => {
+    if (!map.current || id === activeBaseMap) return;
+    const bm = BASE_MAPS.find((m) => m.id === id);
+    if (!bm) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    map.current.setStyle(bm.style as any);
+    setActiveBaseMap(id);
+  };
+
   const handleSearchSelect = (result: SearchResult) => {
     if (!map.current) return;
 
@@ -476,14 +538,33 @@ export default function DashboardPage() {
         </motion.button>
       </div>
 
-      {/* Search Box — top right */}
+      {/* Right-side controls — search + base map toggle */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.15 }}
-        className="absolute top-4 right-4 z-10"
+        className="absolute top-4 right-4 z-10 flex flex-col items-end gap-2"
       >
         <MapSearchBox onSelect={handleSearchSelect} />
+
+        {/* Base map toggle */}
+        <div className="flex bg-white/90 backdrop-blur-md rounded-xl shadow-lg overflow-hidden">
+          {BASE_MAPS.map((bm, idx) => (
+            <button
+              key={bm.id}
+              onClick={() => handleBaseMapChange(bm.id)}
+              className={`px-3 py-2 text-xs font-medium transition-colors ${
+                idx < BASE_MAPS.length - 1 ? "border-r border-navy-100" : ""
+              } ${
+                activeBaseMap === bm.id
+                  ? "bg-navy-800 text-white"
+                  : "text-navy-600 hover:bg-navy-50"
+              }`}
+            >
+              {bm.label}
+            </button>
+          ))}
+        </div>
       </motion.div>
 
       {/* Add Report FAB */}
