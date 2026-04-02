@@ -6,22 +6,28 @@ import { HiCheckCircle, HiXCircle } from "react-icons/hi2";
 import { useVerifyEmailMutation } from "@/store/api/authApi";
 import Spinner from "@/components/ui/Spinner";
 
+const CACHE_KEY = (token: string) => `email_verified_${token}`;
+
 export default function VerifyEmailPage() {
   const { token } = useParams<{ token: string }>();
   const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
+
+  // Seed initial state from sessionStorage so a page refresh keeps showing success
+  const cached = token ? sessionStorage.getItem(CACHE_KEY(token)) : null;
   const [status, setStatus] = useState<"loading" | "success" | "error">(
-    token ? "loading" : "error",
+    cached ? "success" : token ? "loading" : "error",
   );
   const [message, setMessage] = useState(
-    token ? "" : "Invalid verification link.",
+    cached ?? (token ? "" : "Invalid verification link."),
   );
 
   useEffect(() => {
-    if (!token) return;
+    if (!token || cached) return;
 
     verifyEmail(token)
       .unwrap()
       .then((res) => {
+        sessionStorage.setItem(CACHE_KEY(token), res.message);
         setStatus("success");
         setMessage(res.message);
       })
@@ -30,7 +36,7 @@ export default function VerifyEmailPage() {
         const errorData = err?.data as { error?: string } | undefined;
         setMessage(errorData?.error ?? "Email verification failed.");
       });
-  }, [token, verifyEmail]);
+  }, [token, cached, verifyEmail]);
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center px-4 py-12 bg-linear-to-br from-navy-900 via-navy-800 to-navy-950">

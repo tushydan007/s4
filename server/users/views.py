@@ -57,11 +57,21 @@ class VerifyEmailView(APIView):
     def get(self, request, token: str):
         try:
             verification = EmailVerificationToken.objects.select_related('user').get(
-                id=token, is_used=False
+                id=token
             )
         except (EmailVerificationToken.DoesNotExist, ValueError):
             return Response(
                 {'error': 'Invalid or expired verification link.'},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Token was already used — if the user is verified treat this as success
+        # so that refreshing the confirmation page does not show an error.
+        if verification.is_used:
+            if verification.user.email_verified:
+                return Response({'message': 'Email already verified. You can now log in.'})
+            return Response(
+                {'error': 'This verification link has already been used.'},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
