@@ -74,3 +74,9 @@ body {
     max-width: 100%;
   }
 }
+
+/* Keep zoom and geolocate controls below the top-right report button */
+.dashboard-map .mapboxgl-ctrl-top-right {
+  top: 5rem;
+  right: 0.5rem;
+}
