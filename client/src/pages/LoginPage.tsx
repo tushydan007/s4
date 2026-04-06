@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
@@ -35,6 +35,7 @@ export default function LoginPage() {
 
   const twoFactorForm = useForm<TwoFactorFormData>({
     resolver: zodResolver(twoFactorSchema),
+    defaultValues: { otp_code: "" },
   });
 
   const onLoginSubmit = async (data: LoginFormData) => {
@@ -42,6 +43,7 @@ export default function LoginPage() {
       const response = await loginApi(data).unwrap();
 
       if (response.requires_2fa && response.temp_token) {
+        twoFactorForm.reset({ otp_code: "" });
         setTempToken(response.temp_token);
         setShow2FA(true);
         handleRequires2FA(response.temp_token);
@@ -113,6 +115,7 @@ export default function LoginPage() {
         <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-5 sm:p-8">
           {!show2FA ? (
             <form
+              key="login-form"
               onSubmit={loginForm.handleSubmit(onLoginSubmit)}
               noValidate
               className="space-y-5"
@@ -146,22 +149,38 @@ export default function LoginPage() {
             </form>
           ) : (
             <form
+              key="twofa-form"
               onSubmit={twoFactorForm.handleSubmit(on2FASubmit)}
               noValidate
               autoComplete="off"
               className="space-y-5"
             >
-              <Input
-                label="Verification Code"
-                type="text"
-                inputMode="numeric"
-                autoComplete="off"
-                placeholder="000000"
-                maxLength={6}
-                error={twoFactorForm.formState.errors.otp_code}
-                autoFocus
-                className="text-center text-2xl tracking-[0.5em] font-mono"
-                {...twoFactorForm.register("otp_code")}
+              <Controller
+                control={twoFactorForm.control}
+                name="otp_code"
+                render={({ field }) => (
+                  <Input
+                    label="Verification Code"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="one-time-code"
+                    placeholder="000000"
+                    maxLength={6}
+                    error={twoFactorForm.formState.errors.otp_code}
+                    autoFocus
+                    className="text-center text-2xl tracking-[0.5em] font-mono"
+                    value={field.value ?? ""}
+                    onChange={(e) => {
+                      const digitsOnly = e.target.value
+                        .replace(/\D/g, "")
+                        .slice(0, 6);
+                      field.onChange(digitsOnly);
+                    }}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                    ref={field.ref}
+                  />
+                )}
               />
 
               <Button
