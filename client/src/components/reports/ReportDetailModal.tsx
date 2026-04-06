@@ -61,6 +61,11 @@ export default function ReportDetailModal() {
     });
   };
 
+  const formatCoordinate = (value: unknown) => {
+    const numeric = typeof value === "number" ? value : Number(value);
+    return Number.isFinite(numeric) ? numeric.toFixed(6) : "N/A";
+  };
+
   return (
     <Modal
       isOpen
@@ -222,8 +227,8 @@ export default function ReportDetailModal() {
             <div>
               <p className="text-navy-500 text-xs">Location</p>
               <p className="font-medium text-navy-700">
-                {selectedReport.latitude.toFixed(6)},{" "}
-                {selectedReport.longitude.toFixed(6)}
+                {formatCoordinate(selectedReport.latitude)},{" "}
+                {formatCoordinate(selectedReport.longitude)}
               </p>
             </div>
           </div>
