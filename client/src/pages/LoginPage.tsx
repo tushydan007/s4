@@ -150,11 +150,11 @@ export default function LoginPage() {
               noValidate
               className="space-y-5"
             >
-              <p className="text-sm text-navy-500 text-center -mb-2">
-                Check your email for a 6-digit verification code.
-              </p>
               <Input
                 label="Verification Code"
+                type="text"
+                inputMode="numeric"
+                autoComplete="one-time-code"
                 placeholder="000000"
                 maxLength={6}
                 error={twoFactorForm.formState.errors.otp_code}
