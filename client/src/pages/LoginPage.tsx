@@ -148,13 +148,14 @@ export default function LoginPage() {
             <form
               onSubmit={twoFactorForm.handleSubmit(on2FASubmit)}
               noValidate
+              autoComplete="off"
               className="space-y-5"
             >
               <Input
                 label="Verification Code"
                 type="text"
                 inputMode="numeric"
-                autoComplete="one-time-code"
+                autoComplete="off"
                 placeholder="000000"
                 maxLength={6}
                 error={twoFactorForm.formState.errors.otp_code}
