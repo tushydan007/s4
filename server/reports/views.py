@@ -79,14 +79,36 @@ class ReportCreateView(generics.CreateAPIView):
         return Response(response_data, status=status.HTTP_201_CREATED)
 
 
-class ReportDetailView(generics.RetrieveAPIView):
-    """Retrieve a single report."""
+class ReportDetailView(generics.RetrieveDestroyAPIView):
+    """Retrieve or delete a report."""
 
     serializer_class = ReportSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return Report.objects.filter(is_active=True).select_related('user').prefetch_related('media')
+
+    def destroy(self, request, *args, **kwargs):
+        report = self.get_object()
+
+        if report.user_id != request.user.id:
+            return Response(
+                {'detail': 'You can only delete reports that you created.'},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        if report.voice_note:
+            report.voice_note.delete(save=False)
+
+        media_items = list(report.media.all())
+        for media in media_items:
+            media.file.delete(save=False)
+        report.media.all().delete()
+
+        report.is_active = False
+        report.save(update_fields=['is_active', 'updated_at'])
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserReportsView(generics.ListAPIView):

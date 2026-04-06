@@ -26,7 +26,15 @@ services:
     restart: unless-stopped
 
   client:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        HTTP_PROXY: ${HTTP_PROXY-}
+        HTTPS_PROXY: ${HTTPS_PROXY-}
+        NO_PROXY: ${NO_PROXY-}
+        http_proxy: ${http_proxy-}
+        https_proxy: ${https_proxy-}
+        no_proxy: ${no_proxy-}
     container_name: s4-client
     ports:
       - "8080:80"

@@ -54,6 +54,18 @@ export const reportApi = createApi({
       invalidatesTags: [{ type: "Report", id: "LIST" }],
     }),
 
+    deleteReport: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `/reports/${id}/`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (_result, _error, id) => [
+        { type: "Report", id },
+        { type: "Report", id: "LIST" },
+        { type: "Report", id: "USER_LIST" },
+      ],
+    }),
+
     getUserReports: builder.query<PaginatedResponse<Report>, void>({
       query: () => "/reports/my-reports/",
       providesTags: [{ type: "Report", id: "USER_LIST" }],
@@ -65,5 +77,6 @@ export const {
   useGetReportsQuery,
   useGetReportQuery,
   useCreateReportMutation,
+  useDeleteReportMutation,
   useGetUserReportsQuery,
 } = reportApi;

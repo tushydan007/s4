@@ -8,17 +8,22 @@ import {
   HiPause,
   HiPhoto,
   HiVideoCamera,
+  HiTrash,
 } from "react-icons/hi2";
 import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 import { useAppDispatch, useAppSelector } from "@/store";
 import { closeReportDetail } from "@/store/slices/uiSlice";
+import { useDeleteReportMutation } from "@/store/api/reportApi";
 import Modal from "@/components/ui/Modal";
 import { SEVERITY_LEVELS, REPORT_CATEGORIES } from "@/types";
 
 export default function ReportDetailModal() {
   const dispatch = useAppDispatch();
   const { selectedReport } = useAppSelector((state) => state.ui);
+  const currentUserId = useAppSelector((state) => state.auth.user?.id);
+  const [deleteReport, { isLoading: isDeleting }] = useDeleteReportMutation();
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [activeMediaIdx, setActiveMediaIdx] = useState(0);
@@ -33,6 +38,9 @@ export default function ReportDetailModal() {
   );
   const images = selectedReport.media.filter((m) => m.media_type === "image");
   const videos = selectedReport.media.filter((m) => m.media_type === "video");
+  const canDelete = Boolean(
+    currentUserId && currentUserId === selectedReport.user,
+  );
 
   const togglePlayback = () => {
     if (isPlaying && audioRef.current) {
@@ -64,6 +72,26 @@ export default function ReportDetailModal() {
   const formatCoordinate = (value: unknown) => {
     const numeric = typeof value === "number" ? value : Number(value);
     return Number.isFinite(numeric) ? numeric.toFixed(6) : "N/A";
+  };
+
+  const handleDelete = async () => {
+    if (!canDelete || isDeleting) return;
+
+    const confirmed = window.confirm(
+      "Delete this voice report? This action cannot be undone.",
+    );
+    if (!confirmed) return;
+
+    try {
+      await deleteReport(selectedReport.id).unwrap();
+      toast.success("Report deleted successfully");
+      dispatch(closeReportDetail());
+    } catch (err) {
+      const error = err as { data?: { detail?: string; error?: string } };
+      toast.error(
+        error?.data?.detail ?? error?.data?.error ?? "Failed to delete report",
+      );
+    }
   };
 
   return (
@@ -98,6 +126,17 @@ export default function ReportDetailModal() {
               </span>
             </div>
           </div>
+          {canDelete && (
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-danger-50 text-danger-700 hover:bg-danger-100 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <HiTrash className="w-4 h-4" />
+              {isDeleting ? "Deleting..." : "Delete"}
+            </button>
+          )}
         </div>
 
         {/* Voice Note Player */}

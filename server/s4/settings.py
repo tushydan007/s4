@@ -223,7 +223,7 @@ if not DEBUG:
 MAX_VOICE_NOTE_SIZE = 50 * 1024 * 1024  # 50 MB
 MAX_IMAGE_SIZE = 10 * 1024 * 1024  # 10 MB
 MAX_VIDEO_SIZE = 100 * 1024 * 1024  # 100 MB
-ALLOWED_AUDIO_TYPES = ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/webm', 'audio/mp4']
+ALLOWED_AUDIO_TYPES = ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/webm', 'audio/mp4', 'video/webm']
 ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 ALLOWED_VIDEO_TYPES = ['video/mp4', 'video/webm', 'video/quicktime']
 

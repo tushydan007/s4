@@ -25,6 +25,40 @@ import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import Button from "@/components/ui/Button";
 
+function extractApiErrorMessage(err: unknown): string {
+  const fallback = "Failed to submit report";
+
+  if (!err || typeof err !== "object") return fallback;
+
+  const errorObj = err as {
+    data?: Record<string, unknown>;
+  };
+
+  const payload = errorObj.data;
+  if (!payload || typeof payload !== "object") return fallback;
+
+  if (typeof payload.error === "string") return payload.error;
+  if (typeof payload.detail === "string") return payload.detail;
+
+  const entries = Object.entries(payload);
+  const first = entries.find(([, value]) => {
+    if (typeof value === "string") return true;
+    return Array.isArray(value) && value.length > 0;
+  });
+
+  if (!first) return fallback;
+
+  const [field, value] = first;
+  if (typeof value === "string") return `${field}: ${value}`;
+
+  if (Array.isArray(value)) {
+    const firstItem = value[0];
+    if (typeof firstItem === "string") return `${field}: ${firstItem}`;
+  }
+
+  return fallback;
+}
+
 export default function VoiceUploadModal() {
   const dispatch = useAppDispatch();
   const { selectedLocation } = useAppSelector((state) => state.ui);
@@ -48,6 +82,7 @@ export default function VoiceUploadModal() {
     register,
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm<ReportFormData>({
     resolver: zodResolver(reportSchema),
@@ -69,6 +104,12 @@ export default function VoiceUploadModal() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!selectedLocation) return;
+    setValue("latitude", selectedLocation.lat, { shouldValidate: true });
+    setValue("longitude", selectedLocation.lng, { shouldValidate: true });
+  }, [selectedLocation, setValue]);
 
   // ─── Voice Recording ───
   const startRecording = useCallback(async () => {
@@ -180,13 +221,21 @@ export default function VoiceUploadModal() {
       return;
     }
 
+    const latitude = selectedLocation?.lat ?? data.latitude;
+    const longitude = selectedLocation?.lng ?? data.longitude;
+
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      toast.error("Please select a valid location on the map");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("title", data.title);
     if (data.description) formData.append("description", data.description);
     formData.append("category", data.category);
     formData.append("severity", data.severity);
-    formData.append("latitude", String(data.latitude));
-    formData.append("longitude", String(data.longitude));
+    formData.append("latitude", String(latitude));
+    formData.append("longitude", String(longitude));
     formData.append("voice_note", audioBlob, "voice_note.webm");
 
     images.forEach((img) => formData.append("images", img));
@@ -197,8 +246,7 @@ export default function VoiceUploadModal() {
       toast.success("Report submitted successfully!");
       dispatch(closeUploadModal());
     } catch (err: unknown) {
-      const error = err as { data?: { error?: string } };
-      toast.error(error?.data?.error ?? "Failed to submit report");
+      toast.error(extractApiErrorMessage(err));
     }
   };
 

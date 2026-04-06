@@ -4,6 +4,15 @@ from rest_framework import serializers
 from .models import Report, ReportMedia
 
 
+def _is_allowed_audio_type(content_type: str | None) -> bool:
+    if not content_type:
+        return False
+
+    # Browsers often append parameters, e.g. audio/webm;codecs=opus.
+    normalized = content_type.split(';', 1)[0].strip().lower()
+    return normalized in settings.ALLOWED_AUDIO_TYPES
+
+
 class ReportMediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReportMedia
@@ -40,7 +49,7 @@ class ReportSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 f'Voice note must be under {settings.MAX_VOICE_NOTE_SIZE // (1024 * 1024)}MB.'
             )
-        if value.content_type not in settings.ALLOWED_AUDIO_TYPES:
+        if not _is_allowed_audio_type(getattr(value, 'content_type', None)):
             raise serializers.ValidationError(
                 'Unsupported audio format. Use MP3, WAV, OGG, WebM, or M4A.'
             )
@@ -67,7 +76,7 @@ class ReportCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 f'Voice note must be under {settings.MAX_VOICE_NOTE_SIZE // (1024 * 1024)}MB.'
             )
-        if value.content_type not in settings.ALLOWED_AUDIO_TYPES:
+        if not _is_allowed_audio_type(getattr(value, 'content_type', None)):
             raise serializers.ValidationError(
                 'Unsupported audio format. Use MP3, WAV, OGG, WebM, or M4A.'
             )
