@@ -5,7 +5,12 @@ interface UIState {
   showUploadModal: boolean;
   showReportDetail: boolean;
   selectedReport: Report | null;
-  selectedLocation: { lat: number; lng: number } | null;
+  selectedLocation: {
+    lat: number;
+    lng: number;
+    deviceLat: number;
+    deviceLng: number;
+  } | null;
   sidebarOpen: boolean;
   showStations: boolean;
 }
@@ -25,7 +30,12 @@ const uiSlice = createSlice({
   reducers: {
     openUploadModal(
       state,
-      action: PayloadAction<{ lat: number; lng: number }>,
+      action: PayloadAction<{
+        lat: number;
+        lng: number;
+        deviceLat: number;
+        deviceLng: number;
+      }>,
     ) {
       state.showUploadModal = true;
       state.selectedLocation = action.payload;

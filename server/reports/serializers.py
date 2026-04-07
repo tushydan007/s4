@@ -1,7 +1,39 @@
+import math
+
 from django.conf import settings
 from rest_framework import serializers
 
 from .models import Report, ReportMedia
+
+
+NIGERIA_LAT_MIN, NIGERIA_LAT_MAX = 4.27, 13.90
+NIGERIA_LNG_MIN, NIGERIA_LNG_MAX = 2.69, 14.68
+MAX_REPORT_DISTANCE_KM = 5.0
+
+
+def _to_radians(value: float) -> float:
+    return (value * 3.141592653589793) / 180.0
+
+
+def _distance_km(from_lat: float, from_lng: float, to_lat: float, to_lng: float) -> float:
+    earth_radius_km = 6371.0
+    d_lat = _to_radians(to_lat - from_lat)
+    d_lng = _to_radians(to_lng - from_lng)
+    a = (
+        (math.sin(d_lat / 2) ** 2)
+        + math.cos(_to_radians(from_lat))
+        * math.cos(_to_radians(to_lat))
+        * (math.sin(d_lng / 2) ** 2)
+    )
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    return earth_radius_km * c
+
+
+def _is_within_nigeria(lat: float, lng: float) -> bool:
+    return (
+        NIGERIA_LAT_MIN <= lat <= NIGERIA_LAT_MAX
+        and NIGERIA_LNG_MIN <= lng <= NIGERIA_LNG_MAX
+    )
 
 
 def _is_allowed_audio_type(content_type: str | None) -> bool:
@@ -57,6 +89,8 @@ class ReportSerializer(serializers.ModelSerializer):
 
 
 class ReportCreateSerializer(serializers.ModelSerializer):
+    device_latitude = serializers.FloatField(write_only=True)
+    device_longitude = serializers.FloatField(write_only=True)
     images = serializers.ListField(
         child=serializers.FileField(), required=False, write_only=True
     )
@@ -68,7 +102,8 @@ class ReportCreateSerializer(serializers.ModelSerializer):
         model = Report
         fields = [
             'title', 'description', 'voice_note', 'latitude', 'longitude',
-            'category', 'severity', 'images', 'videos',
+            'device_latitude', 'device_longitude', 'category', 'severity',
+            'images', 'videos',
         ]
 
     def validate_voice_note(self, value):
@@ -106,26 +141,43 @@ class ReportCreateSerializer(serializers.ModelSerializer):
         return value
 
     def validate(self, attrs):
-        """Enforce that reported locations are within Nigeria's geographic bounds."""
-        NIGERIA_LAT_MIN, NIGERIA_LAT_MAX = 4.27, 13.90
-        NIGERIA_LNG_MIN, NIGERIA_LNG_MAX = 2.69, 14.68
+        """Require enabled device location and enforce nearby report posting."""
         try:
-            lat = float(attrs.get('latitude', 0))
-            lng = float(attrs.get('longitude', 0))
+            lat = float(attrs.get('latitude'))
+            lng = float(attrs.get('longitude'))
+            device_lat = float(attrs.get('device_latitude'))
+            device_lng = float(attrs.get('device_longitude'))
         except (TypeError, ValueError):
             raise serializers.ValidationError(
                 {'location': 'Invalid latitude or longitude.'}
             )
-        if not (
-            NIGERIA_LAT_MIN <= lat <= NIGERIA_LAT_MAX
-            and NIGERIA_LNG_MIN <= lng <= NIGERIA_LNG_MAX
-        ):
+
+        if not _is_within_nigeria(device_lat, device_lng):
+            raise serializers.ValidationError(
+                {'device_location': 'Device location must be within Nigeria to submit a report.'}
+            )
+
+        if not _is_within_nigeria(lat, lng):
             raise serializers.ValidationError(
                 {'location': 'Reports must be submitted for locations within Nigeria.'}
             )
+
+        distance_km = _distance_km(device_lat, device_lng, lat, lng)
+        if distance_km > MAX_REPORT_DISTANCE_KM:
+            raise serializers.ValidationError(
+                {
+                    'location': (
+                        f'Report location is too far from your current device location '
+                        f'({distance_km:.1f}km). Move closer and try again.'
+                    )
+                }
+            )
+
         return attrs
 
     def create(self, validated_data: dict) -> Report:
+        validated_data.pop('device_latitude', None)
+        validated_data.pop('device_longitude', None)
         images = validated_data.pop('images', [])
         videos = validated_data.pop('videos', [])
 

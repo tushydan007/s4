@@ -69,9 +69,12 @@ export default function VoiceUploadModal() {
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [audioDuration, setAudioDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackProgress, setPlaybackProgress] = useState(0);
+  const [playbackDuration, setPlaybackDuration] = useState(0);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioObjectUrlRef = useRef<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // File state
@@ -102,6 +105,10 @@ export default function VoiceUploadModal() {
         audioRef.current.pause();
         audioRef.current = null;
       }
+      if (audioObjectUrlRef.current) {
+        URL.revokeObjectURL(audioObjectUrlRef.current);
+        audioObjectUrlRef.current = null;
+      }
     };
   }, []);
 
@@ -110,6 +117,61 @@ export default function VoiceUploadModal() {
     setValue("latitude", selectedLocation.lat, { shouldValidate: true });
     setValue("longitude", selectedLocation.lng, { shouldValidate: true });
   }, [selectedLocation, setValue]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    if (audioObjectUrlRef.current) {
+      URL.revokeObjectURL(audioObjectUrlRef.current);
+      audioObjectUrlRef.current = null;
+    }
+
+    setIsPlaying(false);
+    setPlaybackProgress(0);
+    setPlaybackDuration(0);
+
+    if (!audioBlob) return;
+
+    const objectUrl = URL.createObjectURL(audioBlob);
+    audioObjectUrlRef.current = objectUrl;
+    const audio = new Audio(objectUrl);
+    audioRef.current = audio;
+
+    const onLoadedMetadata = () => {
+      if (Number.isFinite(audio.duration)) {
+        setPlaybackDuration(audio.duration);
+      }
+    };
+    const onTimeUpdate = () => {
+      if (audio.duration > 0) {
+        setPlaybackProgress((audio.currentTime / audio.duration) * 100);
+      }
+    };
+    const onEnded = () => {
+      setIsPlaying(false);
+      setPlaybackProgress(100);
+    };
+
+    audio.addEventListener("loadedmetadata", onLoadedMetadata);
+    audio.addEventListener("timeupdate", onTimeUpdate);
+    audio.addEventListener("ended", onEnded);
+
+    return () => {
+      audio.pause();
+      audio.removeEventListener("loadedmetadata", onLoadedMetadata);
+      audio.removeEventListener("timeupdate", onTimeUpdate);
+      audio.removeEventListener("ended", onEnded);
+      if (audioObjectUrlRef.current === objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+        audioObjectUrlRef.current = null;
+      }
+      if (audioRef.current === audio) {
+        audioRef.current = null;
+      }
+    };
+  }, [audioBlob]);
 
   // ─── Voice Recording ───
   const startRecording = useCallback(async () => {
@@ -156,30 +218,40 @@ export default function VoiceUploadModal() {
     setAudioBlob(null);
     setAudioDuration(0);
     setIsPlaying(false);
+    setPlaybackProgress(0);
+    setPlaybackDuration(0);
     if (audioRef.current) {
       audioRef.current.pause();
+      audioRef.current.currentTime = 0;
       audioRef.current = null;
+    }
+    if (audioObjectUrlRef.current) {
+      URL.revokeObjectURL(audioObjectUrlRef.current);
+      audioObjectUrlRef.current = null;
     }
   };
 
-  const togglePlayback = () => {
-    if (!audioBlob) return;
+  const togglePlayback = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
 
-    if (isPlaying && audioRef.current) {
-      audioRef.current.pause();
+    if (isPlaying) {
+      audio.pause();
       setIsPlaying(false);
       return;
     }
 
-    const url = URL.createObjectURL(audioBlob);
-    const audio = new Audio(url);
-    audioRef.current = audio;
-    audio.onended = () => {
+    try {
+      if (audio.ended || audio.currentTime >= audio.duration) {
+        audio.currentTime = 0;
+        setPlaybackProgress(0);
+      }
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
       setIsPlaying(false);
-      URL.revokeObjectURL(url);
-    };
-    audio.play();
-    setIsPlaying(true);
+      toast.error("Unable to play this recording.");
+    }
   };
 
   // ─── File Handling ───
@@ -223,9 +295,16 @@ export default function VoiceUploadModal() {
 
     const latitude = selectedLocation?.lat ?? data.latitude;
     const longitude = selectedLocation?.lng ?? data.longitude;
+    const deviceLatitude = selectedLocation?.deviceLat;
+    const deviceLongitude = selectedLocation?.deviceLng;
 
     if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
       toast.error("Please select a valid location on the map");
+      return;
+    }
+
+    if (!Number.isFinite(deviceLatitude) || !Number.isFinite(deviceLongitude)) {
+      toast.error("Device location must be enabled to submit a report.");
       return;
     }
 
@@ -236,6 +315,8 @@ export default function VoiceUploadModal() {
     formData.append("severity", data.severity);
     formData.append("latitude", String(latitude));
     formData.append("longitude", String(longitude));
+    formData.append("device_latitude", String(deviceLatitude));
+    formData.append("device_longitude", String(deviceLongitude));
     formData.append("voice_note", audioBlob, "voice_note.webm");
 
     images.forEach((img) => formData.append("images", img));
@@ -354,6 +435,17 @@ export default function VoiceUploadModal() {
                     <HiTrash className="w-5 h-5" />
                   </button>
                 </div>
+                <div className="mt-3 w-full h-1.5 bg-emerald-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-emerald-600 rounded-full transition-all"
+                    style={{ width: `${playbackProgress}%` }}
+                  />
+                </div>
+                {playbackDuration > 0 && (
+                  <p className="mt-2 text-xs text-emerald-700">
+                    Playback {formatTime(Math.floor(playbackDuration))}
+                  </p>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
@@ -436,6 +528,10 @@ export default function VoiceUploadModal() {
             {selectedLocation?.lng.toFixed(6)}
           </span>
         </div>
+        <p className="text-xs text-navy-500 -mt-3">
+          Posting is allowed only when your device location is enabled and the
+          report point is near your current location.
+        </p>
 
         {/* Images */}
         <div>

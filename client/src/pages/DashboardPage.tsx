@@ -92,6 +92,7 @@ const NIGERIA_BOUNDS = {
   minLng: 2.69,
   maxLng: 14.68,
 } as const;
+const MAX_REPORT_DISTANCE_KM = 5;
 
 function isWithinNigeria(lat: number, lng: number): boolean {
   return (
@@ -102,9 +103,33 @@ function isWithinNigeria(lat: number, lng: number): boolean {
   );
 }
 
-function checkNigeriaLocation(): Promise<{
+function toRadians(value: number): number {
+  return (value * Math.PI) / 180;
+}
+
+function getDistanceKm(
+  fromLat: number,
+  fromLng: number,
+  toLat: number,
+  toLng: number,
+): number {
+  const earthRadiusKm = 6371;
+  const dLat = toRadians(toLat - fromLat);
+  const dLng = toRadians(toLng - fromLng);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRadians(fromLat)) *
+      Math.cos(toRadians(toLat)) *
+      Math.sin(dLng / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return earthRadiusKm * c;
+}
+
+function getCurrentDeviceLocation(): Promise<{
   allowed: boolean;
   reason?: string;
+  lat?: number;
+  lng?: number;
 }> {
   return new Promise((resolve) => {
     if (!navigator.geolocation) {
@@ -116,8 +141,11 @@ function checkNigeriaLocation(): Promise<{
     }
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        if (isWithinNigeria(pos.coords.latitude, pos.coords.longitude)) {
-          resolve({ allowed: true });
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        if (isWithinNigeria(lat, lng)) {
+          resolve({ allowed: true, lat, lng });
         } else {
           resolve({
             allowed: false,
@@ -225,13 +253,43 @@ export default function DashboardPage() {
 
       const loadingToastId = toast.loading("Checking your location...");
       try {
-        const loc = await checkNigeriaLocation();
+        const loc = await getCurrentDeviceLocation();
         toast.dismiss(loadingToastId);
         if (!loc.allowed) {
           toast.error(loc.reason ?? "Location check failed.");
           return;
         }
-        dispatch(openUploadModal({ lat: e.lngLat.lat, lng: e.lngLat.lng }));
+
+        if (typeof loc.lat !== "number" || typeof loc.lng !== "number") {
+          toast.error("Unable to verify your current device location.");
+          return;
+        }
+
+        const deviceLat = loc.lat;
+        const deviceLng = loc.lng;
+
+        const distanceKm = getDistanceKm(
+          deviceLat,
+          deviceLng,
+          e.lngLat.lat,
+          e.lngLat.lng,
+        );
+
+        if (distanceKm > MAX_REPORT_DISTANCE_KM) {
+          toast.error(
+            `Selected point is too far from your device location (${distanceKm.toFixed(1)} km). Move closer and try again.`,
+          );
+          return;
+        }
+
+        dispatch(
+          openUploadModal({
+            lat: e.lngLat.lat,
+            lng: e.lngLat.lng,
+            deviceLat,
+            deviceLng,
+          }),
+        );
       } catch {
         toast.dismiss(loadingToastId);
         toast.error("Location check failed. Please try again.");
@@ -454,14 +512,29 @@ export default function DashboardPage() {
 
     setIsCheckingLocation(true);
     try {
-      const loc = await checkNigeriaLocation();
+      const loc = await getCurrentDeviceLocation();
       if (!loc.allowed) {
         toast.error(loc.reason ?? "Location check failed.");
         return;
       }
+
+      if (typeof loc.lat !== "number" || typeof loc.lng !== "number") {
+        toast.error("Unable to verify your current device location.");
+        return;
+      }
+
+      const deviceLat = loc.lat;
+      const deviceLng = loc.lng;
+
       if (map.current) {
-        const center = map.current.getCenter();
-        dispatch(openUploadModal({ lat: center.lat, lng: center.lng }));
+        dispatch(
+          openUploadModal({
+            lat: deviceLat,
+            lng: deviceLng,
+            deviceLat,
+            deviceLng,
+          }),
+        );
       }
     } catch {
       toast.error("Location check failed. Please try again.");

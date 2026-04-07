@@ -10,7 +10,7 @@ import {
   HiVideoCamera,
   HiTrash,
 } from "react-icons/hi2";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 import { useAppDispatch, useAppSelector } from "@/store";
@@ -26,6 +26,8 @@ export default function ReportDetailModal() {
   const [deleteReport, { isLoading: isDeleting }] = useDeleteReportMutation();
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [audioProgress, setAudioProgress] = useState(0);
+  const [audioDuration, setAudioDuration] = useState(0);
   const [activeMediaIdx, setActiveMediaIdx] = useState(0);
 
   if (!selectedReport) return null;
@@ -42,20 +44,76 @@ export default function ReportDetailModal() {
     currentUserId && currentUserId === selectedReport.user,
   );
 
-  const togglePlayback = () => {
-    if (isPlaying && audioRef.current) {
-      audioRef.current.pause();
+  useEffect(() => {
+    if (!selectedReport.voice_note) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+      setIsPlaying(false);
+      setAudioProgress(0);
+      setAudioDuration(0);
+      return;
+    }
+
+    const audio = new Audio(selectedReport.voice_note);
+    audioRef.current = audio;
+
+    const onLoadedMetadata = () => {
+      if (Number.isFinite(audio.duration)) {
+        setAudioDuration(audio.duration);
+      }
+    };
+    const onTimeUpdate = () => {
+      if (audio.duration > 0) {
+        setAudioProgress((audio.currentTime / audio.duration) * 100);
+      }
+    };
+    const onEnded = () => {
+      setIsPlaying(false);
+      setAudioProgress(100);
+    };
+
+    audio.addEventListener("loadedmetadata", onLoadedMetadata);
+    audio.addEventListener("timeupdate", onTimeUpdate);
+    audio.addEventListener("ended", onEnded);
+
+    setIsPlaying(false);
+    setAudioProgress(0);
+    setAudioDuration(0);
+
+    return () => {
+      audio.pause();
+      audio.removeEventListener("loadedmetadata", onLoadedMetadata);
+      audio.removeEventListener("timeupdate", onTimeUpdate);
+      audio.removeEventListener("ended", onEnded);
+      if (audioRef.current === audio) {
+        audioRef.current = null;
+      }
+    };
+  }, [selectedReport.voice_note]);
+
+  const togglePlayback = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
       setIsPlaying(false);
       return;
     }
 
-    if (!selectedReport.voice_note) return;
-
-    const audio = new Audio(selectedReport.voice_note);
-    audioRef.current = audio;
-    audio.onended = () => setIsPlaying(false);
-    audio.play();
-    setIsPlaying(true);
+    try {
+      if (audio.ended || audio.currentTime >= audio.duration) {
+        audio.currentTime = 0;
+        setAudioProgress(0);
+      }
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
+      setIsPlaying(false);
+      toast.error("Unable to play this voice note.");
+    }
   };
 
   const formatDate = (dateStr: string) => {
@@ -165,12 +223,16 @@ export default function ReportDetailModal() {
                 </span>
               </div>
               <div className="w-full h-1.5 bg-navy-200 rounded-full mt-2 overflow-hidden">
-                <motion.div
-                  className="h-full bg-navy-600 rounded-full"
-                  animate={{ width: isPlaying ? "100%" : "0%" }}
-                  transition={{ duration: 30, ease: "linear" }}
+                <div
+                  className="h-full bg-navy-600 rounded-full transition-all"
+                  style={{ width: `${audioProgress}%` }}
                 />
               </div>
+              {audioDuration > 0 && (
+                <p className="mt-1 text-xs text-navy-500">
+                  {Math.round(audioDuration)}s
+                </p>
+              )}
             </div>
           </motion.div>
         )}
