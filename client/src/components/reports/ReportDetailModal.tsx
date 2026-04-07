@@ -23,14 +23,28 @@ function resolveMediaUrl(url: string): string {
   if (!url) return "";
 
   try {
-    // Keep absolute URLs untouched.
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL as string | undefined;
+
+    // When the API base URL is relative (e.g. "/api"), the app is behind a
+    // proxy (Vite dev server or nginx).  DRF may return absolute media URLs
+    // pointing at the backend's internal origin (e.g. http://localhost:8000),
+    // which the browser cannot reach directly.  Strip the origin so the
+    // request goes through the same proxy.
+    if (apiBaseUrl && !/^https?:\/\//i.test(apiBaseUrl)) {
+      if (/^https?:\/\//i.test(url)) {
+        const { pathname } = new URL(url);
+        return new URL(pathname, window.location.origin).toString();
+      }
+      return new URL(url, window.location.origin).toString();
+    }
+
+    // Absolute API base URL — keep absolute media URLs as-is.
     if (/^https?:\/\//i.test(url)) {
       return url;
     }
 
-    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL as string | undefined;
     if (apiBaseUrl) {
-      const apiOrigin = new URL(apiBaseUrl, window.location.origin).origin;
+      const apiOrigin = new URL(apiBaseUrl).origin;
       return new URL(url, apiOrigin).toString();
     }
 
@@ -86,16 +100,26 @@ export default function ReportDetailModal() {
       setIsPlaying(false);
       setAudioProgress(100);
     };
+    const onError = () => {
+      const code = audio.error?.code;
+      setPlaybackError(
+        code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED
+          ? "Audio format is not supported on this browser."
+          : "Unable to load this voice note.",
+      );
+    };
 
     audio.addEventListener("loadedmetadata", onLoadedMetadata);
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("ended", onEnded);
+    audio.addEventListener("error", onError);
 
     return () => {
       audio.pause();
       audio.removeEventListener("loadedmetadata", onLoadedMetadata);
       audio.removeEventListener("timeupdate", onTimeUpdate);
       audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener("error", onError);
       if (audioRef.current === audio) {
         audioRef.current = null;
       }
