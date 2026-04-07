@@ -303,20 +303,29 @@ export default function VoiceUploadModal() {
       return;
     }
 
-    if (!Number.isFinite(deviceLatitude) || !Number.isFinite(deviceLongitude)) {
+    if (
+      typeof deviceLatitude !== "number" ||
+      typeof deviceLongitude !== "number"
+    ) {
       toast.error("Device location must be enabled to submit a report.");
       return;
     }
+
+    // Match backend DecimalField precision: max_digits=10, decimal_places=7
+    const reportLat = Number(latitude.toFixed(7));
+    const reportLng = Number(longitude.toFixed(7));
+    const deviceLat = Number(deviceLatitude.toFixed(7));
+    const deviceLng = Number(deviceLongitude.toFixed(7));
 
     const formData = new FormData();
     formData.append("title", data.title);
     if (data.description) formData.append("description", data.description);
     formData.append("category", data.category);
     formData.append("severity", data.severity);
-    formData.append("latitude", String(latitude));
-    formData.append("longitude", String(longitude));
-    formData.append("device_latitude", String(deviceLatitude));
-    formData.append("device_longitude", String(deviceLongitude));
+    formData.append("latitude", reportLat.toFixed(7));
+    formData.append("longitude", reportLng.toFixed(7));
+    formData.append("device_latitude", deviceLat.toFixed(7));
+    formData.append("device_longitude", deviceLng.toFixed(7));
     formData.append("voice_note", audioBlob, "voice_note.webm");
 
     images.forEach((img) => formData.append("images", img));
