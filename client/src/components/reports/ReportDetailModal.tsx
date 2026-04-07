@@ -19,6 +19,27 @@ import { useDeleteReportMutation } from "@/store/api/reportApi";
 import Modal from "@/components/ui/Modal";
 import { SEVERITY_LEVELS, REPORT_CATEGORIES } from "@/types";
 
+function resolveMediaUrl(url: string): string {
+  if (!url) return "";
+
+  try {
+    // Keep absolute URLs untouched.
+    if (/^https?:\/\//i.test(url)) {
+      return url;
+    }
+
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL as string | undefined;
+    if (apiBaseUrl) {
+      const apiOrigin = new URL(apiBaseUrl, window.location.origin).origin;
+      return new URL(url, apiOrigin).toString();
+    }
+
+    return new URL(url, window.location.origin).toString();
+  } catch {
+    return url;
+  }
+}
+
 export default function ReportDetailModal() {
   const dispatch = useAppDispatch();
   const { selectedReport } = useAppSelector((state) => state.ui);
@@ -28,40 +49,32 @@ export default function ReportDetailModal() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [audioProgress, setAudioProgress] = useState(0);
   const [audioDuration, setAudioDuration] = useState(0);
+  const [playbackError, setPlaybackError] = useState<string | null>(null);
   const [activeMediaIdx, setActiveMediaIdx] = useState(0);
-
-  if (!selectedReport) return null;
-
-  const severity = SEVERITY_LEVELS.find(
-    (s) => s.value === selectedReport.severity,
-  );
-  const category = REPORT_CATEGORIES.find(
-    (c) => c.value === selectedReport.category,
-  );
-  const images = selectedReport.media.filter((m) => m.media_type === "image");
-  const videos = selectedReport.media.filter((m) => m.media_type === "video");
-  const canDelete = Boolean(
-    currentUserId && currentUserId === selectedReport.user,
+  const resolvedVoiceNoteUrl = resolveMediaUrl(
+    selectedReport?.voice_note ?? "",
   );
 
   useEffect(() => {
-    if (!selectedReport.voice_note) {
+    if (!resolvedVoiceNoteUrl) {
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
       }
-      setIsPlaying(false);
-      setAudioProgress(0);
-      setAudioDuration(0);
       return;
     }
 
-    const audio = new Audio(selectedReport.voice_note);
+    const audio = new Audio(resolvedVoiceNoteUrl);
     audioRef.current = audio;
 
     const onLoadedMetadata = () => {
+      setIsPlaying(false);
+      setAudioProgress(0);
+      setPlaybackError(null);
       if (Number.isFinite(audio.duration)) {
         setAudioDuration(audio.duration);
+      } else {
+        setAudioDuration(0);
       }
     };
     const onTimeUpdate = () => {
@@ -78,10 +91,6 @@ export default function ReportDetailModal() {
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("ended", onEnded);
 
-    setIsPlaying(false);
-    setAudioProgress(0);
-    setAudioDuration(0);
-
     return () => {
       audio.pause();
       audio.removeEventListener("loadedmetadata", onLoadedMetadata);
@@ -91,7 +100,21 @@ export default function ReportDetailModal() {
         audioRef.current = null;
       }
     };
-  }, [selectedReport.voice_note]);
+  }, [resolvedVoiceNoteUrl]);
+
+  if (!selectedReport) return null;
+
+  const severity = SEVERITY_LEVELS.find(
+    (s) => s.value === selectedReport.severity,
+  );
+  const category = REPORT_CATEGORIES.find(
+    (c) => c.value === selectedReport.category,
+  );
+  const images = selectedReport.media.filter((m) => m.media_type === "image");
+  const videos = selectedReport.media.filter((m) => m.media_type === "video");
+  const canDelete = Boolean(
+    currentUserId && currentUserId === selectedReport.user,
+  );
 
   const togglePlayback = async () => {
     const audio = audioRef.current;
@@ -110,9 +133,16 @@ export default function ReportDetailModal() {
       }
       await audio.play();
       setIsPlaying(true);
+      setPlaybackError(null);
     } catch {
       setIsPlaying(false);
-      toast.error("Unable to play this voice note.");
+      const code = audio.error?.code;
+      const reason =
+        code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED
+          ? "Audio format is not supported on this browser."
+          : "Unable to play this voice note.";
+      setPlaybackError(reason);
+      toast.error(reason);
     }
   };
 
@@ -160,6 +190,10 @@ export default function ReportDetailModal() {
           audioRef.current.pause();
           audioRef.current = null;
         }
+        setIsPlaying(false);
+        setAudioProgress(0);
+        setAudioDuration(0);
+        setPlaybackError(null);
         dispatch(closeReportDetail());
       }}
       title="Report Details"
@@ -233,6 +267,9 @@ export default function ReportDetailModal() {
                   {Math.round(audioDuration)}s
                 </p>
               )}
+              {playbackError && (
+                <p className="mt-1 text-xs text-danger-600">{playbackError}</p>
+              )}
             </div>
           </motion.div>
         )}
@@ -282,7 +319,7 @@ export default function ReportDetailModal() {
                   }`}
                 >
                   <img
-                    src={m.file}
+                    src={resolveMediaUrl(m.file)}
                     alt=""
                     className="w-full h-full object-cover"
                   />
@@ -291,7 +328,7 @@ export default function ReportDetailModal() {
               {videos.map((m) => (
                 <a
                   key={m.id}
-                  href={m.file}
+                  href={resolveMediaUrl(m.file)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-14 h-14 rounded-lg bg-navy-100 flex items-center justify-center border-2 border-transparent hover:border-navy-400"
