@@ -43,7 +43,7 @@ export default function Header() {
                 S4 Security
               </span>
               <p className="text-[9px] text-navy-400 tracking-[0.15em] uppercase mt-0.5 hidden sm:block">
-                Secure · Swift · Smart · Safe
+                See · Something · Say · Something
               </p>
             </div>
           </Link>

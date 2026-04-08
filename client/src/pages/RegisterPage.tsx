@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
@@ -38,20 +38,32 @@ export default function RegisterPage() {
     handleSubmit,
     formState: { errors },
     setError,
-    watch,
+    control,
     trigger,
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
   });
 
-  const ninValue = watch("nin");
-  const firstNameValue = watch("first_name");
-  const lastNameValue = watch("last_name");
+  const ninValue = useWatch({ control, name: "nin" });
+  const firstNameValue = useWatch({ control, name: "first_name" });
+  const lastNameValue = useWatch({ control, name: "last_name" });
 
-  // Reset NIN verification whenever NIN or name fields change
-  useEffect(() => {
-    setNinStatus("idle");
-  }, [ninValue, firstNameValue, lastNameValue]);
+  // Wrap registerField for NIN-sensitive fields to reset verification on change
+  const registerNinField = useCallback(
+    (name: "nin" | "first_name" | "last_name") => {
+      const registration = registerField(name);
+      return {
+        ...registration,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+          if (ninStatus !== "idle") {
+            setNinStatus("idle");
+          }
+          return registration.onChange(e);
+        },
+      };
+    },
+    [registerField, ninStatus],
+  );
 
   const handleVerifyNIN = async () => {
     const isValid = await trigger(["nin", "first_name", "last_name"]);
@@ -155,14 +167,14 @@ export default function RegisterPage() {
                 icon={<HiUser className="w-4 h-4" />}
                 placeholder="John"
                 error={errors.first_name}
-                {...registerField("first_name")}
+                {...registerNinField("first_name")}
               />
               <Input
                 label="Last Name"
                 icon={<HiUser className="w-4 h-4" />}
                 placeholder="Doe"
                 error={errors.last_name}
-                {...registerField("last_name")}
+                {...registerNinField("last_name")}
               />
             </div>
 
@@ -198,7 +210,7 @@ export default function RegisterPage() {
               placeholder="12345678901"
               maxLength={11}
               error={errors.nin}
-              {...registerField("nin")}
+              {...registerNinField("nin")}
             />
 
             {/* NIN verification button */}
