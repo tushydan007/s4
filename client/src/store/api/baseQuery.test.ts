@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
 // We test the re-auth logic by mocking fetchBaseQuery so we can
 // control what each successive call returns.
