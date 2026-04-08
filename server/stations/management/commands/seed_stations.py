@@ -14,7 +14,7 @@ SAMPLE_STATIONS = [
     {"name": "Rivers State Police Command", "station_type": "police", "latitude": 4.8156, "longitude": 7.0498, "address": "Port Harcourt, Rivers", "phone_number": ""},
     {"name": "Lekki Phase 1 Police Station", "station_type": "police", "latitude": 6.4398, "longitude": 3.4721, "address": "Lekki Phase 1, Lagos", "phone_number": ""},
     {"name": "Oyo State Police Command", "station_type": "police", "latitude": 7.3775, "longitude": 3.9470, "address": "Eleyele, Ibadan", "phone_number": ""},
-
+  
     # Army Barracks
     {"name": "Bonny Camp", "station_type": "army", "latitude": 3.4119, "longitude": 6.4355, "address": "Victoria Island, Lagos", "phone_number": ""},
     {"name": "Ikeja Army Cantonment", "station_type": "army", "latitude": 3.3377, "longitude": 6.6053, "address": "Ikeja, Lagos", "phone_number": ""},

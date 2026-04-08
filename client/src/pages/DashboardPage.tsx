@@ -213,14 +213,14 @@ export default function DashboardPage() {
       attributionControl: false,
     });
 
-    mapInstance.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+    mapInstance.addControl(new mapboxgl.NavigationControl(), "top-right");
     mapInstance.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: { enableHighAccuracy: true },
         trackUserLocation: true,
         showUserHeading: true,
       }),
-      "bottom-right",
+      "top-right",
     );
 
     mapInstance.on("load", () => {
@@ -546,7 +546,7 @@ export default function DashboardPage() {
   return (
     <div className="h-[calc(100vh-3.5rem)] relative overflow-hidden">
       {/* Map Container */}
-      <div ref={mapContainer} className="w-full h-full" />
+      <div ref={mapContainer} className="dashboard-map w-full h-full" />
 
       {/* Control Panel */}
       <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
@@ -649,7 +649,7 @@ export default function DashboardPage() {
         whileTap={{ scale: isCheckingLocation ? 1 : 0.9 }}
         onClick={handleAddReport}
         disabled={isCheckingLocation}
-        className="absolute bottom-24 right-4 sm:bottom-8 sm:right-8 z-10 w-14 h-14 bg-danger-600 hover:bg-danger-700 disabled:opacity-75 text-white rounded-full shadow-lg shadow-danger-600/40 flex items-center justify-center"
+        className="absolute bottom-24 right-4 sm:bottom-8 sm:right-8 z-10 w-12 h-12 cursor-pointer animate-pulse bg-red-600 hover:bg-danger-700 disabled:opacity-75 text-white rounded-full shadow-lg shadow-danger-600/40 flex items-center justify-center"
         title={
           isCheckingLocation
             ? "Checking your location..."
