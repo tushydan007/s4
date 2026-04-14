@@ -41,10 +41,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -74,7 +74,7 @@ jobs:
 
       - name: Upload coverage artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: frontend-coverage
           path: client/coverage/
@@ -115,7 +115,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -172,7 +172,7 @@ jobs:
 
       - name: Upload coverage artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: backend-coverage
           path: server/coverage.xml
@@ -193,7 +193,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Generate image metadata & tags
         id: meta
@@ -262,10 +262,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -274,14 +274,14 @@ jobs:
       # ── Backend Task Definition ──────────────────────────────────────────
       - name: Render backend task definition
         id: render-backend
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        uses: aws-actions/amazon-ecs-render-task-definition@v2
         with:
           task-definition: .aws/task-def-backend.json
           container-name: s4-server
           image: "${{ env.BACKEND_IMAGE }}:${{ needs.build-and-push.outputs.image-tag }}"
 
       - name: Deploy backend to ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v3
         with:
           task-definition: ${{ steps.render-backend.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE_BACKEND }}
@@ -292,14 +292,14 @@ jobs:
       # ── Frontend Task Definition ─────────────────────────────────────────
       - name: Render frontend task definition
         id: render-frontend
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        uses: aws-actions/amazon-ecs-render-task-definition@v2
         with:
           task-definition: .aws/task-def-frontend.json
           container-name: s4-client
           image: "${{ env.FRONTEND_IMAGE }}:${{ needs.build-and-push.outputs.image-tag }}"
 
       - name: Deploy frontend to ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v3
         with:
           task-definition: ${{ steps.render-frontend.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE_FRONTEND }}

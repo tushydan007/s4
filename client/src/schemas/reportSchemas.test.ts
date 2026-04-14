@@ -17,7 +17,8 @@ describe("reportSchema", () => {
   });
 
   it("accepts valid data without description", () => {
-    const { description: _, ...data } = validData;
+    const data = { ...validData };
+    delete (data as Record<string, unknown>).description;
     const result = reportSchema.safeParse(data);
     expect(result.success).toBe(true);
   });
@@ -88,13 +89,15 @@ describe("reportSchema", () => {
   });
 
   it("rejects missing latitude", () => {
-    const { latitude: _, ...data } = validData;
+    const data = { ...validData };
+    delete (data as Record<string, unknown>).latitude;
     const result = reportSchema.safeParse(data);
     expect(result.success).toBe(false);
   });
 
   it("rejects missing longitude", () => {
-    const { longitude: _, ...data } = validData;
+    const data = { ...validData };
+    delete (data as Record<string, unknown>).longitude;
     const result = reportSchema.safeParse(data);
     expect(result.success).toBe(false);
   });

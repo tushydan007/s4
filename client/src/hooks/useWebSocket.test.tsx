@@ -5,13 +5,15 @@ import { Provider } from "react-redux";
 import { createTestStore } from "@/test/utils";
 
 // We need to mock WebSocket before importing the hook
-let mockWsInstance: {
+interface MockWsInstance {
   onopen: (() => void) | null;
   onmessage: ((e: { data: string }) => void) | null;
   onclose: (() => void) | null;
   onerror: (() => void) | null;
   close: ReturnType<typeof vi.fn>;
-};
+}
+
+const mockWsInstances: MockWsInstance[] = [];
 
 class MockWebSocket {
   onopen: (() => void) | null = null;
@@ -21,10 +23,14 @@ class MockWebSocket {
   close = vi.fn();
 
   constructor() {
-    mockWsInstance = this;
+    mockWsInstances.push(this);
   }
 }
 vi.stubGlobal("WebSocket", MockWebSocket);
+
+function getLatestWs(): MockWsInstance | undefined {
+  return mockWsInstances[mockWsInstances.length - 1];
+}
 
 import { useWebSocket } from "@/hooks/useWebSocket";
 
@@ -32,6 +38,7 @@ describe("useWebSocket", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.useFakeTimers();
+    mockWsInstances.length = 0;
   });
 
   function createWrapper(authenticated: boolean) {
@@ -52,7 +59,7 @@ describe("useWebSocket", () => {
   it("does not connect when not authenticated", () => {
     const { wrapper } = createWrapper(false);
     renderHook(() => useWebSocket(), { wrapper });
-    expect(mockWsInstance).toBeUndefined;
+    expect(getLatestWs()).toBeUndefined();
   });
 
   it("connects when authenticated", () => {
@@ -66,7 +73,7 @@ describe("useWebSocket", () => {
     const { result } = renderHook(() => useWebSocket(), { wrapper });
 
     await act(async () => {
-      mockWsInstance?.onopen?.();
+      getLatestWs()?.onopen?.();
     });
     expect(result.current.isConnected).toBe(true);
   });
@@ -75,7 +82,7 @@ describe("useWebSocket", () => {
     const { wrapper } = createWrapper(true);
     const { unmount } = renderHook(() => useWebSocket(), { wrapper });
     unmount();
-    expect(mockWsInstance.close).toHaveBeenCalled();
+    expect(getLatestWs()!.close).toHaveBeenCalled();
   });
 
   it("handles new_report message without crashing", async () => {
@@ -83,7 +90,7 @@ describe("useWebSocket", () => {
     renderHook(() => useWebSocket(), { wrapper });
 
     await act(async () => {
-      mockWsInstance?.onmessage?.({
+      getLatestWs()?.onmessage?.({
         data: JSON.stringify({ type: "new_report" }),
       });
     });
@@ -95,7 +102,7 @@ describe("useWebSocket", () => {
     renderHook(() => useWebSocket(), { wrapper });
 
     await act(async () => {
-      mockWsInstance?.onmessage?.({ data: "not json" });
+      getLatestWs()?.onmessage?.({ data: "not json" });
     });
     // Should not throw
   });
@@ -105,12 +112,12 @@ describe("useWebSocket", () => {
     const { result } = renderHook(() => useWebSocket(), { wrapper });
 
     await act(async () => {
-      mockWsInstance?.onopen?.();
+      getLatestWs()?.onopen?.();
     });
     expect(result.current.isConnected).toBe(true);
 
     await act(async () => {
-      mockWsInstance?.onclose?.();
+      getLatestWs()?.onclose?.();
     });
     expect(result.current.isConnected).toBe(false);
   });
@@ -120,9 +127,9 @@ describe("useWebSocket", () => {
     renderHook(() => useWebSocket(), { wrapper });
 
     await act(async () => {
-      mockWsInstance?.onerror?.();
+      getLatestWs()?.onerror?.();
     });
-    expect(mockWsInstance.close).toHaveBeenCalled();
+    expect(getLatestWs()!.close).toHaveBeenCalled();
   });
 
   it("attempts reconnect after close", async () => {
@@ -130,7 +137,7 @@ describe("useWebSocket", () => {
     renderHook(() => useWebSocket(), { wrapper });
 
     await act(async () => {
-      mockWsInstance?.onclose?.();
+      getLatestWs()?.onclose?.();
     });
 
     // Advance timer to trigger reconnect
