@@ -3,7 +3,7 @@
 # Trigger: push to main
 # Stages:
 #   1. Quality Gate – lint, test, coverage for client & server
-#   2. Build & Tag – Docker images pushed to DockerHub
+#   2. Build & Tag – Docker images pushed to Amazon ECR
 #   3. Deploy – Roll out to Amazon ECS (production)
 #   4. Notify – Slack/email on failure
 ###############################################################################
@@ -19,10 +19,10 @@ permissions:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  FRONTEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/s4-client
-  BACKEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/s4-server
   AWS_REGION: ${{ secrets.AWS_REGION }}
+  ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+  FRONTEND_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/s4-client
+  BACKEND_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/s4-server
   ECS_CLUSTER: ${{ secrets.ECS_CLUSTER }}
   ECS_SERVICE_FRONTEND: ${{ secrets.ECS_SERVICE_FRONTEND }}
   ECS_SERVICE_BACKEND: ${{ secrets.ECS_SERVICE_BACKEND }}
@@ -220,14 +220,19 @@ jobs:
           echo "build_num=$BUILD_NUM"   >> "$GITHUB_OUTPUT"
           echo "version=$VERSION"       >> "$GITHUB_OUTPUT"
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # ── Frontend Image ───────────────────────────────────────────────────
       - name: Build & push frontend image
