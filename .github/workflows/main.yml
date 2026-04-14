@@ -18,6 +18,7 @@ permissions:
   contents: read
 
 env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   FRONTEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/s4-client
   BACKEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/s4-server
@@ -74,7 +75,7 @@ jobs:
 
       - name: Upload coverage artifact
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: frontend-coverage
           path: client/coverage/
@@ -118,7 +119,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.6.0
         with:
           python-version: "3.11"
           cache: pip
@@ -167,12 +168,12 @@ jobs:
           DEBUG: "True"
         run: |
           coverage run -m pytest --tb=short -q
-          coverage report --fail-under=50
           coverage xml -o coverage.xml
+          coverage report --fail-under=50
 
       - name: Upload coverage artifact
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: backend-coverage
           path: server/coverage.xml
@@ -274,14 +275,14 @@ jobs:
       # ── Backend Task Definition ──────────────────────────────────────────
       - name: Render backend task definition
         id: render-backend
-        uses: aws-actions/amazon-ecs-render-task-definition@v2
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: .aws/task-def-backend.json
           container-name: s4-server
           image: "${{ env.BACKEND_IMAGE }}:${{ needs.build-and-push.outputs.image-tag }}"
 
       - name: Deploy backend to ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v3
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.render-backend.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE_BACKEND }}
@@ -292,14 +293,14 @@ jobs:
       # ── Frontend Task Definition ─────────────────────────────────────────
       - name: Render frontend task definition
         id: render-frontend
-        uses: aws-actions/amazon-ecs-render-task-definition@v2
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: .aws/task-def-frontend.json
           container-name: s4-client
           image: "${{ env.FRONTEND_IMAGE }}:${{ needs.build-and-push.outputs.image-tag }}"
 
       - name: Deploy frontend to ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v3
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.render-frontend.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE_FRONTEND }}
