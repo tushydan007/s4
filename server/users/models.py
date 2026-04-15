@@ -14,13 +14,13 @@ class User(AbstractUser):
     email_verified = models.BooleanField(default=False)
     two_factor_enabled = models.BooleanField(default=False)
     two_factor_secret = models.CharField(max_length=64, blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True)
+    profile_picture = models.ImageField(upload_to="profile_pictures/", blank=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username", "first_name", "last_name"]
 
     class Meta:
-        ordering = ['-date_joined']
+        ordering = ["-date_joined"]
 
     def __str__(self):
         return self.email
@@ -33,7 +33,7 @@ class User(AbstractUser):
 class EmailVerificationToken(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='verification_tokens'
+        User, on_delete=models.CASCADE, related_name="verification_tokens"
     )
     created_at = models.DateTimeField(auto_now_add=True)
     expires_at = models.DateTimeField()

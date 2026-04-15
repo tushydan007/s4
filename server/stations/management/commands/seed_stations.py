@@ -1,4863 +1,4956 @@
 """Seed database with sample security stations across Nigeria."""
+
 from django.core.management.base import BaseCommand
 
 from stations.models import SecurityStation
 
-
 SAMPLE_STATIONS = [
     # Police Stations
     {
-    "name": "Law Enforcement",
-    "station_type": "police",
-    "latitude": 7.930170751367532,
-    "longitude": 9.870565946802305
-  },
-  {
-    "name": "Police Station Outpost Didango Old Muri",
-    "station_type": "police",
-    "latitude": 9.158694534616092,
-    "longitude": 11.037908333333332
-  },
-  {
-    "name": "Ogijo Police Station",
-    "station_type": "police",
-    "latitude": 6.703515,
-    "longitude": 3.51085
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 6.790705,
-    "longitude": 3.943611667
-  },
-  {
-    "name": "The Nigeria Police Force State Traffic Division",
-    "station_type": "police",
-    "latitude": 7.14172,
-    "longitude": 3.339623333333334
-  },
-  {
-    "name": "Ibara Gra Police Post Ibara Housing",
-    "station_type": "police",
-    "latitude": 7.122856666666666,
-    "longitude": 3.340916666666666
-  },
-  {
-    "name": "The Nigerian Police Station Etitale Ijebu Ode",
-    "station_type": "police",
-    "latitude": 6.819212857112889,
-    "longitude": 3.92054066166286
-  },
-  {
-    "name": "Police Station Idomowo",
-    "station_type": "police",
-    "latitude": 6.817843333,
-    "longitude": 3.911475
-  },
-  {
-    "name": "The Nigerian Police Station Etitale",
-    "station_type": "police",
-    "latitude": 6.819208941820513,
-    "longitude": 3.920438681858823
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Shagamu",
-    "station_type": "police",
-    "latitude": 6.85250390106624,
-    "longitude": 3.633255051474509
-  },
-  {
-    "name": "Aboru Police Station",
-    "station_type": "police",
-    "latitude": 6.631831335015624,
-    "longitude": 3.280121677239183
-  },
-  {
-    "name": "Ikotun Divisional Hq",
-    "station_type": "police",
-    "latitude": 6.551468970476763,
-    "longitude": 3.268867740095753
-  },
-  {
-    "name": "Idimu Police Station",
-    "station_type": "police",
-    "latitude": 6.578951967953325,
-    "longitude": 3.28337559323758
-  },
-  {
-    "name": "Shasha",
-    "station_type": "police",
-    "latitude": 6.589516230381011,
-    "longitude": 3.30208732996875
-  },
-  {
-    "name": "Isheri Oshun Police Station",
-    "station_type": "police",
-    "latitude": 6.516454947682692,
-    "longitude": 3.278064302127804
-  },
-  {
-    "name": "Igando Police Station",
-    "station_type": "police",
-    "latitude": 6.5510648599375,
-    "longitude": 3.238934192379807
-  },
-  {
-    "name": "Cele Police Post Itire",
-    "station_type": "police",
-    "latitude": 6.506024467491186,
-    "longitude": 3.324385681049279
-  },
-  {
-    "name": "Baroda Divisional Police Statoin",
-    "station_type": "police",
-    "latitude": 6.534046038858976,
-    "longitude": 3.390603543526844
-  },
-  {
-    "name": "Pedro Divisional Police Station",
-    "station_type": "police",
-    "latitude": 6.545025916477164,
-    "longitude": 3.372381849777244
-  },
-  {
-    "name": "Aguda Police Station",
-    "station_type": "police",
-    "latitude": 6.49338351644391,
-    "longitude": 3.340945436285657
-  },
-  {
-    "name": "F SARS Annex Bode Thomas",
-    "station_type": "police",
-    "latitude": 6.492677460762019,
-    "longitude": 3.348612670031249
-  },
-  {
-    "name": "Bode Thomas Police Station",
-    "station_type": "police",
-    "latitude": 6.489209205904647,
-    "longitude": 3.357954310539262
-  },
-  {
-    "name": "Tejuosho Police Post",
-    "station_type": "police",
-    "latitude": 6.509127181428286,
-    "longitude": 3.370763508032452
-  },
-  {
-    "name": "Anti Kidnapping Police Post Hogan Basset Crescent",
-    "station_type": "police",
-    "latitude": 6.502640227016426,
-    "longitude": 3.364190663302083
-  },
-  {
-    "name": "Shogunle Police Station",
-    "station_type": "police",
-    "latitude": 6.576429738413462,
-    "longitude": 3.340237539237981
-  },
-  {
-    "name": "Amuwo Odofin Police Station",
-    "station_type": "police",
-    "latitude": 6.469359545967148,
-    "longitude": 3.323151919841747
-  },
-  {
-    "name": "Ashamu Police Station",
-    "station_type": "police",
-    "latitude": 6.525705610984776,
-    "longitude": 3.294752486920673
-  },
-  {
-    "name": "Police Mobile Force No 63 Pmf Squadron",
-    "station_type": "police",
-    "latitude": 6.589695480191506,
-    "longitude": 3.518002740095753
-  },
-  {
-    "name": "Nichemtex Police Station",
-    "station_type": "police",
-    "latitude": 6.570144214316106,
-    "longitude": 3.482456003364583
-  },
-  {
-    "name": "Okokomaiko",
-    "station_type": "police",
-    "latitude": 6.472023210951522,
-    "longitude": 3.187058001682292
-  },
-  {
-    "name": "Tedi Town Plover Station",
-    "station_type": "police",
-    "latitude": 6.445273978888221,
-    "longitude": 3.226555689460736
-  },
-  {
-    "name": "Onireke Police Station",
-    "station_type": "police",
-    "latitude": 6.459519459079727,
-    "longitude": 3.229433202540064
-  },
-  {
-    "name": "NPF Divisional HQ Isasi Town",
-    "station_type": "police",
-    "latitude": 6.500809284380609,
-    "longitude": 3.170384119017228
-  },
-  {
-    "name": "Ajangbadi Police Station",
-    "station_type": "police",
-    "latitude": 6.462544799142226,
-    "longitude": 3.168010357809695
-  },
-  {
-    "name": "Shibiri Ekunpa Police Station",
-    "station_type": "police",
-    "latitude": 6.459860671713543,
-    "longitude": 3.137297129110978
-  },
-  {
-    "name": "Sanya Police Station 98",
-    "station_type": "police",
-    "latitude": 6.485060890318509,
-    "longitude": 3.329505715619391
-  },
-  {
-    "name": "Erekusu Police Post Salami Street",
-    "station_type": "police",
-    "latitude": 6.488205305492388,
-    "longitude": 3.325568821936298
-  },
-  {
-    "name": "Olowosokodile Police Post",
-    "station_type": "police",
-    "latitude": 6.650454101270032,
-    "longitude": 3.323472687778446
-  },
-  {
-    "name": "Area E Command Headquarters Festac Town",
-    "station_type": "police",
-    "latitude": 6.462029686096154,
-    "longitude": 3.294585279333733
-  },
-  {
-    "name": "Owutu Police Station",
-    "station_type": "police",
-    "latitude": 6.640626640508012,
-    "longitude": 3.480576465808894
-  },
-  {
-    "name": "Nigerian Police Stationmedical Service",
-    "station_type": "police",
-    "latitude": 6.443733673395834,
-    "longitude": 3.428779668348958
-  },
-  {
-    "name": "Ilasan Police Station",
-    "station_type": "police",
-    "latitude": 6.433485401715545,
-    "longitude": 3.503111308856971
-  },
-  {
-    "name": "Ijeshatado Police Station",
-    "station_type": "police",
-    "latitude": 6.496060898729969,
-    "longitude": 3.325793359491987
-  },
-  {
-    "name": "Ebute Ero Police Station",
-    "station_type": "police",
-    "latitude": 6.464254441332532,
-    "longitude": 3.386461954411859
-  },
-  {
-    "name": "Kam Salem House Nigeria Police Hqts Annex",
-    "station_type": "police",
-    "latitude": 6.449228019429488,
-    "longitude": 3.406964075111378
-  },
-  {
-    "name": "Eleruwa Police Stationwemabod Estate",
-    "station_type": "police",
-    "latitude": 6.6048,
-    "longitude": 3.340141666666667
-  },
-  {
-    "name": "Maruwa Police Station",
-    "station_type": "police",
-    "latitude": 6.433227382286058,
-    "longitude": 3.468993071746795
-  },
-  {
-    "name": "Alakara Police Station",
-    "station_type": "police",
-    "latitude": 6.521735008411459,
-    "longitude": 3.36369436285657
-  },
-  {
-    "name": "Police Division HQ Ijamo Ilesha",
-    "station_type": "police",
-    "latitude": 7.627555,
-    "longitude": 4.746393333
-  },
-  {
-    "name": "The Nigeria Police Force Jalingo",
-    "station_type": "police",
-    "latitude": 8.89433964723635,
-    "longitude": 11.364525743067384
-  },
-  {
-    "name": "Nigerian Police Mobile Force",
-    "station_type": "police",
-    "latitude": 7.795276667,
-    "longitude": 4.57492
-  },
-  {
-    "name": "The Nigeria Police Housing Estate",
-    "station_type": "police",
-    "latitude": 7.8039,
-    "longitude": 4.555721667
-  },
-  {
-    "name": "Police Command HQ Ring Road",
-    "station_type": "police",
-    "latitude": 7.798646667,
-    "longitude": 4.550281667
-  },
-  {
-    "name": "Divisional Headquarter Ogbere Ibadan",
-    "station_type": "police",
-    "latitude": 7.354703538145706,
-    "longitude": 3.94094459065917
-  },
-  {
-    "name": "Nigeria Security And Civil Defense Corps",
-    "station_type": "police",
-    "latitude": 7.272914112717864,
-    "longitude": 3.130614890652545
-  },
-  {
-    "name": "Imala Division",
-    "station_type": "police",
-    "latitude": 7.272570765569709,
-    "longitude": 3.131591325683915
-  },
-  {
-    "name": "Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 9.204536726843966,
-    "longitude": 11.28897355857385
-  },
-  {
-    "name": "Bashing Police Station",
-    "station_type": "police",
-    "latitude": 8.908635615544252,
-    "longitude": 11.416277673080462
-  },
-  {
-    "name": "Police Station 19",
-    "station_type": "police",
-    "latitude": 9.008314924919828,
-    "longitude": 11.421862132050576
-  },
-  {
-    "name": "Kona Police Station",
-    "station_type": "police",
-    "latitude": 8.978632136489018,
-    "longitude": 11.329475436920726
-  },
-  {
-    "name": "Police Post Iwoye Ketu",
-    "station_type": "police",
-    "latitude": 7.5657754,
-    "longitude": 2.7433511
-  },
-  {
-    "name": "Post Du Police",
-    "station_type": "police",
-    "latitude": 7.554031666666667,
-    "longitude": 2.742176666666666
-  },
-  {
-    "name": "Owode Police Station",
-    "station_type": "police",
-    "latitude": 6.697696213012128,
-    "longitude": 2.97514563063451
-  },
-  {
-    "name": "B Dept Mounted Troop Okooko Outpost",
-    "station_type": "police",
-    "latitude": 7.867934931284764,
-    "longitude": 2.890257813914793
-  },
-  {
-    "name": "Ijio Police Station",
-    "station_type": "police",
-    "latitude": 7.935313388372188,
-    "longitude": 2.981586120228698
-  },
-  {
-    "name": "Ijoko Road",
-    "station_type": "police",
-    "latitude": 6.745386666666667,
-    "longitude": 3.257477451724707
-  },
-  {
-    "name": "Obasanjo Farm Police Station",
-    "station_type": "police",
-    "latitude": 6.682356666666667,
-    "longitude": 3.208365
-  },
-  {
-    "name": "Sango Police Station",
-    "station_type": "police",
-    "latitude": 7.425008948486537,
-    "longitude": 3.899460628829585
-  },
-  {
-    "name": "Oregun Police Post",
-    "station_type": "police",
-    "latitude": 6.603311849777245,
-    "longitude": 3.363352661619792
-  },
-  {
-    "name": "Swift Response Squad",
-    "station_type": "police",
-    "latitude": 7.388982076340831,
-    "longitude": 3.88103550574216
-  },
-  {
-    "name": "The Nigerian Police Division Headquarters Idi Aro",
-    "station_type": "police",
-    "latitude": 7.368066079199557,
-    "longitude": 3.90475393414349
-  },
-  {
-    "name": "Mapo Police Station",
-    "station_type": "police",
-    "latitude": 7.376184480914793,
-    "longitude": 3.897690027686094
-  },
-  {
-    "name": "Ijokodo Police Station",
-    "station_type": "police",
-    "latitude": 7.422892199428254,
-    "longitude": 3.881289972313906
-  },
-  {
-    "name": "Area K Police Station",
-    "station_type": "police",
-    "latitude": 6.483738264193109,
-    "longitude": 3.038894825300881
-  },
-  {
-    "name": "Housing Police Station",
-    "station_type": "police",
-    "latitude": 7.419211652656953,
-    "longitude": 3.901896133571745
-  },
-  {
-    "name": "Secretariat Police Station",
-    "station_type": "police",
-    "latitude": 7.408563333,
-    "longitude": 3.909668333
-  },
-  {
-    "name": "Nigeria Police Olusosun Post",
-    "station_type": "police",
-    "latitude": 6.586827861174279,
-    "longitude": 3.37334087003125
-  },
-  {
-    "name": "Joyce B Police Post",
-    "station_type": "police",
-    "latitude": 7.369171079199557,
-    "longitude": 3.867561100571745
-  },
-  {
-    "name": "Agugu Police Station",
-    "station_type": "police",
-    "latitude": 7.384347800571745,
-    "longitude": 3.924926598284764
-  },
-  {
-    "name": "Testing Ground Police Station",
-    "station_type": "police",
-    "latitude": 7.403211174600886,
-    "longitude": 3.929167186085207
-  },
-  {
-    "name": "Zone 9 Police Station",
-    "station_type": "police",
-    "latitude": 5.521016667,
-    "longitude": 7.522998333
-  },
-  {
-    "name": "Divisional Headquarters World Bank Division Ehimiri",
-    "station_type": "police",
-    "latitude": 5.51574,
-    "longitude": 7.52218
-  },
-  {
-    "name": "Ebonyi State Police Head Quarter",
-    "station_type": "police",
-    "latitude": 6.327693333,
-    "longitude": 8.106263333
-  },
-  {
-    "name": "Oluwo Nla Police Station",
-    "station_type": "police",
-    "latitude": 7.415587268143491,
-    "longitude": 3.92985717174216
-  },
-  {
-    "name": "Ikolaba Police Station",
-    "station_type": "police",
-    "latitude": 7.415708374029141,
-    "longitude": 3.916936652656953
-  },
-  {
-    "name": "Ashi Police Station",
-    "station_type": "police",
-    "latitude": 7.424117171742161,
-    "longitude": 3.925667718513463
-  },
-  {
-    "name": "Gombe Divisional Police Station",
-    "station_type": "police",
-    "latitude": 10.290355,
-    "longitude": 11.167145
-  },
-  {
-    "name": "Air Force Police Station",
-    "station_type": "police",
-    "latitude": 7.389018415058283,
-    "longitude": 3.969871708029141
-  },
-  {
-    "name": "The Nigerian Police Station Kobolese Idi Osan",
-    "station_type": "police",
-    "latitude": 7.378024549630029,
-    "longitude": 3.946811680343047
-  },
-  {
-    "name": "Nigerian Police Station Ejigbo",
-    "station_type": "police",
-    "latitude": 7.89472,
-    "longitude": 4.308055
-  },
-  {
-    "name": "Idi Ogungun Police Station",
-    "station_type": "police",
-    "latitude": 7.39518217174216,
-    "longitude": 3.917985
-  },
-  {
-    "name": "Agodi Gate Police Station",
-    "station_type": "police",
-    "latitude": 7.396578333,
-    "longitude": 3.919911667
-  },
-  {
-    "name": "Jonku Police Station",
-    "station_type": "police",
-    "latitude": 7.416245,
-    "longitude": 3.945351667
-  },
-  {
-    "name": "Nigeria Police Force IGP X Squad Osun Annex",
-    "station_type": "police",
-    "latitude": 7.787161667,
-    "longitude": 4.543836667
-  },
-  {
-    "name": "Nigeria Police Force 28 Squadron Umuobia",
-    "station_type": "police",
-    "latitude": 5.486535,
-    "longitude": 7.4842633
-  },
-  {
-    "name": "Eziama Police Station",
-    "station_type": "police",
-    "latitude": 5.116405,
-    "longitude": 7.376485
-  },
-  {
-    "name": "Alayabiagba Police Station",
-    "station_type": "police",
-    "latitude": 6.45451,
-    "longitude": 3.351833333333333
-  },
-  {
-    "name": "Central Police Station Adeniji Adele",
-    "station_type": "police",
-    "latitude": 6.456210104634616,
-    "longitude": 3.397585820254006
-  },
-  {
-    "name": "Zone 2 Police Officer Mess Police Mini Market",
-    "station_type": "police",
-    "latitude": 6.441921962823318,
-    "longitude": 3.402997024476362
-  },
-  {
-    "name": "Industrial Police Post",
-    "station_type": "police",
-    "latitude": 6.679167605459134,
-    "longitude": 3.535338438825721
-  },
-  {
-    "name": "Imowo Nla Police Station",
-    "station_type": "police",
-    "latitude": 6.616447800824519,
-    "longitude": 3.60427322028726
-  },
-  {
-    "name": "Ladegboye Police Post",
-    "station_type": "police",
-    "latitude": 6.624074835840145,
-    "longitude": 3.564517194953125
-  },
-  {
-    "name": "Igbogbo Police Station",
-    "station_type": "police",
-    "latitude": 6.60849280082452,
-    "longitude": 3.513413795777644
-  },
-  {
-    "name": "Makoko Police Post",
-    "station_type": "police",
-    "latitude": 6.495387312221554,
-    "longitude": 3.385714895365385
-  },
-  {
-    "name": "Police Station 78",
-    "station_type": "police",
-    "latitude": 6.458641386096154,
-    "longitude": 3.293165577651442
-  },
-  {
-    "name": "Ajah Police Station",
-    "station_type": "police",
-    "latitude": 6.469927426191908,
-    "longitude": 3.577294249810496
-  },
-  {
-    "name": "NPF Divisional HQ Ojo",
-    "station_type": "police",
-    "latitude": 6.456596980570513,
-    "longitude": 3.205760436285657
-  },
-  {
-    "name": "Sabo Police Station",
-    "station_type": "police",
-    "latitude": 6.505394258221957,
-    "longitude": 3.37812050635016
-  },
-  {
-    "name": "Basua Police Station",
-    "station_type": "police",
-    "latitude": 6.527099485238382,
-    "longitude": 3.376328124064102
-  },
-  {
-    "name": "Obafemi Awolowo Road Police Station",
-    "station_type": "police",
-    "latitude": 6.595783490285257,
-    "longitude": 3.336936178063702
-  },
-  {
-    "name": "Okobaba Police Post",
-    "station_type": "police",
-    "latitude": 6.490493534191105,
-    "longitude": 3.389131841365786
-  },
-  {
-    "name": "The Nigeria Police Force Dopemu Agege",
-    "station_type": "police",
-    "latitude": 6.610114917318309,
-    "longitude": 3.31842037555689
-  },
-  {
-    "name": "The Nigeria Police Station Elere Division",
-    "station_type": "police",
-    "latitude": 6.628979816889422,
-    "longitude": 3.320355122381811
-  },
-  {
-    "name": "Ijora Badia Police Station Fadaini Street",
-    "station_type": "police",
-    "latitude": 6.468676335015626,
-    "longitude": 3.361571871730169
-  },
-  {
-    "name": "Marina Leventis Police Station",
-    "station_type": "police",
-    "latitude": 6.455474624443109,
-    "longitude": 3.380480156951923
-  },
-  {
-    "name": "Owode Onirin Police Station",
-    "station_type": "police",
-    "latitude": 6.606404616031651,
-    "longitude": 3.415083228698719
-  },
-  {
-    "name": "Nigerian Railway Hospital Police Station",
-    "station_type": "police",
-    "latitude": 6.4978,
-    "longitude": 3.376015
-  },
-  {
-    "name": "Odaliki Police Station",
-    "station_type": "police",
-    "latitude": 6.484066457397435,
-    "longitude": 3.3777883940621
-  },
-  {
-    "name": "Railway Police Station",
-    "station_type": "police",
-    "latitude": 6.444789051557993,
-    "longitude": 7.494131555130124
-  },
-  {
-    "name": "New Layout Police Station",
-    "station_type": "police",
-    "latitude": 6.470088106316907,
-    "longitude": 3.194801151905048
-  },
-  {
-    "name": "Rofo Police Post",
-    "station_type": "police",
-    "latitude": 6.654851640508014,
-    "longitude": 3.501417774665865
-  },
-  {
-    "name": "Divisional Headquarters Ajao Estate",
-    "station_type": "police",
-    "latitude": 6.549015026158653,
-    "longitude": 3.322853918159455
-  },
-  {
-    "name": "Orile Police Stationsari Iganmu",
-    "station_type": "police",
-    "latitude": 6.478178970476762,
-    "longitude": 3.345868324921875
-  },
-  {
-    "name": "The Nigerian Police Force Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 5.707214888783207,
-    "longitude": 7.167577030628465
-  },
-  {
-    "name": "The Nigerian Police State Headquarters",
-    "station_type": "police",
-    "latitude": 6.443309774989227,
-    "longitude": 7.487433244814863
-  },
-  {
-    "name": "Ogui Road Police Station",
-    "station_type": "police",
-    "latitude": 6.441191667,
-    "longitude": 7.495215
-  },
-  {
-    "name": "Enyiogugu Police Station",
-    "station_type": "police",
-    "latitude": 5.469545,
-    "longitude": 7.199471667
-  },
-  {
-    "name": "The Nigerian Police Divisional Headquarters Abayi Aba",
-    "station_type": "police",
-    "latitude": 5.139203333,
-    "longitude": 7.33497
-  },
-  {
-    "name": "Ohuru Ishimiri Police Station",
-    "station_type": "police",
-    "latitude": 5.14048,
-    "longitude": 7.3808617
-  },
-  {
-    "name": "Police Force Education Unit",
-    "station_type": "police",
-    "latitude": 5.510423333,
-    "longitude": 7.021436667
-  },
-  {
-    "name": "Divisional Headquarters Awo Idemili",
-    "station_type": "police",
-    "latitude": 5.831946,
-    "longitude": 6.9533192
-  },
-  {
-    "name": "Ibefun Town Police Post",
-    "station_type": "police",
-    "latitude": 6.720756666666666,
-    "longitude": 3.79623
-  },
-  {
-    "name": "The Nigerian Police Officers Mess",
-    "station_type": "police",
-    "latitude": 5.522403333,
-    "longitude": 7.490885
-  },
-  {
-    "name": "Nigeria Police Station Area Command Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 5.798563333,
-    "longitude": 7.035203333
-  },
-  {
-    "name": "Umuopara Police Station",
-    "station_type": "police",
-    "latitude": 5.539128333,
-    "longitude": 7.457425
-  },
-  {
-    "name": "Amuzi Police Station Ahiazu Mbaise",
-    "station_type": "police",
-    "latitude": 5.515636912818388,
-    "longitude": 7.214976272047965
-  },
-  {
-    "name": "Vosan Drive Police Station",
-    "station_type": "police",
-    "latitude": 6.440096126356601,
-    "longitude": 7.537441012619676
-  },
-  {
-    "name": "Nigeria Police Station Elekute",
-    "station_type": "police",
-    "latitude": 7.607032736284052,
-    "longitude": 5.215599600575302
-  },
-  {
-    "name": "Nigerian Police Force",
-    "station_type": "police",
-    "latitude": 7.644881083013026,
-    "longitude": 5.238148286701292
-  },
-  {
-    "name": "Odo Ado Divisional Police Head Quarter",
-    "station_type": "police",
-    "latitude": 7.610115997098542,
-    "longitude": 5.250664471744098
-  },
-  {
-    "name": "Police CID Office Lafia",
-    "station_type": "police",
-    "latitude": 8.48592,
-    "longitude": 8.529181666666666
-  },
-  {
-    "name": "Moore Police Station",
-    "station_type": "police",
-    "latitude": 7.491651667,
-    "longitude": 4.566798333
-  },
-  {
-    "name": "C Divisional Police Head Quarter Jos The Nigerian Police Force Masallacin Jummaa Street Jos",
-    "station_type": "police",
-    "latitude": 9.9270517,
-    "longitude": 8.8888883
-  },
-  {
-    "name": "Divisional Police Station Pantami",
-    "station_type": "police",
-    "latitude": 10.27487,
-    "longitude": 11.16948667
-  },
-  {
-    "name": "Durbar Police Station Oyo",
-    "station_type": "police",
-    "latitude": 7.834352746199556,
-    "longitude": 3.936742240457396
-  },
-  {
-    "name": "New Fobur Police Station",
-    "station_type": "police",
-    "latitude": 9.855455,
-    "longitude": 9.022285
-  },
-  {
-    "name": "Lagos State Police Command",
-    "station_type": "police",
-    "latitude": 6.585599659937499,
-    "longitude": 3.344101125746394
-  },
-  {
-    "name": "Ikeja Area f Command",
-    "station_type": "police",
-    "latitude": 6.589697115552884,
-    "longitude": 3.345062004634616
-  },
-  {
-    "name": "Police Officers Mess",
-    "station_type": "police",
-    "latitude": 6.577979476826923,
-    "longitude": 3.356378490285257
-  },
-  {
-    "name": "Ikirike Police Station",
-    "station_type": "police",
-    "latitude": 6.413800662142098,
-    "longitude": 7.486531999097594
-  },
-  {
-    "name": "Police Squadron 1",
-    "station_type": "police",
-    "latitude": 6.413893333,
-    "longitude": 7.49289
-  },
-  {
-    "name": "Nigeria Security And Civil Defence Corps",
-    "station_type": "police",
-    "latitude": 7.336288333,
-    "longitude": 3.957368333
-  },
-  {
-    "name": "Orsumoghu Police Station",
-    "station_type": "police",
-    "latitude": 5.862860236116588,
-    "longitude": 6.927027716660095
-  },
-  {
-    "name": "Felele Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 7.337431667,
-    "longitude": 3.886625
-  },
-  {
-    "name": "Iyaganku Police Station",
-    "station_type": "police",
-    "latitude": 7.383937322515679,
-    "longitude": 3.874013224255623
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquaters",
-    "station_type": "police",
-    "latitude": 5.476243478719754,
-    "longitude": 7.013086969284648
-  },
-  {
-    "name": "The Nigerian Police Station Ekwusigo Park Isuofia",
-    "station_type": "police",
-    "latitude": 6.026899226083678,
-    "longitude": 7.066730509176194
-  },
-  {
-    "name": "The Nigeria Police Shell Camp Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 5.496905,
-    "longitude": 7.030565
-  },
-  {
-    "name": "Abajah Police Station",
-    "station_type": "police",
-    "latitude": 5.690043949392289,
-    "longitude": 7.138158848770789
-  },
-  {
-    "name": "Amaraku Police Station",
-    "station_type": "police",
-    "latitude": 5.656147383176836,
-    "longitude": 7.148925636458423
-  },
-  {
-    "name": "Nigerian Police Station Umuagu Nnobi",
-    "station_type": "police",
-    "latitude": 6.07191488921608,
-    "longitude": 6.939435713784802
-  },
-  {
-    "name": "Uratta Police Station",
-    "station_type": "police",
-    "latitude": 5.089578333,
-    "longitude": 7.336441667
-  },
-  {
-    "name": "NPF Divisional HQ Victoria Island",
-    "station_type": "police",
-    "latitude": 6.422903795777644,
-    "longitude": 3.411678027840945
-  },
-  {
-    "name": "Ojodu Police Station",
-    "station_type": "police",
-    "latitude": 6.640159007207933,
-    "longitude": 3.358292538001202
-  },
-  {
-    "name": "Bende Police Station",
-    "station_type": "police",
-    "latitude": 5.528760579979256,
-    "longitude": 7.492831938106741
-  },
-  {
-    "name": "The Police Force Fegge Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 6.13550963009825,
-    "longitude": 6.771698316040347
-  },
-  {
-    "name": "The Nigeria Police B Division Awka",
-    "station_type": "police",
-    "latitude": 6.23594075927055,
-    "longitude": 7.082419522287669
-  },
-  {
-    "name": "The Nigerian Police World Bank Housing Estate",
-    "station_type": "police",
-    "latitude": 5.514826667,
-    "longitude": 7.499298333
-  },
-  {
-    "name": "The Nigeria Police",
-    "station_type": "police",
-    "latitude": 6.210775543803296,
-    "longitude": 7.064196445619671
-  },
-  {
-    "name": "Neni Police Station",
-    "station_type": "police",
-    "latitude": 6.087675367689129,
-    "longitude": 7.001001470756515
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarter",
-    "station_type": "police",
-    "latitude": 5.693421667,
-    "longitude": 7.068346667
-  },
-  {
-    "name": "Divisional Police Headquarters Ogborhill Aba",
-    "station_type": "police",
-    "latitude": 5.111108333,
-    "longitude": 7.392886667
-  },
-  {
-    "name": "Aguata Area Command 1",
-    "station_type": "police",
-    "latitude": 5.944196547945205,
-    "longitude": 7.088414171232876
-  },
-  {
-    "name": "Aguata Area Command 2",
-    "station_type": "police",
-    "latitude": 5.94273420146369,
-    "longitude": 7.089379304447363
-  },
-  {
-    "name": "Obalende Divisional Police Headquarters",
-    "station_type": "police",
-    "latitude": 6.831665127610316,
-    "longitude": 3.905675759320784
-  },
-  {
-    "name": "Base 15 Special Protection Unit Ukpo",
-    "station_type": "police",
-    "latitude": 6.196679564338451,
-    "longitude": 7.047536837525169
-  },
-  {
-    "name": "Police Commissioners Resident",
-    "station_type": "police",
-    "latitude": 4.9753741,
-    "longitude": 8.3300495
-  },
-  {
-    "name": "Divisional Headquarters Ukpor",
-    "station_type": "police",
-    "latitude": 5.937746566821541,
-    "longitude": 6.922430506914464
-  },
-  {
-    "name": "Isoke Ndida Police Post Obenasa Amichi",
-    "station_type": "police",
-    "latitude": 5.960750926293711,
-    "longitude": 6.972796214464855
-  },
-  {
-    "name": "Osun State Police Command",
-    "station_type": "police",
-    "latitude": 7.480491667,
-    "longitude": 4.560843333
-  },
-  {
-    "name": "Abagana Police Station",
-    "station_type": "police",
-    "latitude": 6.183536844296544,
-    "longitude": 6.98923080805712
-  },
-  {
-    "name": "Olonde Police Station",
-    "station_type": "police",
-    "latitude": 7.914863333,
-    "longitude": 4.673833333
-  },
-  {
-    "name": "Dugbe Police Station",
-    "station_type": "police",
-    "latitude": 7.782056667,
-    "longitude": 4.550628333
-  },
-  {
-    "name": "Federal Housing Police Station",
-    "station_type": "police",
-    "latitude": 5.021303333,
-    "longitude": 8.336738333
-  },
-  {
-    "name": "The Nigeria Police Post Esuk Utan",
-    "station_type": "police",
-    "latitude": 5.0169091,
-    "longitude": 8.3246121
-  },
-  {
-    "name": "The Nigeria Police Force Zone 6 Headquarters",
-    "station_type": "police",
-    "latitude": 5.01678,
-    "longitude": 8.3336267
-  },
-  {
-    "name": "Amaufuru Police Station",
-    "station_type": "police",
-    "latitude": 5.019593333,
-    "longitude": 7.31674
-  },
-  {
-    "name": "Kemta Police Station Oke Ola Street Kemta Idi Aba",
-    "station_type": "police",
-    "latitude": 7.142725,
-    "longitude": 3.384273333333333
-  },
-  {
-    "name": "Office Of The Area Commander Nigeria Police",
-    "station_type": "police",
-    "latitude": 7.135022515952851,
-    "longitude": 3.344144948525491
-  },
-  {
-    "name": "The Nigerian Police Ibara Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 7.142111543258014,
-    "longitude": 3.339281113243922
-  },
-  {
-    "name": "Gangare Police Station",
-    "station_type": "police",
-    "latitude": 9.915896667,
-    "longitude": 8.893423333
-  },
-  {
-    "name": "Area Command Police Station Jos",
-    "station_type": "police",
-    "latitude": 9.917207,
-    "longitude": 8.8835585
-  },
-  {
-    "name": "Laronto Police Station",
-    "station_type": "police",
-    "latitude": 9.942298,
-    "longitude": 8.8777707
-  },
-  {
-    "name": "Nasarawa Gwang Division",
-    "station_type": "police",
-    "latitude": 9.93019,
-    "longitude": 8.900575
-  },
-  {
-    "name": "Head Quarters Sector 2 Operation Save Heaven Bauchi Road",
-    "station_type": "police",
-    "latitude": 9.951715,
-    "longitude": 8.8921267
-  },
-  {
-    "name": "Salisu Adamu Police Station",
-    "station_type": "police",
-    "latitude": 9.9343117,
-    "longitude": 8.8927355
-  },
-  {
-    "name": "Jos Main Market Police Station",
-    "station_type": "police",
-    "latitude": 9.920681667,
-    "longitude": 8.890596667
-  },
-  {
-    "name": "Alausa Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 6.618232818571714,
-    "longitude": 3.360992129110977
-  },
-  {
-    "name": "Lagos State Police Command HQ Rapid Response Squad",
-    "station_type": "police",
-    "latitude": 6.614992251492788,
-    "longitude": 3.361976151905048
-  },
-  {
-    "name": "Juro Mamu",
-    "station_type": "police",
-    "latitude": 8.641221666666667,
-    "longitude": 10.782051666666666
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Anguwan Rogo",
-    "station_type": "police",
-    "latitude": 9.944385,
-    "longitude": 8.88906
-  },
-  {
-    "name": "The Nigeria Police Post Bauchi Road",
-    "station_type": "police",
-    "latitude": 9.956125,
-    "longitude": 8.8921167
-  },
-  {
-    "name": "NPF Police B Department Ikeja HQ Annex",
-    "station_type": "police",
-    "latitude": 6.590202042223558,
-    "longitude": 3.355014555302884
-  },
-  {
-    "name": "Area Command Headquaters Abakaliki",
-    "station_type": "police",
-    "latitude": 6.325435,
-    "longitude": 8.096798333
-  },
-  {
-    "name": "Oke Baale Police Station",
-    "station_type": "police",
-    "latitude": 7.767368333,
-    "longitude": 4.578105
-  },
-  {
-    "name": "Otop Abasi Police Station",
-    "station_type": "police",
-    "latitude": 4.964191667,
-    "longitude": 8.331331667
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters A",
-    "station_type": "police",
-    "latitude": 4.9653874,
-    "longitude": 8.3499339
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters A Division Calabar",
-    "station_type": "police",
-    "latitude": 4.9653874,
-    "longitude": 8.3499339
-  },
-  {
-    "name": "Unilever Police Post",
-    "station_type": "police",
-    "latitude": 6.514796666666666,
-    "longitude": 3.07789
-  },
-  {
-    "name": "Divisional Police Head Quarters Agbara",
-    "station_type": "police",
-    "latitude": 6.501005,
-    "longitude": 3.09812
-  },
-  {
-    "name": "Agbara Police Station",
-    "station_type": "police",
-    "latitude": 6.501106972159055,
-    "longitude": 3.098094847253806
-  },
-  {
-    "name": "Morogbo Police Station",
-    "station_type": "police",
-    "latitude": 6.494871805871394,
-    "longitude": 3.083676300445513
-  },
-  {
-    "name": "Nigeria Police Post Igangan",
-    "station_type": "police",
-    "latitude": 7.672371667,
-    "longitude": 3.184918333
-  },
-  {
-    "name": "Yemeni Police Station",
-    "station_type": "police",
-    "latitude": 7.396283291970859,
-    "longitude": 3.907313360686094
-  },
-  {
-    "name": "Idishin Police Station",
-    "station_type": "police",
-    "latitude": 7.401790587800443,
-    "longitude": 3.854385587800444
-  },
-  {
-    "name": "Nigeria Security And Civil Defense Corps",
-    "station_type": "police",
-    "latitude": 7.450603265284764,
-    "longitude": 3.858907199428255
-  },
-  {
-    "name": "Orogun Police Station",
-    "station_type": "police",
-    "latitude": 7.455371147914793,
-    "longitude": 3.914437240457396
-  },
-  {
-    "name": "Ojoo Police Station",
-    "station_type": "police",
-    "latitude": 7.468016741029142,
-    "longitude": 3.912193380343047
-  },
-  {
-    "name": "Police Station 44",
-    "station_type": "police",
-    "latitude": 6.401409921524039,
-    "longitude": 3.392116849777243
-  },
-  {
-    "name": "Kawo Out Station",
-    "station_type": "police",
-    "latitude": 10.217971666666667,
-    "longitude": 4.832693333333333
-  },
-  {
-    "name": "SSS Ochudo",
-    "station_type": "police",
-    "latitude": 6.299041667,
-    "longitude": 8.110888333
-  },
-  {
-    "name": "Mbeke Police Station",
-    "station_type": "police",
-    "latitude": 6.643056667,
-    "longitude": 8.102006667
-  },
-  {
-    "name": "Itori Police Station",
-    "station_type": "police",
-    "latitude": 6.934005380828151,
-    "longitude": 3.220426125430961
-  },
-  {
-    "name": "Itori Police Post",
-    "station_type": "police",
-    "latitude": 6.927363333,
-    "longitude": 3.219293333
-  },
-  {
-    "name": "Proposed Police Post",
-    "station_type": "police",
-    "latitude": 6.932319104096616,
-    "longitude": 3.243342471063528
-  },
-  {
-    "name": "Lafenwa",
-    "station_type": "police",
-    "latitude": 7.155887725480524,
-    "longitude": 3.330168333333333
-  },
-  {
-    "name": "Lafenwa Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 7.155835,
-    "longitude": 3.325528333333333
-  },
-  {
-    "name": "Budo nuhu police station",
-    "station_type": "police",
-    "latitude": 8.4308488,
-    "longitude": 4.493687
-  },
-  {
-    "name": "Police Station Idofa",
-    "station_type": "police",
-    "latitude": 7.446656113000312,
-    "longitude": 2.827514749025883
-  },
-  {
-    "name": "Police Divisional Headquarters Imeko Afon",
-    "station_type": "police",
-    "latitude": 7.436856666666667,
-    "longitude": 2.839541666666667
-  },
-  {
-    "name": "Nigeria Police Idere",
-    "station_type": "police",
-    "latitude": 7.493560060686093,
-    "longitude": 3.248147821943934
-  },
-  {
-    "name": "Police Station Igan Alade",
-    "station_type": "police",
-    "latitude": 7.056166667,
-    "longitude": 2.90476
-  },
-  {
-    "name": "Police Post",
-    "station_type": "police",
-    "latitude": 7.100595,
-    "longitude": 3.166981667
-  },
-  {
-    "name": "Nigeria Police",
-    "station_type": "police",
-    "latitude": 7.09286,
-    "longitude": 3.092726666666667
-  },
-  {
-    "name": "Iro Police Station",
-    "station_type": "police",
-    "latitude": 6.880071013685602,
-    "longitude": 3.36584300514745
-  },
-  {
-    "name": "The Nigeria Police Station Oluwo",
-    "station_type": "police",
-    "latitude": 7.1194139,
-    "longitude": 3.3297083
-  },
-  {
-    "name": "Ewekoro Police Post Beside First Bank Plc",
-    "station_type": "police",
-    "latitude": 6.903838905790729,
-    "longitude": 3.206044774763138
-  },
-  {
-    "name": "Ofada Police Post",
-    "station_type": "police",
-    "latitude": 6.864362,
-    "longitude": 3.4261834
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 6.651543333,
-    "longitude": 3.368971667
-  },
-  {
-    "name": "Police Post",
-    "station_type": "police",
-    "latitude": 6.7756015,
-    "longitude": 3.2793528
-  },
-  {
-    "name": "Ijoko Lemode Town Ogun State",
-    "station_type": "police",
-    "latitude": 6.730370923305992,
-    "longitude": 3.284066330884706
-  },
-  {
-    "name": "Ketu Adie Owe Station",
-    "station_type": "police",
-    "latitude": 6.597020999747285,
-    "longitude": 3.074927574012548
-  },
-  {
-    "name": "The Nigerian Police Force Ajuwon Division",
-    "station_type": "police",
-    "latitude": 6.674893297078595,
-    "longitude": 3.348634884557647
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Ibogun Olagun",
-    "station_type": "police",
-    "latitude": 6.834539042554983,
-    "longitude": 3.123201492904315
-  },
-  {
-    "name": "Redemption Camp Police Station",
-    "station_type": "police",
-    "latitude": 6.818531162045375,
-    "longitude": 3.454140379660393
-  },
-  {
-    "name": "Ajebo Police Station",
-    "station_type": "police",
-    "latitude": 7.105831270917911,
-    "longitude": 3.709929974262745
-  },
-  {
-    "name": "Police College",
-    "station_type": "police",
-    "latitude": 7.090964366253965,
-    "longitude": 3.398522538070571
-  },
-  {
-    "name": "Owode Egba Police Area Command",
-    "station_type": "police",
-    "latitude": 6.9271712,
-    "longitude": 3.4959211
-  },
-  {
-    "name": "Police Post Obafemi",
-    "station_type": "police",
-    "latitude": 7.116247942862967,
-    "longitude": 3.61597370075059
-  },
-  {
-    "name": "Owena Police Station",
-    "station_type": "police",
-    "latitude": 7.400233333,
-    "longitude": 5.008688333
-  },
-  {
-    "name": "Police Station Erin Oke Express Way",
-    "station_type": "police",
-    "latitude": 7.553236667,
-    "longitude": 4.885283333
-  },
-  {
-    "name": "Police Station Iloko Ijesa",
-    "station_type": "police",
-    "latitude": 7.647241667,
-    "longitude": 4.820028333
-  },
-  {
-    "name": "Erinmo Police Post",
-    "station_type": "police",
-    "latitude": 7.623403333,
-    "longitude": 4.853536667
-  },
-  {
-    "name": "Police Station Ikeji Arakeji",
-    "station_type": "police",
-    "latitude": 7.425333333,
-    "longitude": 4.954953333
-  },
-  {
-    "name": "Esa Oke Police Station",
-    "station_type": "police",
-    "latitude": 7.766386667,
-    "longitude": 4.898338333
-  },
-  {
-    "name": "Ikeji Ile Police Station",
-    "station_type": "police",
-    "latitude": 7.48534,
-    "longitude": 4.924133333
-  },
-  {
-    "name": "Nigeria Police Station Kajola Ajaba",
-    "station_type": "police",
-    "latitude": 7.917065,
-    "longitude": 4.900528333
-  },
-  {
-    "name": "Trailer Park Police Station",
-    "station_type": "police",
-    "latitude": 6.943998333333333,
-    "longitude": 3.646071666666666
-  },
-  {
-    "name": "Police Post Ososa",
-    "station_type": "police",
-    "latitude": 6.800975290691765,
-    "longitude": 3.854541486505881
-  },
-  {
-    "name": "Nigeria Police Post Ososa",
-    "station_type": "police",
-    "latitude": 6.800843790691764,
-    "longitude": 3.854576286505881
-  },
-  {
-    "name": "Odogbolu Police Station Traffic Department",
-    "station_type": "police",
-    "latitude": 6.847171666666666,
-    "longitude": 3.769018333333333
-  },
-  {
-    "name": "Imodi Imosan Police Post",
-    "station_type": "police",
-    "latitude": 6.86581,
-    "longitude": 3.885958333333334
-  },
-  {
-    "name": "Awa Police Station",
-    "station_type": "police",
-    "latitude": 6.955613998699,
-    "longitude": 3.933023590705885
-  },
-  {
-    "name": "Lafarge Police Station",
-    "station_type": "police",
-    "latitude": 6.819267080040174,
-    "longitude": 3.620001486505881
-  },
-  {
-    "name": "Police Station Odeda",
-    "station_type": "police",
-    "latitude": 7.232329377338915,
-    "longitude": 3.523491666666666
-  },
-  {
-    "name": "Top On Police Station",
-    "station_type": "police",
-    "latitude": 6.95520971101309,
-    "longitude": 3.98806651864157
-  },
-  {
-    "name": "Police Barracks Eleweran",
-    "station_type": "police",
-    "latitude": 7.1841577,
-    "longitude": 3.412178
-  },
-  {
-    "name": "The Nigerian Police Divisional Head Qrts",
-    "station_type": "police",
-    "latitude": 7.178025,
-    "longitude": 3.391676666666667
-  },
-  {
-    "name": "Ogbere Area Command Headquarters",
-    "station_type": "police",
-    "latitude": 6.739005490041317,
-    "longitude": 4.165214897050979
-  },
-  {
-    "name": "Ogbere Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 6.738608262807116,
-    "longitude": 4.167090128686275
-  },
-  {
-    "name": "Police Station Ibefun",
-    "station_type": "police",
-    "latitude": 6.727115,
-    "longitude": 3.81092
-  },
-  {
-    "name": "Police Station Iperindo",
-    "station_type": "police",
-    "latitude": 7.503353333,
-    "longitude": 4.825361667
-  },
-  {
-    "name": "Atan Police Station",
-    "station_type": "police",
-    "latitude": 6.892831666666666,
-    "longitude": 4.006135
-  },
-  {
-    "name": "Area A West Airport Command HQ",
-    "station_type": "police",
-    "latitude": 6.561554310539264,
-    "longitude": 3.320596605013622
-  },
-  {
-    "name": "Airport Police Command",
-    "station_type": "police",
-    "latitude": 6.565126666666667,
-    "longitude": 3.32023
-  },
-  {
-    "name": "Police Post",
-    "station_type": "police",
-    "latitude": 6.589754939271235,
-    "longitude": 3.335151282698317
-  },
-  {
-    "name": "Onipetesi Police Post",
-    "station_type": "police",
-    "latitude": 6.605388560349759,
-    "longitude": 3.323828952729567
-  },
-  {
-    "name": "Imota Police Station Ebute Ajebo Road Imota",
-    "station_type": "police",
-    "latitude": 6.657621849777244,
-    "longitude": 3.669316762889824
-  },
-  {
-    "name": "Chindo Bako Adamu",
-    "station_type": "police",
-    "latitude": 8.575389099037931,
-    "longitude": 10.719286952084484
-  },
-  {
-    "name": "Police Station Ogbaagbaa",
-    "station_type": "police",
-    "latitude": 7.701783333,
-    "longitude": 4.251876667
-  },
-  {
-    "name": "Kakwagom Police Station",
-    "station_type": "police",
-    "latitude": 6.4920896,
-    "longitude": 8.8112461
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 6.632522674933568,
-    "longitude": 2.742490964513359
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 9.499825,
-    "longitude": 10.3139317
-  },
-  {
-    "name": "Abobi Police Station",
-    "station_type": "police",
-    "latitude": 6.936357397240492,
-    "longitude": 3.923735148025096
-  },
-  {
-    "name": "Mini Campus Police Post",
-    "station_type": "police",
-    "latitude": 6.950070781065665,
-    "longitude": 3.903899099052553
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 6.763152205088828,
-    "longitude": 4.06670493011442
-  },
-  {
-    "name": "Nigeria Police Ogbia Div HQ",
-    "station_type": "police",
-    "latitude": 4.688833444640522,
-    "longitude": 6.315562905973729
-  },
-  {
-    "name": "Layeni Police Station",
-    "station_type": "police",
-    "latitude": 6.461070689460738,
-    "longitude": 3.327806666666667
-  },
-  {
-    "name": "Igbologun Station",
-    "station_type": "police",
-    "latitude": 6.425445357809696,
-    "longitude": 3.332843385650641
-  },
-  {
-    "name": "Police Station 9",
-    "station_type": "police",
-    "latitude": 6.417147522415065,
-    "longitude": 4.211947460762019
-  },
-  {
-    "name": "Orugbo Police Post",
-    "station_type": "police",
-    "latitude": 6.631293787366186,
-    "longitude": 3.772953804189102
-  },
-  {
-    "name": "Apapa Police Station",
-    "station_type": "police",
-    "latitude": 6.450089310539263,
-    "longitude": 3.367356339221354
-  },
-  {
-    "name": "Seme Police Station",
-    "station_type": "police",
-    "latitude": 6.384188857430689,
-    "longitude": 2.728848459920873
-  },
-  {
-    "name": "Badagry Divisional Police",
-    "station_type": "police",
-    "latitude": 6.412672940953525,
-    "longitude": 2.89293940676242
-  },
-  {
-    "name": "Eredo Police Station",
-    "station_type": "police",
-    "latitude": 6.648215626158653,
-    "longitude": 3.989168266221154
-  },
-  {
-    "name": "Ajara Police Post",
-    "station_type": "police",
-    "latitude": 6.434103725713141,
-    "longitude": 2.890856151905048
-  },
-  {
-    "name": "Satellite Police Post",
-    "station_type": "police",
-    "latitude": 6.449063464126603,
-    "longitude": 3.270669895365385
-  },
-  {
-    "name": "Area L Police Command Headquarters",
-    "station_type": "police",
-    "latitude": 6.454000156951923,
-    "longitude": 3.272906640508012
-  },
-  {
-    "name": "Manang Lakware Police Station",
-    "station_type": "police",
-    "latitude": 9.070829921927677,
-    "longitude": 11.67590277593801
-  },
-  {
-    "name": "Divisional Police Pantisawa Yorro LGA",
-    "station_type": "police",
-    "latitude": 8.942266373027698,
-    "longitude": 11.521004181348616
-  },
-  {
-    "name": "Kungana Police Station",
-    "station_type": "police",
-    "latitude": 8.892595629139478,
-    "longitude": 11.577748236497419
-  },
-  {
-    "name": "Ankuwa Kashi Police Station",
-    "station_type": "police",
-    "latitude": 9.032116666666667,
-    "longitude": 11.60473
-  },
-  {
-    "name": "Igbekurikor Police Station",
-    "station_type": "police",
-    "latitude": 6.6761033,
-    "longitude": 8.7255817
-  },
-  {
-    "name": "Erena Divisional Police Station",
-    "station_type": "police",
-    "latitude": 10.08203,
-    "longitude": 6.738521667
-  },
-  {
-    "name": "Is A Police Station Outpost Old Muri",
-    "station_type": "police",
-    "latitude": 9.188025,
-    "longitude": 10.883101381248853
-  },
-  {
-    "name": "Jab Jab Police Station",
-    "station_type": "police",
-    "latitude": 9.246593209375575,
-    "longitude": 10.690380807451435
-  },
-  {
-    "name": "Karim Lamido Police Station",
-    "station_type": "police",
-    "latitude": 9.314871636295113,
-    "longitude": 11.191961862101438
-  },
-  {
-    "name": "Serti Police Station",
-    "station_type": "police",
-    "latitude": 8.933338623474036,
-    "longitude": 11.191621946210578
-  },
-  {
-    "name": "Nigeria Police Station Biakpan",
-    "station_type": "police",
-    "latitude": 5.5878283,
-    "longitude": 7.9259533
-  },
-  {
-    "name": "Yerima Police Station",
-    "station_type": "police",
-    "latitude": 8.448413648556897,
-    "longitude": 10.578897402565518
-  },
-  {
-    "name": "Nyaja Police Out Porce",
-    "station_type": "police",
-    "latitude": 7.812156571744155,
-    "longitude": 10.58498944091218
-  },
-  {
-    "name": "Police Station 4",
-    "station_type": "police",
-    "latitude": 7.856448678362641,
-    "longitude": 10.968195089983045
-  },
-  {
-    "name": "Ute Police Station",
-    "station_type": "police",
-    "latitude": 6.435311712593105,
-    "longitude": 5.685727320134553
-  },
-  {
-    "name": "Ijanikin Divisional Police Station",
-    "station_type": "police",
-    "latitude": 6.496115148540465,
-    "longitude": 3.125291483556089
-  },
-  {
-    "name": "Ogombo Police Station",
-    "station_type": "police",
-    "latitude": 6.44866157044351,
-    "longitude": 3.611636047270432
-  },
-  {
-    "name": "Area N Command Ijede Police Station",
-    "station_type": "police",
-    "latitude": 6.56621792320633,
-    "longitude": 3.589016361174279
-  },
-  {
-    "name": "Apa Police Station",
-    "station_type": "police",
-    "latitude": 6.429737635461137,
-    "longitude": 2.814852696189904
-  },
-  {
-    "name": "Ketu Ereyun Police Post",
-    "station_type": "police",
-    "latitude": 6.6373931,
-    "longitude": 3.8758529
-  },
-  {
-    "name": "Imesi Ile Police Station",
-    "station_type": "police",
-    "latitude": 7.827006667,
-    "longitude": 4.834231667
-  },
-  {
-    "name": "The Nigeria Police Force B",
-    "station_type": "police",
-    "latitude": 7.945441667,
-    "longitude": 4.77996
-  },
-  {
-    "name": "Gassol Police Station",
-    "station_type": "police",
-    "latitude": 8.539266487624861,
-    "longitude": 10.449575374759483
-  },
-  {
-    "name": "Garwa Police Post",
-    "station_type": "police",
-    "latitude": 8.278728333333333,
-    "longitude": 10.628195
-  },
-  {
-    "name": "Nigeria Police Station Creek Town Odukpani LGA",
-    "station_type": "police",
-    "latitude": 4.993585,
-    "longitude": 8.2743917
-  },
-  {
-    "name": "Agua Police Station",
-    "station_type": "police",
-    "latitude": 6.759564559750771,
-    "longitude": 6.23265822011219
-  },
-  {
-    "name": "Police Station Akoka Street Ebute Road Ibafo",
-    "station_type": "police",
-    "latitude": 6.739111667,
-    "longitude": 3.420711667
-  },
-  {
-    "name": "Police Station Akoka",
-    "station_type": "police",
-    "latitude": 6.739149432937013,
-    "longitude": 3.42070406126392
-  },
-  {
-    "name": "Nigeria Police Ndeaboh Aninri LGA",
-    "station_type": "police",
-    "latitude": 6.034367022988029,
-    "longitude": 7.57863801171727
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Igarra",
-    "station_type": "police",
-    "latitude": 7.2815953767327,
-    "longitude": 6.107159215720879
-  },
-  {
-    "name": "Okoyong Police Post",
-    "station_type": "police",
-    "latitude": 5.195645,
-    "longitude": 8.2783183
-  },
-  {
-    "name": "Kabo Police Station",
-    "station_type": "police",
-    "latitude": 9.409176896785064,
-    "longitude": 7.180404393850123
-  },
-  {
-    "name": "Police Out Post Ashuku",
-    "station_type": "police",
-    "latitude": 7.142801666666666,
-    "longitude": 10.677868333333333
-  },
-  {
-    "name": "Eneme Police Out Post",
-    "station_type": "police",
-    "latitude": 7.10087060064138,
-    "longitude": 10.650765690624427
-  },
-  {
-    "name": "Mayo Ndaga Police Station",
-    "station_type": "police",
-    "latitude": 6.915681456329023,
-    "longitude": 11.433419939822702
-  },
-  {
-    "name": "Jatau Police Station",
-    "station_type": "police",
-    "latitude": 7.904696024278448,
-    "longitude": 10.653511801924138
-  },
-  {
-    "name": "Wurbo Police Station",
-    "station_type": "police",
-    "latitude": 8.010261754758355,
-    "longitude": 10.825108278143267
-  },
-  {
-    "name": "Nigerian Police Station Kuffai Ahmadu",
-    "station_type": "police",
-    "latitude": 7.395343888700286,
-    "longitude": 9.94331698962457
-  },
-  {
-    "name": "Police Station Alingora Ward",
-    "station_type": "police",
-    "latitude": 7.497374978955954,
-    "longitude": 11.351780358646005
-  },
-  {
-    "name": "Police Station Didan",
-    "station_type": "police",
-    "latitude": 6.872344977263458,
-    "longitude": 9.672393691979337
-  },
-  {
-    "name": "Nigeria Police Kabri Song Barki",
-    "station_type": "police",
-    "latitude": 6.695313663459768,
-    "longitude": 11.423895135257471
-  },
-  {
-    "name": "Mayo Dulle Police Station",
-    "station_type": "police",
-    "latitude": 6.646312717789081,
-    "longitude": 11.46300625793247
-  },
-  {
-    "name": "The Nigeria Police Force Kara Out Station",
-    "station_type": "police",
-    "latitude": 6.72894,
-    "longitude": 11.364213333333332
-  },
-  {
-    "name": "Police Station 38",
-    "station_type": "police",
-    "latitude": 6.57826615985661,
-    "longitude": 11.422150951443102
-  },
-  {
-    "name": "Nyido Police Station",
-    "station_type": "police",
-    "latitude": 7.178229203923848,
-    "longitude": 10.285412056970403
-  },
-  {
-    "name": "Lip Police Post",
-    "station_type": "police",
-    "latitude": 6.51100445953592,
-    "longitude": 11.150397717789081
-  },
-  {
-    "name": "Road Abpng",
-    "station_type": "police",
-    "latitude": 6.987745616110061,
-    "longitude": 10.742437853046555
-  },
-  {
-    "name": "Police Post Shibong",
-    "station_type": "police",
-    "latitude": 6.86424273942644,
-    "longitude": 9.852114258894542
-  },
-  {
-    "name": "Nigeria Police Force Out Post Danbeki",
-    "station_type": "police",
-    "latitude": 7.317616262647566,
-    "longitude": 10.572516497558743
-  },
-  {
-    "name": "Kashimbila Police Station",
-    "station_type": "police",
-    "latitude": 7.328669811626563,
-    "longitude": 10.544900244518082
-  },
-  {
-    "name": "Nfom Police Post",
-    "station_type": "police",
-    "latitude": 6.500196667,
-    "longitude": 8.55636
-  },
-  {
-    "name": "Nigeria Police Divisioal Headquarters Nkporo",
-    "station_type": "police",
-    "latitude": 5.787653333,
-    "longitude": 7.768323333
-  },
-  {
-    "name": "Nigeria Police Force Divisional Headquarter Saki",
-    "station_type": "police",
-    "latitude": 8.671296917941717,
-    "longitude": 3.396051318513462
-  },
-  {
-    "name": "Ojoto Police Station",
-    "station_type": "police",
-    "latitude": 6.091198063148516,
-    "longitude": 6.909012962363787
-  },
-  {
-    "name": "The Nigeria Police Post Ikot Iwang Bakassi Lga",
-    "station_type": "police",
-    "latitude": 4.8516083,
-    "longitude": 8.5292517
-  },
-  {
-    "name": "Ikot Nakanda Police Station",
-    "station_type": "police",
-    "latitude": 4.8791733,
-    "longitude": 8.4881283
-  },
-  {
-    "name": "Fogbe Police Out Post",
-    "station_type": "police",
-    "latitude": 8.718845,
-    "longitude": 6.512195
-  },
-  {
-    "name": "Dukku Central Police Station",
-    "station_type": "police",
-    "latitude": 11.2350888,
-    "longitude": 4.9056339
-  },
-  {
-    "name": "Nil Police Out post",
-    "station_type": "police",
-    "latitude": 9.9759,
-    "longitude": 11.48367833
-  },
-  {
-    "name": "Beni Police Station",
-    "station_type": "police",
-    "latitude": 9.649530523858429,
-    "longitude": 7.190731673316431
-  },
-  {
-    "name": "Kpanbo Police Out Post",
-    "station_type": "police",
-    "latitude": 9.0627239,
-    "longitude": 5.4247119
-  },
-  {
-    "name": "Paiko Police Station",
-    "station_type": "police",
-    "latitude": 9.430818333,
-    "longitude": 6.642163333
-  },
-  {
-    "name": "The Nigerian Police Post",
-    "station_type": "police",
-    "latitude": 7.494105,
-    "longitude": 4.492211667
-  },
-  {
-    "name": "Ilode Police Post",
-    "station_type": "police",
-    "latitude": 7.480421667,
-    "longitude": 4.576366667
-  },
-  {
-    "name": "The Nigeria Police Station Oyan",
-    "station_type": "police",
-    "latitude": 8.048713333,
-    "longitude": 4.766183333
-  },
-  {
-    "name": "Police Station Inisa",
-    "station_type": "police",
-    "latitude": 7.981185,
-    "longitude": 4.6451
-  },
-  {
-    "name": "Oke Aanu Police Station",
-    "station_type": "police",
-    "latitude": 8.011346667,
-    "longitude": 4.671405
-  },
-  {
-    "name": "The Nigeria Police Post Mpu",
-    "station_type": "police",
-    "latitude": 5.986182497142475,
-    "longitude": 7.648623718828815
-  },
-  {
-    "name": "Police Quarter Mpu",
-    "station_type": "police",
-    "latitude": 5.986608333,
-    "longitude": 7.648241827641364
-  },
-  {
-    "name": "Ikot Eneobong Police Post",
-    "station_type": "police",
-    "latitude": 5.051795,
-    "longitude": 8.360701667
-  },
-  {
-    "name": "Area Command Headquarters Tinapa Calabar",
-    "station_type": "police",
-    "latitude": 5.0599283,
-    "longitude": 8.31938
-  },
-  {
-    "name": "Police Station Alagbado",
-    "station_type": "police",
-    "latitude": 7.179503333,
-    "longitude": 4.69582
-  },
-  {
-    "name": "Saki Divisional Police Station",
-    "station_type": "police",
-    "latitude": 8.65075,
-    "longitude": 3.2195883
-  },
-  {
-    "name": "Nigerian Police Barack Okundi",
-    "station_type": "police",
-    "latitude": 6.4359717,
-    "longitude": 8.7966033
-  },
-  {
-    "name": "Igwo Police Outstation",
-    "station_type": "police",
-    "latitude": 6.63082,
-    "longitude": 9.1207983
-  },
-  {
-    "name": "Ikot Ekpo Edem Police Station",
-    "station_type": "police",
-    "latitude": 4.9468083,
-    "longitude": 8.5678183
-  },
-  {
-    "name": "Nigeria Police Force Calaro Estate Post",
-    "station_type": "police",
-    "latitude": 5.283725,
-    "longitude": 8.293315
-  },
-  {
-    "name": "The Nigeria Police Okuku",
-    "station_type": "police",
-    "latitude": 6.712545,
-    "longitude": 8.7734833
-  },
-  {
-    "name": "Tumu Police Station",
-    "station_type": "police",
-    "latitude": 10.00649333,
-    "longitude": 11.00838833
-  },
-  {
-    "name": "Kuola Police Station",
-    "station_type": "police",
-    "latitude": 7.366314439885651,
-    "longitude": 3.81507449425784
-  },
-  {
-    "name": "Ariyo Police Station",
-    "station_type": "police",
-    "latitude": 5.3246483,
-    "longitude": 7.98888
-  },
-  {
-    "name": "Onimangoro Police Station",
-    "station_type": "police",
-    "latitude": 7.440081284345263,
-    "longitude": 3.299843224255623
-  },
-  {
-    "name": "Police Training School",
-    "station_type": "police",
-    "latitude": 5.1472983,
-    "longitude": 8.3482967
-  },
-  {
-    "name": "Divisional Headquarters Odukpani",
-    "station_type": "police",
-    "latitude": 5.15723,
-    "longitude": 8.3423817
-  },
-  {
-    "name": "Beteriko Police Station",
-    "station_type": "police",
-    "latitude": 6.4838086,
-    "longitude": 9.1452534
-  },
-  {
-    "name": "Batriku Police Station",
-    "station_type": "police",
-    "latitude": 6.4837233,
-    "longitude": 9.1450783
-  },
-  {
-    "name": "Dadin Kowa Police Division",
-    "station_type": "police",
-    "latitude": 10.28047167,
-    "longitude": 11.495045
-  },
-  {
-    "name": "Shinga Police Outpost",
-    "station_type": "police",
-    "latitude": 10.2841533,
-    "longitude": 11.5029233
-  },
-  {
-    "name": "Police Divisional Headquarters Otu",
-    "station_type": "police",
-    "latitude": 8.205839412199557,
-    "longitude": 3.416823333
-  },
-  {
-    "name": "Iludun Police Division Osogbo",
-    "station_type": "police",
-    "latitude": 7.782713333,
-    "longitude": 4.58607
-  },
-  {
-    "name": "Zambuk Police Station",
-    "station_type": "police",
-    "latitude": 10.31970167,
-    "longitude": 11.35897167
-  },
-  {
-    "name": "Owu Community Police Station",
-    "station_type": "police",
-    "latitude": 7.242568333,
-    "longitude": 4.331205
-  },
-  {
-    "name": "Police Station Isiukwuato Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 5.739911667,
-    "longitude": 7.497308333
-  },
-  {
-    "name": "Odeyinka Police Station",
-    "station_type": "police",
-    "latitude": 7.324371667,
-    "longitude": 4.361508333
-  },
-  {
-    "name": "Edor Police Station",
-    "station_type": "police",
-    "latitude": 6.2016838,
-    "longitude": 8.6333833
-  },
-  {
-    "name": "Community Police Owelle Inoma",
-    "station_type": "police",
-    "latitude": 6.533471512943618,
-    "longitude": 6.705556508950606
-  },
-  {
-    "name": "Tongo Police Out Post",
-    "station_type": "police",
-    "latitude": 10.70851,
-    "longitude": 11.36492
-  },
-  {
-    "name": "The Divisional Headquarter",
-    "station_type": "police",
-    "latitude": 9.082935,
-    "longitude": 3.848571619656953
-  },
-  {
-    "name": "Ido Divisional Headquarter",
-    "station_type": "police",
-    "latitude": 7.472643879771302,
-    "longitude": 3.761798333
-  },
-  {
-    "name": "Ofukpa Police Station Apiapum",
-    "station_type": "police",
-    "latitude": 6.000633333,
-    "longitude": 8.308923333
-  },
-  {
-    "name": "Ipapo House Police Station",
-    "station_type": "police",
-    "latitude": 8.121012921943933,
-    "longitude": 3.507561560686094
-  },
-  {
-    "name": "Pindiga Police Station",
-    "station_type": "police",
-    "latitude": 9.989606667,
-    "longitude": 10.95911833
-  },
-  {
-    "name": "Police Station Egana",
-    "station_type": "police",
-    "latitude": 5.8698417,
-    "longitude": 8.1226367
-  },
-  {
-    "name": "Nigeria Police Division",
-    "station_type": "police",
-    "latitude": 7.794333333,
-    "longitude": 4.728916667
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Igboho",
-    "station_type": "police",
-    "latitude": 8.837846734715237,
-    "longitude": 3.760784508600887
-  },
-  {
-    "name": "Ago Are Police Post",
-    "station_type": "police",
-    "latitude": 8.48858601851346,
-    "longitude": 3.416055784917009
-  },
-  {
-    "name": "The Nigeria Police Akamkpa Area Command Headquarters Old Netim",
-    "station_type": "police",
-    "latitude": 5.349593333,
-    "longitude": 8.349801667
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Akamkpa Urban",
-    "station_type": "police",
-    "latitude": 5.315771667,
-    "longitude": 8.352613333
-  },
-  {
-    "name": "The Nigeria Police Akamkpa Area Command Headquarters",
-    "station_type": "police",
-    "latitude": 5.349593333,
-    "longitude": 8.349801667
-  },
-  {
-    "name": "Ipetu Ijesa Police Station",
-    "station_type": "police",
-    "latitude": 7.45681,
-    "longitude": 4.891873333
-  },
-  {
-    "name": "Ekang Police Station",
-    "station_type": "police",
-    "latitude": 5.6755492,
-    "longitude": 8.8413901
-  },
-  {
-    "name": "Police Post",
-    "station_type": "police",
-    "latitude": 5.7242017,
-    "longitude": 8.1721033
-  },
-  {
-    "name": "Ayoyoa Police Post",
-    "station_type": "police",
-    "latitude": 5.724135,
-    "longitude": 8.17195
-  },
-  {
-    "name": "Odajie Mbube Police Post",
-    "station_type": "police",
-    "latitude": 6.5549222,
-    "longitude": 8.8582091
-  },
-  {
-    "name": "Ogburo Police Station",
-    "station_type": "police",
-    "latitude": 7.595975854396897,
-    "longitude": 4.125017698856509
-  },
-  {
-    "name": "Amaeke Police Station",
-    "station_type": "police",
-    "latitude": 5.752976667,
-    "longitude": 7.681721667
-  },
-  {
-    "name": "Yahe Police Station",
-    "station_type": "police",
-    "latitude": 6.471965,
-    "longitude": 8.5031333
-  },
-  {
-    "name": "Ezekwe Okpodon Police Station",
-    "station_type": "police",
-    "latitude": 6.517911667,
-    "longitude": 8.42694
-  },
-  {
-    "name": "Civil Defence",
-    "station_type": "police",
-    "latitude": 8.082769043887868,
-    "longitude": 4.398278388372189
-  },
-  {
-    "name": "Iresaadu Police",
-    "station_type": "police",
-    "latitude": 8.083586625970858,
-    "longitude": 4.398207089683877
-  },
-  {
-    "name": "Out Post Police Station Nassarawa",
-    "station_type": "police",
-    "latitude": 9.856777610413257,
-    "longitude": 4.628336814629256
-  },
-  {
-    "name": "The Nigeria Police Force Divisional Headquarter Lanlate",
-    "station_type": "police",
-    "latitude": 7.606522869286981,
-    "longitude": 3.449466803430472
-  },
-  {
-    "name": "Mashegu Police Division",
-    "station_type": "police",
-    "latitude": 9.927059201228248,
-    "longitude": 5.6427617
-  },
-  {
-    "name": "Kuta Division Police Station Kobwa",
-    "station_type": "police",
-    "latitude": 9.853837128932195,
-    "longitude": 6.711807038653144
-  },
-  {
-    "name": "Lagun Police Station",
-    "station_type": "police",
-    "latitude": 9.203051667,
-    "longitude": 5.590665
-  },
-  {
-    "name": "Police Out Post Lefu",
-    "station_type": "police",
-    "latitude": 9.29544777048286,
-    "longitude": 6.780384632585081
-  },
-  {
-    "name": "Songbe Police Post",
-    "station_type": "police",
-    "latitude": 7.753738333,
-    "longitude": 4.317028333
-  },
-  {
-    "name": "Ede Police Division Ede",
-    "station_type": "police",
-    "latitude": 7.736293333,
-    "longitude": 4.435633333
-  },
-  {
-    "name": "Nyuwar Police Station",
-    "station_type": "police",
-    "latitude": 9.77924,
-    "longitude": 11.75256
-  },
-  {
-    "name": "Ikoyi Police Station Headquarters",
-    "station_type": "police",
-    "latitude": 8.24516450228698,
-    "longitude": 4.175913257255623
-  },
-  {
-    "name": "State Headquarters Nigerian Police Force",
-    "station_type": "police",
-    "latitude": 10.290825,
-    "longitude": 11.14094333
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 6.6477,
-    "longitude": 9.02705
-  },
-  {
-    "name": "Police Divisional Headquarters Ifon",
-    "station_type": "police",
-    "latitude": 7.877075,
-    "longitude": 4.467128333
-  },
-  {
-    "name": "Ijabe Police Station",
-    "station_type": "police",
-    "latitude": 8.035453333,
-    "longitude": 4.684911667
-  },
-  {
-    "name": "Police Station Geneva",
-    "station_type": "police",
-    "latitude": 5.863741667,
-    "longitude": 8.182936667
-  },
-  {
-    "name": "Police Post Ayedaade LGA",
-    "station_type": "police",
-    "latitude": 7.587663333,
-    "longitude": 4.418468333
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Otte",
-    "station_type": "police",
-    "latitude": 8.311624316798227,
-    "longitude": 4.381312240457397
-  },
-  {
-    "name": "Divisional Police Headquarters Effraya Stung Lga",
-    "station_type": "police",
-    "latitude": 5.905068333,
-    "longitude": 8.787478333
-  },
-  {
-    "name": "Police Station Iree",
-    "station_type": "police",
-    "latitude": 7.938508333,
-    "longitude": 4.727451667
-  },
-  {
-    "name": "The Nigeria Police Force A",
-    "station_type": "police",
-    "latitude": 7.9408,
-    "longitude": 4.742101667
-  },
-  {
-    "name": "Igboora Police Station",
-    "station_type": "police",
-    "latitude": 7.436805499428255,
-    "longitude": 3.287108258970858
-  },
-  {
-    "name": "Igbaye Police Station",
-    "station_type": "police",
-    "latitude": 8.030956667,
-    "longitude": 4.63372
-  },
-  {
-    "name": "Ogbegun Favour Police Outpost",
-    "station_type": "police",
-    "latitude": 8.12514622365917,
-    "longitude": 4.280114500571745
-  },
-  {
-    "name": "Ogungbade Police Division Ibadan",
-    "station_type": "police",
-    "latitude": 7.385572787228698,
-    "longitude": 4.006828415058283
-  },
-  {
-    "name": "Nigeria Police Force Divisional Headquarters Ilero",
-    "station_type": "police",
-    "latitude": 8.089373333,
-    "longitude": 3.349521667
-  },
-  {
-    "name": "Obubra Police Station",
-    "station_type": "police",
-    "latitude": 6.066838333,
-    "longitude": 8.337636667
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 9.8312067,
-    "longitude": 11.5123633
-  },
-  {
-    "name": "Divisional Headquarter Tula",
-    "station_type": "police",
-    "latitude": 9.846066667,
-    "longitude": 11.47256333
-  },
-  {
-    "name": "Eastern Ngwa Division Headquarters",
-    "station_type": "police",
-    "latitude": 5.151945,
-    "longitude": 7.4579
-  },
-  {
-    "name": "Obite Police Station",
-    "station_type": "police",
-    "latitude": 5.243445693112555,
-    "longitude": 6.65559697913051
-  },
-  {
-    "name": "Gombe Area Command",
-    "station_type": "police",
-    "latitude": 10.29947167,
-    "longitude": 11.16226167
-  },
-  {
-    "name": "Iseyin Police Station",
-    "station_type": "police",
-    "latitude": 7.966314398856509,
-    "longitude": 3.607261051513462
-  },
-  {
-    "name": "Nigeria Civil Defence Corps",
-    "station_type": "police",
-    "latitude": 7.983540068715236,
-    "longitude": 3.572380532428255
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 8.036259521943933,
-    "longitude": 3.344244931284765
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 8.032660642172631,
-    "longitude": 3.354802705170416
-  },
-  {
-    "name": "Wahinem Police Post",
-    "station_type": "police",
-    "latitude": 6.72372,
-    "longitude": 8.452953333
-  },
-  {
-    "name": "Station Araromi Ogunsipe",
-    "station_type": "police",
-    "latitude": 8.709296660686094,
-    "longitude": 3.709225019656953
-  },
-  {
-    "name": "The Nigerian Police Okubuchi Irruan",
-    "station_type": "police",
-    "latitude": 6.4727536,
-    "longitude": 8.9814806
-  },
-  {
-    "name": "Nigerian Police Station Okubuchi Irruan",
-    "station_type": "police",
-    "latitude": 6.472811667,
-    "longitude": 8.981573333
-  },
-  {
-    "name": "Kara Police Station",
-    "station_type": "police",
-    "latitude": 7.606711147914792,
-    "longitude": 3.916108388372189
-  },
-  {
-    "name": "Rehabilitation Police Station",
-    "station_type": "police",
-    "latitude": 7.560279398856509,
-    "longitude": 3.908950021372188
-  },
-  {
-    "name": "Moniya Police Station",
-    "station_type": "police",
-    "latitude": 7.531043333,
-    "longitude": 3.910435
-  },
-  {
-    "name": "Ugep Police Station",
-    "station_type": "police",
-    "latitude": 5.813685,
-    "longitude": 8.076618333
-  },
-  {
-    "name": "The Nigeria Police Force Ugep",
-    "station_type": "police",
-    "latitude": 5.8137817,
-    "longitude": 8.0765167
-  },
-  {
-    "name": "Nigerian Police Bode Osi",
-    "station_type": "police",
-    "latitude": 7.755528333,
-    "longitude": 4.225753333
-  },
-  {
-    "name": "Police Outputs Liji",
-    "station_type": "police",
-    "latitude": 10.27673167,
-    "longitude": 11.23164667
-  },
-  {
-    "name": "Lau Iyaka Police Outpost",
-    "station_type": "police",
-    "latitude": 9.905416667,
-    "longitude": 11.24512167
-  },
-  {
-    "name": "Nigeria Police Divisional Headquarters Okpuala Ngwa",
-    "station_type": "police",
-    "latitude": 5.346285,
-    "longitude": 7.379411667
-  },
-  {
-    "name": "Iyiowa Odekpe Police Station",
-    "station_type": "police",
-    "latitude": 6.107562436910304,
-    "longitude": 6.764533648593741
-  },
-  {
-    "name": "Okwelle Police Divisoon Head Quarter",
-    "station_type": "police",
-    "latitude": 5.745660976226908,
-    "longitude": 7.182665757711618
-  },
-  {
-    "name": "Imo River Police Post",
-    "station_type": "police",
-    "latitude": 4.887526667,
-    "longitude": 7.167776667
-  },
-  {
-    "name": "Phase 6 Police Station Trans Ekulu",
-    "station_type": "police",
-    "latitude": 6.478091399707615,
-    "longitude": 7.484346222032531
-  },
-  {
-    "name": "Awara Police Station",
-    "station_type": "police",
-    "latitude": 5.36301,
-    "longitude": 6.770205
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 5.710213333,
-    "longitude": 6.801158333
-  },
-  {
-    "name": "Osse Motor Police Station",
-    "station_type": "police",
-    "latitude": 5.723433333,
-    "longitude": 6.794417818229212
-  },
-  {
-    "name": "Ibagwa Aka Police Station",
-    "station_type": "police",
-    "latitude": 6.931576588728187,
-    "longitude": 7.390594592989157
-  },
-  {
-    "name": "Ifelodun Police Post Isemi Ile",
-    "station_type": "police",
-    "latitude": 7.993512882630029,
-    "longitude": 3.370922376887867
-  },
-  {
-    "name": "Ubakala Police Station",
-    "station_type": "police",
-    "latitude": 5.474366667,
-    "longitude": 7.436418333
-  },
-  {
-    "name": "Nigerian Police Force Asabanka",
-    "station_type": "police",
-    "latitude": 5.05521,
-    "longitude": 8.424656667
-  },
-  {
-    "name": "Nigerian Police Rifle Range Squad Station Asabanka",
-    "station_type": "police",
-    "latitude": 5.054278333,
-    "longitude": 8.419053333
-  },
-  {
-    "name": "Nigeria Police Post Akwa Ikot Effanga",
-    "station_type": "police",
-    "latitude": 4.9736888,
-    "longitude": 8.4937766
-  },
-  {
-    "name": "Alifokpa Police Station",
-    "station_type": "police",
-    "latitude": 6.8362133,
-    "longitude": 8.8069817
-  },
-  {
-    "name": "Akobo Division",
-    "station_type": "police",
-    "latitude": 7.433514467571745,
-    "longitude": 3.943149371170415
-  },
-  {
-    "name": "Bage Out Forces",
-    "station_type": "police",
-    "latitude": 10.95130667,
-    "longitude": 11.382825
-  },
-  {
-    "name": "Iba Police Station",
-    "station_type": "police",
-    "latitude": 7.965931667,
-    "longitude": 4.706823333
-  },
-  {
-    "name": "Kobuwa Police Station",
-    "station_type": "police",
-    "latitude": 10.02395333,
-    "longitude": 11.15612833
-  },
-  {
-    "name": "Gbongan Police Station",
-    "station_type": "police",
-    "latitude": 7.470476667,
-    "longitude": 4.370228333
-  },
-  {
-    "name": "Cattle Ranch Police Post",
-    "station_type": "police",
-    "latitude": 6.3750983,
-    "longitude": 9.37813
-  },
-  {
-    "name": "Ijaye Police Station",
-    "station_type": "police",
-    "latitude": 7.629286120228699,
-    "longitude": 3.849530082058283
-  },
-  {
-    "name": "Polic Station",
-    "station_type": "police",
-    "latitude": 6.1606384,
-    "longitude": 9.0220742
-  },
-  {
-    "name": "Danare Police Station",
-    "station_type": "police",
-    "latitude": 6.0140133,
-    "longitude": 9.0601033
-  },
-  {
-    "name": "Ozu Abam Police Station",
-    "station_type": "police",
-    "latitude": 5.58879,
-    "longitude": 7.728765
-  },
-  {
-    "name": "Ojongbodu Police Station",
-    "station_type": "police",
-    "latitude": 7.850030464713019,
-    "longitude": 3.909032227114349
-  },
-  {
-    "name": "Alaseyori Police Station",
-    "station_type": "police",
-    "latitude": 7.638760655515679,
-    "longitude": 3.804247199428255
-  },
-  {
-    "name": "NPCF Post Itagunmodi",
-    "station_type": "police",
-    "latitude": 7.530116667,
-    "longitude": 4.648508333
-  },
-  {
-    "name": "Ndoni Police Station",
-    "station_type": "police",
-    "latitude": 5.545833092208784,
-    "longitude": 6.59415572475104
-  },
-  {
-    "name": "Nigeria Police Station Akanran Head Quarters",
-    "station_type": "police",
-    "latitude": 7.279959467571746,
-    "longitude": 4.025476120228698
-  },
-  {
-    "name": "Isiala Oboro Police Station",
-    "station_type": "police",
-    "latitude": 5.407818333,
-    "longitude": 7.566641667
-  },
-  {
-    "name": "Mamu Police Station",
-    "station_type": "police",
-    "latitude": 7.087656038170415,
-    "longitude": 3.910699972313906
-  },
-  {
-    "name": "Police Divisional Headquarters Isiebu",
-    "station_type": "police",
-    "latitude": 5.706613914935596,
-    "longitude": 7.214139333086888
-  },
-  {
-    "name": "Azumini Police Station",
-    "station_type": "police",
-    "latitude": 4.944928333,
-    "longitude": 7.48115
-  },
-  {
-    "name": "Akwete Nigeria Police",
-    "station_type": "police",
-    "latitude": 4.888095,
-    "longitude": 7.362585
-  },
-  {
-    "name": "The Nigeria Police Station Ndiolumbe",
-    "station_type": "police",
-    "latitude": 5.265438333,
-    "longitude": 7.476021667
-  },
-  {
-    "name": "Abia State University Uturu Police Station",
-    "station_type": "police",
-    "latitude": 5.829015,
-    "longitude": 7.395431667
-  },
-  {
-    "name": "Police Post",
-    "station_type": "police",
-    "latitude": 5.428161667,
-    "longitude": 6.886891667
-  },
-  {
-    "name": "Ofolora Police Station",
-    "station_type": "police",
-    "latitude": 5.422306358510871,
-    "longitude": 6.928042818229212
-  },
-  {
-    "name": "Federal Housing Police Post",
-    "station_type": "police",
-    "latitude": 5.512445,
-    "longitude": 7.011916667
-  },
-  {
-    "name": "Police Post Ikun Ekiti",
-    "station_type": "police",
-    "latitude": 7.994223333,
-    "longitude": 5.199897006666052
-  },
-  {
-    "name": "Obehie Police Station",
-    "station_type": "police",
-    "latitude": 4.945391667,
-    "longitude": 7.261503333
-  },
-  {
-    "name": "Obie Police Station Obie Community",
-    "station_type": "police",
-    "latitude": 5.391148539346698,
-    "longitude": 6.675689337181624
-  },
-  {
-    "name": "Amper Police Outpost",
-    "station_type": "police",
-    "latitude": 9.354275,
-    "longitude": 9.698008333
-  },
-  {
-    "name": "Divisional Police Head Quaters",
-    "station_type": "police",
-    "latitude": 5.417891667,
-    "longitude": 7.011866667
-  },
-  {
-    "name": "Umuokanne Police Station",
-    "station_type": "police",
-    "latitude": 5.3515783,
-    "longitude": 6.90331
-  },
-  {
-    "name": "Nigerian Police Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 7.801755786382004,
-    "longitude": 5.372120184801477
-  },
-  {
-    "name": "The Nigeria Police Ologede Divisional Police Headquarters Ikere Road",
-    "station_type": "police",
-    "latitude": 7.580492206699631,
-    "longitude": 5.214026855361202
-  },
-  {
-    "name": "Fagbohun Police Station",
-    "station_type": "police",
-    "latitude": 7.547895131887343,
-    "longitude": 5.217541885029036
-  },
-  {
-    "name": "Bum Police Station",
-    "station_type": "police",
-    "latitude": 9.706231667,
-    "longitude": 8.670576667
-  },
-  {
-    "name": "Quan An Pan Police Station",
-    "station_type": "police",
-    "latitude": 8.9416717,
-    "longitude": 9.25647
-  },
-  {
-    "name": "Kwalla Police Rural Station Office",
-    "station_type": "police",
-    "latitude": 8.90446,
-    "longitude": 9.291105
-  },
-  {
-    "name": "Police Divisional Head Quarters",
-    "station_type": "police",
-    "latitude": 9.089373333,
-    "longitude": 9.95645
-  },
-  {
-    "name": "Police Divisional Headquarters Umabor",
-    "station_type": "police",
-    "latitude": 6.813166667,
-    "longitude": 7.45678
-  },
-  {
-    "name": "Kassa Out station",
-    "station_type": "police",
-    "latitude": 9.587015,
-    "longitude": 8.898035
-  },
-  {
-    "name": "Gwaria Police Station Gwaria",
-    "station_type": "police",
-    "latitude": 9.39288,
-    "longitude": 3.85674
-  },
-  {
-    "name": "Moshe Gada Police Station",
-    "station_type": "police",
-    "latitude": 9.21428166666667,
-    "longitude": 3.86444833333333
-  },
-  {
-    "name": "Opi Uno Police Post",
-    "station_type": "police",
-    "latitude": 6.763858529989228,
-    "longitude": 7.462214802402011
-  },
-  {
-    "name": "Okpuje Police Station",
-    "station_type": "police",
-    "latitude": 6.908376202034689,
-    "longitude": 7.287302805456228
-  },
-  {
-    "name": "Divisional Police Head Quarters Abakpa Nike",
-    "station_type": "police",
-    "latitude": 6.508285779628388,
-    "longitude": 7.51532139448876
-  },
-  {
-    "name": "Iziogo Police Station",
-    "station_type": "police",
-    "latitude": 6.643551667,
-    "longitude": 8.204405
-  },
-  {
-    "name": "Hillcrest Police Post",
-    "station_type": "police",
-    "latitude": 6.449793333,
-    "longitude": 7.428345
-  },
-  {
-    "name": "Ogwu Eze Police Station",
-    "station_type": "police",
-    "latitude": 5.963196667,
-    "longitude": 7.966485
-  },
-  {
-    "name": "The Nigeria Police Igbo Etiti Division Ogbede",
-    "station_type": "police",
-    "latitude": 6.67755931177873,
-    "longitude": 7.372641233847394
-  },
-  {
-    "name": "Oji Police Station",
-    "station_type": "police",
-    "latitude": 8.046961667,
-    "longitude": 5.144211667
-  },
-  {
-    "name": "Unadu Police Post",
-    "station_type": "police",
-    "latitude": 7.003227272121027,
-    "longitude": 7.365493000902406
-  },
-  {
-    "name": "Inyi Police Station",
-    "station_type": "police",
-    "latitude": 6.117153310916094,
-    "longitude": 7.282906382673896
-  },
-  {
-    "name": "Court Area Station",
-    "station_type": "police",
-    "latitude": 6.034253333,
-    "longitude": 7.820568333
-  },
-  {
-    "name": "Affa Police Station",
-    "station_type": "police",
-    "latitude": 6.601507426184194,
-    "longitude": 7.323100630750597
-  },
-  {
-    "name": "Iwollo Police Post",
-    "station_type": "police",
-    "latitude": 6.431518939070966,
-    "longitude": 7.270152185880721
-  },
-  {
-    "name": "Umuoke Police Post",
-    "station_type": "police",
-    "latitude": 5.570326427716596,
-    "longitude": 7.37951
-  },
-  {
-    "name": "Isuochi Divisional Police Headquarters",
-    "station_type": "police",
-    "latitude": 5.981331667,
-    "longitude": 7.403015
-  },
-  {
-    "name": "Divisional Headquaters Isuochi",
-    "station_type": "police",
-    "latitude": 5.981876667,
-    "longitude": 7.402876667
-  },
-  {
-    "name": "Ugwunagbo Police Station",
-    "station_type": "police",
-    "latitude": 5.021735,
-    "longitude": 7.354328333
-  },
-  {
-    "name": "Ohaji Egbema Area Comand",
-    "station_type": "police",
-    "latitude": 5.481461667,
-    "longitude": 6.794408333
-  },
-  {
-    "name": "Dada Estate Division",
-    "station_type": "police",
-    "latitude": 7.787041667,
-    "longitude": 4.521715
-  },
-  {
-    "name": "Dagjolu Ataoja Police Post",
-    "station_type": "police",
-    "latitude": 7.847845,
-    "longitude": 4.607255
-  },
-  {
-    "name": "Angware Division Head Quarter",
-    "station_type": "police",
-    "latitude": 9.9902767,
-    "longitude": 9.1058467
-  },
-  {
-    "name": "Police Outpost Ajaga",
-    "station_type": "police",
-    "latitude": 8.34544362171651,
-    "longitude": 7.603666536735883
-  },
-  {
-    "name": "Divisional Police Headquarters Anaku",
-    "station_type": "police",
-    "latitude": 6.481286929661275,
-    "longitude": 6.937061796989332
-  },
-  {
-    "name": "Niger Cem Police Station",
-    "station_type": "police",
-    "latitude": 6.550653333,
-    "longitude": 7.783041667
-  },
-  {
-    "name": "Ndingshan Police Out station",
-    "station_type": "police",
-    "latitude": 8.581535,
-    "longitude": 9.863378333
-  },
-  {
-    "name": "Oso Police Station",
-    "station_type": "police",
-    "latitude": 5.86727,
-    "longitude": 7.808101667
-  },
-  {
-    "name": "Malale Police Out Post",
-    "station_type": "police",
-    "latitude": 10.070132499300419,
-    "longitude": 4.493609842558266
-  },
-  {
-    "name": "Bangi Police Station",
-    "station_type": "police",
-    "latitude": 10.8245532,
-    "longitude": 5.8176305
-  },
-  {
-    "name": "9th Mile Police Station",
-    "station_type": "police",
-    "latitude": 6.424933103344136,
-    "longitude": 7.407127840261041
-  },
-  {
-    "name": "The Police Post",
-    "station_type": "police",
-    "latitude": 6.236749361285848,
-    "longitude": 7.461805509412853
-  },
-  {
-    "name": "Nasko Police Station",
-    "station_type": "police",
-    "latitude": 10.494318333333334,
-    "longitude": 4.902158333333333
-  },
-  {
-    "name": "Oke Owa Police Station",
-    "station_type": "police",
-    "latitude": 7.898570540941385,
-    "longitude": 5.10801593564614
-  },
-  {
-    "name": "Umuoka Police Station",
-    "station_type": "police",
-    "latitude": 6.625138333,
-    "longitude": 7.384856667
-  },
-  {
-    "name": "Are Police Station",
-    "station_type": "police",
-    "latitude": 7.70300613070613,
-    "longitude": 5.304823188687385
-  },
-  {
-    "name": "Awo Police Station",
-    "station_type": "police",
-    "latitude": 7.71092,
-    "longitude": 5.150213333
-  },
-  {
-    "name": "Igede Police Station",
-    "station_type": "police",
-    "latitude": 7.67808564347213,
-    "longitude": 5.122997172553609
-  },
-  {
-    "name": "Iyin Police Out Post",
-    "station_type": "police",
-    "latitude": 7.660193333,
-    "longitude": 5.145238333
-  },
-  {
-    "name": "Ayegunle Police Station",
-    "station_type": "police",
-    "latitude": 7.844678857112618,
-    "longitude": 5.107232957587199
-  },
-  {
-    "name": "Afao Police Station",
-    "station_type": "police",
-    "latitude": 7.505625624299218,
-    "longitude": 5.229287858308552
-  },
-  {
-    "name": "Divisional Headquarters Mikang Tunkus",
-    "station_type": "police",
-    "latitude": 9.015245,
-    "longitude": 9.6049967
-  },
-  {
-    "name": "Nigeria A Divisions Police Station",
-    "station_type": "police",
-    "latitude": 7.792086007726004,
-    "longitude": 5.512602549081684
-  },
-  {
-    "name": "Nigeria Police Divisional Headquarter Ijesa Isu Road Ikole Ekiti",
-    "station_type": "police",
-    "latitude": 7.769182043654125,
-    "longitude": 5.509100120865665
-  },
-  {
-    "name": "The Police Area Command Headquarters Ijesa Isu",
-    "station_type": "police",
-    "latitude": 7.772961425484172,
-    "longitude": 5.509181847395662
-  },
-  {
-    "name": "Omuo Ekiti Divisional Police Station",
-    "station_type": "police",
-    "latitude": 7.746369953479446,
-    "longitude": 5.717238658157948
-  },
-  {
-    "name": "Ikere Area Command Headquarters Police Station",
-    "station_type": "police",
-    "latitude": 7.494831667,
-    "longitude": 5.207233333
-  },
-  {
-    "name": "Ikere Divisional Head Quarter Police Station",
-    "station_type": "police",
-    "latitude": 7.489431106065042,
-    "longitude": 5.221526659515774
-  },
-  {
-    "name": "Ayede Police Station",
-    "station_type": "police",
-    "latitude": 7.904920589428356,
-    "longitude": 5.328227183983302
-  },
-  {
-    "name": "Ayede Town Police Station",
-    "station_type": "police",
-    "latitude": 7.8925,
-    "longitude": 5.333895
-  },
-  {
-    "name": "Division Headquarters Ipoti Ekiti",
-    "station_type": "police",
-    "latitude": 7.872815616554275,
-    "longitude": 5.073719442076261
-  },
-  {
-    "name": "Nigeria Police Station Igbemo Ekiti",
-    "station_type": "police",
-    "latitude": 7.679531667,
-    "longitude": 5.385646667
-  },
-  {
-    "name": "Divisional Head Quaters Police Station",
-    "station_type": "police",
-    "latitude": 5.897823333,
-    "longitude": 7.935926667
-  },
-  {
-    "name": "Ita Odo Police Station",
-    "station_type": "police",
-    "latitude": 7.680611233856219,
-    "longitude": 4.924683326034459
-  },
-  {
-    "name": "The Nigeria Police State Headquarters Ado Ekiti",
-    "station_type": "police",
-    "latitude": 7.661772794044849,
-    "longitude": 5.20588714416882
-  },
-  {
-    "name": "Kuba Police Station",
-    "station_type": "police",
-    "latitude": 9.4153583,
-    "longitude": 8.9281133
-  },
-  {
-    "name": "Divisional Headquarters Iye Ilejemeje",
-    "station_type": "police",
-    "latitude": 7.95037913401562,
-    "longitude": 5.238764427145182
-  },
-  {
-    "name": "Eporo Police Station",
-    "station_type": "police",
-    "latitude": 7.330648927697527,
-    "longitude": 5.503513000818174
-  },
-  {
-    "name": "Nigeria Police Station",
-    "station_type": "police",
-    "latitude": 7.624306662700501,
-    "longitude": 5.386448908508349
-  },
-  {
-    "name": "Ijan Police Post",
-    "station_type": "police",
-    "latitude": 7.611720546055629,
-    "longitude": 5.385571384858994
-  },
-  {
-    "name": "Afao Police Station",
-    "station_type": "police",
-    "latitude": 7.695871667,
-    "longitude": 5.308578333
-  },
-  {
-    "name": "Area Command Police Station",
-    "station_type": "police",
-    "latitude": 7.825347415214601,
-    "longitude": 5.064986095233764
-  },
-  {
-    "name": "Police Divisional Headquarter Ijero Ekiti",
-    "station_type": "police",
-    "latitude": 7.825310749043589,
-    "longitude": 5.065814807714299
-  },
-  {
-    "name": "Gada Police Station",
-    "station_type": "police",
-    "latitude": 10.03845167,
-    "longitude": 9.111443333
-  },
-  {
-    "name": "University Of Nigeria Teaching Hospital Police Post",
-    "station_type": "police",
-    "latitude": 6.294670085143148,
-    "longitude": 7.467173210315259
-  },
-  {
-    "name": "Ezi Nze Police Station",
-    "station_type": "police",
-    "latitude": 6.651799449117207,
-    "longitude": 7.285499802402009
-  },
-  {
-    "name": "Yelwa Police Station",
-    "station_type": "police",
-    "latitude": 8.811376667,
-    "longitude": 9.659111667
-  },
-  {
-    "name": "Yelwa Police Station 1",
-    "station_type": "police",
-    "latitude": 8.81152,
-    "longitude": 9.659096667
-  },
-  {
-    "name": "Yelwa Police Station 2",
-    "station_type": "police",
-    "latitude": 8.81145,
-    "longitude": 9.659105
-  },
-  {
-    "name": "Awkunanaw Police Station",
-    "station_type": "police",
-    "latitude": 6.382241667,
-    "longitude": 7.493341667
-  },
-  {
-    "name": "Butura Kampani Out post",
-    "station_type": "police",
-    "latitude": 9.3365217,
-    "longitude": 8.9346267
-  },
-  {
-    "name": "Mangun Police Station",
-    "station_type": "police",
-    "latitude": 9.2227367,
-    "longitude": 9.1544183
-  },
-  {
-    "name": "Mushu Police Outpost",
-    "station_type": "police",
-    "latitude": 9.2866617,
-    "longitude": 9.090165
-  },
-  {
-    "name": "Dadinkowa Police Station",
-    "station_type": "police",
-    "latitude": 8.7532467,
-    "longitude": 9.8765267
-  },
-  {
-    "name": "Kalong Police Station",
-    "station_type": "police",
-    "latitude": 8.712718333,
-    "longitude": 9.508535
-  },
-  {
-    "name": "Shimankar Police Station",
-    "station_type": "police",
-    "latitude": 8.628465,
-    "longitude": 9.523815
-  },
-  {
-    "name": "Dokan Kasuwa Police Station",
-    "station_type": "police",
-    "latitude": 9.093715,
-    "longitude": 9.32095
-  },
-  {
-    "name": "Panyam Out station",
-    "station_type": "police",
-    "latitude": 9.408726667,
-    "longitude": 9.215298333
-  },
-  {
-    "name": "Dorowa Police Station",
-    "station_type": "police",
-    "latitude": 9.5260367,
-    "longitude": 8.9825433
-  },
-  {
-    "name": "Police Station Kwal",
-    "station_type": "police",
-    "latitude": 9.3696233,
-    "longitude": 9.6186583
-  },
-  {
-    "name": "Police Outpost Kwogo hoss",
-    "station_type": "police",
-    "latitude": 9.61447,
-    "longitude": 8.729251667
-  },
-  {
-    "name": "The Nigeria Police Out post Kwogo Hoss",
-    "station_type": "police",
-    "latitude": 9.6144483,
-    "longitude": 8.7293267
-  },
-  {
-    "name": "Bukuru Police Division",
-    "station_type": "police",
-    "latitude": 9.796163333,
-    "longitude": 8.86704
-  },
-  {
-    "name": "Police Station Turaki",
-    "station_type": "police",
-    "latitude": 8.609918333,
-    "longitude": 9.706863333
-  },
-  {
-    "name": "Police Station Yamini",
-    "station_type": "police",
-    "latitude": 8.52561,
-    "longitude": 9.66035
-  },
-  {
-    "name": "Lakushi Police Station",
-    "station_type": "police",
-    "latitude": 8.558793333,
-    "longitude": 9.647895
-  },
-  {
-    "name": "Ecwa Staff Police Station",
-    "station_type": "police",
-    "latitude": 9.953825,
-    "longitude": 8.8548667
-  },
-  {
-    "name": "The Nigeria Police Nepa Out station",
-    "station_type": "police",
-    "latitude": 9.9897633,
-    "longitude": 8.8512467
-  },
-  {
-    "name": "The Nigeria Police Force",
-    "station_type": "police",
-    "latitude": 9.32417,
-    "longitude": 9.4331933
-  },
-  {
-    "name": "The Nigeria Police Plateau Central Area Command Pankshin",
-    "station_type": "police",
-    "latitude": 9.3237717,
-    "longitude": 9.4343983
-  },
-  {
-    "name": "Gwan Police Out post",
-    "station_type": "police",
-    "latitude": 9.019735,
-    "longitude": 9.26403
-  },
-  {
-    "name": "The Nigerian Police Divisional Headquarters Anglo Jos",
-    "station_type": "police",
-    "latitude": 9.873088333,
-    "longitude": 8.881498333
-  },
-  {
-    "name": "Abattoir Police",
-    "station_type": "police",
-    "latitude": 9.884186667,
-    "longitude": 8.886288333
-  },
-  {
-    "name": "Bisichi Police Station",
-    "station_type": "police",
-    "latitude": 9.715163333,
-    "longitude": 8.907163333
-  },
-  {
-    "name": "Gwamlar Police Station",
-    "station_type": "police",
-    "latitude": 9.4175984,
-    "longitude": 9.7903203
-  },
-  {
-    "name": "The Nigerian Police Station Miango Bassa Division",
-    "station_type": "police",
-    "latitude": 9.8511167,
-    "longitude": 8.6864683
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Shendam",
-    "station_type": "police",
-    "latitude": 8.875246667,
-    "longitude": 9.547291667
-  },
-  {
-    "name": "Abwor Dyis Police Station",
-    "station_type": "police",
-    "latitude": 9.2587033,
-    "longitude": 9.2811133
-  },
-  {
-    "name": "Gidan Dabat Police Station",
-    "station_type": "police",
-    "latitude": 8.717373333,
-    "longitude": 9.23419
-  },
-  {
-    "name": "Rural Police Station Kwande",
-    "station_type": "police",
-    "latitude": 8.70832,
-    "longitude": 9.298405
-  },
-  {
-    "name": "The Nigeria Police Heipang Station",
-    "station_type": "police",
-    "latitude": 9.635475,
-    "longitude": 8.88855
-  },
-  {
-    "name": "Bakin Chiyawa Police Post",
-    "station_type": "police",
-    "latitude": 8.611821667,
-    "longitude": 9.290026667
-  },
-  {
-    "name": "Ikngwakap Police Station",
-    "station_type": "police",
-    "latitude": 9.159861667,
-    "longitude": 9.047278333
-  },
-  {
-    "name": "Police Outpost Garwaza",
-    "station_type": "police",
-    "latitude": 9.3373617,
-    "longitude": 8.8697417
-  },
-  {
-    "name": "The Nigerian Police Outpost D Division Marit",
-    "station_type": "police",
-    "latitude": 9.47252,
-    "longitude": 8.9920283
-  },
-  {
-    "name": "Kafel Police Station",
-    "station_type": "police",
-    "latitude": 9.2265901,
-    "longitude": 9.915148
-  },
-  {
-    "name": "Far Doki Police Station",
-    "station_type": "police",
-    "latitude": 9.39595,
-    "longitude": 6.8382233
-  },
-  {
-    "name": "The Nigerian Police Station Kuka",
-    "station_type": "police",
-    "latitude": 8.443273333,
-    "longitude": 9.696106667
-  },
-  {
-    "name": "Fuka Police",
-    "station_type": "police",
-    "latitude": 9.647951927943337,
-    "longitude": 6.937469428928328
-  },
-  {
-    "name": "Police Station Kadarko",
-    "station_type": "police",
-    "latitude": 8.9087417,
-    "longitude": 10.0217283
-  },
-  {
-    "name": "Dogon Ruwa Police Station",
-    "station_type": "police",
-    "latitude": 9.598895,
-    "longitude": 10.09430167
-  },
-  {
-    "name": "Alama Police Station",
-    "station_type": "police",
-    "latitude": 9.93633,
-    "longitude": 8.863318333
-  },
-  {
-    "name": "Alheri Police Station Jos",
-    "station_type": "police",
-    "latitude": 9.93682,
-    "longitude": 8.870578333
-  },
-  {
-    "name": "Nigerian Police Post Kawel",
-    "station_type": "police",
-    "latitude": 9.203588333,
-    "longitude": 9.066071667
-  },
-  {
-    "name": "Fwavei Police Station",
-    "station_type": "police",
-    "latitude": 9.84743,
-    "longitude": 8.8937567
-  },
-  {
-    "name": "Jebbu Bassa Station",
-    "station_type": "police",
-    "latitude": 9.9541483,
-    "longitude": 8.749425
-  },
-  {
-    "name": "Nigeria Police Station Kurgwi",
-    "station_type": "police",
-    "latitude": 8.780556667,
-    "longitude": 9.293508333
-  },
-  {
-    "name": "Anguwan Hakimi Police Station",
-    "station_type": "police",
-    "latitude": 9.6095033,
-    "longitude": 9.9641717
-  },
-  {
-    "name": "The Nigeria Police Station Pueship",
-    "station_type": "police",
-    "latitude": 8.812505,
-    "longitude": 9.44828
-  },
-  {
-    "name": "Police Outpost Langai",
-    "station_type": "police",
-    "latitude": 9.62597,
-    "longitude": 9.2149833
-  },
-  {
-    "name": "Nigeria Police Out post Takkas",
-    "station_type": "police",
-    "latitude": 9.4617567,
-    "longitude": 9.3675867
-  },
-  {
-    "name": "Richa Police Outposts",
-    "station_type": "police",
-    "latitude": 9.124546667,
-    "longitude": 8.872921667
-  },
-  {
-    "name": "Dengi Police Station",
-    "station_type": "police",
-    "latitude": 9.37393,
-    "longitude": 9.9644483
-  },
-  {
-    "name": "Police Station Ajali",
-    "station_type": "police",
-    "latitude": 6.046235152405242,
-    "longitude": 7.210203648458619
-  },
-  {
-    "name": "Post Nigeria Police Station Gidan Adamu",
-    "station_type": "police",
-    "latitude": 8.936778333,
-    "longitude": 9.457298333
-  },
-  {
-    "name": "Nigeria Police Out post Gidan Adamu 1",
-    "station_type": "police",
-    "latitude": 8.936953333,
-    "longitude": 9.457338333
-  },
-  {
-    "name": "Nigeria Police Out post Gidan Adamu 2",
-    "station_type": "police",
-    "latitude": 8.936911667,
-    "longitude": 9.457211667
-  },
-  {
-    "name": "Bwonpe Police Station",
-    "station_type": "police",
-    "latitude": 9.300018333,
-    "longitude": 9.220131667
-  },
-  {
-    "name": "Demshin Police Out station 1",
-    "station_type": "police",
-    "latitude": 8.68995,
-    "longitude": 9.445485
-  },
-  {
-    "name": "Demshin Police Out station 2",
-    "station_type": "police",
-    "latitude": 8.689876667,
-    "longitude": 9.445271667
-  },
-  {
-    "name": "Demshin Police Out station 3",
-    "station_type": "police",
-    "latitude": 8.689636667,
-    "longitude": 9.445321667
-  },
-  {
-    "name": "The Nigeria Police Out post",
-    "station_type": "police",
-    "latitude": 8.689985,
-    "longitude": 9.380611667
-  },
-  {
-    "name": "The Nigeria Police Out post Turniang 1",
-    "station_type": "police",
-    "latitude": 8.690235,
-    "longitude": 9.380431667
-  },
-  {
-    "name": "The Nigeria Police Out post Turniang 2",
-    "station_type": "police",
-    "latitude": 8.690223333,
-    "longitude": 9.38059
-  },
-  {
-    "name": "Flaming Police Station",
-    "station_type": "police",
-    "latitude": 9.912271667,
-    "longitude": 8.944415
-  },
-  {
-    "name": "Nigerian Police Agba Police Station",
-    "station_type": "police",
-    "latitude": 6.219983333,
-    "longitude": 7.857076667
-  },
-  {
-    "name": "Iboko Police Station",
-    "station_type": "police",
-    "latitude": 6.41623,
-    "longitude": 8.236113333
-  },
-  {
-    "name": "Kataeregi Police Station",
-    "station_type": "police",
-    "latitude": 9.364208221033,
-    "longitude": 6.289770396176692
-  },
-  {
-    "name": "Gwiwan Kogi Police Station",
-    "station_type": "police",
-    "latitude": 8.255221971873274,
-    "longitude": 10.068896467308047
-  },
-  {
-    "name": "Sansani Police Station",
-    "station_type": "police",
-    "latitude": 8.43098,
-    "longitude": 10.192511666666666
-  },
-  {
-    "name": "Police Out Post Jaagi",
-    "station_type": "police",
-    "latitude": 9.148861154639569,
-    "longitude": 5.225796028928326
-  },
-  {
-    "name": "Nigeria Police Post Ogbodo Ukehe",
-    "station_type": "police",
-    "latitude": 6.660303204337466,
-    "longitude": 7.414134024336949
-  },
-  {
-    "name": "Nigeria Police Kinafa Outpost",
-    "station_type": "police",
-    "latitude": 10.42756,
-    "longitude": 11.43663833
-  },
-  {
-    "name": "Urugbam Police Station",
-    "station_type": "police",
-    "latitude": 5.7333917,
-    "longitude": 7.92629
-  },
-  {
-    "name": "The Nigeria Police Division Headquarter Challenge",
-    "station_type": "police",
-    "latitude": 7.337848333,
-    "longitude": 3.870068975172632
-  },
-  {
-    "name": "The Nigeria Police Station Toll Gate Ibadan",
-    "station_type": "police",
-    "latitude": 7.321671844459613,
-    "longitude": 3.87358342940133
-  },
-  {
-    "name": "The Nigeria Police Idi Ayunre Division",
-    "station_type": "police",
-    "latitude": 7.240587841600886,
-    "longitude": 3.85816625665917
-  },
-  {
-    "name": "Oban Police Station",
-    "station_type": "police",
-    "latitude": 5.33144,
-    "longitude": 8.5956817
-  },
-  {
-    "name": "Jb Farm Police Post",
-    "station_type": "police",
-    "latitude": 5.3556533,
-    "longitude": 8.6072533
-  },
-  {
-    "name": "The Nigerian Police Force",
-    "station_type": "police",
-    "latitude": 7.619956667,
-    "longitude": 4.728996667
-  },
-  {
-    "name": "Police Station Kuta",
-    "station_type": "police",
-    "latitude": 7.646015,
-    "longitude": 4.28768
-  },
-  {
-    "name": "Police Divisional Headquarters Awo",
-    "station_type": "police",
-    "latitude": 7.76941,
-    "longitude": 4.389923333
-  },
-  {
-    "name": "Nahuche Police Station Zakun Bello Road Laminga",
-    "station_type": "police",
-    "latitude": 8.684468333333333,
-    "longitude": 7.810673333333334
-  },
-  {
-    "name": "The Nigeria Police Station Assakio",
-    "station_type": "police",
-    "latitude": 8.5977899472457,
-    "longitude": 8.851299319933748
-  },
-  {
-    "name": "Idominansi Police Station",
-    "station_type": "police",
-    "latitude": 7.69474,
-    "longitude": 4.705608333
-  },
-  {
-    "name": "Dajo Police Station",
-    "station_type": "police",
-    "latitude": 7.665765690624425,
-    "longitude": 9.793751925240517
-  },
-  {
-    "name": "Nigeria Police Gindin Waya Out Station",
-    "station_type": "police",
-    "latitude": 8.078067379928305,
-    "longitude": 9.787711118468245
-  },
-  {
-    "name": "Nigeria Police Divisional HQ Donga",
-    "station_type": "police",
-    "latitude": 7.722140615544253,
-    "longitude": 10.050700135257474
-  },
-  {
-    "name": "Gbeji Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 7.885836606489367,
-    "longitude": 9.461609702282614
-  },
-  {
-    "name": "Abiriba Divisional Police Headquarters",
-    "station_type": "police",
-    "latitude": 5.706136667,
-    "longitude": 7.737551667
-  },
-  {
-    "name": "Kulani Police Station",
-    "station_type": "police",
-    "latitude": 9.81463,
-    "longitude": 11.629075
-  },
-  {
-    "name": "Komu Police Station",
-    "station_type": "police",
-    "latitude": 8.228582016798226,
-    "longitude": 3.207080740457396
-  },
-  {
-    "name": "The Nigeria Police Ajido",
-    "station_type": "police",
-    "latitude": 7.463836667,
-    "longitude": 4.762385
-  },
-  {
-    "name": "Nigeria Police Force Nkwagu",
-    "station_type": "police",
-    "latitude": 6.248541667,
-    "longitude": 8.107661667
-  },
-  {
-    "name": "Nigerian Police Post Oluponna",
-    "station_type": "police",
-    "latitude": 7.605408333,
-    "longitude": 4.189538333
-  },
-  {
-    "name": "Ivo Divisional Police Headquarters Akanu",
-    "station_type": "police",
-    "latitude": 5.927793333,
-    "longitude": 7.557778333
-  },
-  {
-    "name": "Police Station",
-    "station_type": "police",
-    "latitude": 7.533146667,
-    "longitude": 4.723273333
-  },
-  {
-    "name": "Epe Police Post",
-    "station_type": "police",
-    "latitude": 7.542016667,
-    "longitude": 4.694313333
-  },
-  {
-    "name": "Odogbo Ijesha Police Station",
-    "station_type": "police",
-    "latitude": 7.520796667,
-    "longitude": 4.762781667
-  },
-  {
-    "name": "Divisional Police Station Ugwogo",
-    "station_type": "police",
-    "latitude": 6.624325976048279,
-    "longitude": 7.564899296848187
-  },
-  {
-    "name": "Police Station Ikun",
-    "station_type": "police",
-    "latitude": 5.651605,
-    "longitude": 7.9647367
-  },
-  {
-    "name": "Aziaba Police Station",
-    "station_type": "police",
-    "latitude": 6.237907132641271,
-    "longitude": 7.619845166432158
-  },
-  {
-    "name": "The Nigeria Police Igbo Eze North Division Ogrute Enugu Ezike",
-    "station_type": "police",
-    "latitude": 6.973297889469802,
-    "longitude": 7.449739629945781
-  },
-  {
-    "name": "Ohom Orba Police Station",
-    "station_type": "police",
-    "latitude": 6.862291224245983,
-    "longitude": 7.468230923379529
-  },
-  {
-    "name": "Orba Police Station Udenu Division",
-    "station_type": "police",
-    "latitude": 6.85817289089981,
-    "longitude": 7.461214345619677
-  },
-  {
-    "name": "Ndufu Ameagu Village Police Station",
-    "station_type": "police",
-    "latitude": 6.113261667,
-    "longitude": 8.156935
-  },
-  {
-    "name": "Okpoduma Police Station",
-    "station_type": "police",
-    "latitude": 6.51281,
-    "longitude": 8.16158
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Umuchukwu",
-    "station_type": "police",
-    "latitude": 6.010971261524571,
-    "longitude": 7.310066696649503
-  },
-  {
-    "name": "Nigerian Police Division Atani",
-    "station_type": "police",
-    "latitude": 6.022773073295198,
-    "longitude": 6.747415917993875
-  },
-  {
-    "name": "The Nigeria Police Force Divisional Police Headquarters",
-    "station_type": "police",
-    "latitude": 6.132128924446743,
-    "longitude": 6.767142957771459
-  },
-  {
-    "name": "34 Arty Bde Fob Okigwe",
-    "station_type": "police",
-    "latitude": 5.835224651983114,
-    "longitude": 7.331751363715354
-  },
-  {
-    "name": "The Nigeria Police Station Umuna",
-    "station_type": "police",
-    "latitude": 5.783814985384192,
-    "longitude": 7.270326242027717
-  },
-  {
-    "name": "The Nigeria Police Iludun",
-    "station_type": "police",
-    "latitude": 7.944111613103098,
-    "longitude": 5.249329305699447
-  },
-  {
-    "name": "Anticrim Patrol Base Onunworie Onueke",
-    "station_type": "police",
-    "latitude": 6.171228333,
-    "longitude": 8.028431667
-  },
-  {
-    "name": "The Nigeria Police Station Ilara Yewa",
-    "station_type": "police",
-    "latitude": 7.414968120098814,
-    "longitude": 2.748085225236862
-  },
-  {
-    "name": "Tede Police Station",
-    "station_type": "police",
-    "latitude": 8.553523358970859,
-    "longitude": 3.445971320800443
-  },
-  {
-    "name": "Nigeria Police Area Command Office Saki",
-    "station_type": "police",
-    "latitude": 8.652166995997783,
-    "longitude": 3.406436320228698
-  },
-  {
-    "name": "Umulokpa Police Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 6.522638983152768,
-    "longitude": 7.108105309467866
-  },
-  {
-    "name": "Ekoli Police Station Ezi Ekenta",
-    "station_type": "police",
-    "latitude": 5.752291667,
-    "longitude": 7.844156667
-  },
-  {
-    "name": "The Nigerian Police Force Divisional Headquarters Obosi",
-    "station_type": "police",
-    "latitude": 6.099097947029369,
-    "longitude": 6.816985826769404
-  },
-  {
-    "name": "Nigerian Police Ngbo West Police Station Ijinike",
-    "station_type": "police",
-    "latitude": 6.47972,
-    "longitude": 7.94605
-  },
-  {
-    "name": "Olele PolicePost",
-    "station_type": "police",
-    "latitude": 7.464477224373115,
-    "longitude": 5.405463159424863
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 7.977503418985802,
-    "longitude": 5.134341832464581
-  },
-  {
-    "name": "Ayegbaju Eliti Police Station",
-    "station_type": "police",
-    "latitude": 7.792767698420638,
-    "longitude": 5.295639475532473
-  },
-  {
-    "name": "Ayepe Police Station",
-    "station_type": "police",
-    "latitude": 6.807834205211647,
-    "longitude": 3.732995643431378
-  },
-  {
-    "name": "The Nigerian Police Ilese Division",
-    "station_type": "police",
-    "latitude": 6.802082727894591,
-    "longitude": 3.965292969865883
-  },
-  {
-    "name": "Police Quarter",
-    "station_type": "police",
-    "latitude": 6.782916667,
-    "longitude": 4.033736667
-  },
-  {
-    "name": "Nigeria Police Force B Division Ede",
-    "station_type": "police",
-    "latitude": 7.703501667,
-    "longitude": 4.449953333
-  },
-  {
-    "name": "Abijo Police Station",
-    "station_type": "police",
-    "latitude": 6.452945942635818,
-    "longitude": 3.666147286062901
-  },
-  {
-    "name": "NPF Mopol 49 Akodo Old Secteriat",
-    "station_type": "police",
-    "latitude": 6.437500218604967,
-    "longitude": 3.938895767936699
-  },
-  {
-    "name": "Lekki Police Post",
-    "station_type": "police",
-    "latitude": 6.414473734124598,
-    "longitude": 4.095287591555288
-  },
-  {
-    "name": "Ifonyintedo Police Station",
-    "station_type": "police",
-    "latitude": 6.778595,
-    "longitude": 2.78958
-  },
-  {
-    "name": "Agboakoli Police Station",
-    "station_type": "police",
-    "latitude": 5.735346667,
-    "longitude": 7.593728333
-  },
-  {
-    "name": "Faforiji Police Post",
-    "station_type": "police",
-    "latitude": 7.289883333,
-    "longitude": 4.705013333
-  },
-  {
-    "name": "The Nigeria Police Ibere Ikwuano",
-    "station_type": "police",
-    "latitude": 5.437903333,
-    "longitude": 7.605561667
-  },
-  {
-    "name": "Fiditi Police Station",
-    "station_type": "police",
-    "latitude": 7.708012268143491,
-    "longitude": 3.922163388372188
-  },
-  {
-    "name": "Nigerian Police Post Owode",
-    "station_type": "police",
-    "latitude": 7.739635,
-    "longitude": 4.588693333
-  },
-  {
-    "name": "Ogboeze Police Station",
-    "station_type": "police",
-    "latitude": 6.70766752860991,
-    "longitude": 7.342851457587146
-  },
-  {
-    "name": "Divisional Police Headquarters Amaigbo",
-    "station_type": "police",
-    "latitude": 5.716638743034542,
-    "longitude": 7.105510182031452
-  },
-  {
-    "name": "Police Post Oduma",
-    "station_type": "police",
-    "latitude": 6.084807968243898,
-    "longitude": 7.640136934551507
-  },
-  {
-    "name": "Itumbauzo Police Station",
-    "station_type": "police",
-    "latitude": 5.500156667,
-    "longitude": 7.684908333
-  },
-  {
-    "name": "The Nigerian Police Divisional Headquarters Emene",
-    "station_type": "police",
-    "latitude": 6.454695522098048,
-    "longitude": 7.580325765347791
-  },
-  {
-    "name": "The Nigerian Police Divisional Headquarters Airport Emene",
-    "station_type": "police",
-    "latitude": 6.470471237946298,
-    "longitude": 7.564811120532927
-  },
-  {
-    "name": "Fight Crime",
-    "station_type": "police",
-    "latitude": 6.776253981287465,
-    "longitude": 7.718432246467074
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Oji River",
-    "station_type": "police",
-    "latitude": 6.255458314119659,
-    "longitude": 7.269179174163449
-  },
-  {
-    "name": "Imezi Owa Police Station",
-    "station_type": "police",
-    "latitude": 6.369183333,
-    "longitude": 7.36569
-  },
-  {
-    "name": "Ogbeke Nike",
-    "station_type": "police",
-    "latitude": 6.570579542307536,
-    "longitude": 7.539469730000794
-  },
-  {
-    "name": "Isuofia Police Post",
-    "station_type": "police",
-    "latitude": 6.41194,
-    "longitude": 7.503223333
-  },
-  {
-    "name": "The Nigeria Police Headquaters",
-    "station_type": "police",
-    "latitude": 5.604104408347212,
-    "longitude": 7.520810117282606
-  },
-  {
-    "name": "Divisional Police Headquarters Isiebu",
-    "station_type": "police",
-    "latitude": 5.707322977758508,
-    "longitude": 7.218972242114607
-  },
-  {
-    "name": "Ayete Ibarapa North Police Head Quarter",
-    "station_type": "police",
-    "latitude": 7.535060019656953,
-    "longitude": 3.220280936455179
-  },
-  {
-    "name": "Nigerian Police Umuegwu Ohuhu",
-    "station_type": "police",
-    "latitude": 5.600535,
-    "longitude": 7.475898333
-  },
-  {
-    "name": "Ogbunike Police Station",
-    "station_type": "police",
-    "latitude": 6.177579317255149,
-    "longitude": 6.865290414967772
-  },
-  {
-    "name": "Ire Police Station",
-    "station_type": "police",
-    "latitude": 7.742566095122537,
-    "longitude": 5.392598842499077
-  },
-  {
-    "name": "The Nigeria Police Station Ilishan Remo",
-    "station_type": "police",
-    "latitude": 6.895796666666667,
-    "longitude": 3.715028333333334
-  },
-  {
-    "name": "Ikenne Police Station",
-    "station_type": "police",
-    "latitude": 6.866539346822085,
-    "longitude": 3.714445759320785
-  },
-  {
-    "name": "The Nigeria Police Divisional Headquarters Ogere Remo",
-    "station_type": "police",
-    "latitude": 6.934561666666667,
-    "longitude": 3.635365
-  },
-  {
-    "name": "The Nigerian Police Isonyin Police Post",
-    "station_type": "police",
-    "latitude": 6.83284648069939,
-    "longitude": 3.988044593101173
-  },
-  {
-    "name": "Elemoro Police Station",
-    "station_type": "police",
-    "latitude": 6.475277202061298,
-    "longitude": 3.755143342635817
-  },
-  {
-    "name": "Eleko Police Post",
-    "station_type": "police",
-    "latitude": 6.441172460762021,
-    "longitude": 3.853764432921074
-  },
-  {
-    "name": "Akodo Police Station",
-    "station_type": "police",
-    "latitude": 6.437251780637021,
-    "longitude": 3.94915084641266
-  },
-  {
-    "name": "Pan Atlantic Police Post",
-    "station_type": "police",
-    "latitude": 6.483657950289263,
-    "longitude": 3.857244781395032
-  },
-  {
-    "name": "Yashikira police station HQ",
-    "station_type": "police",
-    "latitude": 9.769693333333333,
-    "longitude": 3.394703333333334
-  },
-  {
-    "name": "The Nigeria Police out post Chikanda",
-    "station_type": "police",
-    "latitude": 9.822983333333333,
-    "longitude": 3.366155
-  },
-  {
-    "name": "Bends Divisional Police Headquarters",
-    "station_type": "police",
-    "latitude": 5.55874,
-    "longitude": 7.636551667
-  },
-  {
-    "name": "Igbope Police Station",
-    "station_type": "police",
-    "latitude": 8.833597424230915,
-    "longitude": 3.787302759542604
-  },
-  {
-    "name": "Ode Remo Police Station",
-    "station_type": "police",
-    "latitude": 6.963283333333334,
-    "longitude": 3.673398333333334
-  },
-  {
-    "name": "The Nigeria Police Ode Remo Ogun State",
-    "station_type": "police",
-    "latitude": 6.96337,
-    "longitude": 3.673373333333333
-  },
-  {
-    "name": "The Nigeria Police Force Divisional Headquarters Iperu Remo",
-    "station_type": "police",
-    "latitude": 6.903477541908971,
-    "longitude": 3.66632906051843
-  },
-  {
-    "name": "Police Training School",
-    "station_type": "police",
-    "latitude": 6.903377760731845,
-    "longitude": 3.668515321787449
-  },
-  {
-    "name": "Federal Road Safety Corpsila Oragun",
-    "station_type": "police",
-    "latitude": 8.022565,
-    "longitude": 4.921968333
-  },
-  {
-    "name": "Base 15 Special Protection Unit",
-    "station_type": "police",
-    "latitude": 6.191276416382534,
-    "longitude": 6.983045307172518
-  },
-  {
-    "name": "Agaun Police Station",
-    "station_type": "police",
-    "latitude": 7.458606667,
-    "longitude": 4.570901667
-  },
-  {
-    "name": "NSCDC Iloba Outpost",
-    "station_type": "police",
-    "latitude": 7.633925,
-    "longitude": 4.619958333
-  },
-  {
-    "name": "Nigeria Police Divisional Headquarters Uzoakoli",
-    "station_type": "police",
-    "latitude": 5.63371,
-    "longitude": 7.559471667
-  },
-  {
-    "name": "Police Post Iwara",
-    "station_type": "police",
-    "latitude": 7.466481667,
-    "longitude": 4.672225
-  },
-  {
-    "name": "Agbado Police Station",
-    "station_type": "police",
-    "latitude": 7.57826220905124,
-    "longitude": 5.52444727658072
-  },
-  {
-    "name": "Ode Divisional Headquarter",
-    "station_type": "police",
-    "latitude": 7.638332759009987,
-    "longitude": 5.546913294185516
-  },
-  {
-    "name": "Security Post",
-    "station_type": "police",
-    "latitude": 7.633818,
-    "longitude": 4.2015449
-  },
-  {
-    "name": "The Nigerian Police Divisional Headquarters",
-    "station_type": "police",
-    "latitude": 5.415341667,
-    "longitude": 7.561731667
-  },
-  {
-    "name": "Ara Police Station",
-    "station_type": "police",
-    "latitude": 7.85406,
-    "longitude": 4.382285
-  },
-  {
-    "name": "Lalupon Police Station",
-    "station_type": "police",
-    "latitude": 7.463362160114349,
-    "longitude": 4.065314438742161
-  },
-  {
-    "name": "Police Post Odo Ori",
-    "station_type": "police",
-    "latitude": 7.655853333,
-    "longitude": 4.189233333
-  },
-  {
-    "name": "Adeke Police Station Iwo",
-    "station_type": "police",
-    "latitude": 7.627438333,
-    "longitude": 4.158541667
-  },
-  {
-    "name": "Igbajo Police Station",
-    "station_type": "police",
-    "latitude": 7.897966667,
-    "longitude": 4.822976667
-  },
-  {
-    "name": "Ipetumodu Police Station",
-    "station_type": "police",
-    "latitude": 7.51539,
-    "longitude": 4.437365
-  },
-  {
-    "name": "NPF Kirikiri Police Post",
-    "station_type": "police",
-    "latitude": 6.443499022794071,
-    "longitude": 3.311178494490986
-  },
-  {
-    "name": "Ezza North Council Police Post Ebiaji",
-    "station_type": "police",
-    "latitude": 6.224571667,
-    "longitude": 7.996183333
-  },
-  {
-    "name": "Police Head Quarters Ichi",
-    "station_type": "police",
-    "latitude": 6.046037705286994,
-    "longitude": 6.87402053209281
-  },
-  {
-    "name": "Njeaba Police Station",
-    "station_type": "police",
-    "latitude": 5.642148397658627,
-    "longitude": 6.950408606698839
-  },
-  {
-    "name": "The Nigeria Police Ndiejezie Police Post",
-    "station_type": "police",
-    "latitude": 5.874431991152411,
-    "longitude": 7.215527181770788
-  },
-  {
-    "name": "Ibalebo Police Post",
-    "station_type": "police",
-    "latitude": 5.932405,
-    "longitude": 8.102955
-  },
-  {
-    "name": "Divisional Police Headquarter Ariyasi",
-    "station_type": "police",
-    "latitude": 7.426828634420525,
-    "longitude": 5.460774124883855
-  },
-  {
-    "name": "Regional Police Headquarters Obudu",
-    "station_type": "police",
-    "latitude": 6.6659467,
-    "longitude": 9.1697233
-  },
-  {
-    "name": "Agubia urban Police Station",
-    "station_type": "police",
-    "latitude": 6.069765,
-    "longitude": 8.113871667
-  },
-  {
-    "name": "Nsidung Marina Police Station",
-    "station_type": "police",
-    "latitude": 4.9560933,
-    "longitude": 8.3114
-  },
-  {
-    "name": "Atakpa Police Station",
-    "station_type": "police",
-    "latitude": 4.9591928,
-    "longitude": 8.3214614
-  },
-  {
-    "name": "Nigeria Police Force Obaagun",
-    "station_type": "police",
-    "latitude": 7.929638333,
-    "longitude": 4.675115
-  },
-  {
-    "name": "Police Station Ika",
-    "station_type": "police",
-    "latitude": 7.899446667,
-    "longitude": 4.32955
-  },
-  {
-    "name": "Umuagu Police",
-    "station_type": "police",
-    "latitude": 5.550786667,
-    "longitude": 7.48875
-  },
-  {
-    "name": "State Cid Station",
-    "station_type": "police",
-    "latitude": 5.54894,
-    "longitude": 7.490166667
-  },
-  {
-    "name": "Idi Iroko Police Post",
-    "station_type": "police",
-    "latitude": 7.713375,
-    "longitude": 4.078021667
-  },
-  {
-    "name": "Ihe Enyi Old Police Post",
-    "station_type": "police",
-    "latitude": 6.673594680081643,
-    "longitude": 7.75866109834779
-  },
-  {
-    "name": "Nenwe Police Post",
-    "station_type": "police",
-    "latitude": 6.132577732029938,
-    "longitude": 7.526640181823392
-  },
-  {
-    "name": "The Nigeria Police Onicha Divisional Police Station",
-    "station_type": "police",
-    "latitude": 5.540448435906235,
-    "longitude": 7.336594969545312
-  },
-  {
-    "name": "Edem Edet Police Station",
-    "station_type": "police",
-    "latitude": 4.9347417,
-    "longitude": 8.3366017
-  },
-  {
-    "name": "Uwanse Police Station",
-    "station_type": "police",
-    "latitude": 4.94181,
-    "longitude": 8.33683
-  },
-  {
-    "name": "Anantigha Police Station",
-    "station_type": "police",
-    "latitude": 4.9188017,
-    "longitude": 8.3268183
-  },
-  {
-    "name": "Police Post Ada",
-    "station_type": "police",
-    "latitude": 7.892361667,
-    "longitude": 4.712168333
-  },
-  {
-    "name": "Police Mobile Force 11Th Squadron Calabar",
-    "station_type": "police",
-    "latitude": 5.020745,
-    "longitude": 8.3335317
-  },
-  {
-    "name": "The Nigeria Police Force",
-    "station_type": "police",
-    "latitude": 9.888688561332927,
-    "longitude": 5.410400292020282
-  },
-  {
-    "name": "The Nigeria Police Area Command Shagamu",
-    "station_type": "police",
-    "latitude": 6.868525867495744,
-    "longitude": 3.65794921494196
-  },
-  
+        "name": "Law Enforcement",
+        "station_type": "police",
+        "latitude": 7.930170751367532,
+        "longitude": 9.870565946802305,
+    },
+    {
+        "name": "Police Station Outpost Didango Old Muri",
+        "station_type": "police",
+        "latitude": 9.158694534616092,
+        "longitude": 11.037908333333332,
+    },
+    {
+        "name": "Ogijo Police Station",
+        "station_type": "police",
+        "latitude": 6.703515,
+        "longitude": 3.51085,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 6.790705,
+        "longitude": 3.943611667,
+    },
+    {
+        "name": "The Nigeria Police Force State Traffic Division",
+        "station_type": "police",
+        "latitude": 7.14172,
+        "longitude": 3.339623333333334,
+    },
+    {
+        "name": "Ibara Gra Police Post Ibara Housing",
+        "station_type": "police",
+        "latitude": 7.122856666666666,
+        "longitude": 3.340916666666666,
+    },
+    {
+        "name": "The Nigerian Police Station Etitale Ijebu Ode",
+        "station_type": "police",
+        "latitude": 6.819212857112889,
+        "longitude": 3.92054066166286,
+    },
+    {
+        "name": "Police Station Idomowo",
+        "station_type": "police",
+        "latitude": 6.817843333,
+        "longitude": 3.911475,
+    },
+    {
+        "name": "The Nigerian Police Station Etitale",
+        "station_type": "police",
+        "latitude": 6.819208941820513,
+        "longitude": 3.920438681858823,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Shagamu",
+        "station_type": "police",
+        "latitude": 6.85250390106624,
+        "longitude": 3.633255051474509,
+    },
+    {
+        "name": "Aboru Police Station",
+        "station_type": "police",
+        "latitude": 6.631831335015624,
+        "longitude": 3.280121677239183,
+    },
+    {
+        "name": "Ikotun Divisional Hq",
+        "station_type": "police",
+        "latitude": 6.551468970476763,
+        "longitude": 3.268867740095753,
+    },
+    {
+        "name": "Idimu Police Station",
+        "station_type": "police",
+        "latitude": 6.578951967953325,
+        "longitude": 3.28337559323758,
+    },
+    {
+        "name": "Shasha",
+        "station_type": "police",
+        "latitude": 6.589516230381011,
+        "longitude": 3.30208732996875,
+    },
+    {
+        "name": "Isheri Oshun Police Station",
+        "station_type": "police",
+        "latitude": 6.516454947682692,
+        "longitude": 3.278064302127804,
+    },
+    {
+        "name": "Igando Police Station",
+        "station_type": "police",
+        "latitude": 6.5510648599375,
+        "longitude": 3.238934192379807,
+    },
+    {
+        "name": "Cele Police Post Itire",
+        "station_type": "police",
+        "latitude": 6.506024467491186,
+        "longitude": 3.324385681049279,
+    },
+    {
+        "name": "Baroda Divisional Police Statoin",
+        "station_type": "police",
+        "latitude": 6.534046038858976,
+        "longitude": 3.390603543526844,
+    },
+    {
+        "name": "Pedro Divisional Police Station",
+        "station_type": "police",
+        "latitude": 6.545025916477164,
+        "longitude": 3.372381849777244,
+    },
+    {
+        "name": "Aguda Police Station",
+        "station_type": "police",
+        "latitude": 6.49338351644391,
+        "longitude": 3.340945436285657,
+    },
+    {
+        "name": "F SARS Annex Bode Thomas",
+        "station_type": "police",
+        "latitude": 6.492677460762019,
+        "longitude": 3.348612670031249,
+    },
+    {
+        "name": "Bode Thomas Police Station",
+        "station_type": "police",
+        "latitude": 6.489209205904647,
+        "longitude": 3.357954310539262,
+    },
+    {
+        "name": "Tejuosho Police Post",
+        "station_type": "police",
+        "latitude": 6.509127181428286,
+        "longitude": 3.370763508032452,
+    },
+    {
+        "name": "Anti Kidnapping Police Post Hogan Basset Crescent",
+        "station_type": "police",
+        "latitude": 6.502640227016426,
+        "longitude": 3.364190663302083,
+    },
+    {
+        "name": "Shogunle Police Station",
+        "station_type": "police",
+        "latitude": 6.576429738413462,
+        "longitude": 3.340237539237981,
+    },
+    {
+        "name": "Amuwo Odofin Police Station",
+        "station_type": "police",
+        "latitude": 6.469359545967148,
+        "longitude": 3.323151919841747,
+    },
+    {
+        "name": "Ashamu Police Station",
+        "station_type": "police",
+        "latitude": 6.525705610984776,
+        "longitude": 3.294752486920673,
+    },
+    {
+        "name": "Police Mobile Force No 63 Pmf Squadron",
+        "station_type": "police",
+        "latitude": 6.589695480191506,
+        "longitude": 3.518002740095753,
+    },
+    {
+        "name": "Nichemtex Police Station",
+        "station_type": "police",
+        "latitude": 6.570144214316106,
+        "longitude": 3.482456003364583,
+    },
+    {
+        "name": "Okokomaiko",
+        "station_type": "police",
+        "latitude": 6.472023210951522,
+        "longitude": 3.187058001682292,
+    },
+    {
+        "name": "Tedi Town Plover Station",
+        "station_type": "police",
+        "latitude": 6.445273978888221,
+        "longitude": 3.226555689460736,
+    },
+    {
+        "name": "Onireke Police Station",
+        "station_type": "police",
+        "latitude": 6.459519459079727,
+        "longitude": 3.229433202540064,
+    },
+    {
+        "name": "NPF Divisional HQ Isasi Town",
+        "station_type": "police",
+        "latitude": 6.500809284380609,
+        "longitude": 3.170384119017228,
+    },
+    {
+        "name": "Ajangbadi Police Station",
+        "station_type": "police",
+        "latitude": 6.462544799142226,
+        "longitude": 3.168010357809695,
+    },
+    {
+        "name": "Shibiri Ekunpa Police Station",
+        "station_type": "police",
+        "latitude": 6.459860671713543,
+        "longitude": 3.137297129110978,
+    },
+    {
+        "name": "Sanya Police Station 98",
+        "station_type": "police",
+        "latitude": 6.485060890318509,
+        "longitude": 3.329505715619391,
+    },
+    {
+        "name": "Erekusu Police Post Salami Street",
+        "station_type": "police",
+        "latitude": 6.488205305492388,
+        "longitude": 3.325568821936298,
+    },
+    {
+        "name": "Olowosokodile Police Post",
+        "station_type": "police",
+        "latitude": 6.650454101270032,
+        "longitude": 3.323472687778446,
+    },
+    {
+        "name": "Area E Command Headquarters Festac Town",
+        "station_type": "police",
+        "latitude": 6.462029686096154,
+        "longitude": 3.294585279333733,
+    },
+    {
+        "name": "Owutu Police Station",
+        "station_type": "police",
+        "latitude": 6.640626640508012,
+        "longitude": 3.480576465808894,
+    },
+    {
+        "name": "Nigerian Police Stationmedical Service",
+        "station_type": "police",
+        "latitude": 6.443733673395834,
+        "longitude": 3.428779668348958,
+    },
+    {
+        "name": "Ilasan Police Station",
+        "station_type": "police",
+        "latitude": 6.433485401715545,
+        "longitude": 3.503111308856971,
+    },
+    {
+        "name": "Ijeshatado Police Station",
+        "station_type": "police",
+        "latitude": 6.496060898729969,
+        "longitude": 3.325793359491987,
+    },
+    {
+        "name": "Ebute Ero Police Station",
+        "station_type": "police",
+        "latitude": 6.464254441332532,
+        "longitude": 3.386461954411859,
+    },
+    {
+        "name": "Kam Salem House Nigeria Police Hqts Annex",
+        "station_type": "police",
+        "latitude": 6.449228019429488,
+        "longitude": 3.406964075111378,
+    },
+    {
+        "name": "Eleruwa Police Stationwemabod Estate",
+        "station_type": "police",
+        "latitude": 6.6048,
+        "longitude": 3.340141666666667,
+    },
+    {
+        "name": "Maruwa Police Station",
+        "station_type": "police",
+        "latitude": 6.433227382286058,
+        "longitude": 3.468993071746795,
+    },
+    {
+        "name": "Alakara Police Station",
+        "station_type": "police",
+        "latitude": 6.521735008411459,
+        "longitude": 3.36369436285657,
+    },
+    {
+        "name": "Police Division HQ Ijamo Ilesha",
+        "station_type": "police",
+        "latitude": 7.627555,
+        "longitude": 4.746393333,
+    },
+    {
+        "name": "The Nigeria Police Force Jalingo",
+        "station_type": "police",
+        "latitude": 8.89433964723635,
+        "longitude": 11.364525743067384,
+    },
+    {
+        "name": "Nigerian Police Mobile Force",
+        "station_type": "police",
+        "latitude": 7.795276667,
+        "longitude": 4.57492,
+    },
+    {
+        "name": "The Nigeria Police Housing Estate",
+        "station_type": "police",
+        "latitude": 7.8039,
+        "longitude": 4.555721667,
+    },
+    {
+        "name": "Police Command HQ Ring Road",
+        "station_type": "police",
+        "latitude": 7.798646667,
+        "longitude": 4.550281667,
+    },
+    {
+        "name": "Divisional Headquarter Ogbere Ibadan",
+        "station_type": "police",
+        "latitude": 7.354703538145706,
+        "longitude": 3.94094459065917,
+    },
+    {
+        "name": "Nigeria Security And Civil Defense Corps",
+        "station_type": "police",
+        "latitude": 7.272914112717864,
+        "longitude": 3.130614890652545,
+    },
+    {
+        "name": "Imala Division",
+        "station_type": "police",
+        "latitude": 7.272570765569709,
+        "longitude": 3.131591325683915,
+    },
+    {
+        "name": "Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 9.204536726843966,
+        "longitude": 11.28897355857385,
+    },
+    {
+        "name": "Bashing Police Station",
+        "station_type": "police",
+        "latitude": 8.908635615544252,
+        "longitude": 11.416277673080462,
+    },
+    {
+        "name": "Police Station 19",
+        "station_type": "police",
+        "latitude": 9.008314924919828,
+        "longitude": 11.421862132050576,
+    },
+    {
+        "name": "Kona Police Station",
+        "station_type": "police",
+        "latitude": 8.978632136489018,
+        "longitude": 11.329475436920726,
+    },
+    {
+        "name": "Police Post Iwoye Ketu",
+        "station_type": "police",
+        "latitude": 7.5657754,
+        "longitude": 2.7433511,
+    },
+    {
+        "name": "Post Du Police",
+        "station_type": "police",
+        "latitude": 7.554031666666667,
+        "longitude": 2.742176666666666,
+    },
+    {
+        "name": "Owode Police Station",
+        "station_type": "police",
+        "latitude": 6.697696213012128,
+        "longitude": 2.97514563063451,
+    },
+    {
+        "name": "B Dept Mounted Troop Okooko Outpost",
+        "station_type": "police",
+        "latitude": 7.867934931284764,
+        "longitude": 2.890257813914793,
+    },
+    {
+        "name": "Ijio Police Station",
+        "station_type": "police",
+        "latitude": 7.935313388372188,
+        "longitude": 2.981586120228698,
+    },
+    {
+        "name": "Ijoko Road",
+        "station_type": "police",
+        "latitude": 6.745386666666667,
+        "longitude": 3.257477451724707,
+    },
+    {
+        "name": "Obasanjo Farm Police Station",
+        "station_type": "police",
+        "latitude": 6.682356666666667,
+        "longitude": 3.208365,
+    },
+    {
+        "name": "Sango Police Station",
+        "station_type": "police",
+        "latitude": 7.425008948486537,
+        "longitude": 3.899460628829585,
+    },
+    {
+        "name": "Oregun Police Post",
+        "station_type": "police",
+        "latitude": 6.603311849777245,
+        "longitude": 3.363352661619792,
+    },
+    {
+        "name": "Swift Response Squad",
+        "station_type": "police",
+        "latitude": 7.388982076340831,
+        "longitude": 3.88103550574216,
+    },
+    {
+        "name": "The Nigerian Police Division Headquarters Idi Aro",
+        "station_type": "police",
+        "latitude": 7.368066079199557,
+        "longitude": 3.90475393414349,
+    },
+    {
+        "name": "Mapo Police Station",
+        "station_type": "police",
+        "latitude": 7.376184480914793,
+        "longitude": 3.897690027686094,
+    },
+    {
+        "name": "Ijokodo Police Station",
+        "station_type": "police",
+        "latitude": 7.422892199428254,
+        "longitude": 3.881289972313906,
+    },
+    {
+        "name": "Area K Police Station",
+        "station_type": "police",
+        "latitude": 6.483738264193109,
+        "longitude": 3.038894825300881,
+    },
+    {
+        "name": "Housing Police Station",
+        "station_type": "police",
+        "latitude": 7.419211652656953,
+        "longitude": 3.901896133571745,
+    },
+    {
+        "name": "Secretariat Police Station",
+        "station_type": "police",
+        "latitude": 7.408563333,
+        "longitude": 3.909668333,
+    },
+    {
+        "name": "Nigeria Police Olusosun Post",
+        "station_type": "police",
+        "latitude": 6.586827861174279,
+        "longitude": 3.37334087003125,
+    },
+    {
+        "name": "Joyce B Police Post",
+        "station_type": "police",
+        "latitude": 7.369171079199557,
+        "longitude": 3.867561100571745,
+    },
+    {
+        "name": "Agugu Police Station",
+        "station_type": "police",
+        "latitude": 7.384347800571745,
+        "longitude": 3.924926598284764,
+    },
+    {
+        "name": "Testing Ground Police Station",
+        "station_type": "police",
+        "latitude": 7.403211174600886,
+        "longitude": 3.929167186085207,
+    },
+    {
+        "name": "Zone 9 Police Station",
+        "station_type": "police",
+        "latitude": 5.521016667,
+        "longitude": 7.522998333,
+    },
+    {
+        "name": "Divisional Headquarters World Bank Division Ehimiri",
+        "station_type": "police",
+        "latitude": 5.51574,
+        "longitude": 7.52218,
+    },
+    {
+        "name": "Ebonyi State Police Head Quarter",
+        "station_type": "police",
+        "latitude": 6.327693333,
+        "longitude": 8.106263333,
+    },
+    {
+        "name": "Oluwo Nla Police Station",
+        "station_type": "police",
+        "latitude": 7.415587268143491,
+        "longitude": 3.92985717174216,
+    },
+    {
+        "name": "Ikolaba Police Station",
+        "station_type": "police",
+        "latitude": 7.415708374029141,
+        "longitude": 3.916936652656953,
+    },
+    {
+        "name": "Ashi Police Station",
+        "station_type": "police",
+        "latitude": 7.424117171742161,
+        "longitude": 3.925667718513463,
+    },
+    {
+        "name": "Gombe Divisional Police Station",
+        "station_type": "police",
+        "latitude": 10.290355,
+        "longitude": 11.167145,
+    },
+    {
+        "name": "Air Force Police Station",
+        "station_type": "police",
+        "latitude": 7.389018415058283,
+        "longitude": 3.969871708029141,
+    },
+    {
+        "name": "The Nigerian Police Station Kobolese Idi Osan",
+        "station_type": "police",
+        "latitude": 7.378024549630029,
+        "longitude": 3.946811680343047,
+    },
+    {
+        "name": "Nigerian Police Station Ejigbo",
+        "station_type": "police",
+        "latitude": 7.89472,
+        "longitude": 4.308055,
+    },
+    {
+        "name": "Idi Ogungun Police Station",
+        "station_type": "police",
+        "latitude": 7.39518217174216,
+        "longitude": 3.917985,
+    },
+    {
+        "name": "Agodi Gate Police Station",
+        "station_type": "police",
+        "latitude": 7.396578333,
+        "longitude": 3.919911667,
+    },
+    {
+        "name": "Jonku Police Station",
+        "station_type": "police",
+        "latitude": 7.416245,
+        "longitude": 3.945351667,
+    },
+    {
+        "name": "Nigeria Police Force IGP X Squad Osun Annex",
+        "station_type": "police",
+        "latitude": 7.787161667,
+        "longitude": 4.543836667,
+    },
+    {
+        "name": "Nigeria Police Force 28 Squadron Umuobia",
+        "station_type": "police",
+        "latitude": 5.486535,
+        "longitude": 7.4842633,
+    },
+    {
+        "name": "Eziama Police Station",
+        "station_type": "police",
+        "latitude": 5.116405,
+        "longitude": 7.376485,
+    },
+    {
+        "name": "Alayabiagba Police Station",
+        "station_type": "police",
+        "latitude": 6.45451,
+        "longitude": 3.351833333333333,
+    },
+    {
+        "name": "Central Police Station Adeniji Adele",
+        "station_type": "police",
+        "latitude": 6.456210104634616,
+        "longitude": 3.397585820254006,
+    },
+    {
+        "name": "Zone 2 Police Officer Mess Police Mini Market",
+        "station_type": "police",
+        "latitude": 6.441921962823318,
+        "longitude": 3.402997024476362,
+    },
+    {
+        "name": "Industrial Police Post",
+        "station_type": "police",
+        "latitude": 6.679167605459134,
+        "longitude": 3.535338438825721,
+    },
+    {
+        "name": "Imowo Nla Police Station",
+        "station_type": "police",
+        "latitude": 6.616447800824519,
+        "longitude": 3.60427322028726,
+    },
+    {
+        "name": "Ladegboye Police Post",
+        "station_type": "police",
+        "latitude": 6.624074835840145,
+        "longitude": 3.564517194953125,
+    },
+    {
+        "name": "Igbogbo Police Station",
+        "station_type": "police",
+        "latitude": 6.60849280082452,
+        "longitude": 3.513413795777644,
+    },
+    {
+        "name": "Makoko Police Post",
+        "station_type": "police",
+        "latitude": 6.495387312221554,
+        "longitude": 3.385714895365385,
+    },
+    {
+        "name": "Police Station 78",
+        "station_type": "police",
+        "latitude": 6.458641386096154,
+        "longitude": 3.293165577651442,
+    },
+    {
+        "name": "Ajah Police Station",
+        "station_type": "police",
+        "latitude": 6.469927426191908,
+        "longitude": 3.577294249810496,
+    },
+    {
+        "name": "NPF Divisional HQ Ojo",
+        "station_type": "police",
+        "latitude": 6.456596980570513,
+        "longitude": 3.205760436285657,
+    },
+    {
+        "name": "Sabo Police Station",
+        "station_type": "police",
+        "latitude": 6.505394258221957,
+        "longitude": 3.37812050635016,
+    },
+    {
+        "name": "Basua Police Station",
+        "station_type": "police",
+        "latitude": 6.527099485238382,
+        "longitude": 3.376328124064102,
+    },
+    {
+        "name": "Obafemi Awolowo Road Police Station",
+        "station_type": "police",
+        "latitude": 6.595783490285257,
+        "longitude": 3.336936178063702,
+    },
+    {
+        "name": "Okobaba Police Post",
+        "station_type": "police",
+        "latitude": 6.490493534191105,
+        "longitude": 3.389131841365786,
+    },
+    {
+        "name": "The Nigeria Police Force Dopemu Agege",
+        "station_type": "police",
+        "latitude": 6.610114917318309,
+        "longitude": 3.31842037555689,
+    },
+    {
+        "name": "The Nigeria Police Station Elere Division",
+        "station_type": "police",
+        "latitude": 6.628979816889422,
+        "longitude": 3.320355122381811,
+    },
+    {
+        "name": "Ijora Badia Police Station Fadaini Street",
+        "station_type": "police",
+        "latitude": 6.468676335015626,
+        "longitude": 3.361571871730169,
+    },
+    {
+        "name": "Marina Leventis Police Station",
+        "station_type": "police",
+        "latitude": 6.455474624443109,
+        "longitude": 3.380480156951923,
+    },
+    {
+        "name": "Owode Onirin Police Station",
+        "station_type": "police",
+        "latitude": 6.606404616031651,
+        "longitude": 3.415083228698719,
+    },
+    {
+        "name": "Nigerian Railway Hospital Police Station",
+        "station_type": "police",
+        "latitude": 6.4978,
+        "longitude": 3.376015,
+    },
+    {
+        "name": "Odaliki Police Station",
+        "station_type": "police",
+        "latitude": 6.484066457397435,
+        "longitude": 3.3777883940621,
+    },
+    {
+        "name": "Railway Police Station",
+        "station_type": "police",
+        "latitude": 6.444789051557993,
+        "longitude": 7.494131555130124,
+    },
+    {
+        "name": "New Layout Police Station",
+        "station_type": "police",
+        "latitude": 6.470088106316907,
+        "longitude": 3.194801151905048,
+    },
+    {
+        "name": "Rofo Police Post",
+        "station_type": "police",
+        "latitude": 6.654851640508014,
+        "longitude": 3.501417774665865,
+    },
+    {
+        "name": "Divisional Headquarters Ajao Estate",
+        "station_type": "police",
+        "latitude": 6.549015026158653,
+        "longitude": 3.322853918159455,
+    },
+    {
+        "name": "Orile Police Stationsari Iganmu",
+        "station_type": "police",
+        "latitude": 6.478178970476762,
+        "longitude": 3.345868324921875,
+    },
+    {
+        "name": "The Nigerian Police Force Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 5.707214888783207,
+        "longitude": 7.167577030628465,
+    },
+    {
+        "name": "The Nigerian Police State Headquarters",
+        "station_type": "police",
+        "latitude": 6.443309774989227,
+        "longitude": 7.487433244814863,
+    },
+    {
+        "name": "Ogui Road Police Station",
+        "station_type": "police",
+        "latitude": 6.441191667,
+        "longitude": 7.495215,
+    },
+    {
+        "name": "Enyiogugu Police Station",
+        "station_type": "police",
+        "latitude": 5.469545,
+        "longitude": 7.199471667,
+    },
+    {
+        "name": "The Nigerian Police Divisional Headquarters Abayi Aba",
+        "station_type": "police",
+        "latitude": 5.139203333,
+        "longitude": 7.33497,
+    },
+    {
+        "name": "Ohuru Ishimiri Police Station",
+        "station_type": "police",
+        "latitude": 5.14048,
+        "longitude": 7.3808617,
+    },
+    {
+        "name": "Police Force Education Unit",
+        "station_type": "police",
+        "latitude": 5.510423333,
+        "longitude": 7.021436667,
+    },
+    {
+        "name": "Divisional Headquarters Awo Idemili",
+        "station_type": "police",
+        "latitude": 5.831946,
+        "longitude": 6.9533192,
+    },
+    {
+        "name": "Ibefun Town Police Post",
+        "station_type": "police",
+        "latitude": 6.720756666666666,
+        "longitude": 3.79623,
+    },
+    {
+        "name": "The Nigerian Police Officers Mess",
+        "station_type": "police",
+        "latitude": 5.522403333,
+        "longitude": 7.490885,
+    },
+    {
+        "name": "Nigeria Police Station Area Command Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 5.798563333,
+        "longitude": 7.035203333,
+    },
+    {
+        "name": "Umuopara Police Station",
+        "station_type": "police",
+        "latitude": 5.539128333,
+        "longitude": 7.457425,
+    },
+    {
+        "name": "Amuzi Police Station Ahiazu Mbaise",
+        "station_type": "police",
+        "latitude": 5.515636912818388,
+        "longitude": 7.214976272047965,
+    },
+    {
+        "name": "Vosan Drive Police Station",
+        "station_type": "police",
+        "latitude": 6.440096126356601,
+        "longitude": 7.537441012619676,
+    },
+    {
+        "name": "Nigeria Police Station Elekute",
+        "station_type": "police",
+        "latitude": 7.607032736284052,
+        "longitude": 5.215599600575302,
+    },
+    {
+        "name": "Nigerian Police Force",
+        "station_type": "police",
+        "latitude": 7.644881083013026,
+        "longitude": 5.238148286701292,
+    },
+    {
+        "name": "Odo Ado Divisional Police Head Quarter",
+        "station_type": "police",
+        "latitude": 7.610115997098542,
+        "longitude": 5.250664471744098,
+    },
+    {
+        "name": "Police CID Office Lafia",
+        "station_type": "police",
+        "latitude": 8.48592,
+        "longitude": 8.529181666666666,
+    },
+    {
+        "name": "Moore Police Station",
+        "station_type": "police",
+        "latitude": 7.491651667,
+        "longitude": 4.566798333,
+    },
+    {
+        "name": "C Divisional Police Head Quarter Jos The Nigerian Police Force Masallacin Jummaa Street Jos",
+        "station_type": "police",
+        "latitude": 9.9270517,
+        "longitude": 8.8888883,
+    },
+    {
+        "name": "Divisional Police Station Pantami",
+        "station_type": "police",
+        "latitude": 10.27487,
+        "longitude": 11.16948667,
+    },
+    {
+        "name": "Durbar Police Station Oyo",
+        "station_type": "police",
+        "latitude": 7.834352746199556,
+        "longitude": 3.936742240457396,
+    },
+    {
+        "name": "New Fobur Police Station",
+        "station_type": "police",
+        "latitude": 9.855455,
+        "longitude": 9.022285,
+    },
+    {
+        "name": "Lagos State Police Command",
+        "station_type": "police",
+        "latitude": 6.585599659937499,
+        "longitude": 3.344101125746394,
+    },
+    {
+        "name": "Ikeja Area f Command",
+        "station_type": "police",
+        "latitude": 6.589697115552884,
+        "longitude": 3.345062004634616,
+    },
+    {
+        "name": "Police Officers Mess",
+        "station_type": "police",
+        "latitude": 6.577979476826923,
+        "longitude": 3.356378490285257,
+    },
+    {
+        "name": "Ikirike Police Station",
+        "station_type": "police",
+        "latitude": 6.413800662142098,
+        "longitude": 7.486531999097594,
+    },
+    {
+        "name": "Police Squadron 1",
+        "station_type": "police",
+        "latitude": 6.413893333,
+        "longitude": 7.49289,
+    },
+    {
+        "name": "Nigeria Security And Civil Defence Corps",
+        "station_type": "police",
+        "latitude": 7.336288333,
+        "longitude": 3.957368333,
+    },
+    {
+        "name": "Orsumoghu Police Station",
+        "station_type": "police",
+        "latitude": 5.862860236116588,
+        "longitude": 6.927027716660095,
+    },
+    {
+        "name": "Felele Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 7.337431667,
+        "longitude": 3.886625,
+    },
+    {
+        "name": "Iyaganku Police Station",
+        "station_type": "police",
+        "latitude": 7.383937322515679,
+        "longitude": 3.874013224255623,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquaters",
+        "station_type": "police",
+        "latitude": 5.476243478719754,
+        "longitude": 7.013086969284648,
+    },
+    {
+        "name": "The Nigerian Police Station Ekwusigo Park Isuofia",
+        "station_type": "police",
+        "latitude": 6.026899226083678,
+        "longitude": 7.066730509176194,
+    },
+    {
+        "name": "The Nigeria Police Shell Camp Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 5.496905,
+        "longitude": 7.030565,
+    },
+    {
+        "name": "Abajah Police Station",
+        "station_type": "police",
+        "latitude": 5.690043949392289,
+        "longitude": 7.138158848770789,
+    },
+    {
+        "name": "Amaraku Police Station",
+        "station_type": "police",
+        "latitude": 5.656147383176836,
+        "longitude": 7.148925636458423,
+    },
+    {
+        "name": "Nigerian Police Station Umuagu Nnobi",
+        "station_type": "police",
+        "latitude": 6.07191488921608,
+        "longitude": 6.939435713784802,
+    },
+    {
+        "name": "Uratta Police Station",
+        "station_type": "police",
+        "latitude": 5.089578333,
+        "longitude": 7.336441667,
+    },
+    {
+        "name": "NPF Divisional HQ Victoria Island",
+        "station_type": "police",
+        "latitude": 6.422903795777644,
+        "longitude": 3.411678027840945,
+    },
+    {
+        "name": "Ojodu Police Station",
+        "station_type": "police",
+        "latitude": 6.640159007207933,
+        "longitude": 3.358292538001202,
+    },
+    {
+        "name": "Bende Police Station",
+        "station_type": "police",
+        "latitude": 5.528760579979256,
+        "longitude": 7.492831938106741,
+    },
+    {
+        "name": "The Police Force Fegge Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 6.13550963009825,
+        "longitude": 6.771698316040347,
+    },
+    {
+        "name": "The Nigeria Police B Division Awka",
+        "station_type": "police",
+        "latitude": 6.23594075927055,
+        "longitude": 7.082419522287669,
+    },
+    {
+        "name": "The Nigerian Police World Bank Housing Estate",
+        "station_type": "police",
+        "latitude": 5.514826667,
+        "longitude": 7.499298333,
+    },
+    {
+        "name": "The Nigeria Police",
+        "station_type": "police",
+        "latitude": 6.210775543803296,
+        "longitude": 7.064196445619671,
+    },
+    {
+        "name": "Neni Police Station",
+        "station_type": "police",
+        "latitude": 6.087675367689129,
+        "longitude": 7.001001470756515,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarter",
+        "station_type": "police",
+        "latitude": 5.693421667,
+        "longitude": 7.068346667,
+    },
+    {
+        "name": "Divisional Police Headquarters Ogborhill Aba",
+        "station_type": "police",
+        "latitude": 5.111108333,
+        "longitude": 7.392886667,
+    },
+    {
+        "name": "Aguata Area Command 1",
+        "station_type": "police",
+        "latitude": 5.944196547945205,
+        "longitude": 7.088414171232876,
+    },
+    {
+        "name": "Aguata Area Command 2",
+        "station_type": "police",
+        "latitude": 5.94273420146369,
+        "longitude": 7.089379304447363,
+    },
+    {
+        "name": "Obalende Divisional Police Headquarters",
+        "station_type": "police",
+        "latitude": 6.831665127610316,
+        "longitude": 3.905675759320784,
+    },
+    {
+        "name": "Base 15 Special Protection Unit Ukpo",
+        "station_type": "police",
+        "latitude": 6.196679564338451,
+        "longitude": 7.047536837525169,
+    },
+    {
+        "name": "Police Commissioners Resident",
+        "station_type": "police",
+        "latitude": 4.9753741,
+        "longitude": 8.3300495,
+    },
+    {
+        "name": "Divisional Headquarters Ukpor",
+        "station_type": "police",
+        "latitude": 5.937746566821541,
+        "longitude": 6.922430506914464,
+    },
+    {
+        "name": "Isoke Ndida Police Post Obenasa Amichi",
+        "station_type": "police",
+        "latitude": 5.960750926293711,
+        "longitude": 6.972796214464855,
+    },
+    {
+        "name": "Osun State Police Command",
+        "station_type": "police",
+        "latitude": 7.480491667,
+        "longitude": 4.560843333,
+    },
+    {
+        "name": "Abagana Police Station",
+        "station_type": "police",
+        "latitude": 6.183536844296544,
+        "longitude": 6.98923080805712,
+    },
+    {
+        "name": "Olonde Police Station",
+        "station_type": "police",
+        "latitude": 7.914863333,
+        "longitude": 4.673833333,
+    },
+    {
+        "name": "Dugbe Police Station",
+        "station_type": "police",
+        "latitude": 7.782056667,
+        "longitude": 4.550628333,
+    },
+    {
+        "name": "Federal Housing Police Station",
+        "station_type": "police",
+        "latitude": 5.021303333,
+        "longitude": 8.336738333,
+    },
+    {
+        "name": "The Nigeria Police Post Esuk Utan",
+        "station_type": "police",
+        "latitude": 5.0169091,
+        "longitude": 8.3246121,
+    },
+    {
+        "name": "The Nigeria Police Force Zone 6 Headquarters",
+        "station_type": "police",
+        "latitude": 5.01678,
+        "longitude": 8.3336267,
+    },
+    {
+        "name": "Amaufuru Police Station",
+        "station_type": "police",
+        "latitude": 5.019593333,
+        "longitude": 7.31674,
+    },
+    {
+        "name": "Kemta Police Station Oke Ola Street Kemta Idi Aba",
+        "station_type": "police",
+        "latitude": 7.142725,
+        "longitude": 3.384273333333333,
+    },
+    {
+        "name": "Office Of The Area Commander Nigeria Police",
+        "station_type": "police",
+        "latitude": 7.135022515952851,
+        "longitude": 3.344144948525491,
+    },
+    {
+        "name": "The Nigerian Police Ibara Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 7.142111543258014,
+        "longitude": 3.339281113243922,
+    },
+    {
+        "name": "Gangare Police Station",
+        "station_type": "police",
+        "latitude": 9.915896667,
+        "longitude": 8.893423333,
+    },
+    {
+        "name": "Area Command Police Station Jos",
+        "station_type": "police",
+        "latitude": 9.917207,
+        "longitude": 8.8835585,
+    },
+    {
+        "name": "Laronto Police Station",
+        "station_type": "police",
+        "latitude": 9.942298,
+        "longitude": 8.8777707,
+    },
+    {
+        "name": "Nasarawa Gwang Division",
+        "station_type": "police",
+        "latitude": 9.93019,
+        "longitude": 8.900575,
+    },
+    {
+        "name": "Head Quarters Sector 2 Operation Save Heaven Bauchi Road",
+        "station_type": "police",
+        "latitude": 9.951715,
+        "longitude": 8.8921267,
+    },
+    {
+        "name": "Salisu Adamu Police Station",
+        "station_type": "police",
+        "latitude": 9.9343117,
+        "longitude": 8.8927355,
+    },
+    {
+        "name": "Jos Main Market Police Station",
+        "station_type": "police",
+        "latitude": 9.920681667,
+        "longitude": 8.890596667,
+    },
+    {
+        "name": "Alausa Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 6.618232818571714,
+        "longitude": 3.360992129110977,
+    },
+    {
+        "name": "Lagos State Police Command HQ Rapid Response Squad",
+        "station_type": "police",
+        "latitude": 6.614992251492788,
+        "longitude": 3.361976151905048,
+    },
+    {
+        "name": "Juro Mamu",
+        "station_type": "police",
+        "latitude": 8.641221666666667,
+        "longitude": 10.782051666666666,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Anguwan Rogo",
+        "station_type": "police",
+        "latitude": 9.944385,
+        "longitude": 8.88906,
+    },
+    {
+        "name": "The Nigeria Police Post Bauchi Road",
+        "station_type": "police",
+        "latitude": 9.956125,
+        "longitude": 8.8921167,
+    },
+    {
+        "name": "NPF Police B Department Ikeja HQ Annex",
+        "station_type": "police",
+        "latitude": 6.590202042223558,
+        "longitude": 3.355014555302884,
+    },
+    {
+        "name": "Area Command Headquaters Abakaliki",
+        "station_type": "police",
+        "latitude": 6.325435,
+        "longitude": 8.096798333,
+    },
+    {
+        "name": "Oke Baale Police Station",
+        "station_type": "police",
+        "latitude": 7.767368333,
+        "longitude": 4.578105,
+    },
+    {
+        "name": "Otop Abasi Police Station",
+        "station_type": "police",
+        "latitude": 4.964191667,
+        "longitude": 8.331331667,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters A",
+        "station_type": "police",
+        "latitude": 4.9653874,
+        "longitude": 8.3499339,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters A Division Calabar",
+        "station_type": "police",
+        "latitude": 4.9653874,
+        "longitude": 8.3499339,
+    },
+    {
+        "name": "Unilever Police Post",
+        "station_type": "police",
+        "latitude": 6.514796666666666,
+        "longitude": 3.07789,
+    },
+    {
+        "name": "Divisional Police Head Quarters Agbara",
+        "station_type": "police",
+        "latitude": 6.501005,
+        "longitude": 3.09812,
+    },
+    {
+        "name": "Agbara Police Station",
+        "station_type": "police",
+        "latitude": 6.501106972159055,
+        "longitude": 3.098094847253806,
+    },
+    {
+        "name": "Morogbo Police Station",
+        "station_type": "police",
+        "latitude": 6.494871805871394,
+        "longitude": 3.083676300445513,
+    },
+    {
+        "name": "Nigeria Police Post Igangan",
+        "station_type": "police",
+        "latitude": 7.672371667,
+        "longitude": 3.184918333,
+    },
+    {
+        "name": "Yemeni Police Station",
+        "station_type": "police",
+        "latitude": 7.396283291970859,
+        "longitude": 3.907313360686094,
+    },
+    {
+        "name": "Idishin Police Station",
+        "station_type": "police",
+        "latitude": 7.401790587800443,
+        "longitude": 3.854385587800444,
+    },
+    {
+        "name": "Nigeria Security And Civil Defense Corps",
+        "station_type": "police",
+        "latitude": 7.450603265284764,
+        "longitude": 3.858907199428255,
+    },
+    {
+        "name": "Orogun Police Station",
+        "station_type": "police",
+        "latitude": 7.455371147914793,
+        "longitude": 3.914437240457396,
+    },
+    {
+        "name": "Ojoo Police Station",
+        "station_type": "police",
+        "latitude": 7.468016741029142,
+        "longitude": 3.912193380343047,
+    },
+    {
+        "name": "Police Station 44",
+        "station_type": "police",
+        "latitude": 6.401409921524039,
+        "longitude": 3.392116849777243,
+    },
+    {
+        "name": "Kawo Out Station",
+        "station_type": "police",
+        "latitude": 10.217971666666667,
+        "longitude": 4.832693333333333,
+    },
+    {
+        "name": "SSS Ochudo",
+        "station_type": "police",
+        "latitude": 6.299041667,
+        "longitude": 8.110888333,
+    },
+    {
+        "name": "Mbeke Police Station",
+        "station_type": "police",
+        "latitude": 6.643056667,
+        "longitude": 8.102006667,
+    },
+    {
+        "name": "Itori Police Station",
+        "station_type": "police",
+        "latitude": 6.934005380828151,
+        "longitude": 3.220426125430961,
+    },
+    {
+        "name": "Itori Police Post",
+        "station_type": "police",
+        "latitude": 6.927363333,
+        "longitude": 3.219293333,
+    },
+    {
+        "name": "Proposed Police Post",
+        "station_type": "police",
+        "latitude": 6.932319104096616,
+        "longitude": 3.243342471063528,
+    },
+    {
+        "name": "Lafenwa",
+        "station_type": "police",
+        "latitude": 7.155887725480524,
+        "longitude": 3.330168333333333,
+    },
+    {
+        "name": "Lafenwa Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 7.155835,
+        "longitude": 3.325528333333333,
+    },
+    {
+        "name": "Budo nuhu police station",
+        "station_type": "police",
+        "latitude": 8.4308488,
+        "longitude": 4.493687,
+    },
+    {
+        "name": "Police Station Idofa",
+        "station_type": "police",
+        "latitude": 7.446656113000312,
+        "longitude": 2.827514749025883,
+    },
+    {
+        "name": "Police Divisional Headquarters Imeko Afon",
+        "station_type": "police",
+        "latitude": 7.436856666666667,
+        "longitude": 2.839541666666667,
+    },
+    {
+        "name": "Nigeria Police Idere",
+        "station_type": "police",
+        "latitude": 7.493560060686093,
+        "longitude": 3.248147821943934,
+    },
+    {
+        "name": "Police Station Igan Alade",
+        "station_type": "police",
+        "latitude": 7.056166667,
+        "longitude": 2.90476,
+    },
+    {
+        "name": "Police Post",
+        "station_type": "police",
+        "latitude": 7.100595,
+        "longitude": 3.166981667,
+    },
+    {
+        "name": "Nigeria Police",
+        "station_type": "police",
+        "latitude": 7.09286,
+        "longitude": 3.092726666666667,
+    },
+    {
+        "name": "Iro Police Station",
+        "station_type": "police",
+        "latitude": 6.880071013685602,
+        "longitude": 3.36584300514745,
+    },
+    {
+        "name": "The Nigeria Police Station Oluwo",
+        "station_type": "police",
+        "latitude": 7.1194139,
+        "longitude": 3.3297083,
+    },
+    {
+        "name": "Ewekoro Police Post Beside First Bank Plc",
+        "station_type": "police",
+        "latitude": 6.903838905790729,
+        "longitude": 3.206044774763138,
+    },
+    {
+        "name": "Ofada Police Post",
+        "station_type": "police",
+        "latitude": 6.864362,
+        "longitude": 3.4261834,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 6.651543333,
+        "longitude": 3.368971667,
+    },
+    {
+        "name": "Police Post",
+        "station_type": "police",
+        "latitude": 6.7756015,
+        "longitude": 3.2793528,
+    },
+    {
+        "name": "Ijoko Lemode Town Ogun State",
+        "station_type": "police",
+        "latitude": 6.730370923305992,
+        "longitude": 3.284066330884706,
+    },
+    {
+        "name": "Ketu Adie Owe Station",
+        "station_type": "police",
+        "latitude": 6.597020999747285,
+        "longitude": 3.074927574012548,
+    },
+    {
+        "name": "The Nigerian Police Force Ajuwon Division",
+        "station_type": "police",
+        "latitude": 6.674893297078595,
+        "longitude": 3.348634884557647,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Ibogun Olagun",
+        "station_type": "police",
+        "latitude": 6.834539042554983,
+        "longitude": 3.123201492904315,
+    },
+    {
+        "name": "Redemption Camp Police Station",
+        "station_type": "police",
+        "latitude": 6.818531162045375,
+        "longitude": 3.454140379660393,
+    },
+    {
+        "name": "Ajebo Police Station",
+        "station_type": "police",
+        "latitude": 7.105831270917911,
+        "longitude": 3.709929974262745,
+    },
+    {
+        "name": "Police College",
+        "station_type": "police",
+        "latitude": 7.090964366253965,
+        "longitude": 3.398522538070571,
+    },
+    {
+        "name": "Owode Egba Police Area Command",
+        "station_type": "police",
+        "latitude": 6.9271712,
+        "longitude": 3.4959211,
+    },
+    {
+        "name": "Police Post Obafemi",
+        "station_type": "police",
+        "latitude": 7.116247942862967,
+        "longitude": 3.61597370075059,
+    },
+    {
+        "name": "Owena Police Station",
+        "station_type": "police",
+        "latitude": 7.400233333,
+        "longitude": 5.008688333,
+    },
+    {
+        "name": "Police Station Erin Oke Express Way",
+        "station_type": "police",
+        "latitude": 7.553236667,
+        "longitude": 4.885283333,
+    },
+    {
+        "name": "Police Station Iloko Ijesa",
+        "station_type": "police",
+        "latitude": 7.647241667,
+        "longitude": 4.820028333,
+    },
+    {
+        "name": "Erinmo Police Post",
+        "station_type": "police",
+        "latitude": 7.623403333,
+        "longitude": 4.853536667,
+    },
+    {
+        "name": "Police Station Ikeji Arakeji",
+        "station_type": "police",
+        "latitude": 7.425333333,
+        "longitude": 4.954953333,
+    },
+    {
+        "name": "Esa Oke Police Station",
+        "station_type": "police",
+        "latitude": 7.766386667,
+        "longitude": 4.898338333,
+    },
+    {
+        "name": "Ikeji Ile Police Station",
+        "station_type": "police",
+        "latitude": 7.48534,
+        "longitude": 4.924133333,
+    },
+    {
+        "name": "Nigeria Police Station Kajola Ajaba",
+        "station_type": "police",
+        "latitude": 7.917065,
+        "longitude": 4.900528333,
+    },
+    {
+        "name": "Trailer Park Police Station",
+        "station_type": "police",
+        "latitude": 6.943998333333333,
+        "longitude": 3.646071666666666,
+    },
+    {
+        "name": "Police Post Ososa",
+        "station_type": "police",
+        "latitude": 6.800975290691765,
+        "longitude": 3.854541486505881,
+    },
+    {
+        "name": "Nigeria Police Post Ososa",
+        "station_type": "police",
+        "latitude": 6.800843790691764,
+        "longitude": 3.854576286505881,
+    },
+    {
+        "name": "Odogbolu Police Station Traffic Department",
+        "station_type": "police",
+        "latitude": 6.847171666666666,
+        "longitude": 3.769018333333333,
+    },
+    {
+        "name": "Imodi Imosan Police Post",
+        "station_type": "police",
+        "latitude": 6.86581,
+        "longitude": 3.885958333333334,
+    },
+    {
+        "name": "Awa Police Station",
+        "station_type": "police",
+        "latitude": 6.955613998699,
+        "longitude": 3.933023590705885,
+    },
+    {
+        "name": "Lafarge Police Station",
+        "station_type": "police",
+        "latitude": 6.819267080040174,
+        "longitude": 3.620001486505881,
+    },
+    {
+        "name": "Police Station Odeda",
+        "station_type": "police",
+        "latitude": 7.232329377338915,
+        "longitude": 3.523491666666666,
+    },
+    {
+        "name": "Top On Police Station",
+        "station_type": "police",
+        "latitude": 6.95520971101309,
+        "longitude": 3.98806651864157,
+    },
+    {
+        "name": "Police Barracks Eleweran",
+        "station_type": "police",
+        "latitude": 7.1841577,
+        "longitude": 3.412178,
+    },
+    {
+        "name": "The Nigerian Police Divisional Head Qrts",
+        "station_type": "police",
+        "latitude": 7.178025,
+        "longitude": 3.391676666666667,
+    },
+    {
+        "name": "Ogbere Area Command Headquarters",
+        "station_type": "police",
+        "latitude": 6.739005490041317,
+        "longitude": 4.165214897050979,
+    },
+    {
+        "name": "Ogbere Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 6.738608262807116,
+        "longitude": 4.167090128686275,
+    },
+    {
+        "name": "Police Station Ibefun",
+        "station_type": "police",
+        "latitude": 6.727115,
+        "longitude": 3.81092,
+    },
+    {
+        "name": "Police Station Iperindo",
+        "station_type": "police",
+        "latitude": 7.503353333,
+        "longitude": 4.825361667,
+    },
+    {
+        "name": "Atan Police Station",
+        "station_type": "police",
+        "latitude": 6.892831666666666,
+        "longitude": 4.006135,
+    },
+    {
+        "name": "Area A West Airport Command HQ",
+        "station_type": "police",
+        "latitude": 6.561554310539264,
+        "longitude": 3.320596605013622,
+    },
+    {
+        "name": "Airport Police Command",
+        "station_type": "police",
+        "latitude": 6.565126666666667,
+        "longitude": 3.32023,
+    },
+    {
+        "name": "Police Post",
+        "station_type": "police",
+        "latitude": 6.589754939271235,
+        "longitude": 3.335151282698317,
+    },
+    {
+        "name": "Onipetesi Police Post",
+        "station_type": "police",
+        "latitude": 6.605388560349759,
+        "longitude": 3.323828952729567,
+    },
+    {
+        "name": "Imota Police Station Ebute Ajebo Road Imota",
+        "station_type": "police",
+        "latitude": 6.657621849777244,
+        "longitude": 3.669316762889824,
+    },
+    {
+        "name": "Chindo Bako Adamu",
+        "station_type": "police",
+        "latitude": 8.575389099037931,
+        "longitude": 10.719286952084484,
+    },
+    {
+        "name": "Police Station Ogbaagbaa",
+        "station_type": "police",
+        "latitude": 7.701783333,
+        "longitude": 4.251876667,
+    },
+    {
+        "name": "Kakwagom Police Station",
+        "station_type": "police",
+        "latitude": 6.4920896,
+        "longitude": 8.8112461,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 6.632522674933568,
+        "longitude": 2.742490964513359,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 9.499825,
+        "longitude": 10.3139317,
+    },
+    {
+        "name": "Abobi Police Station",
+        "station_type": "police",
+        "latitude": 6.936357397240492,
+        "longitude": 3.923735148025096,
+    },
+    {
+        "name": "Mini Campus Police Post",
+        "station_type": "police",
+        "latitude": 6.950070781065665,
+        "longitude": 3.903899099052553,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 6.763152205088828,
+        "longitude": 4.06670493011442,
+    },
+    {
+        "name": "Nigeria Police Ogbia Div HQ",
+        "station_type": "police",
+        "latitude": 4.688833444640522,
+        "longitude": 6.315562905973729,
+    },
+    {
+        "name": "Layeni Police Station",
+        "station_type": "police",
+        "latitude": 6.461070689460738,
+        "longitude": 3.327806666666667,
+    },
+    {
+        "name": "Igbologun Station",
+        "station_type": "police",
+        "latitude": 6.425445357809696,
+        "longitude": 3.332843385650641,
+    },
+    {
+        "name": "Police Station 9",
+        "station_type": "police",
+        "latitude": 6.417147522415065,
+        "longitude": 4.211947460762019,
+    },
+    {
+        "name": "Orugbo Police Post",
+        "station_type": "police",
+        "latitude": 6.631293787366186,
+        "longitude": 3.772953804189102,
+    },
+    {
+        "name": "Apapa Police Station",
+        "station_type": "police",
+        "latitude": 6.450089310539263,
+        "longitude": 3.367356339221354,
+    },
+    {
+        "name": "Seme Police Station",
+        "station_type": "police",
+        "latitude": 6.384188857430689,
+        "longitude": 2.728848459920873,
+    },
+    {
+        "name": "Badagry Divisional Police",
+        "station_type": "police",
+        "latitude": 6.412672940953525,
+        "longitude": 2.89293940676242,
+    },
+    {
+        "name": "Eredo Police Station",
+        "station_type": "police",
+        "latitude": 6.648215626158653,
+        "longitude": 3.989168266221154,
+    },
+    {
+        "name": "Ajara Police Post",
+        "station_type": "police",
+        "latitude": 6.434103725713141,
+        "longitude": 2.890856151905048,
+    },
+    {
+        "name": "Satellite Police Post",
+        "station_type": "police",
+        "latitude": 6.449063464126603,
+        "longitude": 3.270669895365385,
+    },
+    {
+        "name": "Area L Police Command Headquarters",
+        "station_type": "police",
+        "latitude": 6.454000156951923,
+        "longitude": 3.272906640508012,
+    },
+    {
+        "name": "Manang Lakware Police Station",
+        "station_type": "police",
+        "latitude": 9.070829921927677,
+        "longitude": 11.67590277593801,
+    },
+    {
+        "name": "Divisional Police Pantisawa Yorro LGA",
+        "station_type": "police",
+        "latitude": 8.942266373027698,
+        "longitude": 11.521004181348616,
+    },
+    {
+        "name": "Kungana Police Station",
+        "station_type": "police",
+        "latitude": 8.892595629139478,
+        "longitude": 11.577748236497419,
+    },
+    {
+        "name": "Ankuwa Kashi Police Station",
+        "station_type": "police",
+        "latitude": 9.032116666666667,
+        "longitude": 11.60473,
+    },
+    {
+        "name": "Igbekurikor Police Station",
+        "station_type": "police",
+        "latitude": 6.6761033,
+        "longitude": 8.7255817,
+    },
+    {
+        "name": "Erena Divisional Police Station",
+        "station_type": "police",
+        "latitude": 10.08203,
+        "longitude": 6.738521667,
+    },
+    {
+        "name": "Is A Police Station Outpost Old Muri",
+        "station_type": "police",
+        "latitude": 9.188025,
+        "longitude": 10.883101381248853,
+    },
+    {
+        "name": "Jab Jab Police Station",
+        "station_type": "police",
+        "latitude": 9.246593209375575,
+        "longitude": 10.690380807451435,
+    },
+    {
+        "name": "Karim Lamido Police Station",
+        "station_type": "police",
+        "latitude": 9.314871636295113,
+        "longitude": 11.191961862101438,
+    },
+    {
+        "name": "Serti Police Station",
+        "station_type": "police",
+        "latitude": 8.933338623474036,
+        "longitude": 11.191621946210578,
+    },
+    {
+        "name": "Nigeria Police Station Biakpan",
+        "station_type": "police",
+        "latitude": 5.5878283,
+        "longitude": 7.9259533,
+    },
+    {
+        "name": "Yerima Police Station",
+        "station_type": "police",
+        "latitude": 8.448413648556897,
+        "longitude": 10.578897402565518,
+    },
+    {
+        "name": "Nyaja Police Out Porce",
+        "station_type": "police",
+        "latitude": 7.812156571744155,
+        "longitude": 10.58498944091218,
+    },
+    {
+        "name": "Police Station 4",
+        "station_type": "police",
+        "latitude": 7.856448678362641,
+        "longitude": 10.968195089983045,
+    },
+    {
+        "name": "Ute Police Station",
+        "station_type": "police",
+        "latitude": 6.435311712593105,
+        "longitude": 5.685727320134553,
+    },
+    {
+        "name": "Ijanikin Divisional Police Station",
+        "station_type": "police",
+        "latitude": 6.496115148540465,
+        "longitude": 3.125291483556089,
+    },
+    {
+        "name": "Ogombo Police Station",
+        "station_type": "police",
+        "latitude": 6.44866157044351,
+        "longitude": 3.611636047270432,
+    },
+    {
+        "name": "Area N Command Ijede Police Station",
+        "station_type": "police",
+        "latitude": 6.56621792320633,
+        "longitude": 3.589016361174279,
+    },
+    {
+        "name": "Apa Police Station",
+        "station_type": "police",
+        "latitude": 6.429737635461137,
+        "longitude": 2.814852696189904,
+    },
+    {
+        "name": "Ketu Ereyun Police Post",
+        "station_type": "police",
+        "latitude": 6.6373931,
+        "longitude": 3.8758529,
+    },
+    {
+        "name": "Imesi Ile Police Station",
+        "station_type": "police",
+        "latitude": 7.827006667,
+        "longitude": 4.834231667,
+    },
+    {
+        "name": "The Nigeria Police Force B",
+        "station_type": "police",
+        "latitude": 7.945441667,
+        "longitude": 4.77996,
+    },
+    {
+        "name": "Gassol Police Station",
+        "station_type": "police",
+        "latitude": 8.539266487624861,
+        "longitude": 10.449575374759483,
+    },
+    {
+        "name": "Garwa Police Post",
+        "station_type": "police",
+        "latitude": 8.278728333333333,
+        "longitude": 10.628195,
+    },
+    {
+        "name": "Nigeria Police Station Creek Town Odukpani LGA",
+        "station_type": "police",
+        "latitude": 4.993585,
+        "longitude": 8.2743917,
+    },
+    {
+        "name": "Agua Police Station",
+        "station_type": "police",
+        "latitude": 6.759564559750771,
+        "longitude": 6.23265822011219,
+    },
+    {
+        "name": "Police Station Akoka Street Ebute Road Ibafo",
+        "station_type": "police",
+        "latitude": 6.739111667,
+        "longitude": 3.420711667,
+    },
+    {
+        "name": "Police Station Akoka",
+        "station_type": "police",
+        "latitude": 6.739149432937013,
+        "longitude": 3.42070406126392,
+    },
+    {
+        "name": "Nigeria Police Ndeaboh Aninri LGA",
+        "station_type": "police",
+        "latitude": 6.034367022988029,
+        "longitude": 7.57863801171727,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Igarra",
+        "station_type": "police",
+        "latitude": 7.2815953767327,
+        "longitude": 6.107159215720879,
+    },
+    {
+        "name": "Okoyong Police Post",
+        "station_type": "police",
+        "latitude": 5.195645,
+        "longitude": 8.2783183,
+    },
+    {
+        "name": "Kabo Police Station",
+        "station_type": "police",
+        "latitude": 9.409176896785064,
+        "longitude": 7.180404393850123,
+    },
+    {
+        "name": "Police Out Post Ashuku",
+        "station_type": "police",
+        "latitude": 7.142801666666666,
+        "longitude": 10.677868333333333,
+    },
+    {
+        "name": "Eneme Police Out Post",
+        "station_type": "police",
+        "latitude": 7.10087060064138,
+        "longitude": 10.650765690624427,
+    },
+    {
+        "name": "Mayo Ndaga Police Station",
+        "station_type": "police",
+        "latitude": 6.915681456329023,
+        "longitude": 11.433419939822702,
+    },
+    {
+        "name": "Jatau Police Station",
+        "station_type": "police",
+        "latitude": 7.904696024278448,
+        "longitude": 10.653511801924138,
+    },
+    {
+        "name": "Wurbo Police Station",
+        "station_type": "police",
+        "latitude": 8.010261754758355,
+        "longitude": 10.825108278143267,
+    },
+    {
+        "name": "Nigerian Police Station Kuffai Ahmadu",
+        "station_type": "police",
+        "latitude": 7.395343888700286,
+        "longitude": 9.94331698962457,
+    },
+    {
+        "name": "Police Station Alingora Ward",
+        "station_type": "police",
+        "latitude": 7.497374978955954,
+        "longitude": 11.351780358646005,
+    },
+    {
+        "name": "Police Station Didan",
+        "station_type": "police",
+        "latitude": 6.872344977263458,
+        "longitude": 9.672393691979337,
+    },
+    {
+        "name": "Nigeria Police Kabri Song Barki",
+        "station_type": "police",
+        "latitude": 6.695313663459768,
+        "longitude": 11.423895135257471,
+    },
+    {
+        "name": "Mayo Dulle Police Station",
+        "station_type": "police",
+        "latitude": 6.646312717789081,
+        "longitude": 11.46300625793247,
+    },
+    {
+        "name": "The Nigeria Police Force Kara Out Station",
+        "station_type": "police",
+        "latitude": 6.72894,
+        "longitude": 11.364213333333332,
+    },
+    {
+        "name": "Police Station 38",
+        "station_type": "police",
+        "latitude": 6.57826615985661,
+        "longitude": 11.422150951443102,
+    },
+    {
+        "name": "Nyido Police Station",
+        "station_type": "police",
+        "latitude": 7.178229203923848,
+        "longitude": 10.285412056970403,
+    },
+    {
+        "name": "Lip Police Post",
+        "station_type": "police",
+        "latitude": 6.51100445953592,
+        "longitude": 11.150397717789081,
+    },
+    {
+        "name": "Road Abpng",
+        "station_type": "police",
+        "latitude": 6.987745616110061,
+        "longitude": 10.742437853046555,
+    },
+    {
+        "name": "Police Post Shibong",
+        "station_type": "police",
+        "latitude": 6.86424273942644,
+        "longitude": 9.852114258894542,
+    },
+    {
+        "name": "Nigeria Police Force Out Post Danbeki",
+        "station_type": "police",
+        "latitude": 7.317616262647566,
+        "longitude": 10.572516497558743,
+    },
+    {
+        "name": "Kashimbila Police Station",
+        "station_type": "police",
+        "latitude": 7.328669811626563,
+        "longitude": 10.544900244518082,
+    },
+    {
+        "name": "Nfom Police Post",
+        "station_type": "police",
+        "latitude": 6.500196667,
+        "longitude": 8.55636,
+    },
+    {
+        "name": "Nigeria Police Divisioal Headquarters Nkporo",
+        "station_type": "police",
+        "latitude": 5.787653333,
+        "longitude": 7.768323333,
+    },
+    {
+        "name": "Nigeria Police Force Divisional Headquarter Saki",
+        "station_type": "police",
+        "latitude": 8.671296917941717,
+        "longitude": 3.396051318513462,
+    },
+    {
+        "name": "Ojoto Police Station",
+        "station_type": "police",
+        "latitude": 6.091198063148516,
+        "longitude": 6.909012962363787,
+    },
+    {
+        "name": "The Nigeria Police Post Ikot Iwang Bakassi Lga",
+        "station_type": "police",
+        "latitude": 4.8516083,
+        "longitude": 8.5292517,
+    },
+    {
+        "name": "Ikot Nakanda Police Station",
+        "station_type": "police",
+        "latitude": 4.8791733,
+        "longitude": 8.4881283,
+    },
+    {
+        "name": "Fogbe Police Out Post",
+        "station_type": "police",
+        "latitude": 8.718845,
+        "longitude": 6.512195,
+    },
+    {
+        "name": "Dukku Central Police Station",
+        "station_type": "police",
+        "latitude": 11.2350888,
+        "longitude": 4.9056339,
+    },
+    {
+        "name": "Nil Police Out post",
+        "station_type": "police",
+        "latitude": 9.9759,
+        "longitude": 11.48367833,
+    },
+    {
+        "name": "Beni Police Station",
+        "station_type": "police",
+        "latitude": 9.649530523858429,
+        "longitude": 7.190731673316431,
+    },
+    {
+        "name": "Kpanbo Police Out Post",
+        "station_type": "police",
+        "latitude": 9.0627239,
+        "longitude": 5.4247119,
+    },
+    {
+        "name": "Paiko Police Station",
+        "station_type": "police",
+        "latitude": 9.430818333,
+        "longitude": 6.642163333,
+    },
+    {
+        "name": "The Nigerian Police Post",
+        "station_type": "police",
+        "latitude": 7.494105,
+        "longitude": 4.492211667,
+    },
+    {
+        "name": "Ilode Police Post",
+        "station_type": "police",
+        "latitude": 7.480421667,
+        "longitude": 4.576366667,
+    },
+    {
+        "name": "The Nigeria Police Station Oyan",
+        "station_type": "police",
+        "latitude": 8.048713333,
+        "longitude": 4.766183333,
+    },
+    {
+        "name": "Police Station Inisa",
+        "station_type": "police",
+        "latitude": 7.981185,
+        "longitude": 4.6451,
+    },
+    {
+        "name": "Oke Aanu Police Station",
+        "station_type": "police",
+        "latitude": 8.011346667,
+        "longitude": 4.671405,
+    },
+    {
+        "name": "The Nigeria Police Post Mpu",
+        "station_type": "police",
+        "latitude": 5.986182497142475,
+        "longitude": 7.648623718828815,
+    },
+    {
+        "name": "Police Quarter Mpu",
+        "station_type": "police",
+        "latitude": 5.986608333,
+        "longitude": 7.648241827641364,
+    },
+    {
+        "name": "Ikot Eneobong Police Post",
+        "station_type": "police",
+        "latitude": 5.051795,
+        "longitude": 8.360701667,
+    },
+    {
+        "name": "Area Command Headquarters Tinapa Calabar",
+        "station_type": "police",
+        "latitude": 5.0599283,
+        "longitude": 8.31938,
+    },
+    {
+        "name": "Police Station Alagbado",
+        "station_type": "police",
+        "latitude": 7.179503333,
+        "longitude": 4.69582,
+    },
+    {
+        "name": "Saki Divisional Police Station",
+        "station_type": "police",
+        "latitude": 8.65075,
+        "longitude": 3.2195883,
+    },
+    {
+        "name": "Nigerian Police Barack Okundi",
+        "station_type": "police",
+        "latitude": 6.4359717,
+        "longitude": 8.7966033,
+    },
+    {
+        "name": "Igwo Police Outstation",
+        "station_type": "police",
+        "latitude": 6.63082,
+        "longitude": 9.1207983,
+    },
+    {
+        "name": "Ikot Ekpo Edem Police Station",
+        "station_type": "police",
+        "latitude": 4.9468083,
+        "longitude": 8.5678183,
+    },
+    {
+        "name": "Nigeria Police Force Calaro Estate Post",
+        "station_type": "police",
+        "latitude": 5.283725,
+        "longitude": 8.293315,
+    },
+    {
+        "name": "The Nigeria Police Okuku",
+        "station_type": "police",
+        "latitude": 6.712545,
+        "longitude": 8.7734833,
+    },
+    {
+        "name": "Tumu Police Station",
+        "station_type": "police",
+        "latitude": 10.00649333,
+        "longitude": 11.00838833,
+    },
+    {
+        "name": "Kuola Police Station",
+        "station_type": "police",
+        "latitude": 7.366314439885651,
+        "longitude": 3.81507449425784,
+    },
+    {
+        "name": "Ariyo Police Station",
+        "station_type": "police",
+        "latitude": 5.3246483,
+        "longitude": 7.98888,
+    },
+    {
+        "name": "Onimangoro Police Station",
+        "station_type": "police",
+        "latitude": 7.440081284345263,
+        "longitude": 3.299843224255623,
+    },
+    {
+        "name": "Police Training School",
+        "station_type": "police",
+        "latitude": 5.1472983,
+        "longitude": 8.3482967,
+    },
+    {
+        "name": "Divisional Headquarters Odukpani",
+        "station_type": "police",
+        "latitude": 5.15723,
+        "longitude": 8.3423817,
+    },
+    {
+        "name": "Beteriko Police Station",
+        "station_type": "police",
+        "latitude": 6.4838086,
+        "longitude": 9.1452534,
+    },
+    {
+        "name": "Batriku Police Station",
+        "station_type": "police",
+        "latitude": 6.4837233,
+        "longitude": 9.1450783,
+    },
+    {
+        "name": "Dadin Kowa Police Division",
+        "station_type": "police",
+        "latitude": 10.28047167,
+        "longitude": 11.495045,
+    },
+    {
+        "name": "Shinga Police Outpost",
+        "station_type": "police",
+        "latitude": 10.2841533,
+        "longitude": 11.5029233,
+    },
+    {
+        "name": "Police Divisional Headquarters Otu",
+        "station_type": "police",
+        "latitude": 8.205839412199557,
+        "longitude": 3.416823333,
+    },
+    {
+        "name": "Iludun Police Division Osogbo",
+        "station_type": "police",
+        "latitude": 7.782713333,
+        "longitude": 4.58607,
+    },
+    {
+        "name": "Zambuk Police Station",
+        "station_type": "police",
+        "latitude": 10.31970167,
+        "longitude": 11.35897167,
+    },
+    {
+        "name": "Owu Community Police Station",
+        "station_type": "police",
+        "latitude": 7.242568333,
+        "longitude": 4.331205,
+    },
+    {
+        "name": "Police Station Isiukwuato Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 5.739911667,
+        "longitude": 7.497308333,
+    },
+    {
+        "name": "Odeyinka Police Station",
+        "station_type": "police",
+        "latitude": 7.324371667,
+        "longitude": 4.361508333,
+    },
+    {
+        "name": "Edor Police Station",
+        "station_type": "police",
+        "latitude": 6.2016838,
+        "longitude": 8.6333833,
+    },
+    {
+        "name": "Community Police Owelle Inoma",
+        "station_type": "police",
+        "latitude": 6.533471512943618,
+        "longitude": 6.705556508950606,
+    },
+    {
+        "name": "Tongo Police Out Post",
+        "station_type": "police",
+        "latitude": 10.70851,
+        "longitude": 11.36492,
+    },
+    {
+        "name": "The Divisional Headquarter",
+        "station_type": "police",
+        "latitude": 9.082935,
+        "longitude": 3.848571619656953,
+    },
+    {
+        "name": "Ido Divisional Headquarter",
+        "station_type": "police",
+        "latitude": 7.472643879771302,
+        "longitude": 3.761798333,
+    },
+    {
+        "name": "Ofukpa Police Station Apiapum",
+        "station_type": "police",
+        "latitude": 6.000633333,
+        "longitude": 8.308923333,
+    },
+    {
+        "name": "Ipapo House Police Station",
+        "station_type": "police",
+        "latitude": 8.121012921943933,
+        "longitude": 3.507561560686094,
+    },
+    {
+        "name": "Pindiga Police Station",
+        "station_type": "police",
+        "latitude": 9.989606667,
+        "longitude": 10.95911833,
+    },
+    {
+        "name": "Police Station Egana",
+        "station_type": "police",
+        "latitude": 5.8698417,
+        "longitude": 8.1226367,
+    },
+    {
+        "name": "Nigeria Police Division",
+        "station_type": "police",
+        "latitude": 7.794333333,
+        "longitude": 4.728916667,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Igboho",
+        "station_type": "police",
+        "latitude": 8.837846734715237,
+        "longitude": 3.760784508600887,
+    },
+    {
+        "name": "Ago Are Police Post",
+        "station_type": "police",
+        "latitude": 8.48858601851346,
+        "longitude": 3.416055784917009,
+    },
+    {
+        "name": "The Nigeria Police Akamkpa Area Command Headquarters Old Netim",
+        "station_type": "police",
+        "latitude": 5.349593333,
+        "longitude": 8.349801667,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Akamkpa Urban",
+        "station_type": "police",
+        "latitude": 5.315771667,
+        "longitude": 8.352613333,
+    },
+    {
+        "name": "The Nigeria Police Akamkpa Area Command Headquarters",
+        "station_type": "police",
+        "latitude": 5.349593333,
+        "longitude": 8.349801667,
+    },
+    {
+        "name": "Ipetu Ijesa Police Station",
+        "station_type": "police",
+        "latitude": 7.45681,
+        "longitude": 4.891873333,
+    },
+    {
+        "name": "Ekang Police Station",
+        "station_type": "police",
+        "latitude": 5.6755492,
+        "longitude": 8.8413901,
+    },
+    {
+        "name": "Police Post",
+        "station_type": "police",
+        "latitude": 5.7242017,
+        "longitude": 8.1721033,
+    },
+    {
+        "name": "Ayoyoa Police Post",
+        "station_type": "police",
+        "latitude": 5.724135,
+        "longitude": 8.17195,
+    },
+    {
+        "name": "Odajie Mbube Police Post",
+        "station_type": "police",
+        "latitude": 6.5549222,
+        "longitude": 8.8582091,
+    },
+    {
+        "name": "Ogburo Police Station",
+        "station_type": "police",
+        "latitude": 7.595975854396897,
+        "longitude": 4.125017698856509,
+    },
+    {
+        "name": "Amaeke Police Station",
+        "station_type": "police",
+        "latitude": 5.752976667,
+        "longitude": 7.681721667,
+    },
+    {
+        "name": "Yahe Police Station",
+        "station_type": "police",
+        "latitude": 6.471965,
+        "longitude": 8.5031333,
+    },
+    {
+        "name": "Ezekwe Okpodon Police Station",
+        "station_type": "police",
+        "latitude": 6.517911667,
+        "longitude": 8.42694,
+    },
+    {
+        "name": "Civil Defence",
+        "station_type": "police",
+        "latitude": 8.082769043887868,
+        "longitude": 4.398278388372189,
+    },
+    {
+        "name": "Iresaadu Police",
+        "station_type": "police",
+        "latitude": 8.083586625970858,
+        "longitude": 4.398207089683877,
+    },
+    {
+        "name": "Out Post Police Station Nassarawa",
+        "station_type": "police",
+        "latitude": 9.856777610413257,
+        "longitude": 4.628336814629256,
+    },
+    {
+        "name": "The Nigeria Police Force Divisional Headquarter Lanlate",
+        "station_type": "police",
+        "latitude": 7.606522869286981,
+        "longitude": 3.449466803430472,
+    },
+    {
+        "name": "Mashegu Police Division",
+        "station_type": "police",
+        "latitude": 9.927059201228248,
+        "longitude": 5.6427617,
+    },
+    {
+        "name": "Kuta Division Police Station Kobwa",
+        "station_type": "police",
+        "latitude": 9.853837128932195,
+        "longitude": 6.711807038653144,
+    },
+    {
+        "name": "Lagun Police Station",
+        "station_type": "police",
+        "latitude": 9.203051667,
+        "longitude": 5.590665,
+    },
+    {
+        "name": "Police Out Post Lefu",
+        "station_type": "police",
+        "latitude": 9.29544777048286,
+        "longitude": 6.780384632585081,
+    },
+    {
+        "name": "Songbe Police Post",
+        "station_type": "police",
+        "latitude": 7.753738333,
+        "longitude": 4.317028333,
+    },
+    {
+        "name": "Ede Police Division Ede",
+        "station_type": "police",
+        "latitude": 7.736293333,
+        "longitude": 4.435633333,
+    },
+    {
+        "name": "Nyuwar Police Station",
+        "station_type": "police",
+        "latitude": 9.77924,
+        "longitude": 11.75256,
+    },
+    {
+        "name": "Ikoyi Police Station Headquarters",
+        "station_type": "police",
+        "latitude": 8.24516450228698,
+        "longitude": 4.175913257255623,
+    },
+    {
+        "name": "State Headquarters Nigerian Police Force",
+        "station_type": "police",
+        "latitude": 10.290825,
+        "longitude": 11.14094333,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 6.6477,
+        "longitude": 9.02705,
+    },
+    {
+        "name": "Police Divisional Headquarters Ifon",
+        "station_type": "police",
+        "latitude": 7.877075,
+        "longitude": 4.467128333,
+    },
+    {
+        "name": "Ijabe Police Station",
+        "station_type": "police",
+        "latitude": 8.035453333,
+        "longitude": 4.684911667,
+    },
+    {
+        "name": "Police Station Geneva",
+        "station_type": "police",
+        "latitude": 5.863741667,
+        "longitude": 8.182936667,
+    },
+    {
+        "name": "Police Post Ayedaade LGA",
+        "station_type": "police",
+        "latitude": 7.587663333,
+        "longitude": 4.418468333,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Otte",
+        "station_type": "police",
+        "latitude": 8.311624316798227,
+        "longitude": 4.381312240457397,
+    },
+    {
+        "name": "Divisional Police Headquarters Effraya Stung Lga",
+        "station_type": "police",
+        "latitude": 5.905068333,
+        "longitude": 8.787478333,
+    },
+    {
+        "name": "Police Station Iree",
+        "station_type": "police",
+        "latitude": 7.938508333,
+        "longitude": 4.727451667,
+    },
+    {
+        "name": "The Nigeria Police Force A",
+        "station_type": "police",
+        "latitude": 7.9408,
+        "longitude": 4.742101667,
+    },
+    {
+        "name": "Igboora Police Station",
+        "station_type": "police",
+        "latitude": 7.436805499428255,
+        "longitude": 3.287108258970858,
+    },
+    {
+        "name": "Igbaye Police Station",
+        "station_type": "police",
+        "latitude": 8.030956667,
+        "longitude": 4.63372,
+    },
+    {
+        "name": "Ogbegun Favour Police Outpost",
+        "station_type": "police",
+        "latitude": 8.12514622365917,
+        "longitude": 4.280114500571745,
+    },
+    {
+        "name": "Ogungbade Police Division Ibadan",
+        "station_type": "police",
+        "latitude": 7.385572787228698,
+        "longitude": 4.006828415058283,
+    },
+    {
+        "name": "Nigeria Police Force Divisional Headquarters Ilero",
+        "station_type": "police",
+        "latitude": 8.089373333,
+        "longitude": 3.349521667,
+    },
+    {
+        "name": "Obubra Police Station",
+        "station_type": "police",
+        "latitude": 6.066838333,
+        "longitude": 8.337636667,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 9.8312067,
+        "longitude": 11.5123633,
+    },
+    {
+        "name": "Divisional Headquarter Tula",
+        "station_type": "police",
+        "latitude": 9.846066667,
+        "longitude": 11.47256333,
+    },
+    {
+        "name": "Eastern Ngwa Division Headquarters",
+        "station_type": "police",
+        "latitude": 5.151945,
+        "longitude": 7.4579,
+    },
+    {
+        "name": "Obite Police Station",
+        "station_type": "police",
+        "latitude": 5.243445693112555,
+        "longitude": 6.65559697913051,
+    },
+    {
+        "name": "Gombe Area Command",
+        "station_type": "police",
+        "latitude": 10.29947167,
+        "longitude": 11.16226167,
+    },
+    {
+        "name": "Iseyin Police Station",
+        "station_type": "police",
+        "latitude": 7.966314398856509,
+        "longitude": 3.607261051513462,
+    },
+    {
+        "name": "Nigeria Civil Defence Corps",
+        "station_type": "police",
+        "latitude": 7.983540068715236,
+        "longitude": 3.572380532428255,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 8.036259521943933,
+        "longitude": 3.344244931284765,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 8.032660642172631,
+        "longitude": 3.354802705170416,
+    },
+    {
+        "name": "Wahinem Police Post",
+        "station_type": "police",
+        "latitude": 6.72372,
+        "longitude": 8.452953333,
+    },
+    {
+        "name": "Station Araromi Ogunsipe",
+        "station_type": "police",
+        "latitude": 8.709296660686094,
+        "longitude": 3.709225019656953,
+    },
+    {
+        "name": "The Nigerian Police Okubuchi Irruan",
+        "station_type": "police",
+        "latitude": 6.4727536,
+        "longitude": 8.9814806,
+    },
+    {
+        "name": "Nigerian Police Station Okubuchi Irruan",
+        "station_type": "police",
+        "latitude": 6.472811667,
+        "longitude": 8.981573333,
+    },
+    {
+        "name": "Kara Police Station",
+        "station_type": "police",
+        "latitude": 7.606711147914792,
+        "longitude": 3.916108388372189,
+    },
+    {
+        "name": "Rehabilitation Police Station",
+        "station_type": "police",
+        "latitude": 7.560279398856509,
+        "longitude": 3.908950021372188,
+    },
+    {
+        "name": "Moniya Police Station",
+        "station_type": "police",
+        "latitude": 7.531043333,
+        "longitude": 3.910435,
+    },
+    {
+        "name": "Ugep Police Station",
+        "station_type": "police",
+        "latitude": 5.813685,
+        "longitude": 8.076618333,
+    },
+    {
+        "name": "The Nigeria Police Force Ugep",
+        "station_type": "police",
+        "latitude": 5.8137817,
+        "longitude": 8.0765167,
+    },
+    {
+        "name": "Nigerian Police Bode Osi",
+        "station_type": "police",
+        "latitude": 7.755528333,
+        "longitude": 4.225753333,
+    },
+    {
+        "name": "Police Outputs Liji",
+        "station_type": "police",
+        "latitude": 10.27673167,
+        "longitude": 11.23164667,
+    },
+    {
+        "name": "Lau Iyaka Police Outpost",
+        "station_type": "police",
+        "latitude": 9.905416667,
+        "longitude": 11.24512167,
+    },
+    {
+        "name": "Nigeria Police Divisional Headquarters Okpuala Ngwa",
+        "station_type": "police",
+        "latitude": 5.346285,
+        "longitude": 7.379411667,
+    },
+    {
+        "name": "Iyiowa Odekpe Police Station",
+        "station_type": "police",
+        "latitude": 6.107562436910304,
+        "longitude": 6.764533648593741,
+    },
+    {
+        "name": "Okwelle Police Divisoon Head Quarter",
+        "station_type": "police",
+        "latitude": 5.745660976226908,
+        "longitude": 7.182665757711618,
+    },
+    {
+        "name": "Imo River Police Post",
+        "station_type": "police",
+        "latitude": 4.887526667,
+        "longitude": 7.167776667,
+    },
+    {
+        "name": "Phase 6 Police Station Trans Ekulu",
+        "station_type": "police",
+        "latitude": 6.478091399707615,
+        "longitude": 7.484346222032531,
+    },
+    {
+        "name": "Awara Police Station",
+        "station_type": "police",
+        "latitude": 5.36301,
+        "longitude": 6.770205,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 5.710213333,
+        "longitude": 6.801158333,
+    },
+    {
+        "name": "Osse Motor Police Station",
+        "station_type": "police",
+        "latitude": 5.723433333,
+        "longitude": 6.794417818229212,
+    },
+    {
+        "name": "Ibagwa Aka Police Station",
+        "station_type": "police",
+        "latitude": 6.931576588728187,
+        "longitude": 7.390594592989157,
+    },
+    {
+        "name": "Ifelodun Police Post Isemi Ile",
+        "station_type": "police",
+        "latitude": 7.993512882630029,
+        "longitude": 3.370922376887867,
+    },
+    {
+        "name": "Ubakala Police Station",
+        "station_type": "police",
+        "latitude": 5.474366667,
+        "longitude": 7.436418333,
+    },
+    {
+        "name": "Nigerian Police Force Asabanka",
+        "station_type": "police",
+        "latitude": 5.05521,
+        "longitude": 8.424656667,
+    },
+    {
+        "name": "Nigerian Police Rifle Range Squad Station Asabanka",
+        "station_type": "police",
+        "latitude": 5.054278333,
+        "longitude": 8.419053333,
+    },
+    {
+        "name": "Nigeria Police Post Akwa Ikot Effanga",
+        "station_type": "police",
+        "latitude": 4.9736888,
+        "longitude": 8.4937766,
+    },
+    {
+        "name": "Alifokpa Police Station",
+        "station_type": "police",
+        "latitude": 6.8362133,
+        "longitude": 8.8069817,
+    },
+    {
+        "name": "Akobo Division",
+        "station_type": "police",
+        "latitude": 7.433514467571745,
+        "longitude": 3.943149371170415,
+    },
+    {
+        "name": "Bage Out Forces",
+        "station_type": "police",
+        "latitude": 10.95130667,
+        "longitude": 11.382825,
+    },
+    {
+        "name": "Iba Police Station",
+        "station_type": "police",
+        "latitude": 7.965931667,
+        "longitude": 4.706823333,
+    },
+    {
+        "name": "Kobuwa Police Station",
+        "station_type": "police",
+        "latitude": 10.02395333,
+        "longitude": 11.15612833,
+    },
+    {
+        "name": "Gbongan Police Station",
+        "station_type": "police",
+        "latitude": 7.470476667,
+        "longitude": 4.370228333,
+    },
+    {
+        "name": "Cattle Ranch Police Post",
+        "station_type": "police",
+        "latitude": 6.3750983,
+        "longitude": 9.37813,
+    },
+    {
+        "name": "Ijaye Police Station",
+        "station_type": "police",
+        "latitude": 7.629286120228699,
+        "longitude": 3.849530082058283,
+    },
+    {
+        "name": "Polic Station",
+        "station_type": "police",
+        "latitude": 6.1606384,
+        "longitude": 9.0220742,
+    },
+    {
+        "name": "Danare Police Station",
+        "station_type": "police",
+        "latitude": 6.0140133,
+        "longitude": 9.0601033,
+    },
+    {
+        "name": "Ozu Abam Police Station",
+        "station_type": "police",
+        "latitude": 5.58879,
+        "longitude": 7.728765,
+    },
+    {
+        "name": "Ojongbodu Police Station",
+        "station_type": "police",
+        "latitude": 7.850030464713019,
+        "longitude": 3.909032227114349,
+    },
+    {
+        "name": "Alaseyori Police Station",
+        "station_type": "police",
+        "latitude": 7.638760655515679,
+        "longitude": 3.804247199428255,
+    },
+    {
+        "name": "NPCF Post Itagunmodi",
+        "station_type": "police",
+        "latitude": 7.530116667,
+        "longitude": 4.648508333,
+    },
+    {
+        "name": "Ndoni Police Station",
+        "station_type": "police",
+        "latitude": 5.545833092208784,
+        "longitude": 6.59415572475104,
+    },
+    {
+        "name": "Nigeria Police Station Akanran Head Quarters",
+        "station_type": "police",
+        "latitude": 7.279959467571746,
+        "longitude": 4.025476120228698,
+    },
+    {
+        "name": "Isiala Oboro Police Station",
+        "station_type": "police",
+        "latitude": 5.407818333,
+        "longitude": 7.566641667,
+    },
+    {
+        "name": "Mamu Police Station",
+        "station_type": "police",
+        "latitude": 7.087656038170415,
+        "longitude": 3.910699972313906,
+    },
+    {
+        "name": "Police Divisional Headquarters Isiebu",
+        "station_type": "police",
+        "latitude": 5.706613914935596,
+        "longitude": 7.214139333086888,
+    },
+    {
+        "name": "Azumini Police Station",
+        "station_type": "police",
+        "latitude": 4.944928333,
+        "longitude": 7.48115,
+    },
+    {
+        "name": "Akwete Nigeria Police",
+        "station_type": "police",
+        "latitude": 4.888095,
+        "longitude": 7.362585,
+    },
+    {
+        "name": "The Nigeria Police Station Ndiolumbe",
+        "station_type": "police",
+        "latitude": 5.265438333,
+        "longitude": 7.476021667,
+    },
+    {
+        "name": "Abia State University Uturu Police Station",
+        "station_type": "police",
+        "latitude": 5.829015,
+        "longitude": 7.395431667,
+    },
+    {
+        "name": "Police Post",
+        "station_type": "police",
+        "latitude": 5.428161667,
+        "longitude": 6.886891667,
+    },
+    {
+        "name": "Ofolora Police Station",
+        "station_type": "police",
+        "latitude": 5.422306358510871,
+        "longitude": 6.928042818229212,
+    },
+    {
+        "name": "Federal Housing Police Post",
+        "station_type": "police",
+        "latitude": 5.512445,
+        "longitude": 7.011916667,
+    },
+    {
+        "name": "Police Post Ikun Ekiti",
+        "station_type": "police",
+        "latitude": 7.994223333,
+        "longitude": 5.199897006666052,
+    },
+    {
+        "name": "Obehie Police Station",
+        "station_type": "police",
+        "latitude": 4.945391667,
+        "longitude": 7.261503333,
+    },
+    {
+        "name": "Obie Police Station Obie Community",
+        "station_type": "police",
+        "latitude": 5.391148539346698,
+        "longitude": 6.675689337181624,
+    },
+    {
+        "name": "Amper Police Outpost",
+        "station_type": "police",
+        "latitude": 9.354275,
+        "longitude": 9.698008333,
+    },
+    {
+        "name": "Divisional Police Head Quaters",
+        "station_type": "police",
+        "latitude": 5.417891667,
+        "longitude": 7.011866667,
+    },
+    {
+        "name": "Umuokanne Police Station",
+        "station_type": "police",
+        "latitude": 5.3515783,
+        "longitude": 6.90331,
+    },
+    {
+        "name": "Nigerian Police Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 7.801755786382004,
+        "longitude": 5.372120184801477,
+    },
+    {
+        "name": "The Nigeria Police Ologede Divisional Police Headquarters Ikere Road",
+        "station_type": "police",
+        "latitude": 7.580492206699631,
+        "longitude": 5.214026855361202,
+    },
+    {
+        "name": "Fagbohun Police Station",
+        "station_type": "police",
+        "latitude": 7.547895131887343,
+        "longitude": 5.217541885029036,
+    },
+    {
+        "name": "Bum Police Station",
+        "station_type": "police",
+        "latitude": 9.706231667,
+        "longitude": 8.670576667,
+    },
+    {
+        "name": "Quan An Pan Police Station",
+        "station_type": "police",
+        "latitude": 8.9416717,
+        "longitude": 9.25647,
+    },
+    {
+        "name": "Kwalla Police Rural Station Office",
+        "station_type": "police",
+        "latitude": 8.90446,
+        "longitude": 9.291105,
+    },
+    {
+        "name": "Police Divisional Head Quarters",
+        "station_type": "police",
+        "latitude": 9.089373333,
+        "longitude": 9.95645,
+    },
+    {
+        "name": "Police Divisional Headquarters Umabor",
+        "station_type": "police",
+        "latitude": 6.813166667,
+        "longitude": 7.45678,
+    },
+    {
+        "name": "Kassa Out station",
+        "station_type": "police",
+        "latitude": 9.587015,
+        "longitude": 8.898035,
+    },
+    {
+        "name": "Gwaria Police Station Gwaria",
+        "station_type": "police",
+        "latitude": 9.39288,
+        "longitude": 3.85674,
+    },
+    {
+        "name": "Moshe Gada Police Station",
+        "station_type": "police",
+        "latitude": 9.21428166666667,
+        "longitude": 3.86444833333333,
+    },
+    {
+        "name": "Opi Uno Police Post",
+        "station_type": "police",
+        "latitude": 6.763858529989228,
+        "longitude": 7.462214802402011,
+    },
+    {
+        "name": "Okpuje Police Station",
+        "station_type": "police",
+        "latitude": 6.908376202034689,
+        "longitude": 7.287302805456228,
+    },
+    {
+        "name": "Divisional Police Head Quarters Abakpa Nike",
+        "station_type": "police",
+        "latitude": 6.508285779628388,
+        "longitude": 7.51532139448876,
+    },
+    {
+        "name": "Iziogo Police Station",
+        "station_type": "police",
+        "latitude": 6.643551667,
+        "longitude": 8.204405,
+    },
+    {
+        "name": "Hillcrest Police Post",
+        "station_type": "police",
+        "latitude": 6.449793333,
+        "longitude": 7.428345,
+    },
+    {
+        "name": "Ogwu Eze Police Station",
+        "station_type": "police",
+        "latitude": 5.963196667,
+        "longitude": 7.966485,
+    },
+    {
+        "name": "The Nigeria Police Igbo Etiti Division Ogbede",
+        "station_type": "police",
+        "latitude": 6.67755931177873,
+        "longitude": 7.372641233847394,
+    },
+    {
+        "name": "Oji Police Station",
+        "station_type": "police",
+        "latitude": 8.046961667,
+        "longitude": 5.144211667,
+    },
+    {
+        "name": "Unadu Police Post",
+        "station_type": "police",
+        "latitude": 7.003227272121027,
+        "longitude": 7.365493000902406,
+    },
+    {
+        "name": "Inyi Police Station",
+        "station_type": "police",
+        "latitude": 6.117153310916094,
+        "longitude": 7.282906382673896,
+    },
+    {
+        "name": "Court Area Station",
+        "station_type": "police",
+        "latitude": 6.034253333,
+        "longitude": 7.820568333,
+    },
+    {
+        "name": "Affa Police Station",
+        "station_type": "police",
+        "latitude": 6.601507426184194,
+        "longitude": 7.323100630750597,
+    },
+    {
+        "name": "Iwollo Police Post",
+        "station_type": "police",
+        "latitude": 6.431518939070966,
+        "longitude": 7.270152185880721,
+    },
+    {
+        "name": "Umuoke Police Post",
+        "station_type": "police",
+        "latitude": 5.570326427716596,
+        "longitude": 7.37951,
+    },
+    {
+        "name": "Isuochi Divisional Police Headquarters",
+        "station_type": "police",
+        "latitude": 5.981331667,
+        "longitude": 7.403015,
+    },
+    {
+        "name": "Divisional Headquaters Isuochi",
+        "station_type": "police",
+        "latitude": 5.981876667,
+        "longitude": 7.402876667,
+    },
+    {
+        "name": "Ugwunagbo Police Station",
+        "station_type": "police",
+        "latitude": 5.021735,
+        "longitude": 7.354328333,
+    },
+    {
+        "name": "Ohaji Egbema Area Comand",
+        "station_type": "police",
+        "latitude": 5.481461667,
+        "longitude": 6.794408333,
+    },
+    {
+        "name": "Dada Estate Division",
+        "station_type": "police",
+        "latitude": 7.787041667,
+        "longitude": 4.521715,
+    },
+    {
+        "name": "Dagjolu Ataoja Police Post",
+        "station_type": "police",
+        "latitude": 7.847845,
+        "longitude": 4.607255,
+    },
+    {
+        "name": "Angware Division Head Quarter",
+        "station_type": "police",
+        "latitude": 9.9902767,
+        "longitude": 9.1058467,
+    },
+    {
+        "name": "Police Outpost Ajaga",
+        "station_type": "police",
+        "latitude": 8.34544362171651,
+        "longitude": 7.603666536735883,
+    },
+    {
+        "name": "Divisional Police Headquarters Anaku",
+        "station_type": "police",
+        "latitude": 6.481286929661275,
+        "longitude": 6.937061796989332,
+    },
+    {
+        "name": "Niger Cem Police Station",
+        "station_type": "police",
+        "latitude": 6.550653333,
+        "longitude": 7.783041667,
+    },
+    {
+        "name": "Ndingshan Police Out station",
+        "station_type": "police",
+        "latitude": 8.581535,
+        "longitude": 9.863378333,
+    },
+    {
+        "name": "Oso Police Station",
+        "station_type": "police",
+        "latitude": 5.86727,
+        "longitude": 7.808101667,
+    },
+    {
+        "name": "Malale Police Out Post",
+        "station_type": "police",
+        "latitude": 10.070132499300419,
+        "longitude": 4.493609842558266,
+    },
+    {
+        "name": "Bangi Police Station",
+        "station_type": "police",
+        "latitude": 10.8245532,
+        "longitude": 5.8176305,
+    },
+    {
+        "name": "9th Mile Police Station",
+        "station_type": "police",
+        "latitude": 6.424933103344136,
+        "longitude": 7.407127840261041,
+    },
+    {
+        "name": "The Police Post",
+        "station_type": "police",
+        "latitude": 6.236749361285848,
+        "longitude": 7.461805509412853,
+    },
+    {
+        "name": "Nasko Police Station",
+        "station_type": "police",
+        "latitude": 10.494318333333334,
+        "longitude": 4.902158333333333,
+    },
+    {
+        "name": "Oke Owa Police Station",
+        "station_type": "police",
+        "latitude": 7.898570540941385,
+        "longitude": 5.10801593564614,
+    },
+    {
+        "name": "Umuoka Police Station",
+        "station_type": "police",
+        "latitude": 6.625138333,
+        "longitude": 7.384856667,
+    },
+    {
+        "name": "Are Police Station",
+        "station_type": "police",
+        "latitude": 7.70300613070613,
+        "longitude": 5.304823188687385,
+    },
+    {
+        "name": "Awo Police Station",
+        "station_type": "police",
+        "latitude": 7.71092,
+        "longitude": 5.150213333,
+    },
+    {
+        "name": "Igede Police Station",
+        "station_type": "police",
+        "latitude": 7.67808564347213,
+        "longitude": 5.122997172553609,
+    },
+    {
+        "name": "Iyin Police Out Post",
+        "station_type": "police",
+        "latitude": 7.660193333,
+        "longitude": 5.145238333,
+    },
+    {
+        "name": "Ayegunle Police Station",
+        "station_type": "police",
+        "latitude": 7.844678857112618,
+        "longitude": 5.107232957587199,
+    },
+    {
+        "name": "Afao Police Station",
+        "station_type": "police",
+        "latitude": 7.505625624299218,
+        "longitude": 5.229287858308552,
+    },
+    {
+        "name": "Divisional Headquarters Mikang Tunkus",
+        "station_type": "police",
+        "latitude": 9.015245,
+        "longitude": 9.6049967,
+    },
+    {
+        "name": "Nigeria A Divisions Police Station",
+        "station_type": "police",
+        "latitude": 7.792086007726004,
+        "longitude": 5.512602549081684,
+    },
+    {
+        "name": "Nigeria Police Divisional Headquarter Ijesa Isu Road Ikole Ekiti",
+        "station_type": "police",
+        "latitude": 7.769182043654125,
+        "longitude": 5.509100120865665,
+    },
+    {
+        "name": "The Police Area Command Headquarters Ijesa Isu",
+        "station_type": "police",
+        "latitude": 7.772961425484172,
+        "longitude": 5.509181847395662,
+    },
+    {
+        "name": "Omuo Ekiti Divisional Police Station",
+        "station_type": "police",
+        "latitude": 7.746369953479446,
+        "longitude": 5.717238658157948,
+    },
+    {
+        "name": "Ikere Area Command Headquarters Police Station",
+        "station_type": "police",
+        "latitude": 7.494831667,
+        "longitude": 5.207233333,
+    },
+    {
+        "name": "Ikere Divisional Head Quarter Police Station",
+        "station_type": "police",
+        "latitude": 7.489431106065042,
+        "longitude": 5.221526659515774,
+    },
+    {
+        "name": "Ayede Police Station",
+        "station_type": "police",
+        "latitude": 7.904920589428356,
+        "longitude": 5.328227183983302,
+    },
+    {
+        "name": "Ayede Town Police Station",
+        "station_type": "police",
+        "latitude": 7.8925,
+        "longitude": 5.333895,
+    },
+    {
+        "name": "Division Headquarters Ipoti Ekiti",
+        "station_type": "police",
+        "latitude": 7.872815616554275,
+        "longitude": 5.073719442076261,
+    },
+    {
+        "name": "Nigeria Police Station Igbemo Ekiti",
+        "station_type": "police",
+        "latitude": 7.679531667,
+        "longitude": 5.385646667,
+    },
+    {
+        "name": "Divisional Head Quaters Police Station",
+        "station_type": "police",
+        "latitude": 5.897823333,
+        "longitude": 7.935926667,
+    },
+    {
+        "name": "Ita Odo Police Station",
+        "station_type": "police",
+        "latitude": 7.680611233856219,
+        "longitude": 4.924683326034459,
+    },
+    {
+        "name": "The Nigeria Police State Headquarters Ado Ekiti",
+        "station_type": "police",
+        "latitude": 7.661772794044849,
+        "longitude": 5.20588714416882,
+    },
+    {
+        "name": "Kuba Police Station",
+        "station_type": "police",
+        "latitude": 9.4153583,
+        "longitude": 8.9281133,
+    },
+    {
+        "name": "Divisional Headquarters Iye Ilejemeje",
+        "station_type": "police",
+        "latitude": 7.95037913401562,
+        "longitude": 5.238764427145182,
+    },
+    {
+        "name": "Eporo Police Station",
+        "station_type": "police",
+        "latitude": 7.330648927697527,
+        "longitude": 5.503513000818174,
+    },
+    {
+        "name": "Nigeria Police Station",
+        "station_type": "police",
+        "latitude": 7.624306662700501,
+        "longitude": 5.386448908508349,
+    },
+    {
+        "name": "Ijan Police Post",
+        "station_type": "police",
+        "latitude": 7.611720546055629,
+        "longitude": 5.385571384858994,
+    },
+    {
+        "name": "Afao Police Station",
+        "station_type": "police",
+        "latitude": 7.695871667,
+        "longitude": 5.308578333,
+    },
+    {
+        "name": "Area Command Police Station",
+        "station_type": "police",
+        "latitude": 7.825347415214601,
+        "longitude": 5.064986095233764,
+    },
+    {
+        "name": "Police Divisional Headquarter Ijero Ekiti",
+        "station_type": "police",
+        "latitude": 7.825310749043589,
+        "longitude": 5.065814807714299,
+    },
+    {
+        "name": "Gada Police Station",
+        "station_type": "police",
+        "latitude": 10.03845167,
+        "longitude": 9.111443333,
+    },
+    {
+        "name": "University Of Nigeria Teaching Hospital Police Post",
+        "station_type": "police",
+        "latitude": 6.294670085143148,
+        "longitude": 7.467173210315259,
+    },
+    {
+        "name": "Ezi Nze Police Station",
+        "station_type": "police",
+        "latitude": 6.651799449117207,
+        "longitude": 7.285499802402009,
+    },
+    {
+        "name": "Yelwa Police Station",
+        "station_type": "police",
+        "latitude": 8.811376667,
+        "longitude": 9.659111667,
+    },
+    {
+        "name": "Yelwa Police Station 1",
+        "station_type": "police",
+        "latitude": 8.81152,
+        "longitude": 9.659096667,
+    },
+    {
+        "name": "Yelwa Police Station 2",
+        "station_type": "police",
+        "latitude": 8.81145,
+        "longitude": 9.659105,
+    },
+    {
+        "name": "Awkunanaw Police Station",
+        "station_type": "police",
+        "latitude": 6.382241667,
+        "longitude": 7.493341667,
+    },
+    {
+        "name": "Butura Kampani Out post",
+        "station_type": "police",
+        "latitude": 9.3365217,
+        "longitude": 8.9346267,
+    },
+    {
+        "name": "Mangun Police Station",
+        "station_type": "police",
+        "latitude": 9.2227367,
+        "longitude": 9.1544183,
+    },
+    {
+        "name": "Mushu Police Outpost",
+        "station_type": "police",
+        "latitude": 9.2866617,
+        "longitude": 9.090165,
+    },
+    {
+        "name": "Dadinkowa Police Station",
+        "station_type": "police",
+        "latitude": 8.7532467,
+        "longitude": 9.8765267,
+    },
+    {
+        "name": "Kalong Police Station",
+        "station_type": "police",
+        "latitude": 8.712718333,
+        "longitude": 9.508535,
+    },
+    {
+        "name": "Shimankar Police Station",
+        "station_type": "police",
+        "latitude": 8.628465,
+        "longitude": 9.523815,
+    },
+    {
+        "name": "Dokan Kasuwa Police Station",
+        "station_type": "police",
+        "latitude": 9.093715,
+        "longitude": 9.32095,
+    },
+    {
+        "name": "Panyam Out station",
+        "station_type": "police",
+        "latitude": 9.408726667,
+        "longitude": 9.215298333,
+    },
+    {
+        "name": "Dorowa Police Station",
+        "station_type": "police",
+        "latitude": 9.5260367,
+        "longitude": 8.9825433,
+    },
+    {
+        "name": "Police Station Kwal",
+        "station_type": "police",
+        "latitude": 9.3696233,
+        "longitude": 9.6186583,
+    },
+    {
+        "name": "Police Outpost Kwogo hoss",
+        "station_type": "police",
+        "latitude": 9.61447,
+        "longitude": 8.729251667,
+    },
+    {
+        "name": "The Nigeria Police Out post Kwogo Hoss",
+        "station_type": "police",
+        "latitude": 9.6144483,
+        "longitude": 8.7293267,
+    },
+    {
+        "name": "Bukuru Police Division",
+        "station_type": "police",
+        "latitude": 9.796163333,
+        "longitude": 8.86704,
+    },
+    {
+        "name": "Police Station Turaki",
+        "station_type": "police",
+        "latitude": 8.609918333,
+        "longitude": 9.706863333,
+    },
+    {
+        "name": "Police Station Yamini",
+        "station_type": "police",
+        "latitude": 8.52561,
+        "longitude": 9.66035,
+    },
+    {
+        "name": "Lakushi Police Station",
+        "station_type": "police",
+        "latitude": 8.558793333,
+        "longitude": 9.647895,
+    },
+    {
+        "name": "Ecwa Staff Police Station",
+        "station_type": "police",
+        "latitude": 9.953825,
+        "longitude": 8.8548667,
+    },
+    {
+        "name": "The Nigeria Police Nepa Out station",
+        "station_type": "police",
+        "latitude": 9.9897633,
+        "longitude": 8.8512467,
+    },
+    {
+        "name": "The Nigeria Police Force",
+        "station_type": "police",
+        "latitude": 9.32417,
+        "longitude": 9.4331933,
+    },
+    {
+        "name": "The Nigeria Police Plateau Central Area Command Pankshin",
+        "station_type": "police",
+        "latitude": 9.3237717,
+        "longitude": 9.4343983,
+    },
+    {
+        "name": "Gwan Police Out post",
+        "station_type": "police",
+        "latitude": 9.019735,
+        "longitude": 9.26403,
+    },
+    {
+        "name": "The Nigerian Police Divisional Headquarters Anglo Jos",
+        "station_type": "police",
+        "latitude": 9.873088333,
+        "longitude": 8.881498333,
+    },
+    {
+        "name": "Abattoir Police",
+        "station_type": "police",
+        "latitude": 9.884186667,
+        "longitude": 8.886288333,
+    },
+    {
+        "name": "Bisichi Police Station",
+        "station_type": "police",
+        "latitude": 9.715163333,
+        "longitude": 8.907163333,
+    },
+    {
+        "name": "Gwamlar Police Station",
+        "station_type": "police",
+        "latitude": 9.4175984,
+        "longitude": 9.7903203,
+    },
+    {
+        "name": "The Nigerian Police Station Miango Bassa Division",
+        "station_type": "police",
+        "latitude": 9.8511167,
+        "longitude": 8.6864683,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Shendam",
+        "station_type": "police",
+        "latitude": 8.875246667,
+        "longitude": 9.547291667,
+    },
+    {
+        "name": "Abwor Dyis Police Station",
+        "station_type": "police",
+        "latitude": 9.2587033,
+        "longitude": 9.2811133,
+    },
+    {
+        "name": "Gidan Dabat Police Station",
+        "station_type": "police",
+        "latitude": 8.717373333,
+        "longitude": 9.23419,
+    },
+    {
+        "name": "Rural Police Station Kwande",
+        "station_type": "police",
+        "latitude": 8.70832,
+        "longitude": 9.298405,
+    },
+    {
+        "name": "The Nigeria Police Heipang Station",
+        "station_type": "police",
+        "latitude": 9.635475,
+        "longitude": 8.88855,
+    },
+    {
+        "name": "Bakin Chiyawa Police Post",
+        "station_type": "police",
+        "latitude": 8.611821667,
+        "longitude": 9.290026667,
+    },
+    {
+        "name": "Ikngwakap Police Station",
+        "station_type": "police",
+        "latitude": 9.159861667,
+        "longitude": 9.047278333,
+    },
+    {
+        "name": "Police Outpost Garwaza",
+        "station_type": "police",
+        "latitude": 9.3373617,
+        "longitude": 8.8697417,
+    },
+    {
+        "name": "The Nigerian Police Outpost D Division Marit",
+        "station_type": "police",
+        "latitude": 9.47252,
+        "longitude": 8.9920283,
+    },
+    {
+        "name": "Kafel Police Station",
+        "station_type": "police",
+        "latitude": 9.2265901,
+        "longitude": 9.915148,
+    },
+    {
+        "name": "Far Doki Police Station",
+        "station_type": "police",
+        "latitude": 9.39595,
+        "longitude": 6.8382233,
+    },
+    {
+        "name": "The Nigerian Police Station Kuka",
+        "station_type": "police",
+        "latitude": 8.443273333,
+        "longitude": 9.696106667,
+    },
+    {
+        "name": "Fuka Police",
+        "station_type": "police",
+        "latitude": 9.647951927943337,
+        "longitude": 6.937469428928328,
+    },
+    {
+        "name": "Police Station Kadarko",
+        "station_type": "police",
+        "latitude": 8.9087417,
+        "longitude": 10.0217283,
+    },
+    {
+        "name": "Dogon Ruwa Police Station",
+        "station_type": "police",
+        "latitude": 9.598895,
+        "longitude": 10.09430167,
+    },
+    {
+        "name": "Alama Police Station",
+        "station_type": "police",
+        "latitude": 9.93633,
+        "longitude": 8.863318333,
+    },
+    {
+        "name": "Alheri Police Station Jos",
+        "station_type": "police",
+        "latitude": 9.93682,
+        "longitude": 8.870578333,
+    },
+    {
+        "name": "Nigerian Police Post Kawel",
+        "station_type": "police",
+        "latitude": 9.203588333,
+        "longitude": 9.066071667,
+    },
+    {
+        "name": "Fwavei Police Station",
+        "station_type": "police",
+        "latitude": 9.84743,
+        "longitude": 8.8937567,
+    },
+    {
+        "name": "Jebbu Bassa Station",
+        "station_type": "police",
+        "latitude": 9.9541483,
+        "longitude": 8.749425,
+    },
+    {
+        "name": "Nigeria Police Station Kurgwi",
+        "station_type": "police",
+        "latitude": 8.780556667,
+        "longitude": 9.293508333,
+    },
+    {
+        "name": "Anguwan Hakimi Police Station",
+        "station_type": "police",
+        "latitude": 9.6095033,
+        "longitude": 9.9641717,
+    },
+    {
+        "name": "The Nigeria Police Station Pueship",
+        "station_type": "police",
+        "latitude": 8.812505,
+        "longitude": 9.44828,
+    },
+    {
+        "name": "Police Outpost Langai",
+        "station_type": "police",
+        "latitude": 9.62597,
+        "longitude": 9.2149833,
+    },
+    {
+        "name": "Nigeria Police Out post Takkas",
+        "station_type": "police",
+        "latitude": 9.4617567,
+        "longitude": 9.3675867,
+    },
+    {
+        "name": "Richa Police Outposts",
+        "station_type": "police",
+        "latitude": 9.124546667,
+        "longitude": 8.872921667,
+    },
+    {
+        "name": "Dengi Police Station",
+        "station_type": "police",
+        "latitude": 9.37393,
+        "longitude": 9.9644483,
+    },
+    {
+        "name": "Police Station Ajali",
+        "station_type": "police",
+        "latitude": 6.046235152405242,
+        "longitude": 7.210203648458619,
+    },
+    {
+        "name": "Post Nigeria Police Station Gidan Adamu",
+        "station_type": "police",
+        "latitude": 8.936778333,
+        "longitude": 9.457298333,
+    },
+    {
+        "name": "Nigeria Police Out post Gidan Adamu 1",
+        "station_type": "police",
+        "latitude": 8.936953333,
+        "longitude": 9.457338333,
+    },
+    {
+        "name": "Nigeria Police Out post Gidan Adamu 2",
+        "station_type": "police",
+        "latitude": 8.936911667,
+        "longitude": 9.457211667,
+    },
+    {
+        "name": "Bwonpe Police Station",
+        "station_type": "police",
+        "latitude": 9.300018333,
+        "longitude": 9.220131667,
+    },
+    {
+        "name": "Demshin Police Out station 1",
+        "station_type": "police",
+        "latitude": 8.68995,
+        "longitude": 9.445485,
+    },
+    {
+        "name": "Demshin Police Out station 2",
+        "station_type": "police",
+        "latitude": 8.689876667,
+        "longitude": 9.445271667,
+    },
+    {
+        "name": "Demshin Police Out station 3",
+        "station_type": "police",
+        "latitude": 8.689636667,
+        "longitude": 9.445321667,
+    },
+    {
+        "name": "The Nigeria Police Out post",
+        "station_type": "police",
+        "latitude": 8.689985,
+        "longitude": 9.380611667,
+    },
+    {
+        "name": "The Nigeria Police Out post Turniang 1",
+        "station_type": "police",
+        "latitude": 8.690235,
+        "longitude": 9.380431667,
+    },
+    {
+        "name": "The Nigeria Police Out post Turniang 2",
+        "station_type": "police",
+        "latitude": 8.690223333,
+        "longitude": 9.38059,
+    },
+    {
+        "name": "Flaming Police Station",
+        "station_type": "police",
+        "latitude": 9.912271667,
+        "longitude": 8.944415,
+    },
+    {
+        "name": "Nigerian Police Agba Police Station",
+        "station_type": "police",
+        "latitude": 6.219983333,
+        "longitude": 7.857076667,
+    },
+    {
+        "name": "Iboko Police Station",
+        "station_type": "police",
+        "latitude": 6.41623,
+        "longitude": 8.236113333,
+    },
+    {
+        "name": "Kataeregi Police Station",
+        "station_type": "police",
+        "latitude": 9.364208221033,
+        "longitude": 6.289770396176692,
+    },
+    {
+        "name": "Gwiwan Kogi Police Station",
+        "station_type": "police",
+        "latitude": 8.255221971873274,
+        "longitude": 10.068896467308047,
+    },
+    {
+        "name": "Sansani Police Station",
+        "station_type": "police",
+        "latitude": 8.43098,
+        "longitude": 10.192511666666666,
+    },
+    {
+        "name": "Police Out Post Jaagi",
+        "station_type": "police",
+        "latitude": 9.148861154639569,
+        "longitude": 5.225796028928326,
+    },
+    {
+        "name": "Nigeria Police Post Ogbodo Ukehe",
+        "station_type": "police",
+        "latitude": 6.660303204337466,
+        "longitude": 7.414134024336949,
+    },
+    {
+        "name": "Nigeria Police Kinafa Outpost",
+        "station_type": "police",
+        "latitude": 10.42756,
+        "longitude": 11.43663833,
+    },
+    {
+        "name": "Urugbam Police Station",
+        "station_type": "police",
+        "latitude": 5.7333917,
+        "longitude": 7.92629,
+    },
+    {
+        "name": "The Nigeria Police Division Headquarter Challenge",
+        "station_type": "police",
+        "latitude": 7.337848333,
+        "longitude": 3.870068975172632,
+    },
+    {
+        "name": "The Nigeria Police Station Toll Gate Ibadan",
+        "station_type": "police",
+        "latitude": 7.321671844459613,
+        "longitude": 3.87358342940133,
+    },
+    {
+        "name": "The Nigeria Police Idi Ayunre Division",
+        "station_type": "police",
+        "latitude": 7.240587841600886,
+        "longitude": 3.85816625665917,
+    },
+    {
+        "name": "Oban Police Station",
+        "station_type": "police",
+        "latitude": 5.33144,
+        "longitude": 8.5956817,
+    },
+    {
+        "name": "Jb Farm Police Post",
+        "station_type": "police",
+        "latitude": 5.3556533,
+        "longitude": 8.6072533,
+    },
+    {
+        "name": "The Nigerian Police Force",
+        "station_type": "police",
+        "latitude": 7.619956667,
+        "longitude": 4.728996667,
+    },
+    {
+        "name": "Police Station Kuta",
+        "station_type": "police",
+        "latitude": 7.646015,
+        "longitude": 4.28768,
+    },
+    {
+        "name": "Police Divisional Headquarters Awo",
+        "station_type": "police",
+        "latitude": 7.76941,
+        "longitude": 4.389923333,
+    },
+    {
+        "name": "Nahuche Police Station Zakun Bello Road Laminga",
+        "station_type": "police",
+        "latitude": 8.684468333333333,
+        "longitude": 7.810673333333334,
+    },
+    {
+        "name": "The Nigeria Police Station Assakio",
+        "station_type": "police",
+        "latitude": 8.5977899472457,
+        "longitude": 8.851299319933748,
+    },
+    {
+        "name": "Idominansi Police Station",
+        "station_type": "police",
+        "latitude": 7.69474,
+        "longitude": 4.705608333,
+    },
+    {
+        "name": "Dajo Police Station",
+        "station_type": "police",
+        "latitude": 7.665765690624425,
+        "longitude": 9.793751925240517,
+    },
+    {
+        "name": "Nigeria Police Gindin Waya Out Station",
+        "station_type": "police",
+        "latitude": 8.078067379928305,
+        "longitude": 9.787711118468245,
+    },
+    {
+        "name": "Nigeria Police Divisional HQ Donga",
+        "station_type": "police",
+        "latitude": 7.722140615544253,
+        "longitude": 10.050700135257474,
+    },
+    {
+        "name": "Gbeji Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 7.885836606489367,
+        "longitude": 9.461609702282614,
+    },
+    {
+        "name": "Abiriba Divisional Police Headquarters",
+        "station_type": "police",
+        "latitude": 5.706136667,
+        "longitude": 7.737551667,
+    },
+    {
+        "name": "Kulani Police Station",
+        "station_type": "police",
+        "latitude": 9.81463,
+        "longitude": 11.629075,
+    },
+    {
+        "name": "Komu Police Station",
+        "station_type": "police",
+        "latitude": 8.228582016798226,
+        "longitude": 3.207080740457396,
+    },
+    {
+        "name": "The Nigeria Police Ajido",
+        "station_type": "police",
+        "latitude": 7.463836667,
+        "longitude": 4.762385,
+    },
+    {
+        "name": "Nigeria Police Force Nkwagu",
+        "station_type": "police",
+        "latitude": 6.248541667,
+        "longitude": 8.107661667,
+    },
+    {
+        "name": "Nigerian Police Post Oluponna",
+        "station_type": "police",
+        "latitude": 7.605408333,
+        "longitude": 4.189538333,
+    },
+    {
+        "name": "Ivo Divisional Police Headquarters Akanu",
+        "station_type": "police",
+        "latitude": 5.927793333,
+        "longitude": 7.557778333,
+    },
+    {
+        "name": "Police Station",
+        "station_type": "police",
+        "latitude": 7.533146667,
+        "longitude": 4.723273333,
+    },
+    {
+        "name": "Epe Police Post",
+        "station_type": "police",
+        "latitude": 7.542016667,
+        "longitude": 4.694313333,
+    },
+    {
+        "name": "Odogbo Ijesha Police Station",
+        "station_type": "police",
+        "latitude": 7.520796667,
+        "longitude": 4.762781667,
+    },
+    {
+        "name": "Divisional Police Station Ugwogo",
+        "station_type": "police",
+        "latitude": 6.624325976048279,
+        "longitude": 7.564899296848187,
+    },
+    {
+        "name": "Police Station Ikun",
+        "station_type": "police",
+        "latitude": 5.651605,
+        "longitude": 7.9647367,
+    },
+    {
+        "name": "Aziaba Police Station",
+        "station_type": "police",
+        "latitude": 6.237907132641271,
+        "longitude": 7.619845166432158,
+    },
+    {
+        "name": "The Nigeria Police Igbo Eze North Division Ogrute Enugu Ezike",
+        "station_type": "police",
+        "latitude": 6.973297889469802,
+        "longitude": 7.449739629945781,
+    },
+    {
+        "name": "Ohom Orba Police Station",
+        "station_type": "police",
+        "latitude": 6.862291224245983,
+        "longitude": 7.468230923379529,
+    },
+    {
+        "name": "Orba Police Station Udenu Division",
+        "station_type": "police",
+        "latitude": 6.85817289089981,
+        "longitude": 7.461214345619677,
+    },
+    {
+        "name": "Ndufu Ameagu Village Police Station",
+        "station_type": "police",
+        "latitude": 6.113261667,
+        "longitude": 8.156935,
+    },
+    {
+        "name": "Okpoduma Police Station",
+        "station_type": "police",
+        "latitude": 6.51281,
+        "longitude": 8.16158,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Umuchukwu",
+        "station_type": "police",
+        "latitude": 6.010971261524571,
+        "longitude": 7.310066696649503,
+    },
+    {
+        "name": "Nigerian Police Division Atani",
+        "station_type": "police",
+        "latitude": 6.022773073295198,
+        "longitude": 6.747415917993875,
+    },
+    {
+        "name": "The Nigeria Police Force Divisional Police Headquarters",
+        "station_type": "police",
+        "latitude": 6.132128924446743,
+        "longitude": 6.767142957771459,
+    },
+    {
+        "name": "34 Arty Bde Fob Okigwe",
+        "station_type": "police",
+        "latitude": 5.835224651983114,
+        "longitude": 7.331751363715354,
+    },
+    {
+        "name": "The Nigeria Police Station Umuna",
+        "station_type": "police",
+        "latitude": 5.783814985384192,
+        "longitude": 7.270326242027717,
+    },
+    {
+        "name": "The Nigeria Police Iludun",
+        "station_type": "police",
+        "latitude": 7.944111613103098,
+        "longitude": 5.249329305699447,
+    },
+    {
+        "name": "Anticrim Patrol Base Onunworie Onueke",
+        "station_type": "police",
+        "latitude": 6.171228333,
+        "longitude": 8.028431667,
+    },
+    {
+        "name": "The Nigeria Police Station Ilara Yewa",
+        "station_type": "police",
+        "latitude": 7.414968120098814,
+        "longitude": 2.748085225236862,
+    },
+    {
+        "name": "Tede Police Station",
+        "station_type": "police",
+        "latitude": 8.553523358970859,
+        "longitude": 3.445971320800443,
+    },
+    {
+        "name": "Nigeria Police Area Command Office Saki",
+        "station_type": "police",
+        "latitude": 8.652166995997783,
+        "longitude": 3.406436320228698,
+    },
+    {
+        "name": "Umulokpa Police Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 6.522638983152768,
+        "longitude": 7.108105309467866,
+    },
+    {
+        "name": "Ekoli Police Station Ezi Ekenta",
+        "station_type": "police",
+        "latitude": 5.752291667,
+        "longitude": 7.844156667,
+    },
+    {
+        "name": "The Nigerian Police Force Divisional Headquarters Obosi",
+        "station_type": "police",
+        "latitude": 6.099097947029369,
+        "longitude": 6.816985826769404,
+    },
+    {
+        "name": "Nigerian Police Ngbo West Police Station Ijinike",
+        "station_type": "police",
+        "latitude": 6.47972,
+        "longitude": 7.94605,
+    },
+    {
+        "name": "Olele PolicePost",
+        "station_type": "police",
+        "latitude": 7.464477224373115,
+        "longitude": 5.405463159424863,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 7.977503418985802,
+        "longitude": 5.134341832464581,
+    },
+    {
+        "name": "Ayegbaju Eliti Police Station",
+        "station_type": "police",
+        "latitude": 7.792767698420638,
+        "longitude": 5.295639475532473,
+    },
+    {
+        "name": "Ayepe Police Station",
+        "station_type": "police",
+        "latitude": 6.807834205211647,
+        "longitude": 3.732995643431378,
+    },
+    {
+        "name": "The Nigerian Police Ilese Division",
+        "station_type": "police",
+        "latitude": 6.802082727894591,
+        "longitude": 3.965292969865883,
+    },
+    {
+        "name": "Police Quarter",
+        "station_type": "police",
+        "latitude": 6.782916667,
+        "longitude": 4.033736667,
+    },
+    {
+        "name": "Nigeria Police Force B Division Ede",
+        "station_type": "police",
+        "latitude": 7.703501667,
+        "longitude": 4.449953333,
+    },
+    {
+        "name": "Abijo Police Station",
+        "station_type": "police",
+        "latitude": 6.452945942635818,
+        "longitude": 3.666147286062901,
+    },
+    {
+        "name": "NPF Mopol 49 Akodo Old Secteriat",
+        "station_type": "police",
+        "latitude": 6.437500218604967,
+        "longitude": 3.938895767936699,
+    },
+    {
+        "name": "Lekki Police Post",
+        "station_type": "police",
+        "latitude": 6.414473734124598,
+        "longitude": 4.095287591555288,
+    },
+    {
+        "name": "Ifonyintedo Police Station",
+        "station_type": "police",
+        "latitude": 6.778595,
+        "longitude": 2.78958,
+    },
+    {
+        "name": "Agboakoli Police Station",
+        "station_type": "police",
+        "latitude": 5.735346667,
+        "longitude": 7.593728333,
+    },
+    {
+        "name": "Faforiji Police Post",
+        "station_type": "police",
+        "latitude": 7.289883333,
+        "longitude": 4.705013333,
+    },
+    {
+        "name": "The Nigeria Police Ibere Ikwuano",
+        "station_type": "police",
+        "latitude": 5.437903333,
+        "longitude": 7.605561667,
+    },
+    {
+        "name": "Fiditi Police Station",
+        "station_type": "police",
+        "latitude": 7.708012268143491,
+        "longitude": 3.922163388372188,
+    },
+    {
+        "name": "Nigerian Police Post Owode",
+        "station_type": "police",
+        "latitude": 7.739635,
+        "longitude": 4.588693333,
+    },
+    {
+        "name": "Ogboeze Police Station",
+        "station_type": "police",
+        "latitude": 6.70766752860991,
+        "longitude": 7.342851457587146,
+    },
+    {
+        "name": "Divisional Police Headquarters Amaigbo",
+        "station_type": "police",
+        "latitude": 5.716638743034542,
+        "longitude": 7.105510182031452,
+    },
+    {
+        "name": "Police Post Oduma",
+        "station_type": "police",
+        "latitude": 6.084807968243898,
+        "longitude": 7.640136934551507,
+    },
+    {
+        "name": "Itumbauzo Police Station",
+        "station_type": "police",
+        "latitude": 5.500156667,
+        "longitude": 7.684908333,
+    },
+    {
+        "name": "The Nigerian Police Divisional Headquarters Emene",
+        "station_type": "police",
+        "latitude": 6.454695522098048,
+        "longitude": 7.580325765347791,
+    },
+    {
+        "name": "The Nigerian Police Divisional Headquarters Airport Emene",
+        "station_type": "police",
+        "latitude": 6.470471237946298,
+        "longitude": 7.564811120532927,
+    },
+    {
+        "name": "Fight Crime",
+        "station_type": "police",
+        "latitude": 6.776253981287465,
+        "longitude": 7.718432246467074,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Oji River",
+        "station_type": "police",
+        "latitude": 6.255458314119659,
+        "longitude": 7.269179174163449,
+    },
+    {
+        "name": "Imezi Owa Police Station",
+        "station_type": "police",
+        "latitude": 6.369183333,
+        "longitude": 7.36569,
+    },
+    {
+        "name": "Ogbeke Nike",
+        "station_type": "police",
+        "latitude": 6.570579542307536,
+        "longitude": 7.539469730000794,
+    },
+    {
+        "name": "Isuofia Police Post",
+        "station_type": "police",
+        "latitude": 6.41194,
+        "longitude": 7.503223333,
+    },
+    {
+        "name": "The Nigeria Police Headquaters",
+        "station_type": "police",
+        "latitude": 5.604104408347212,
+        "longitude": 7.520810117282606,
+    },
+    {
+        "name": "Divisional Police Headquarters Isiebu",
+        "station_type": "police",
+        "latitude": 5.707322977758508,
+        "longitude": 7.218972242114607,
+    },
+    {
+        "name": "Ayete Ibarapa North Police Head Quarter",
+        "station_type": "police",
+        "latitude": 7.535060019656953,
+        "longitude": 3.220280936455179,
+    },
+    {
+        "name": "Nigerian Police Umuegwu Ohuhu",
+        "station_type": "police",
+        "latitude": 5.600535,
+        "longitude": 7.475898333,
+    },
+    {
+        "name": "Ogbunike Police Station",
+        "station_type": "police",
+        "latitude": 6.177579317255149,
+        "longitude": 6.865290414967772,
+    },
+    {
+        "name": "Ire Police Station",
+        "station_type": "police",
+        "latitude": 7.742566095122537,
+        "longitude": 5.392598842499077,
+    },
+    {
+        "name": "The Nigeria Police Station Ilishan Remo",
+        "station_type": "police",
+        "latitude": 6.895796666666667,
+        "longitude": 3.715028333333334,
+    },
+    {
+        "name": "Ikenne Police Station",
+        "station_type": "police",
+        "latitude": 6.866539346822085,
+        "longitude": 3.714445759320785,
+    },
+    {
+        "name": "The Nigeria Police Divisional Headquarters Ogere Remo",
+        "station_type": "police",
+        "latitude": 6.934561666666667,
+        "longitude": 3.635365,
+    },
+    {
+        "name": "The Nigerian Police Isonyin Police Post",
+        "station_type": "police",
+        "latitude": 6.83284648069939,
+        "longitude": 3.988044593101173,
+    },
+    {
+        "name": "Elemoro Police Station",
+        "station_type": "police",
+        "latitude": 6.475277202061298,
+        "longitude": 3.755143342635817,
+    },
+    {
+        "name": "Eleko Police Post",
+        "station_type": "police",
+        "latitude": 6.441172460762021,
+        "longitude": 3.853764432921074,
+    },
+    {
+        "name": "Akodo Police Station",
+        "station_type": "police",
+        "latitude": 6.437251780637021,
+        "longitude": 3.94915084641266,
+    },
+    {
+        "name": "Pan Atlantic Police Post",
+        "station_type": "police",
+        "latitude": 6.483657950289263,
+        "longitude": 3.857244781395032,
+    },
+    {
+        "name": "Yashikira police station HQ",
+        "station_type": "police",
+        "latitude": 9.769693333333333,
+        "longitude": 3.394703333333334,
+    },
+    {
+        "name": "The Nigeria Police out post Chikanda",
+        "station_type": "police",
+        "latitude": 9.822983333333333,
+        "longitude": 3.366155,
+    },
+    {
+        "name": "Bends Divisional Police Headquarters",
+        "station_type": "police",
+        "latitude": 5.55874,
+        "longitude": 7.636551667,
+    },
+    {
+        "name": "Igbope Police Station",
+        "station_type": "police",
+        "latitude": 8.833597424230915,
+        "longitude": 3.787302759542604,
+    },
+    {
+        "name": "Ode Remo Police Station",
+        "station_type": "police",
+        "latitude": 6.963283333333334,
+        "longitude": 3.673398333333334,
+    },
+    {
+        "name": "The Nigeria Police Ode Remo Ogun State",
+        "station_type": "police",
+        "latitude": 6.96337,
+        "longitude": 3.673373333333333,
+    },
+    {
+        "name": "The Nigeria Police Force Divisional Headquarters Iperu Remo",
+        "station_type": "police",
+        "latitude": 6.903477541908971,
+        "longitude": 3.66632906051843,
+    },
+    {
+        "name": "Police Training School",
+        "station_type": "police",
+        "latitude": 6.903377760731845,
+        "longitude": 3.668515321787449,
+    },
+    {
+        "name": "Federal Road Safety Corpsila Oragun",
+        "station_type": "police",
+        "latitude": 8.022565,
+        "longitude": 4.921968333,
+    },
+    {
+        "name": "Base 15 Special Protection Unit",
+        "station_type": "police",
+        "latitude": 6.191276416382534,
+        "longitude": 6.983045307172518,
+    },
+    {
+        "name": "Agaun Police Station",
+        "station_type": "police",
+        "latitude": 7.458606667,
+        "longitude": 4.570901667,
+    },
+    {
+        "name": "NSCDC Iloba Outpost",
+        "station_type": "police",
+        "latitude": 7.633925,
+        "longitude": 4.619958333,
+    },
+    {
+        "name": "Nigeria Police Divisional Headquarters Uzoakoli",
+        "station_type": "police",
+        "latitude": 5.63371,
+        "longitude": 7.559471667,
+    },
+    {
+        "name": "Police Post Iwara",
+        "station_type": "police",
+        "latitude": 7.466481667,
+        "longitude": 4.672225,
+    },
+    {
+        "name": "Agbado Police Station",
+        "station_type": "police",
+        "latitude": 7.57826220905124,
+        "longitude": 5.52444727658072,
+    },
+    {
+        "name": "Ode Divisional Headquarter",
+        "station_type": "police",
+        "latitude": 7.638332759009987,
+        "longitude": 5.546913294185516,
+    },
+    {
+        "name": "Security Post",
+        "station_type": "police",
+        "latitude": 7.633818,
+        "longitude": 4.2015449,
+    },
+    {
+        "name": "The Nigerian Police Divisional Headquarters",
+        "station_type": "police",
+        "latitude": 5.415341667,
+        "longitude": 7.561731667,
+    },
+    {
+        "name": "Ara Police Station",
+        "station_type": "police",
+        "latitude": 7.85406,
+        "longitude": 4.382285,
+    },
+    {
+        "name": "Lalupon Police Station",
+        "station_type": "police",
+        "latitude": 7.463362160114349,
+        "longitude": 4.065314438742161,
+    },
+    {
+        "name": "Police Post Odo Ori",
+        "station_type": "police",
+        "latitude": 7.655853333,
+        "longitude": 4.189233333,
+    },
+    {
+        "name": "Adeke Police Station Iwo",
+        "station_type": "police",
+        "latitude": 7.627438333,
+        "longitude": 4.158541667,
+    },
+    {
+        "name": "Igbajo Police Station",
+        "station_type": "police",
+        "latitude": 7.897966667,
+        "longitude": 4.822976667,
+    },
+    {
+        "name": "Ipetumodu Police Station",
+        "station_type": "police",
+        "latitude": 7.51539,
+        "longitude": 4.437365,
+    },
+    {
+        "name": "NPF Kirikiri Police Post",
+        "station_type": "police",
+        "latitude": 6.443499022794071,
+        "longitude": 3.311178494490986,
+    },
+    {
+        "name": "Ezza North Council Police Post Ebiaji",
+        "station_type": "police",
+        "latitude": 6.224571667,
+        "longitude": 7.996183333,
+    },
+    {
+        "name": "Police Head Quarters Ichi",
+        "station_type": "police",
+        "latitude": 6.046037705286994,
+        "longitude": 6.87402053209281,
+    },
+    {
+        "name": "Njeaba Police Station",
+        "station_type": "police",
+        "latitude": 5.642148397658627,
+        "longitude": 6.950408606698839,
+    },
+    {
+        "name": "The Nigeria Police Ndiejezie Police Post",
+        "station_type": "police",
+        "latitude": 5.874431991152411,
+        "longitude": 7.215527181770788,
+    },
+    {
+        "name": "Ibalebo Police Post",
+        "station_type": "police",
+        "latitude": 5.932405,
+        "longitude": 8.102955,
+    },
+    {
+        "name": "Divisional Police Headquarter Ariyasi",
+        "station_type": "police",
+        "latitude": 7.426828634420525,
+        "longitude": 5.460774124883855,
+    },
+    {
+        "name": "Regional Police Headquarters Obudu",
+        "station_type": "police",
+        "latitude": 6.6659467,
+        "longitude": 9.1697233,
+    },
+    {
+        "name": "Agubia urban Police Station",
+        "station_type": "police",
+        "latitude": 6.069765,
+        "longitude": 8.113871667,
+    },
+    {
+        "name": "Nsidung Marina Police Station",
+        "station_type": "police",
+        "latitude": 4.9560933,
+        "longitude": 8.3114,
+    },
+    {
+        "name": "Atakpa Police Station",
+        "station_type": "police",
+        "latitude": 4.9591928,
+        "longitude": 8.3214614,
+    },
+    {
+        "name": "Nigeria Police Force Obaagun",
+        "station_type": "police",
+        "latitude": 7.929638333,
+        "longitude": 4.675115,
+    },
+    {
+        "name": "Police Station Ika",
+        "station_type": "police",
+        "latitude": 7.899446667,
+        "longitude": 4.32955,
+    },
+    {
+        "name": "Umuagu Police",
+        "station_type": "police",
+        "latitude": 5.550786667,
+        "longitude": 7.48875,
+    },
+    {
+        "name": "State Cid Station",
+        "station_type": "police",
+        "latitude": 5.54894,
+        "longitude": 7.490166667,
+    },
+    {
+        "name": "Idi Iroko Police Post",
+        "station_type": "police",
+        "latitude": 7.713375,
+        "longitude": 4.078021667,
+    },
+    {
+        "name": "Ihe Enyi Old Police Post",
+        "station_type": "police",
+        "latitude": 6.673594680081643,
+        "longitude": 7.75866109834779,
+    },
+    {
+        "name": "Nenwe Police Post",
+        "station_type": "police",
+        "latitude": 6.132577732029938,
+        "longitude": 7.526640181823392,
+    },
+    {
+        "name": "The Nigeria Police Onicha Divisional Police Station",
+        "station_type": "police",
+        "latitude": 5.540448435906235,
+        "longitude": 7.336594969545312,
+    },
+    {
+        "name": "Edem Edet Police Station",
+        "station_type": "police",
+        "latitude": 4.9347417,
+        "longitude": 8.3366017,
+    },
+    {
+        "name": "Uwanse Police Station",
+        "station_type": "police",
+        "latitude": 4.94181,
+        "longitude": 8.33683,
+    },
+    {
+        "name": "Anantigha Police Station",
+        "station_type": "police",
+        "latitude": 4.9188017,
+        "longitude": 8.3268183,
+    },
+    {
+        "name": "Police Post Ada",
+        "station_type": "police",
+        "latitude": 7.892361667,
+        "longitude": 4.712168333,
+    },
+    {
+        "name": "Police Mobile Force 11Th Squadron Calabar",
+        "station_type": "police",
+        "latitude": 5.020745,
+        "longitude": 8.3335317,
+    },
+    {
+        "name": "The Nigeria Police Force",
+        "station_type": "police",
+        "latitude": 9.888688561332927,
+        "longitude": 5.410400292020282,
+    },
+    {
+        "name": "The Nigeria Police Area Command Shagamu",
+        "station_type": "police",
+        "latitude": 6.868525867495744,
+        "longitude": 3.65794921494196,
+    },
     # Army Barracks
-    {"name": "Bonny Camp", "station_type": "army", "latitude": 3.4119, "longitude": 6.4355, "address": "Victoria Island, Lagos", "phone_number": ""},
-    {"name": "Ikeja Army Cantonment", "station_type": "army", "latitude": 3.3377, "longitude": 6.6053, "address": "Ikeja, Lagos", "phone_number": ""},
-    {"name": "Mogadishu Cantonment", "station_type": "army", "latitude": 7.4863, "longitude": 9.0716, "address": "Asokoro, Abuja", "phone_number": ""},
-    {"name": "Jaji Military Cantonment", "station_type": "army", "latitude": 7.5250, "longitude": 10.5417, "address": "Jaji, Kaduna", "phone_number": ""},
-    {"name": "82 Division Nigerian Army", "station_type": "army", "latitude": 7.5127, "longitude": 6.4423, "address": "Enugu", "phone_number": ""},
-
+    {
+        "name": "Bonny Camp",
+        "station_type": "army",
+        "latitude": 3.4119,
+        "longitude": 6.4355,
+        "address": "Victoria Island, Lagos",
+        "phone_number": "",
+    },
+    {
+        "name": "Ikeja Army Cantonment",
+        "station_type": "army",
+        "latitude": 3.3377,
+        "longitude": 6.6053,
+        "address": "Ikeja, Lagos",
+        "phone_number": "",
+    },
+    {
+        "name": "Mogadishu Cantonment",
+        "station_type": "army",
+        "latitude": 7.4863,
+        "longitude": 9.0716,
+        "address": "Asokoro, Abuja",
+        "phone_number": "",
+    },
+    {
+        "name": "Jaji Military Cantonment",
+        "station_type": "army",
+        "latitude": 7.5250,
+        "longitude": 10.5417,
+        "address": "Jaji, Kaduna",
+        "phone_number": "",
+    },
+    {
+        "name": "82 Division Nigerian Army",
+        "station_type": "army",
+        "latitude": 7.5127,
+        "longitude": 6.4423,
+        "address": "Enugu",
+        "phone_number": "",
+    },
     # Military Bases
-    {"name": "Nigerian Defence Academy", "station_type": "military", "latitude": 7.4317, "longitude": 10.5260, "address": "Afaka, Kaduna", "phone_number": ""},
-    {"name": "Sambisa Military Base", "station_type": "military", "latitude": 13.5833, "longitude": 11.4500, "address": "Borno State", "phone_number": ""},
-    {"name": "Maimalari Barracks", "station_type": "military", "latitude": 13.1510 , "longitude": 11.8311, "address": "Maiduguri, Borno", "phone_number": ""},
-
+    {
+        "name": "Nigerian Defence Academy",
+        "station_type": "military",
+        "latitude": 7.4317,
+        "longitude": 10.5260,
+        "address": "Afaka, Kaduna",
+        "phone_number": "",
+    },
+    {
+        "name": "Sambisa Military Base",
+        "station_type": "military",
+        "latitude": 13.5833,
+        "longitude": 11.4500,
+        "address": "Borno State",
+        "phone_number": "",
+    },
+    {
+        "name": "Maimalari Barracks",
+        "station_type": "military",
+        "latitude": 13.1510,
+        "longitude": 11.8311,
+        "address": "Maiduguri, Borno",
+        "phone_number": "",
+    },
     # Navy
-    {"name": "Western Naval Command", "station_type": "navy", "latitude": 3.4070, "longitude": 6.4290, "address": "Apapa, Lagos", "phone_number": ""},
-    {"name": "NNS Beecroft", "station_type": "navy", "latitude": 3.4075, "longitude": 6.4295, "address": "Apapa, Lagos", "phone_number": ""},
-
+    {
+        "name": "Western Naval Command",
+        "station_type": "navy",
+        "latitude": 3.4070,
+        "longitude": 6.4290,
+        "address": "Apapa, Lagos",
+        "phone_number": "",
+    },
+    {
+        "name": "NNS Beecroft",
+        "station_type": "navy",
+        "latitude": 3.4075,
+        "longitude": 6.4295,
+        "address": "Apapa, Lagos",
+        "phone_number": "",
+    },
     # Civil Defense
-    {"name": "NSCDC Headquarters", "station_type": "civil_defense", "latitude": 7.4890, "longitude": 9.0580, "address": "Abuja", "phone_number": "08033226246"},
-    {"name": "NSCDC Lagos Command", "station_type": "civil_defense", "latitude": 3.3890, "longitude": 6.4550, "address": "Lagos", "phone_number": ""},
-
+    {
+        "name": "NSCDC Headquarters",
+        "station_type": "civil_defense",
+        "latitude": 7.4890,
+        "longitude": 9.0580,
+        "address": "Abuja",
+        "phone_number": "08033226246",
+    },
+    {
+        "name": "NSCDC Lagos Command",
+        "station_type": "civil_defense",
+        "latitude": 3.3890,
+        "longitude": 6.4550,
+        "address": "Lagos",
+        "phone_number": "",
+    },
     # Fire Stations
-    {"name": "Federal Fire Service HQ", "station_type": "fire", "latitude": 7.4940, "longitude": 9.0570, "address": "Abuja", "phone_number": "112"},
-    {"name": "Lagos State Fire Service", "station_type": "fire", "latitude": 3.3920, "longitude": 6.4560, "address": "Lagos Island, Lagos", "phone_number": "112"},
+    {
+        "name": "Federal Fire Service HQ",
+        "station_type": "fire",
+        "latitude": 7.4940,
+        "longitude": 9.0570,
+        "address": "Abuja",
+        "phone_number": "112",
+    },
+    {
+        "name": "Lagos State Fire Service",
+        "station_type": "fire",
+        "latitude": 3.3920,
+        "longitude": 6.4560,
+        "address": "Lagos Island, Lagos",
+        "phone_number": "112",
+    },
 ]
 
 
 class Command(BaseCommand):
-    help = 'Seed the database with sample security stations'
+    help = "Seed the database with sample security stations"
 
     def handle(self, *args, **options):
         created_count = 0
         for station_data in SAMPLE_STATIONS:
             _, created = SecurityStation.objects.get_or_create(
-                name=station_data['name'],
+                name=station_data["name"],
                 defaults=station_data,
             )
             if created:
                 created_count += 1
 
         self.stdout.write(
-            self.style.SUCCESS(f'Seeded {created_count} security stations.')
+            self.style.SUCCESS(f"Seeded {created_count} security stations.")
         )

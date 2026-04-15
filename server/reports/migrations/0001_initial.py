@@ -8,39 +8,91 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Report',
+            name="Report",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=255)),
-                ('description', models.TextField(blank=True)),
-                ('voice_note', models.FileField(upload_to='voice_notes/%Y/%m/%d/')),
-                ('latitude', models.DecimalField(decimal_places=7, max_digits=10)),
-                ('longitude', models.DecimalField(decimal_places=7, max_digits=10)),
-                ('category', models.CharField(choices=[('robbery', 'Robbery'), ('assault', 'Assault'), ('fire', 'Fire Outbreak'), ('accident', 'Road Accident'), ('kidnapping', 'Kidnapping'), ('terrorism', 'Terrorism'), ('flooding', 'Flooding'), ('suspicious', 'Suspicious Activity'), ('gunshot', 'Gunshots / Shooting'), ('vandalism', 'Vandalism'), ('medical', 'Medical Emergency'), ('other', 'Other')], default='other', max_length=20)),
-                ('severity', models.CharField(choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High'), ('critical', 'Critical')], default='medium', max_length=10)),
-                ('is_active', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("description", models.TextField(blank=True)),
+                ("voice_note", models.FileField(upload_to="voice_notes/%Y/%m/%d/")),
+                ("latitude", models.DecimalField(decimal_places=7, max_digits=10)),
+                ("longitude", models.DecimalField(decimal_places=7, max_digits=10)),
+                (
+                    "category",
+                    models.CharField(
+                        choices=[
+                            ("robbery", "Robbery"),
+                            ("assault", "Assault"),
+                            ("fire", "Fire Outbreak"),
+                            ("accident", "Road Accident"),
+                            ("kidnapping", "Kidnapping"),
+                            ("terrorism", "Terrorism"),
+                            ("flooding", "Flooding"),
+                            ("suspicious", "Suspicious Activity"),
+                            ("gunshot", "Gunshots / Shooting"),
+                            ("vandalism", "Vandalism"),
+                            ("medical", "Medical Emergency"),
+                            ("other", "Other"),
+                        ],
+                        default="other",
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "severity",
+                    models.CharField(
+                        choices=[
+                            ("low", "Low"),
+                            ("medium", "Medium"),
+                            ("high", "High"),
+                            ("critical", "Critical"),
+                        ],
+                        default="medium",
+                        max_length=10,
+                    ),
+                ),
+                ("is_active", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
-                'ordering': ['-created_at'],
+                "ordering": ["-created_at"],
             },
         ),
         migrations.CreateModel(
-            name='ReportMedia',
+            name="ReportMedia",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('media_type', models.CharField(choices=[('image', 'Image'), ('video', 'Video')], max_length=5)),
-                ('file', models.FileField(upload_to='report_media/%Y/%m/%d/')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "media_type",
+                    models.CharField(
+                        choices=[("image", "Image"), ("video", "Video")], max_length=5
+                    ),
+                ),
+                ("file", models.FileField(upload_to="report_media/%Y/%m/%d/")),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
             ],
             options={
-                'ordering': ['created_at'],
+                "ordering": ["created_at"],
             },
         ),
     ]

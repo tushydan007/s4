@@ -20,18 +20,22 @@ class ReportListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
-        queryset = Report.objects.filter(is_active=True).select_related('user').prefetch_related('media')
+        queryset = (
+            Report.objects.filter(is_active=True)
+            .select_related("user")
+            .prefetch_related("media")
+        )
 
         # Filter by category
-        category = self.request.query_params.get('category')
+        category = self.request.query_params.get("category")
         if category:
             queryset = queryset.filter(category=category)
 
         # Filter by bounding box for map viewport
-        min_lat = self.request.query_params.get('min_lat')
-        max_lat = self.request.query_params.get('max_lat')
-        min_lng = self.request.query_params.get('min_lng')
-        max_lng = self.request.query_params.get('max_lng')
+        min_lat = self.request.query_params.get("min_lat")
+        max_lat = self.request.query_params.get("max_lat")
+        min_lng = self.request.query_params.get("min_lng")
+        max_lng = self.request.query_params.get("max_lng")
 
         if all([min_lat, max_lat, min_lng, max_lng]):
             queryset = queryset.filter(
@@ -55,6 +59,7 @@ class ReportCreateView(generics.CreateAPIView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         from rest_framework.parsers import MultiPartParser, FormParser
+
         self.parser_classes = [MultiPartParser, FormParser]
 
     def create(self, request, *args, **kwargs):
@@ -67,10 +72,10 @@ class ReportCreateView(generics.CreateAPIView):
         try:
             channel_layer = get_channel_layer()
             async_to_sync(channel_layer.group_send)(
-                'reports',
+                "reports",
                 {
-                    'type': 'report.new',
-                    'report': response_data,
+                    "type": "report.new",
+                    "report": response_data,
                 },
             )
         except Exception as e:
@@ -86,14 +91,18 @@ class ReportDetailView(generics.RetrieveDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Report.objects.filter(is_active=True).select_related('user').prefetch_related('media')
+        return (
+            Report.objects.filter(is_active=True)
+            .select_related("user")
+            .prefetch_related("media")
+        )
 
     def destroy(self, request, *args, **kwargs):
         report = self.get_object()
 
         if report.user_id != request.user.id:
             return Response(
-                {'detail': 'You can only delete reports that you created.'},
+                {"detail": "You can only delete reports that you created."},
                 status=status.HTTP_403_FORBIDDEN,
             )
 
@@ -106,7 +115,7 @@ class ReportDetailView(generics.RetrieveDestroyAPIView):
         report.media.all().delete()
 
         report.is_active = False
-        report.save(update_fields=['is_active', 'updated_at'])
+        report.save(update_fields=["is_active", "updated_at"])
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -120,6 +129,6 @@ class UserReportsView(generics.ListAPIView):
     def get_queryset(self):
         return (
             Report.objects.filter(user=self.request.user)
-            .select_related('user')
-            .prefetch_related('media')
+            .select_related("user")
+            .prefetch_related("media")
         )

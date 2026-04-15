@@ -42,6 +42,7 @@ def create_user(db):
         password = defaults.pop("password", "TestPass123!")
         user = User.objects.create_user(password=password, **defaults)
         return user
+
     return _create_user
 
 

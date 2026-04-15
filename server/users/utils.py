@@ -24,7 +24,7 @@ def send_verification_email(user) -> None:
 
     verification_url = f"{settings.FRONTEND_URL}/verify-email/{token.id}"
 
-    subject = 'S4 Security - Verify Your Email'
+    subject = "S4 Security - Verify Your Email"
     html_message = f"""
     <html>
     <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -88,8 +88,8 @@ def verify_nin_with_smileid(
         logger.warning("SmileID credentials not configured. Using mock verification.")
         # In development, verify if NIN format is valid (11 digits)
         if len(nin) == 11 and nin.isdigit():
-            return {'success': True, 'message': 'NIN verified (development mode).'}
-        return {'success': False, 'message': 'Invalid NIN format.'}
+            return {"success": True, "message": "NIN verified (development mode)."}
+        return {"success": False, "message": "Invalid NIN format."}
 
     try:
         from smile_id_core import IdApi
@@ -97,36 +97,39 @@ def verify_nin_with_smileid(
         id_api = IdApi(partner_id, api_key, sid_server)
 
         partner_params = {
-            'user_id': user_id,
-            'job_id': str(uuid.uuid4()),
-            'job_type': 5,  # Enhanced KYC
+            "user_id": user_id,
+            "job_id": str(uuid.uuid4()),
+            "job_type": 5,  # Enhanced KYC
         }
 
         id_info = {
-            'country': 'NG',
-            'id_type': 'NIN',
-            'id_number': nin,
-            'first_name': first_name,
-            'last_name': last_name,
+            "country": "NG",
+            "id_type": "NIN",
+            "id_number": nin,
+            "first_name": first_name,
+            "last_name": last_name,
         }
 
         result = id_api.submit_job(partner_params, id_info)
 
-        result_code = result.get('ResultCode', '')
-        actions = result.get('Actions', {})
-        id_verified = actions.get('Verify_ID_Number', '') == 'Verified'
+        result_code = result.get("ResultCode", "")
+        actions = result.get("Actions", {})
+        id_verified = actions.get("Verify_ID_Number", "") == "Verified"
 
-        if result_code == '1012' and id_verified:
-            return {'success': True, 'message': 'NIN verified successfully.'}
+        if result_code == "1012" and id_verified:
+            return {"success": True, "message": "NIN verified successfully."}
 
         return {
-            'success': False,
-            'message': f"NIN verification failed: {result.get('ResultText', 'Unknown error')}",
+            "success": False,
+            "message": f"NIN verification failed: {result.get('ResultText', 'Unknown error')}",
         }
 
     except ImportError:
         logger.error("smile-id-core package not installed.")
-        return {'success': False, 'message': 'Verification service unavailable.'}
+        return {"success": False, "message": "Verification service unavailable."}
     except Exception as e:
         logger.error(f"SmileID verification error: {e}")
-        return {'success': False, 'message': 'Verification service error. Please try again later.'}
+        return {
+            "success": False,
+            "message": "Verification service error. Please try again later.",
+        }

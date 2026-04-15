@@ -25,6 +25,7 @@ class TestReportModel:
 
     def test_report_uuid_pk(self, report):
         import uuid
+
         assert isinstance(report.id, uuid.UUID)
 
     def test_report_default_category(self, verified_user):

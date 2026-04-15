@@ -65,5 +65,6 @@ class TestNearestStationsView:
 
     def test_haversine_static_method(self):
         from stations.views import NearestStationsView
+
         d = NearestStationsView._haversine(9.06, 7.50, 9.06, 7.50)
         assert d == 0.0

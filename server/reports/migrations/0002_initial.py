@@ -10,31 +10,45 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('reports', '0001_initial'),
+        ("reports", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='report',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reports', to=settings.AUTH_USER_MODEL),
+            model_name="report",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="reports",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='reportmedia',
-            name='report',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='media', to='reports.report'),
+            model_name="reportmedia",
+            name="report",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="media",
+                to="reports.report",
+            ),
         ),
         migrations.AddIndex(
-            model_name='report',
-            index=models.Index(fields=['latitude', 'longitude'], name='reports_rep_latitud_bfcbfa_idx'),
+            model_name="report",
+            index=models.Index(
+                fields=["latitude", "longitude"], name="reports_rep_latitud_bfcbfa_idx"
+            ),
         ),
         migrations.AddIndex(
-            model_name='report',
-            index=models.Index(fields=['category'], name='reports_rep_categor_b7680f_idx'),
+            model_name="report",
+            index=models.Index(
+                fields=["category"], name="reports_rep_categor_b7680f_idx"
+            ),
         ),
         migrations.AddIndex(
-            model_name='report',
-            index=models.Index(fields=['-created_at'], name='reports_rep_created_f226dd_idx'),
+            model_name="report",
+            index=models.Index(
+                fields=["-created_at"], name="reports_rep_created_f226dd_idx"
+            ),
         ),
     ]

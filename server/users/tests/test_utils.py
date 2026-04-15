@@ -17,6 +17,7 @@ class TestSendVerificationEmail:
         # Create an existing token
         from django.utils import timezone
         from datetime import timedelta
+
         old_token = EmailVerificationToken.objects.create(
             user=user,
             expires_at=timezone.now() + timedelta(hours=24),

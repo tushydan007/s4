@@ -18,7 +18,7 @@ class StationListView(generics.ListAPIView):
     def get_queryset(self):
         queryset = SecurityStation.objects.filter(is_active=True)
 
-        station_type = self.request.query_params.get('type')
+        station_type = self.request.query_params.get("type")
         if station_type:
             queryset = queryset.filter(station_type=station_type)
 
@@ -31,14 +31,14 @@ class NearestStationsView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        lat = request.query_params.get('lat')
-        lng = request.query_params.get('lng')
-        radius_km = float(request.query_params.get('radius', 50))
-        limit = int(request.query_params.get('limit', 10))
+        lat = request.query_params.get("lat")
+        lng = request.query_params.get("lng")
+        radius_km = float(request.query_params.get("radius", 50))
+        limit = int(request.query_params.get("limit", 10))
 
         if not lat or not lng:
             return Response(
-                {'error': 'lat and lng query parameters are required.'},
+                {"error": "lat and lng query parameters are required."},
                 status=400,
             )
 
@@ -47,7 +47,7 @@ class NearestStationsView(APIView):
             lng = float(lng)
         except (ValueError, TypeError):
             return Response(
-                {'error': 'Invalid latitude or longitude values.'},
+                {"error": "Invalid latitude or longitude values."},
                 status=400,
             )
 
@@ -57,8 +57,10 @@ class NearestStationsView(APIView):
         stations_with_distance = []
         for station in stations:
             distance = self._haversine(
-                lat, lng,
-                float(station.latitude), float(station.longitude),
+                lat,
+                lng,
+                float(station.latitude),
+                float(station.longitude),
             )
             if distance <= radius_km:
                 stations_with_distance.append((station, distance))
@@ -69,7 +71,7 @@ class NearestStationsView(APIView):
         result = []
         for station, distance in nearest:
             data = SecurityStationSerializer(station).data
-            data['distance_km'] = round(distance, 2)
+            data["distance_km"] = round(distance, 2)
             result.append(data)
 
         return Response(result)

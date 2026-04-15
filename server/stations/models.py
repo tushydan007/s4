@@ -5,12 +5,12 @@ from django.db import models
 
 class SecurityStation(models.Model):
     STATION_TYPE_CHOICES = [
-        ('police', 'Police Station'),
-        ('army', 'Army Barracks'),
-        ('military', 'Military Base'),
-        ('fire', 'Fire Station'),
-        ('civil_defense', 'Civil Defense'),
-        ('navy', 'Navy Base'),
+        ("police", "Police Station"),
+        ("army", "Army Barracks"),
+        ("military", "Military Base"),
+        ("fire", "Fire Station"),
+        ("civil_defense", "Civil Defense"),
+        ("navy", "Navy Base"),
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -24,10 +24,10 @@ class SecurityStation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
         indexes = [
-            models.Index(fields=['latitude', 'longitude']),
-            models.Index(fields=['station_type']),
+            models.Index(fields=["latitude", "longitude"]),
+            models.Index(fields=["station_type"]),
         ]
 
     def __str__(self):

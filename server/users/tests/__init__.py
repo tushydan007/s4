@@ -42,6 +42,7 @@ class TestUserModel:
 
     def test_user_uuid_primary_key(self, user):
         import uuid
+
         assert isinstance(user.id, uuid.UUID)
 
     def test_username_field_is_email(self):

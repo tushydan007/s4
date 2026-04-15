@@ -13,31 +13,33 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'email', 'username', 'first_name', 'last_name',
-            'phone_number', 'nin', 'password', 'password_confirm',
+            "email",
+            "username",
+            "first_name",
+            "last_name",
+            "phone_number",
+            "nin",
+            "password",
+            "password_confirm",
         ]
 
     def validate_nin(self, value: str) -> str:
-        if not re.match(r'^\d{11}$', value):
-            raise serializers.ValidationError(
-                'NIN must be exactly 11 digits.'
-            )
+        if not re.match(r"^\d{11}$", value):
+            raise serializers.ValidationError("NIN must be exactly 11 digits.")
         if User.objects.filter(nin=value, nin_verified=True).exists():
-            raise serializers.ValidationError(
-                'This NIN has already been registered.'
-            )
+            raise serializers.ValidationError("This NIN has already been registered.")
         return value
 
     def validate(self, attrs: dict) -> dict:
-        if attrs['password'] != attrs['password_confirm']:
+        if attrs["password"] != attrs["password_confirm"]:
             raise serializers.ValidationError(
-                {'password_confirm': 'Passwords do not match.'}
+                {"password_confirm": "Passwords do not match."}
             )
         return attrs
 
     def create(self, validated_data: dict) -> User:
-        validated_data.pop('password_confirm')
-        password = validated_data.pop('password')
+        validated_data.pop("password_confirm")
+        password = validated_data.pop("password")
         user = User(**validated_data)
         user.set_password(password)
         user.is_active = True
@@ -67,14 +69,27 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'id', 'email', 'username', 'first_name', 'last_name',
-            'phone_number', 'nin_verified', 'email_verified',
-            'two_factor_enabled', 'is_fully_verified', 'profile_picture',
-            'date_joined',
+            "id",
+            "email",
+            "username",
+            "first_name",
+            "last_name",
+            "phone_number",
+            "nin_verified",
+            "email_verified",
+            "two_factor_enabled",
+            "is_fully_verified",
+            "profile_picture",
+            "date_joined",
         ]
         read_only_fields = [
-            'id', 'email', 'nin_verified', 'email_verified',
-            'two_factor_enabled', 'is_fully_verified', 'date_joined',
+            "id",
+            "email",
+            "nin_verified",
+            "email_verified",
+            "two_factor_enabled",
+            "is_fully_verified",
+            "date_joined",
         ]
 
 

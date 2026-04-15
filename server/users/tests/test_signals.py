@@ -16,4 +16,6 @@ class TestUserSignals:
                 last_name="User",
                 password="TestPass123!",
             )
-            assert any("signal@example.com" in record.message for record in caplog.records)
+            assert any(
+                "signal@example.com" in record.message for record in caplog.records
+            )

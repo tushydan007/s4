@@ -77,7 +77,10 @@ class TestReportSerializer:
 
     def test_user_name_field(self, report):
         serializer = ReportSerializer(report)
-        assert serializer.data["user_name"] == f"{report.user.first_name} {report.user.last_name}"
+        assert (
+            serializer.data["user_name"]
+            == f"{report.user.first_name} {report.user.last_name}"
+        )
 
 
 @pytest.mark.django_db
@@ -213,9 +216,7 @@ class TestReportCreateSerializer:
         assert not serializer.is_valid()
 
     def test_validate_images_wrong_type(self, verified_user):
-        bad_img = SimpleUploadedFile(
-            "test.txt", b"text", content_type="text/plain"
-        )
+        bad_img = SimpleUploadedFile("test.txt", b"text", content_type="text/plain")
         data = {
             "title": "Test Report",
             "latitude": 9.0579,
@@ -251,9 +252,7 @@ class TestReportCreateSerializer:
         assert not serializer.is_valid()
 
     def test_validate_videos_wrong_type(self, verified_user):
-        bad_vid = SimpleUploadedFile(
-            "test.txt", b"text", content_type="text/plain"
-        )
+        bad_vid = SimpleUploadedFile("test.txt", b"text", content_type="text/plain")
         data = {
             "title": "Test Report",
             "latitude": 9.0579,

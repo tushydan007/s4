@@ -46,10 +46,14 @@ class TestReportCreateView:
     url = "/api/reports/create/"
 
     @patch("reports.views.get_channel_layer")
-    def test_create_success(self, mock_channel_layer, verified_auth_client, verified_user):
+    def test_create_success(
+        self, mock_channel_layer, verified_auth_client, verified_user
+    ):
         mock_layer = MagicMock()
         mock_channel_layer.return_value = mock_layer
-        voice = SimpleUploadedFile("voice.webm", b"\x00" * 1024, content_type="audio/webm")
+        voice = SimpleUploadedFile(
+            "voice.webm", b"\x00" * 1024, content_type="audio/webm"
+        )
         data = {
             "title": "New Report",
             "description": "A test incident",
@@ -70,7 +74,9 @@ class TestReportCreateView:
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
     def test_create_unverified_user(self, auth_client):
-        voice = SimpleUploadedFile("voice.webm", b"\x00" * 1024, content_type="audio/webm")
+        voice = SimpleUploadedFile(
+            "voice.webm", b"\x00" * 1024, content_type="audio/webm"
+        )
         data = {
             "title": "New Report",
             "voice_note": voice,
@@ -88,8 +94,12 @@ class TestReportCreateView:
     def test_create_with_images(self, mock_channel_layer, verified_auth_client):
         mock_layer = MagicMock()
         mock_channel_layer.return_value = mock_layer
-        voice = SimpleUploadedFile("voice.webm", b"\x00" * 1024, content_type="audio/webm")
-        img = SimpleUploadedFile("photo.jpg", b"\xff\xd8\xff\xe0" + b"\x00" * 100, content_type="image/jpeg")
+        voice = SimpleUploadedFile(
+            "voice.webm", b"\x00" * 1024, content_type="audio/webm"
+        )
+        img = SimpleUploadedFile(
+            "photo.jpg", b"\xff\xd8\xff\xe0" + b"\x00" * 100, content_type="image/jpeg"
+        )
         data = {
             "title": "Report with Image",
             "voice_note": voice,
@@ -105,8 +115,12 @@ class TestReportCreateView:
         assert response.status_code == status.HTTP_201_CREATED
 
     @patch("reports.views.get_channel_layer", side_effect=Exception("channel error"))
-    def test_create_websocket_failure_still_succeeds(self, mock_cl, verified_auth_client):
-        voice = SimpleUploadedFile("voice.webm", b"\x00" * 1024, content_type="audio/webm")
+    def test_create_websocket_failure_still_succeeds(
+        self, mock_cl, verified_auth_client
+    ):
+        voice = SimpleUploadedFile(
+            "voice.webm", b"\x00" * 1024, content_type="audio/webm"
+        )
         data = {
             "title": "WS Fail Report",
             "voice_note": voice,

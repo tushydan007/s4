@@ -17,6 +17,7 @@ class TestSecurityStationModel:
 
     def test_station_uuid_pk(self, station):
         import uuid
+
         assert isinstance(station.id, uuid.UUID)
 
     def test_station_types(self):

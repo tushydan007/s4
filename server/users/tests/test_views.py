@@ -128,6 +128,7 @@ class TestVerifyEmailView:
 
     def test_verify_invalid_token(self, api_client):
         import uuid
+
         response = api_client.get(f"/api/users/verify-email/{uuid.uuid4()}/")
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -420,6 +421,7 @@ class TestLogoutView:
 
     def test_logout_success(self, auth_client, user):
         from rest_framework_simplejwt.tokens import RefreshToken
+
         refresh = RefreshToken.for_user(user)
         response = auth_client.post(self.url, {"refresh": str(refresh)})
         assert response.status_code == status.HTTP_200_OK

@@ -8,26 +8,54 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='SecurityStation',
+            name="SecurityStation",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=255)),
-                ('station_type', models.CharField(choices=[('police', 'Police Station'), ('army', 'Army Barracks'), ('military', 'Military Base'), ('fire', 'Fire Station'), ('civil_defense', 'Civil Defense'), ('navy', 'Navy Base')], max_length=20)),
-                ('latitude', models.DecimalField(decimal_places=7, max_digits=10)),
-                ('longitude', models.DecimalField(decimal_places=7, max_digits=10)),
-                ('address', models.TextField(blank=True)),
-                ('phone_number', models.CharField(blank=True, max_length=20)),
-                ('is_active', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                (
+                    "station_type",
+                    models.CharField(
+                        choices=[
+                            ("police", "Police Station"),
+                            ("army", "Army Barracks"),
+                            ("military", "Military Base"),
+                            ("fire", "Fire Station"),
+                            ("civil_defense", "Civil Defense"),
+                            ("navy", "Navy Base"),
+                        ],
+                        max_length=20,
+                    ),
+                ),
+                ("latitude", models.DecimalField(decimal_places=7, max_digits=10)),
+                ("longitude", models.DecimalField(decimal_places=7, max_digits=10)),
+                ("address", models.TextField(blank=True)),
+                ("phone_number", models.CharField(blank=True, max_length=20)),
+                ("is_active", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
             ],
             options={
-                'ordering': ['name'],
-                'indexes': [models.Index(fields=['latitude', 'longitude'], name='stations_se_latitud_1f9b2a_idx'), models.Index(fields=['station_type'], name='stations_se_station_f37cca_idx')],
+                "ordering": ["name"],
+                "indexes": [
+                    models.Index(
+                        fields=["latitude", "longitude"],
+                        name="stations_se_latitud_1f9b2a_idx",
+                    ),
+                    models.Index(
+                        fields=["station_type"], name="stations_se_station_f37cca_idx"
+                    ),
+                ],
             },
         ),
     ]
