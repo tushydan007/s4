@@ -1,11 +1,11 @@
 ###############################################################################
 # S4 – Full-Stack CI/CD Pipeline (Frontend + Backend)
-# Trigger: push to main
+# Triggers: push to main, pull requests to main, manual dispatch
 # Stages:
 #   1. Quality Gate – lint, test, coverage for client & server
-#   2. Build & Tag – Docker images pushed to Amazon ECR
-#   3. Deploy – Roll out to Amazon ECS (production)
-#   4. Notify – Slack/email on failure
+#   2. Build & Tag – Docker images pushed to Amazon ECR (main only)
+#   3. Deploy – Roll out to Amazon ECS production (main only)
+#   4. Notify – Slack/email on failure or success (main only)
 ###############################################################################
 
 name: S4 CI/CD Pipeline
@@ -13,16 +13,22 @@ name: S4 CI/CD Pipeline
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  AWS_REGION: ${{ secrets.AWS_REGION }}
-  ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
-  FRONTEND_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/s4-client
-  BACKEND_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/s4-server
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
+  FRONTEND_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/s4-client
+  BACKEND_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/s4-server
   ECS_CLUSTER: ${{ secrets.ECS_CLUSTER }}
   ECS_SERVICE_FRONTEND: ${{ secrets.ECS_SERVICE_FRONTEND }}
   ECS_SERVICE_BACKEND: ${{ secrets.ECS_SERVICE_BACKEND }}
@@ -36,16 +42,17 @@ jobs:
   quality-gate-frontend:
     name: "Quality Gate – Frontend"
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: client
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
@@ -67,7 +74,7 @@ jobs:
 
       - name: Upload coverage artifact
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7
         with:
           name: frontend-coverage
           path: client/coverage/
@@ -77,9 +84,25 @@ jobs:
   quality-gate-backend:
     name: "Quality Gate – Backend"
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: server
+
+    env:
+      DB_NAME: s4_db
+      DB_USER: s4_user
+      DB_PASSWORD: s4_password
+      DB_HOST: localhost
+      DB_PORT: "5432"
+      REDIS_HOST: localhost
+      REDIS_PORT: "6379"
+      DJANGO_SETTINGS_MODULE: s4.settings
+      SECRET_KEY: ci-test-secret-key-not-for-production
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      DEBUG: "True"
+      FRONTEND_URL: http://localhost:5173
+      EMAIL_BACKEND: django.core.mail.backends.console.EmailBackend
 
     services:
       postgres:
@@ -108,10 +131,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5.6.0
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: pip
@@ -147,37 +170,9 @@ jobs:
         continue-on-error: true
 
       - name: Run migrations
-        env:
-          DB_NAME: s4_db
-          DB_USER: s4_user
-          DB_PASSWORD: s4_password
-          DB_HOST: localhost
-          DB_PORT: "5432"
-          REDIS_HOST: localhost
-          REDIS_PORT: "6379"
-          DJANGO_SETTINGS_MODULE: s4.settings
-          SECRET_KEY: ci-test-secret-key-not-for-production
-          ALLOWED_HOSTS: localhost,127.0.0.1
-          DEBUG: "True"
-          FRONTEND_URL: http://localhost:5173
-          EMAIL_BACKEND: django.core.mail.backends.console.EmailBackend
         run: python manage.py migrate
 
       - name: Run tests with coverage
-        env:
-          DB_NAME: s4_db
-          DB_USER: s4_user
-          DB_PASSWORD: s4_password
-          DB_HOST: localhost
-          DB_PORT: "5432"
-          REDIS_HOST: localhost
-          REDIS_PORT: "6379"
-          DJANGO_SETTINGS_MODULE: s4.settings
-          SECRET_KEY: ci-test-secret-key-not-for-production
-          ALLOWED_HOSTS: localhost,127.0.0.1
-          DEBUG: "True"
-          FRONTEND_URL: http://localhost:5173
-          EMAIL_BACKEND: django.core.mail.backends.console.EmailBackend
         run: |
           coverage run -m pytest --tb=short -q || true
           coverage xml -o coverage.xml || true
@@ -185,18 +180,20 @@ jobs:
 
       - name: Upload coverage artifact
         if: always()
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v7
         with:
           name: backend-coverage
           path: server/coverage.xml
           retention-days: 14
 
   # ─────────────────────────────────────────────────────────────────────────
-  # 2. BUILD & PUSH DOCKER IMAGES
+  # 2. BUILD & PUSH DOCKER IMAGES (main branch & manual dispatch only)
   # ─────────────────────────────────────────────────────────────────────────
   build-and-push:
     name: "Build & Push Docker Images"
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: [quality-gate-frontend, quality-gate-backend]
 
     outputs:
@@ -206,7 +203,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Generate image metadata & tags
         id: meta
@@ -221,7 +218,7 @@ jobs:
           echo "version=$VERSION"       >> "$GITHUB_OUTPUT"
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -232,11 +229,11 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       # ── Frontend Image ───────────────────────────────────────────────────
       - name: Build & push frontend image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./client
           file: ./client/Dockerfile
@@ -252,7 +249,7 @@ jobs:
 
       # ── Backend Image ────────────────────────────────────────────────────
       - name: Build & push backend image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./server
           file: ./server/Dockerfile
@@ -272,18 +269,20 @@ jobs:
   deploy:
     name: "Deploy to Amazon ECS"
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: [build-and-push]
-    environment: production
+    environment:
+      name: production
     concurrency:
       group: production-deploy
       cancel-in-progress: false
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -333,15 +332,18 @@ jobs:
   notify-failure:
     name: "Notify – Pipeline Failed"
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     needs: [quality-gate-frontend, quality-gate-backend, build-and-push, deploy]
-    if: failure()
+    if: failure() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
 
     steps:
       - name: Send Slack failure notification
         if: env.SLACK_WEBHOOK != ''
-        uses: slackapi/slack-github-action@v2.1.0
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        uses: slackapi/slack-github-action@v2.1.1
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
@@ -362,8 +364,6 @@ jobs:
       - name: Send email failure notification
         if: env.NOTIFY_EMAIL != ''
         uses: dawidd6/action-send-mail@v3
-        env:
-          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
         with:
           server_address: smtp.gmail.com
           server_port: 587
@@ -386,15 +386,18 @@ jobs:
   notify-success:
     name: "Notify – Deployment Successful"
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     needs: [deploy]
     if: success()
+
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
 
     steps:
       - name: Send Slack success notification
         if: env.SLACK_WEBHOOK != ''
-        uses: slackapi/slack-github-action@v2.1.0
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        uses: slackapi/slack-github-action@v2.1.1
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
@@ -415,8 +418,6 @@ jobs:
       - name: Send email success notification
         if: env.NOTIFY_EMAIL != ''
         uses: dawidd6/action-send-mail@v3
-        env:
-          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
         with:
           server_address: smtp.gmail.com
           server_port: 587
