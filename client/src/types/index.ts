@@ -95,13 +95,7 @@ export interface SecurityStation {
   distance_km?: number;
 }
 
-export type StationType =
-  | "police"
-  | "army"
-  | "military"
-  | "fire"
-  | "civil_defense"
-  | "navy";
+export type StationType = "police" | "army" | "fire" | "health";
 
 export interface ApiError {
   error?: string;
@@ -163,10 +157,8 @@ export const STATION_TYPES: {
   label: string;
   color: string;
 }[] = [
-  { value: "police", label: "Police Station", color: "#3b82f6" },
-  { value: "army", label: "Army Barracks", color: "#22c55e" },
-  { value: "military", label: "Military Base", color: "#6366f1" },
+  { value: "police", label: "Police Station", color: "#166534" },
+  { value: "army", label: "Army Barracks", color: "#4ade80" },
   { value: "fire", label: "Fire Station", color: "#ef4444" },
-  { value: "civil_defense", label: "Civil Defense", color: "#f59e0b" },
-  { value: "navy", label: "Navy Base", color: "#0ea5e9" },
+  { value: "health", label: "Health Facility", color: "#eab308" },
 ];

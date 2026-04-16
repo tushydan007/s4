@@ -19,7 +19,7 @@ class TestStationListView:
             assert s["station_type"] == "police"
 
     def test_list_filter_type_no_match(self, api_client, station):
-        response = api_client.get(self.url, {"type": "navy"})
+        response = api_client.get(self.url, {"type": "health"})
         assert response.status_code == status.HTTP_200_OK
         assert len(response.data) == 0
 

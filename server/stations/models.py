@@ -7,10 +7,8 @@ class SecurityStation(models.Model):
     STATION_TYPE_CHOICES = [
         ("police", "Police Station"),
         ("army", "Army Barracks"),
-        ("military", "Military Base"),
         ("fire", "Fire Station"),
-        ("civil_defense", "Civil Defense"),
-        ("navy", "Navy Base"),
+        ("health", "Health Facility"),
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

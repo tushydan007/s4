@@ -4859,65 +4859,6 @@ SAMPLE_STATIONS = [
         "address": "Enugu",
         "phone_number": "",
     },
-    # Military Bases
-    {
-        "name": "Nigerian Defence Academy",
-        "station_type": "military",
-        "latitude": 7.4317,
-        "longitude": 10.5260,
-        "address": "Afaka, Kaduna",
-        "phone_number": "",
-    },
-    {
-        "name": "Sambisa Military Base",
-        "station_type": "military",
-        "latitude": 13.5833,
-        "longitude": 11.4500,
-        "address": "Borno State",
-        "phone_number": "",
-    },
-    {
-        "name": "Maimalari Barracks",
-        "station_type": "military",
-        "latitude": 13.1510,
-        "longitude": 11.8311,
-        "address": "Maiduguri, Borno",
-        "phone_number": "",
-    },
-    # Navy
-    {
-        "name": "Western Naval Command",
-        "station_type": "navy",
-        "latitude": 3.4070,
-        "longitude": 6.4290,
-        "address": "Apapa, Lagos",
-        "phone_number": "",
-    },
-    {
-        "name": "NNS Beecroft",
-        "station_type": "navy",
-        "latitude": 3.4075,
-        "longitude": 6.4295,
-        "address": "Apapa, Lagos",
-        "phone_number": "",
-    },
-    # Civil Defense
-    {
-        "name": "NSCDC Headquarters",
-        "station_type": "civil_defense",
-        "latitude": 7.4890,
-        "longitude": 9.0580,
-        "address": "Abuja",
-        "phone_number": "08033226246",
-    },
-    {
-        "name": "NSCDC Lagos Command",
-        "station_type": "civil_defense",
-        "latitude": 3.3890,
-        "longitude": 6.4550,
-        "address": "Lagos",
-        "phone_number": "",
-    },
     # Fire Stations
     {
         "name": "Federal Fire Service HQ",

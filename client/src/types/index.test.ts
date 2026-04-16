@@ -47,7 +47,7 @@ describe("types constants", () => {
   });
 
   it("STATION_TYPES has 6 types", () => {
-    expect(STATION_TYPES).toHaveLength(6);
+    expect(STATION_TYPES).toHaveLength(4);
   });
 
   it("each station type has value, label, and color", () => {
@@ -58,10 +58,11 @@ describe("types constants", () => {
     }
   });
 
-  it("STATION_TYPES includes police and fire", () => {
+  it("STATION_TYPES includes police, army, fire, and health", () => {
     const values = STATION_TYPES.map((s) => s.value);
     expect(values).toContain("police");
+    expect(values).toContain("army");
     expect(values).toContain("fire");
-    expect(values).toContain("navy");
+    expect(values).toContain("health");
   });
 });

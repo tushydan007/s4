@@ -25,6 +25,4 @@ class TestSecurityStationModel:
         assert "police" in types
         assert "army" in types
         assert "fire" in types
-        assert "navy" in types
-        assert "civil_defense" in types
-        assert "military" in types
+        assert "health" in types
