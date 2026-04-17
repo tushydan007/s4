@@ -94,28 +94,143 @@ const NIGERIA_BOUNDS = {
 } as const;
 const MAX_REPORT_DISTANCE_KM = 5;
 
-// ── Zoom-dependent station marker visibility (Google Maps style) ────────
-const STATION_MIN_ZOOM = 10; // Markers appear at this zoom level
-const STATION_LABEL_MIN_ZOOM = 12; // Labels appear alongside icons at this zoom
+// ── Nigeria map bounds (with padding so the user can't pan away) ────────
+const NIGERIA_MAX_BOUNDS: [number, number, number, number] = [
+  NIGERIA_BOUNDS.minLng - 1.5, // west
+  NIGERIA_BOUNDS.minLat - 1.5, // south
+  NIGERIA_BOUNDS.maxLng + 1.5, // east
+  NIGERIA_BOUNDS.maxLat + 1.5, // north
+];
 
-function updateStationMarkersVisibility(
-  markers: mapboxgl.Marker[],
-  zoom: number,
+// ── Zoom thresholds for station layers ──────────────────────────────────
+const STATION_MIN_ZOOM = 8; // Icons appear
+const STATION_LABEL_MIN_ZOOM = 10; // Labels appear
+
+// ── Station type → colour mapping for layers ────────────────────────────
+const STATION_COLOR_MATCH: (string | string[])[] = [
+  "match",
+  ["get", "station_type"],
+  "police",
+  "#166534",
+  "army",
+  "#4ade80",
+  "fire",
+  "#ef4444",
+  "health",
+  "#eab308",
+  "#3b82f6", // fallback
+];
+
+function buildStationGeoJSON(
+  stationsList: SecurityStation[],
+): GeoJSON.FeatureCollection {
+  return {
+    type: "FeatureCollection",
+    features: stationsList.map((s) => ({
+      type: "Feature" as const,
+      geometry: {
+        type: "Point" as const,
+        coordinates: [s.longitude, s.latitude],
+      },
+      properties: {
+        id: s.id,
+        name: s.name,
+        station_type: s.station_type,
+        station_type_display: s.station_type_display,
+        address: s.address || "",
+        phone_number: s.phone_number || "",
+      },
+    })),
+  };
+}
+
+function addStationLayers(
+  mapInst: mapboxgl.Map,
+  geojson: GeoJSON.FeatureCollection,
 ) {
-  markers.forEach((marker) => {
-    const el = marker.getElement();
-    if (zoom < STATION_MIN_ZOOM) {
-      el.style.opacity = "0";
-      el.style.pointerEvents = "none";
-    } else {
-      el.style.opacity = "1";
-      el.style.pointerEvents = "auto";
-      const label = el.querySelector(".station-label") as HTMLElement;
-      if (label) {
-        label.style.opacity = zoom >= STATION_LABEL_MIN_ZOOM ? "1" : "0";
-      }
-    }
+  // Idempotent – remove if already present
+  if (mapInst.getLayer("station-labels")) mapInst.removeLayer("station-labels");
+  if (mapInst.getLayer("station-icons")) mapInst.removeLayer("station-icons");
+  if (mapInst.getSource("stations-src")) mapInst.removeSource("stations-src");
+
+  mapInst.addSource("stations-src", { type: "geojson", data: geojson });
+
+  // Circle icon layer – visible from STATION_MIN_ZOOM
+  mapInst.addLayer({
+    id: "station-icons",
+    type: "circle",
+    source: "stations-src",
+    minzoom: STATION_MIN_ZOOM,
+    paint: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      "circle-color": STATION_COLOR_MATCH as any,
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        STATION_MIN_ZOOM,
+        5,
+        14,
+        8,
+      ],
+      "circle-stroke-width": 2,
+      "circle-stroke-color": "#ffffff",
+      "circle-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        STATION_MIN_ZOOM,
+        0.7,
+        STATION_MIN_ZOOM + 1,
+        1,
+      ],
+    },
   });
+
+  // Text label layer – visible from STATION_LABEL_MIN_ZOOM
+  mapInst.addLayer({
+    id: "station-labels",
+    type: "symbol",
+    source: "stations-src",
+    minzoom: STATION_LABEL_MIN_ZOOM,
+    layout: {
+      "text-field": ["get", "name"],
+      "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
+      "text-size": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        STATION_LABEL_MIN_ZOOM,
+        10,
+        14,
+        13,
+      ],
+      "text-offset": [1, 0],
+      "text-anchor": "left",
+      "text-max-width": 10,
+      "text-allow-overlap": false,
+    },
+    paint: {
+      "text-color": "#1a2332",
+      "text-halo-color": "#ffffff",
+      "text-halo-width": 1.5,
+      "text-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        STATION_LABEL_MIN_ZOOM,
+        0,
+        STATION_LABEL_MIN_ZOOM + 0.5,
+        1,
+      ],
+    },
+  });
+}
+
+function removeStationLayers(mapInst: mapboxgl.Map) {
+  if (mapInst.getLayer("station-labels")) mapInst.removeLayer("station-labels");
+  if (mapInst.getLayer("station-icons")) mapInst.removeLayer("station-icons");
+  if (mapInst.getSource("stations-src")) mapInst.removeSource("stations-src");
 }
 // ────────────────────────────────────────────────────────────────────────────
 
@@ -196,8 +311,9 @@ export default function DashboardPage() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
-  const stationMarkersRef = useRef<mapboxgl.Marker[]>([]);
   const searchMarkerRef = useRef<mapboxgl.Marker | null>(null);
+  const stationGeoJSONRef = useRef<GeoJSON.FeatureCollection | null>(null);
+  const stationPopupRef = useRef<mapboxgl.Popup | null>(null);
 
   const dispatch = useAppDispatch();
   const { showUploadModal, showReportDetail, showStations } = useAppSelector(
@@ -235,6 +351,9 @@ export default function DashboardPage() {
       style: "mapbox://styles/mapbox/satellite-streets-v12",
       center: [7.4951, 9.0579], // Default: Abuja, Nigeria
       zoom: 6,
+      minZoom: 5.5,
+      maxBounds: NIGERIA_MAX_BOUNDS,
+      projection: "mercator",
       attributionControl: false,
     });
 
@@ -252,12 +371,44 @@ export default function DashboardPage() {
       setMapLoaded(true);
     });
 
-    // Zoom-dependent station marker visibility (Google Maps pattern)
-    mapInstance.on("zoom", () => {
-      updateStationMarkersVisibility(
-        stationMarkersRef.current,
-        mapInstance.getZoom(),
-      );
+    // Re-add station layers after a style change (base map switch)
+    mapInstance.on("style.load", () => {
+      const geojson = stationGeoJSONRef.current;
+      if (geojson) {
+        addStationLayers(mapInstance, geojson);
+      }
+    });
+
+    // Station popup on click
+    mapInstance.on("click", "station-icons", (e) => {
+      if (!e.features?.length) return;
+      const props = e.features[0].properties!;
+      const coords = (
+        e.features[0].geometry as GeoJSON.Point
+      ).coordinates.slice() as [number, number];
+
+      // Close previous popup
+      if (stationPopupRef.current) stationPopupRef.current.remove();
+
+      stationPopupRef.current = new mapboxgl.Popup({ offset: 12 })
+        .setLngLat(coords)
+        .setHTML(
+          `<div style="padding:12px;min-width:180px;">
+            <h3 style="font-weight:700;font-size:14px;color:#102a43;margin-bottom:4px;">${props.name}</h3>
+            <p style="font-size:12px;color:#627d98;margin-bottom:4px;">${props.station_type_display}</p>
+            ${props.address ? `<p style="font-size:11px;color:#829ab1;">${props.address}</p>` : ""}
+            ${props.phone_number ? `<p style="font-size:11px;color:#486581;margin-top:4px;">📞 ${props.phone_number}</p>` : ""}
+          </div>`,
+        )
+        .addTo(mapInstance);
+    });
+
+    // Pointer cursor on hover
+    mapInstance.on("mouseenter", "station-icons", () => {
+      mapInstance.getCanvas().style.cursor = "pointer";
+    });
+    mapInstance.on("mouseleave", "station-icons", () => {
+      mapInstance.getCanvas().style.cursor = "";
     });
 
     // Right-click to add report
@@ -386,77 +537,17 @@ export default function DashboardPage() {
     [dispatch],
   );
 
-  // Add station markers
-  const addStationMarkers = useCallback((stationsList: SecurityStation[]) => {
+  // Add station layers (GeoJSON source + circle/symbol layers for performance)
+  const addStationSource = useCallback((stationsList: SecurityStation[]) => {
     if (!map.current) return;
+    const geojson = buildStationGeoJSON(stationsList);
+    stationGeoJSONRef.current = geojson;
 
-    stationMarkersRef.current.forEach((m) => m.remove());
-    stationMarkersRef.current = [];
-
-    const currentZoom = map.current!.getZoom();
-
-    stationsList.forEach((station) => {
-      const stationType = STATION_TYPES.find(
-        (s) => s.value === station.station_type,
-      );
-      const color = stationType?.color ?? "#3b82f6";
-
-      const el = document.createElement("div");
-      el.style.cssText =
-        "position:relative;transition:opacity 0.3s ease;cursor:pointer;";
-
-      // Start hidden if below zoom threshold
-      if (currentZoom < STATION_MIN_ZOOM) {
-        el.style.opacity = "0";
-        el.style.pointerEvents = "none";
-      }
-
-      el.innerHTML = `
-        <svg width="28" height="36" viewBox="0 0 24 32" style="display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.35));transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-          <path d="M12 0C5.37 0 0 5.37 0 12c0 9 12 20 12 20s12-11 12-20c0-6.63-5.37-12-12-12zm0 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="${color}"/>
-          <circle cx="12" cy="12" r="4" fill="white"/>
-        </svg>
-        <div class="station-label" style="
-          position:absolute;
-          left:32px;
-          bottom:8px;
-          background:white;
-          color:#1a2332;
-          font-size:11px;
-          font-weight:600;
-          padding:3px 8px;
-          border-radius:4px;
-          white-space:nowrap;
-          max-width:160px;
-          overflow:hidden;
-          text-overflow:ellipsis;
-          box-shadow:0 1px 4px rgba(0,0,0,0.15);
-          pointer-events:none;
-          transition:opacity 0.3s ease;
-          opacity:${currentZoom >= STATION_LABEL_MIN_ZOOM ? "1" : "0"};
-        ">${station.name}</div>
-      `;
-
-      const popup = new mapboxgl.Popup({ offset: 20 }).setHTML(`
-        <div style="padding: 12px; min-width: 180px;">
-          <h3 style="font-weight: 700; font-size: 14px; color: #102a43; margin-bottom: 4px;">
-            ${station.name}
-          </h3>
-          <p style="font-size: 12px; color: #627d98; margin-bottom: 4px;">
-            ${station.station_type_display}
-          </p>
-          ${station.address ? `<p style="font-size: 11px; color: #829ab1;">${station.address}</p>` : ""}
-          ${station.phone_number ? `<p style="font-size: 11px; color: #486581; margin-top: 4px;">📞 ${station.phone_number}</p>` : ""}
-        </div>
-      `);
-
-      const marker = new mapboxgl.Marker({ element: el, anchor: "bottom" })
-        .setLngLat([station.longitude, station.latitude])
-        .setPopup(popup)
-        .addTo(map.current!);
-
-      stationMarkersRef.current.push(marker);
-    });
+    // If the style is loaded, add layers immediately
+    if (map.current.isStyleLoaded()) {
+      addStationLayers(map.current, geojson);
+    }
+    // Otherwise style.load handler in init will pick it up
   }, []);
 
   // Update markers when data changes
@@ -468,14 +559,14 @@ export default function DashboardPage() {
   }, [reportsData, mapLoaded, addReportMarkers]);
 
   useEffect(() => {
-    if (!mapLoaded) return;
+    if (!mapLoaded || !map.current) return;
     if (showStations && stations) {
-      addStationMarkers(stations);
+      addStationSource(stations);
     } else {
-      stationMarkersRef.current.forEach((m) => m.remove());
-      stationMarkersRef.current = [];
+      stationGeoJSONRef.current = null;
+      removeStationLayers(map.current);
     }
-  }, [stations, showStations, mapLoaded, addStationMarkers]);
+  }, [stations, showStations, mapLoaded, addStationSource]);
 
   const handleBaseMapChange = (id: string) => {
     if (!map.current || id === activeBaseMap) return;
