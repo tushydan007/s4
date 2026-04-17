@@ -94,6 +94,31 @@ const NIGERIA_BOUNDS = {
 } as const;
 const MAX_REPORT_DISTANCE_KM = 5;
 
+// ── Zoom-dependent station marker visibility (Google Maps style) ────────
+const STATION_MIN_ZOOM = 10; // Markers appear at this zoom level
+const STATION_LABEL_MIN_ZOOM = 12; // Labels appear alongside icons at this zoom
+
+function updateStationMarkersVisibility(
+  markers: mapboxgl.Marker[],
+  zoom: number,
+) {
+  markers.forEach((marker) => {
+    const el = marker.getElement();
+    if (zoom < STATION_MIN_ZOOM) {
+      el.style.opacity = "0";
+      el.style.pointerEvents = "none";
+    } else {
+      el.style.opacity = "1";
+      el.style.pointerEvents = "auto";
+      const label = el.querySelector(".station-label") as HTMLElement;
+      if (label) {
+        label.style.opacity = zoom >= STATION_LABEL_MIN_ZOOM ? "1" : "0";
+      }
+    }
+  });
+}
+// ────────────────────────────────────────────────────────────────────────────
+
 function isWithinNigeria(lat: number, lng: number): boolean {
   return (
     lat >= NIGERIA_BOUNDS.minLat &&
@@ -225,6 +250,14 @@ export default function DashboardPage() {
 
     mapInstance.on("load", () => {
       setMapLoaded(true);
+    });
+
+    // Zoom-dependent station marker visibility (Google Maps pattern)
+    mapInstance.on("zoom", () => {
+      updateStationMarkersVisibility(
+        stationMarkersRef.current,
+        mapInstance.getZoom(),
+      );
     });
 
     // Right-click to add report
@@ -360,6 +393,8 @@ export default function DashboardPage() {
     stationMarkersRef.current.forEach((m) => m.remove());
     stationMarkersRef.current = [];
 
+    const currentZoom = map.current!.getZoom();
+
     stationsList.forEach((station) => {
       const stationType = STATION_TYPES.find(
         (s) => s.value === station.station_type,
@@ -367,11 +402,39 @@ export default function DashboardPage() {
       const color = stationType?.color ?? "#3b82f6";
 
       const el = document.createElement("div");
+      el.style.cssText =
+        "position:relative;transition:opacity 0.3s ease;cursor:pointer;";
+
+      // Start hidden if below zoom threshold
+      if (currentZoom < STATION_MIN_ZOOM) {
+        el.style.opacity = "0";
+        el.style.pointerEvents = "none";
+      }
+
       el.innerHTML = `
-        <svg width="24" height="32" viewBox="0 0 24 32" style="cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.4));transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+        <svg width="28" height="36" viewBox="0 0 24 32" style="display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.35));transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
           <path d="M12 0C5.37 0 0 5.37 0 12c0 9 12 20 12 20s12-11 12-20c0-6.63-5.37-12-12-12zm0 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="${color}"/>
           <circle cx="12" cy="12" r="4" fill="white"/>
         </svg>
+        <div class="station-label" style="
+          position:absolute;
+          left:32px;
+          bottom:8px;
+          background:white;
+          color:#1a2332;
+          font-size:11px;
+          font-weight:600;
+          padding:3px 8px;
+          border-radius:4px;
+          white-space:nowrap;
+          max-width:160px;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          box-shadow:0 1px 4px rgba(0,0,0,0.15);
+          pointer-events:none;
+          transition:opacity 0.3s ease;
+          opacity:${currentZoom >= STATION_LABEL_MIN_ZOOM ? "1" : "0"};
+        ">${station.name}</div>
       `;
 
       const popup = new mapboxgl.Popup({ offset: 20 }).setHTML(`
@@ -387,7 +450,7 @@ export default function DashboardPage() {
         </div>
       `);
 
-      const marker = new mapboxgl.Marker({ element: el })
+      const marker = new mapboxgl.Marker({ element: el, anchor: "bottom" })
         .setLngLat([station.longitude, station.latitude])
         .setPopup(popup)
         .addTo(map.current!);
