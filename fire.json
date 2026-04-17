@@ -1,0 +1,1744 @@
+{
+  "type": "FeatureCollection",
+  "totalFeatures": 74,
+  "numberMatched": 74,
+  "numberReturned": 74,
+  "timeStamp": "2025-09-12T15:14:24.650Z",
+  "name": "nigerian-emergency-services",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-5406",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 244,
+        "global_id": "b3f6b2c3-7f49-4dac-9bf2-c66808c80ce4",
+        "name": "Abeokuta South Mortuary",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OGSABS03",
+        "timestamp": null,
+        "lga_name": "Abeokuta South",
+        "state_code": "OG",
+        "state_name": "Ogun"
+      },
+      "geometry": { "type": "Point", "coordinates": [3.364735, 7.160506667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-5405",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 271,
+        "global_id": "52a732da-f6dd-4dc9-bbbd-0ee918cd632b",
+        "name": "Igando Ikotun Fire Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 1,
+        "functional_fire_vehicle_status": "1",
+        "fire_personnel": null,
+        "ward_code": "LASAMO20",
+        "timestamp": null,
+        "lga_name": "Alimosho",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.269258083336774, 6.552742503926275]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-5404",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 265,
+        "global_id": "65e4781d-f016-4b26-b5ac-5e08a24c9110",
+        "name": "Brain Grace Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASMUN01",
+        "timestamp": null,
+        "lga_name": "Mushin",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": { "type": "Point", "coordinates": [3.34212, 6.524808333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-5403",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 278,
+        "global_id": "5d14c13f-b446-4611-87e1-30a2309e1658",
+        "name": "State Ambulance Point Toll Free 112",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASSUE01",
+        "timestamp": null,
+        "lga_name": "Surulere",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.350186023210557, 6.502015865189471]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-5402",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 276,
+        "global_id": "a795a9fd-4fee-4582-8ccb-3f3924dda704",
+        "name": "Federal Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 2,
+        "functional_fire_vehicle_status": "2",
+        "fire_personnel": null,
+        "ward_code": "LASAON07",
+        "timestamp": null,
+        "lga_name": "Amuwo Odofin",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.29069760130522, 6.465832060126217]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-5401",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 273,
+        "global_id": "0093f365-7895-4199-a235-1f60dac06767",
+        "name": "Federal Fire ServiceApapa",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 1,
+        "functional_fire_vehicle_status": "1",
+        "fire_personnel": null,
+        "ward_code": "LASAPA09",
+        "timestamp": null,
+        "lga_name": "Apapa",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.363827302936892, 6.458288011105279]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-5400",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 277,
+        "global_id": "25fb0915-001e-46e3-878d-f455d398fc72",
+        "name": "Lagos State Ambulance Service",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASATO13",
+        "timestamp": null,
+        "lga_name": "Ajeromi\/Ifelodun",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.341396187084194, 6.449638047221026]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53ff",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 274,
+        "global_id": "9bccfb1f-c4ef-4a12-bd30-9d41966f23b6",
+        "name": "Federal Fire Station Campos Ajele",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 10,
+        "functional_fire_vehicle_status": "3",
+        "fire_personnel": null,
+        "ward_code": "LASLID01",
+        "timestamp": null,
+        "lga_name": "Lagos Island",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.394259306536715, 6.451404177778826]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53fe",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 251,
+        "global_id": "993d2568-4342-4e92-9c8b-aac8a16f5314",
+        "name": "Ikorodu Fire Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASIKU23",
+        "timestamp": null,
+        "lga_name": "Ikorodu",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.513096180378649, 6.671398333]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53fd",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 264,
+        "global_id": "6397e68b-1f0f-4fe2-9d57-428b1d9ecd24",
+        "name": "Police State Ambulance Point",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASAON13",
+        "timestamp": null,
+        "lga_name": "Amuwo Odofin",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.315926184968446, 6.462283304736804]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53fc",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 255,
+        "global_id": "960f33bf-aa37-4b33-819c-d17c9314ca38",
+        "name": "Taraba State Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "TRSJAL03",
+        "timestamp": null,
+        "lga_name": "Jalingo",
+        "state_code": "TA",
+        "state_name": "Taraba"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.341642253511321, 8.924225560815731]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53fb",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 218,
+        "global_id": "f0ee3409-c992-4078-8f77-ef3fe15f171e",
+        "name": "Fire Station Danbaba Airport",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "TRSARD05",
+        "timestamp": null,
+        "lga_name": "Ardo-Kola",
+        "state_code": "TA",
+        "state_name": "Taraba"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.286781666666664, 8.900613333333332]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53fa",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 247,
+        "global_id": "ad1293cf-2b6b-4e80-981d-ce5c9a81037e",
+        "name": "Ogun State Fire And Safety Services",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 1,
+        "functional_fire_vehicle_status": "1",
+        "fire_personnel": 7,
+        "ward_code": "OGSADO15",
+        "timestamp": null,
+        "lga_name": "Ado Odo\/Ota",
+        "state_code": "OG",
+        "state_name": "Ogun"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.23844, 6.690731666666666]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f9",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 261,
+        "global_id": "3ea1695e-9aea-48d8-aa4c-c373f31ae5b2",
+        "name": "Omaliko Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSGDD13",
+        "timestamp": null,
+        "lga_name": "Idemili North",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.934896115927593, 6.125629563776029]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f8",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 294,
+        "global_id": "1ee2c062-2248-4f33-a7f3-2c1a4c8147bf",
+        "name": "Osun State Fire Service Ikirun",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OSSIDN07",
+        "timestamp": "2020\/05\/13 12:00:08.057+00",
+        "lga_name": "Ifelodun",
+        "state_code": "OS",
+        "state_name": "Osun"
+      },
+      "geometry": { "type": "Point", "coordinates": [4.661516667, 7.917123333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f7",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 233,
+        "global_id": "f9700f6f-61ed-4845-ab32-708dcfd02650",
+        "name": "Osun State Fire Service Oke Fia R Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OSSOSO02",
+        "timestamp": null,
+        "lga_name": "Osogbo",
+        "state_code": "OS",
+        "state_name": "Osun"
+      },
+      "geometry": { "type": "Point", "coordinates": [4.544845, 7.785898333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f6",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 281,
+        "global_id": "c392e76c-f67d-456c-b5cf-d41a0d607fd9",
+        "name": "State Fire service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ABSEZA05",
+        "timestamp": null,
+        "lga_name": "Aba North",
+        "state_code": "AB",
+        "state_name": "Abia"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.3761233, 5.1137033] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f5",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 252,
+        "global_id": "c0a376da-7c22-4010-9fce-3cd1aaa931b4",
+        "name": "Lagos State Fire Services",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASIKA05",
+        "timestamp": null,
+        "lga_name": "Ikeja",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.340468637263344, 6.591740745094662]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f4",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 269,
+        "global_id": "681f3ce0-2ee2-452a-a0a6-60d02571df54",
+        "name": "Federal Fire Service Station Ebute Meta",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 2,
+        "functional_fire_vehicle_status": "2",
+        "fire_personnel": null,
+        "ward_code": "LASLMD11",
+        "timestamp": null,
+        "lga_name": "Lagos Mainland",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.381044749336774, 6.482287954578885]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f3",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 290,
+        "global_id": "e040876a-aaa0-44c1-b5c8-34e578b4ee9c",
+        "name": "Enugu State Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 12,
+        "functional_fire_vehicle_status": "9",
+        "fire_personnel": 20,
+        "ward_code": "ENSENU08",
+        "timestamp": "2020\/05\/13 12:00:08.057+00",
+        "lga_name": "Enugu North",
+        "state_code": "EN",
+        "state_name": "Enugu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.509661703956628, 6.45815281323137]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f2",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 253,
+        "global_id": "fe99b93b-4863-404b-9588-73c0b4609cb1",
+        "name": "Lekki Fire Station Chevron",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 1,
+        "functional_fire_vehicle_status": "1",
+        "fire_personnel": null,
+        "ward_code": "LASEOA04",
+        "timestamp": null,
+        "lga_name": "Eti Osa",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.530499284979062, 6.44684090130522]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f1",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 270,
+        "global_id": "47322f54-0ab8-4ca1-961c-55b91adc8234",
+        "name": "Arena Fire Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASIKA12",
+        "timestamp": null,
+        "lga_name": "Ikeja",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": { "type": "Point", "coordinates": [3.348905, 6.5644967] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53f0",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 263,
+        "global_id": "cd6acf62-2776-4f15-a264-a1a06d8b3835",
+        "name": "Daddy Bishop Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSHAL16",
+        "timestamp": null,
+        "lga_name": "Ihiala",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.865148420285075, 5.797077267606334]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53ef",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 259,
+        "global_id": "3006f204-af2b-4a6a-a0a0-688f28efea90",
+        "name": "Gozirim Best Services",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSHAL16",
+        "timestamp": null,
+        "lga_name": "Ihiala",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.865724588542993, 5.786704940278286]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53ee",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 212,
+        "global_id": "baf9eeb0-ab2e-4672-84ad-81a5d3c926b1",
+        "name": "Allied Mortuary and Funeral Services",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ABSSSM14",
+        "timestamp": null,
+        "lga_name": "Osisioma Ngwa",
+        "state_code": "AB",
+        "state_name": "Abia"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.329356667, 5.161283333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53ed",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 262,
+        "global_id": "59fd984c-dced-4851-9d27-43975ca2ea39",
+        "name": "Chibuike Ambulance Services",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSHAL02",
+        "timestamp": null,
+        "lga_name": "Ihiala",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.834812354891409, 5.836743317420823]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53ec",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 260,
+        "global_id": "e2c130cb-18d4-4f55-bffa-3b9c02e43065",
+        "name": "Akpo Mortuary Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSAGU04",
+        "timestamp": null,
+        "lga_name": "Aguata",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.102865308592756, 5.963192912355206]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53eb",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 228,
+        "global_id": "2657bea1-81b1-4e97-b6b0-d6062cb412cc",
+        "name": "Chimezie Casket And Ambulance Global Services",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ABSUMA01",
+        "timestamp": null,
+        "lga_name": "Umuahia North",
+        "state_code": "AB",
+        "state_name": "Abia"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.4857083, 5.49959] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53ea",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 243,
+        "global_id": "4a51bf69-5f49-4b70-b257-ca2a532db2d2",
+        "name": "Ekiti State Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "EKSADO02",
+        "timestamp": null,
+        "lga_name": "Ado-Ekiti",
+        "state_code": "EK",
+        "state_name": "Ekiti"
+      },
+      "geometry": { "type": "Point", "coordinates": [5.215341667, 7.62929] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e9",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 242,
+        "global_id": "cf9931af-63a6-4464-b31b-f40015f76ea2",
+        "name": "Ekiti Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 4,
+        "functional_fire_vehicle_status": "1",
+        "fire_personnel": 40,
+        "ward_code": "EKSADO02",
+        "timestamp": null,
+        "lga_name": "Ado-Ekiti",
+        "state_code": "EK",
+        "state_name": "Ekiti"
+      },
+      "geometry": { "type": "Point", "coordinates": [5.21521, 7.62897] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e8",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 214,
+        "global_id": "174e2678-e247-409b-b5b5-ba06975673fb",
+        "name": "Sun Medical Diagnostics Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSNNE08",
+        "timestamp": null,
+        "lga_name": "Nnewi North",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.914603056565598, 6.027158772020369]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e7",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 231,
+        "global_id": "7e044a05-0b0b-4722-8280-131d5f80ef2c",
+        "name": "Osun State Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OSSIWO01",
+        "timestamp": null,
+        "lga_name": "Iwo",
+        "state_code": "OS",
+        "state_name": "Osun"
+      },
+      "geometry": { "type": "Point", "coordinates": [4.172783333, 7.628733333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e6",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 279,
+        "global_id": "30509b33-e76c-4451-a1f6-620e12be80b9",
+        "name": "Hospital Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASEOA05",
+        "timestamp": null,
+        "lga_name": "Eti Osa",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": { "type": "Point", "coordinates": [3.443915, 6.427051667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e5",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 258,
+        "global_id": "877880eb-bc2f-4254-8b81-3968e690b8e0",
+        "name": "Anambra State University Teaching Hospital Amaku Ambulance Service",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSAWK07",
+        "timestamp": null,
+        "lga_name": "Awka South",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.07943311169232, 6.223318094271496]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e4",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 249,
+        "global_id": "2d76aa46-93c1-4abc-932a-8b2f86e49667",
+        "name": "Anambra State Fire Service Station Agulu",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSNEN09",
+        "timestamp": null,
+        "lga_name": "Anaocha",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.034359907078088, 6.132326986976818]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e3",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 250,
+        "global_id": "52fd6665-cb3f-47fc-943f-947043ef06d5",
+        "name": "Lagos State Fire Service Headquarters Alausa",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASIKA04",
+        "timestamp": null,
+        "lga_name": "Ikeja",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.359017928757889, 6.612803985936598]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e2",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 254,
+        "global_id": "8ba44b3f-59b3-46d4-8ab5-f1e1e2855300",
+        "name": "Federal Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "LASEOA19",
+        "timestamp": null,
+        "lga_name": "Eti Osa",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.409596508978915, 6.423428976789442]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e1",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 245,
+        "global_id": "490dcad4-9ab8-4853-8e18-3408ea7060fb",
+        "name": "Accident And Emergency Clinic Sagamu",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OGSSAU14",
+        "timestamp": null,
+        "lga_name": "Shagamu",
+        "state_code": "OG",
+        "state_name": "Ogun"
+      },
+      "geometry": { "type": "Point", "coordinates": [3.57853, 6.882823333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53e0",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 246,
+        "global_id": "6b54a1d2-c9c4-4605-97cf-19ec1cdb4f1a",
+        "name": "Itowo Fire Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 1,
+        "functional_fire_vehicle_status": "1",
+        "fire_personnel": 7,
+        "ward_code": "OGSIUN06",
+        "timestamp": null,
+        "lga_name": "Ijebu North",
+        "state_code": "OG",
+        "state_name": "Ogun"
+      },
+      "geometry": { "type": "Point", "coordinates": [3.995905, 6.97168] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53df",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 239,
+        "global_id": "be78013c-ad15-469b-bfb1-bf11bcbe99ca",
+        "name": "Kaltungo area fire station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "GMSKLT05",
+        "timestamp": null,
+        "lga_name": "Kaltungo",
+        "state_code": "GO",
+        "state_name": "Gombe"
+      },
+      "geometry": { "type": "Point", "coordinates": [11.3109667, 9.8176267] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53de",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 232,
+        "global_id": "05fc67d4-b909-4a60-bde6-1fa0cd7046ef",
+        "name": "Department Of Fire Service Okuku",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OSSODN09",
+        "timestamp": null,
+        "lga_name": "Odo Otin",
+        "state_code": "OS",
+        "state_name": "Osun"
+      },
+      "geometry": { "type": "Point", "coordinates": [4.677668333, 8.026973333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53dd",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 272,
+        "global_id": "9fe998cf-f1ee-4985-88b9-fa01dcb4af38",
+        "name": "Badagry Fire Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 2,
+        "functional_fire_vehicle_status": "2",
+        "fire_personnel": null,
+        "ward_code": "LASBDY09",
+        "timestamp": null,
+        "lga_name": "Badagry",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": { "type": "Point", "coordinates": [2.906456667, 6.413013333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53dc",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 275,
+        "global_id": "6e9d5298-7a65-4948-9af8-6292b86e4383",
+        "name": "Unilag Fire Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 3,
+        "functional_fire_vehicle_status": "3",
+        "fire_personnel": null,
+        "ward_code": "LASLMD02",
+        "timestamp": null,
+        "lga_name": "Lagos Mainland",
+        "state_code": "LA",
+        "state_name": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.396100772547332, 6.518755264368327]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53db",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 283,
+        "global_id": "8d4a58ee-834a-4955-b95a-625130717685",
+        "name": "Jebba Hydro Electric Power Plant Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "NISMKW04",
+        "timestamp": null,
+        "lga_name": "Mokwa",
+        "state_code": "NI",
+        "state_name": "Niger"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [4.791983333333333, 9.142528333333333]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53da",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 266,
+        "global_id": "7e3540a7-f2b3-4a31-a37e-42925fd479bd",
+        "name": "First Referral Hospital Serti",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "TRSGKA01",
+        "timestamp": null,
+        "lga_name": "Gashaka",
+        "state_code": "TA",
+        "state_name": "Taraba"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.337183333333334, 7.489111666666668]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d9",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 224,
+        "global_id": "da176894-535b-4705-9652-506df8c7218b",
+        "name": "Peace Corps of Nigeria Boki Divisional Headquarters",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "CRSBJE04",
+        "timestamp": null,
+        "lga_name": "Boki",
+        "state_code": "CR",
+        "state_name": "Cross River"
+      },
+      "geometry": { "type": "Point", "coordinates": [8.786711667, 6.441146667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d8",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 222,
+        "global_id": "cd8ee85a-bab7-4876-a12b-31387a61182d",
+        "name": "Housing Estate Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "CRSDUK06",
+        "timestamp": null,
+        "lga_name": "Odukpani",
+        "state_code": "CR",
+        "state_name": "Cross River"
+      },
+      "geometry": { "type": "Point", "coordinates": [8.3409917, 5.1211317] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d7",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 293,
+        "global_id": "8322c977-bfdd-46c1-a1ae-d46e10f78fb7",
+        "name": "Oau Fire Station B",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OSSICL06",
+        "timestamp": "2020\/05\/13 12:00:08.057+00",
+        "lga_name": "Ife Central",
+        "state_code": "OS",
+        "state_name": "Osun"
+      },
+      "geometry": { "type": "Point", "coordinates": [4.522833333, 7.51653] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d6",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 229,
+        "global_id": "364a37e5-8599-4ac6-bb9f-1d204dce8f9f",
+        "name": "Osun State Fire Service Headquarters",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OSSOSO06",
+        "timestamp": null,
+        "lga_name": "Osogbo",
+        "state_code": "OS",
+        "state_name": "Osun"
+      },
+      "geometry": { "type": "Point", "coordinates": [4.515828333, 7.732816667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d5",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 237,
+        "global_id": "94672f7e-0106-4d9e-8e00-e6cdf8f5dbb3",
+        "name": "Gombe Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "GMSGME11",
+        "timestamp": null,
+        "lga_name": "Gombe",
+        "state_code": "GO",
+        "state_name": "Gombe"
+      },
+      "geometry": { "type": "Point", "coordinates": [11.16285, 10.29849667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d4",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 220,
+        "global_id": "8f86565a-55a8-4cca-957c-2a4b6d31de65",
+        "name": "Gods Time Is The Best Ambulance Services",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ABSUNC01",
+        "timestamp": null,
+        "lga_name": "Umu-Nneochi",
+        "state_code": "AB",
+        "state_name": "Abia"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.314136667, 5.962113333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d3",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 235,
+        "global_id": "fb23e36e-249c-49f0-8998-3cfd3d188d14",
+        "name": "Fire Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OSSIRE06",
+        "timestamp": null,
+        "lga_name": "Irewole",
+        "state_code": "OS",
+        "state_name": "Osun"
+      },
+      "geometry": { "type": "Point", "coordinates": [4.185426667, 7.36084] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d2",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 256,
+        "global_id": "8adcdb83-1637-4302-b311-039cdd56ddaf",
+        "name": "Ndidiamaka Ambulance Service",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSAWK06",
+        "timestamp": null,
+        "lga_name": "Awka South",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.080492561082838, 6.220219810156974]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d1",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 292,
+        "global_id": "4d4d1f73-fc20-48f5-9600-f7cbf77571c2",
+        "name": "Funeral Service",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "CRSKMM06",
+        "timestamp": "2020\/05\/13 12:00:08.057+00",
+        "lga_name": "Ikom",
+        "state_code": "CR",
+        "state_name": "Cross River"
+      },
+      "geometry": { "type": "Point", "coordinates": [8.691208333, 5.9473] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53d0",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 257,
+        "global_id": "c95787a7-14bc-4105-b28d-72d9d24f42fc",
+        "name": "Primary Health Care Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSHTE10",
+        "timestamp": null,
+        "lga_name": "Oyi",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.927682635920804, 6.261133168617636]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53cf",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 213,
+        "global_id": "990ccf95-3abd-47f9-8d33-9d308d47d65e",
+        "name": "Paradise Ambulance",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ABSGWB15",
+        "timestamp": null,
+        "lga_name": "Ugwunagbo",
+        "state_code": "AB",
+        "state_name": "Abia"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.315508333, 5.028581667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53ce",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 268,
+        "global_id": "a5ccc888-6b7e-4c16-a6dd-fb60521c7254",
+        "name": "Chika Mortuary And Embalmment",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ENSUDD18",
+        "timestamp": null,
+        "lga_name": "Udi",
+        "state_code": "EN",
+        "state_name": "Enugu"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.363118333, 6.294411667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53cd",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 267,
+        "global_id": "3687aad5-5dfe-4bd9-81c4-71d19501f7d5",
+        "name": "Kams Aham Nig Ltd",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ENSUDD18",
+        "timestamp": null,
+        "lga_name": "Udi",
+        "state_code": "EN",
+        "state_name": "Enugu"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.363735, 6.294746667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53cc",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 280,
+        "global_id": "fd24ae3d-7673-4ada-9acc-79ff55b36a3d",
+        "name": "Enugu State Fire Substation",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 1,
+        "functional_fire_vehicle_status": "1",
+        "fire_personnel": 1,
+        "ward_code": "ENSUDD12",
+        "timestamp": null,
+        "lga_name": "Udi",
+        "state_code": "EN",
+        "state_name": "Enugu"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.402398333, 6.417948333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53cb",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 241,
+        "global_id": "78469e5e-6f86-4839-8c0a-be3e2ba96f7f",
+        "name": "Ekiti State Fire Service Zonal Headquarters",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 3,
+        "functional_fire_vehicle_status": "2",
+        "fire_personnel": 6,
+        "ward_code": "EKSIKE03",
+        "timestamp": null,
+        "lga_name": "Ikole",
+        "state_code": "EK",
+        "state_name": "Ekiti"
+      },
+      "geometry": { "type": "Point", "coordinates": [5.510065, 7.777703333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53ca",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 282,
+        "global_id": "9d804588-2fb2-4fa5-b5c9-cdbbb3fdd489",
+        "name": "Nickson Casket",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "EKSIKR05",
+        "timestamp": null,
+        "lga_name": "Ikere",
+        "state_code": "EK",
+        "state_name": "Ekiti"
+      },
+      "geometry": { "type": "Point", "coordinates": [5.223643333, 7.51884] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c9",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 240,
+        "global_id": "57034ffd-4417-42b1-a5cd-2588d8dfc6d7",
+        "name": "Ikere Ekiti fire Station",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 0,
+        "functional_fire_vehicle_status": "0",
+        "fire_personnel": 1,
+        "ward_code": "EKSIKR03",
+        "timestamp": null,
+        "lga_name": "Ikere",
+        "state_code": "EK",
+        "state_name": "Ekiti"
+      },
+      "geometry": { "type": "Point", "coordinates": [5.246876667, 7.492945] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c8",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 219,
+        "global_id": "23cf1dd1-2d10-4629-ab06-c966e8467469",
+        "name": "Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "TRSWKR05",
+        "timestamp": null,
+        "lga_name": "Wukari",
+        "state_code": "TA",
+        "state_name": "Taraba"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.76632527954391, 7.866647753201469]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c7",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 238,
+        "global_id": "1b27c97c-592b-43e4-b417-7616439f2ed5",
+        "name": "Gombe Airport Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "GMSAKK01",
+        "timestamp": null,
+        "lga_name": "Akko",
+        "state_code": "GO",
+        "state_name": "Gombe"
+      },
+      "geometry": { "type": "Point", "coordinates": [10.90386, 10.30403833] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c6",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 289,
+        "global_id": "89be268c-8ab3-4399-9b43-ffebb5c0046a",
+        "name": "Enugu State Fire Service Station Ogrute Igbo Eze North",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ENSENZ10",
+        "timestamp": "2020\/05\/13 12:00:08.057+00",
+        "lga_name": "Igbo-Eze North",
+        "state_code": "EN",
+        "state_name": "Enugu"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.457013333, 6.983633333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c5",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 291,
+        "global_id": "9bca4d74-71fb-4ad2-8940-6ae8f5d68270",
+        "name": "Enugu State Medical Emergency Response Team",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ENSBBG02",
+        "timestamp": "2020\/05\/13 12:00:08.057+00",
+        "lga_name": "Igbo-Eze-South",
+        "state_code": "EN",
+        "state_name": "Enugu"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.403858333, 6.925721667] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c4",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 221,
+        "global_id": "816c69c9-7cb6-4c3a-b9a8-29ecad07f808",
+        "name": "Ogun State Fire and Safety Services Ipokia",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": 1,
+        "functional_fire_vehicle_status": "1",
+        "fire_personnel": null,
+        "ward_code": "OGSIKA08",
+        "timestamp": null,
+        "lga_name": "Ipokia",
+        "state_code": "OG",
+        "state_name": "Ogun"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.841923333333333, 6.529666666666667]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c3",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 226,
+        "global_id": "69b0417a-3c1f-4481-9f16-e75d7c5f8715",
+        "name": "NASA Ambulance Services",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ABSBND07",
+        "timestamp": null,
+        "lga_name": "Bende",
+        "state_code": "AB",
+        "state_name": "Abia"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.672601667, 5.764318333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c2",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 227,
+        "global_id": "d7384dda-382d-4428-9cab-85a642de68d2",
+        "name": "Still Waters Ambulance Services",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ABSACH11",
+        "timestamp": null,
+        "lga_name": "Arochukwu",
+        "state_code": "AB",
+        "state_name": "Abia"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.88275, 5.455798333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c1",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 286,
+        "global_id": "4bb3011c-2bb0-4762-b17a-d52c94479045",
+        "name": "Oau Fire Station A",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OSSICL05",
+        "timestamp": null,
+        "lga_name": "Ife Central",
+        "state_code": "OS",
+        "state_name": "Osun"
+      },
+      "geometry": { "type": "Point", "coordinates": [4.568031667, 7.506723333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53c0",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 248,
+        "global_id": "c66a946b-71fc-42ad-8cb8-9ce46538cdbd",
+        "name": "Headquarters 35 Artillery Brigade Alamala",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "OGSABN10",
+        "timestamp": null,
+        "lga_name": "Abeokuta North",
+        "state_code": "OG",
+        "state_name": "Ogun"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.244175, 7.190866666666667]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53bf",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 285,
+        "global_id": "9b658693-057b-48fd-9dc4-dccb9cf78d95",
+        "name": "Ndidiamaka Multilink Ambulance Services Nigeria Limited",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSAWK18",
+        "timestamp": null,
+        "lga_name": "Awka South",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": { "type": "Point", "coordinates": [7.040425, 6.163023333] }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53be",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 284,
+        "global_id": "31d2bce1-5dac-4c2a-a6a6-fdc6417d2038",
+        "name": "Piaas Ambulance Services Limited",
+        "police_station": null,
+        "ambulance": "Yes",
+        "fire_station": null,
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "ANSAWK18",
+        "timestamp": null,
+        "lga_name": "Awka South",
+        "state_code": "AN",
+        "state_name": "Anambra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.04010460412217, 6.162725052330324]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sv_emergency_services.fid-64a064c3_1993e7dd88d_-53bd",
+      "geometry_name": "geom",
+      "properties": {
+        "id": 295,
+        "global_id": "ea1e1f3f-cbb4-42c3-aa00-e6932c8d13f9",
+        "name": "Cross River State Fire Service",
+        "police_station": null,
+        "ambulance": null,
+        "fire_station": "Yes",
+        "fire_vehicle": null,
+        "functional_fire_vehicle_status": null,
+        "fire_personnel": null,
+        "ward_code": "CRSANA03",
+        "timestamp": null,
+        "lga_name": "Calabar South",
+        "state_code": "CR",
+        "state_name": "Cross River"
+      },
+      "geometry": { "type": "Point", "coordinates": [8.3351562, 4.9548896] }
+    }
+  ]
+}
