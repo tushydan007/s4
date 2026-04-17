@@ -40,7 +40,7 @@ env:
 jobs:
   # ── Frontend Quality Gate ──────────────────────────────────────────────────
   quality-gate-frontend:
-    name: "Quality Gate – Frontend"
+    name: "Quality Gate - Frontend"
     runs-on: ubuntu-latest
     timeout-minutes: 15
     defaults:
@@ -82,7 +82,7 @@ jobs:
 
   # ── Backend Quality Gate ───────────────────────────────────────────────────
   quality-gate-backend:
-    name: "Quality Gate – Backend"
+    name: "Quality Gate - Backend"
     runs-on: ubuntu-latest
     timeout-minutes: 20
     defaults:

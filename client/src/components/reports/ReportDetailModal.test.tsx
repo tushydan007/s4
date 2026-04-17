@@ -56,7 +56,6 @@ class MockAudio {
   });
   removeEventListener = vi.fn();
   constructor() {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
     lastAudio = this as unknown as typeof lastAudio;
   }
 }

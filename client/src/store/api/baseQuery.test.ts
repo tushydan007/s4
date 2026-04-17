@@ -4,10 +4,17 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 // control what each successive call returns.
 
 const baseFn = vi.fn();
-let capturedPrepareHeaders: Function | undefined;
+let capturedPrepareHeaders:
+  | ((headers: Headers, api: { getState: () => unknown }) => Headers)
+  | undefined;
 
 vi.mock("@reduxjs/toolkit/query/react", () => ({
-  fetchBaseQuery: (opts: { prepareHeaders?: Function }) => {
+  fetchBaseQuery: (opts: {
+    prepareHeaders?: (
+      headers: Headers,
+      api: { getState: () => unknown },
+    ) => Headers;
+  }) => {
     capturedPrepareHeaders = opts?.prepareHeaders;
     return baseFn;
   },

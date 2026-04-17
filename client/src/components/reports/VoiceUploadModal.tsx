@@ -119,19 +119,6 @@ export default function VoiceUploadModal() {
   }, [selectedLocation, setValue]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
-    if (audioObjectUrlRef.current) {
-      URL.revokeObjectURL(audioObjectUrlRef.current);
-      audioObjectUrlRef.current = null;
-    }
-
-    setIsPlaying(false);
-    setPlaybackProgress(0);
-    setPlaybackDuration(0);
-
     if (!audioBlob) return;
 
     const objectUrl = URL.createObjectURL(audioBlob);
@@ -170,6 +157,9 @@ export default function VoiceUploadModal() {
       if (audioRef.current === audio) {
         audioRef.current = null;
       }
+      setIsPlaying(false);
+      setPlaybackProgress(0);
+      setPlaybackDuration(0);
     };
   }, [audioBlob]);
 
