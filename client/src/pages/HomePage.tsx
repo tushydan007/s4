@@ -596,7 +596,7 @@ export default function HomePage() {
                 </span>
               </div>
               <p className="text-navy-400 text-sm leading-relaxed">
-                Secure - Swift - Smart - Safe. Bridging the gap between citizens
+                See - Something - Say - Something. Bridging the gap between citizens
                 and security agencies across Nigeria.
               </p>
             </div>

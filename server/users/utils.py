@@ -30,7 +30,7 @@ def send_verification_email(user) -> None:
     <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <div style="background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%); padding: 30px; border-radius: 10px; text-align: center;">
             <h1 style="color: #ffffff; margin: 0;">S4 Security</h1>
-            <p style="color: #94a3b8; margin-top: 5px;">Secure • Swift • Smart • Safe</p>
+            <p style="color: #94a3b8; margin-top: 5px;">See • Something • Say • Something</p>
         </div>
         <div style="padding: 30px 0;">
             <h2 style="color: #1e3a5f;">Verify Your Email Address</h2>
